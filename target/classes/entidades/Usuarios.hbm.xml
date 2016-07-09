@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Jul 4, 2016 12:16:50 PM by Hibernate Tools 4.0.0.Final -->
+<hibernate-mapping>
+    <class name="entidades.Usuarios" table="usuarios" catalog="gaha">
+        <id name="idUsuario" type="java.lang.Integer">
+            <column name="ID_Usuario" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="perfilesusuario" class="entidades.Perfilesusuario" fetch="select">
+            <column name="ID_PerfilUsuario" not-null="true" />
+        </many-to-one>
+        <property name="usuario" type="string">
+            <column name="Usuario" length="15" not-null="true" />
+        </property>
+        <property name="password" type="string">
+            <column name="Password" length="256" not-null="true" />
+        </property>
+        <property name="nombres" type="string">
+            <column name="Nombres" length="35" not-null="true" />
+        </property>
+        <property name="apellidos" type="string">
+            <column name="Apellidos" length="35" not-null="true" />
+        </property>
+        <property name="correo" type="string">
+            <column name="Correo" length="70" />
+        </property>
+        <property name="estado" type="char">
+            <column name="Estado" length="1" not-null="true" />
+        </property>
+        <property name="fechaCreacion" type="timestamp">
+            <column name="FechaCreacion" length="19" not-null="true" />
+        </property>
+        <property name="usuarioCrea" type="int">
+            <column name="UsuarioCrea" not-null="true" />
+        </property>
+        <property name="fechaModificacion" type="timestamp">
+            <column name="FechaModificacion" length="19" />
+        </property>
+        <property name="usuarioModifica" type="java.lang.Integer">
+            <column name="UsuarioModifica" />
+        </property>
+    </class>
+</hibernate-mapping>

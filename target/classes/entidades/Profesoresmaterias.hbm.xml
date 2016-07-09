@@ -1,0 +1,49 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Jul 4, 2016 12:16:50 PM by Hibernate Tools 4.0.0.Final -->
+<hibernate-mapping>
+    <class name="entidades.Profesoresmaterias" table="profesoresmaterias" catalog="gaha">
+        <composite-id name="id" class="entidades.ProfesoresmateriasId">
+            <key-property name="idProfesor" type="int">
+                <column name="ID_Profesor" />
+            </key-property>
+            <key-property name="idMateria" type="string">
+                <column name="ID_Materia" length="20" />
+            </key-property>
+            <key-property name="idCurso" type="string">
+                <column name="ID_Curso" length="5" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="profesores" class="entidades.Profesores" update="false" insert="false" fetch="select">
+            <column name="ID_Profesor" not-null="true" />
+        </many-to-one>
+        <many-to-one name="materiascursos" class="entidades.Materiascursos" update="false" insert="false" fetch="select">
+            <column name="ID_Materia" length="20" not-null="true" />
+            <column name="ID_Curso" length="5" not-null="true" />
+        </many-to-one>
+        <property name="estado" type="char">
+            <column name="Estado" length="1" not-null="true" />
+        </property>
+        <property name="fechaCreacion" type="timestamp">
+            <column name="FechaCreacion" length="19" not-null="true" />
+        </property>
+        <property name="usuarioCrea" type="int">
+            <column name="UsuarioCrea" not-null="true" />
+        </property>
+        <property name="fechaModificacion" type="timestamp">
+            <column name="FechaModificacion" length="19" />
+        </property>
+        <property name="usuarioModifica" type="java.lang.Integer">
+            <column name="UsuarioModifica" />
+        </property>
+        <set name="horariosdetalles" table="horariosdetalle" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="ID_Profesor" not-null="true" />
+                <column name="ID_Materia" length="20" not-null="true" />
+                <column name="ID_Curso" length="5" not-null="true" />
+            </key>
+            <one-to-many class="entidades.Horariosdetalle" />
+        </set>
+    </class>
+</hibernate-mapping>

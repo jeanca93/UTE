@@ -1,0 +1,143 @@
+<!-- 
+   Copyright 2016 Jean Carlos Trivino Calderon
+
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+ -->
+
+<?page title="Login" contentType="text/html;charset=UTF-8"?>
+
+<zk>
+	<borderlayout id="bdlPrincipal">
+
+		<north size="17%" border="none" flex="true">
+			<borderlayout>
+				<center border="none" flex="false" style='background-image:url("img/degradado_verde.png"); background-repeat:repeat;'>
+					<div align="right" vflex="1" hflex="1">
+						<image id="img_logo" src="/img/logoCompany.png" />
+					</div>
+				</center>
+			</borderlayout>
+		</north>
+
+		<center border="none" flex="true">
+			<borderlayout>
+				<west size="40%" border="none" flex="true"></west>
+
+				<center border="none" flex="true">
+
+					<vbox>
+						<style src="/css/Focus.css" />
+						<separator></separator>
+						<separator></separator>
+						<div width="600px" height="30px" align="right">
+							<label value="Acceso al Sistema"
+								style="font-family: Times New Roman, Times, serif; font-size: 22px; color: #33ff93; 
+								text-decoration: none; padding-top: 20px; text-align: right; padding-bottom: 5px;" />
+						</div>
+						<div width="600px" height="200px"
+							style="background-image: url(img/degradado_verde.png); background-repeat: repeat-x; 
+							border-radius: 16px 16px 16px 16px; -moz-border-radius: 16px 16px 16px 16px;
+							-webkit-border-radius: 16px 16px 16px 16px; border: 0px solid #000000;"
+							class="fixed-center" xmlns:w="client">
+							<separator></separator>
+							<vbox>
+								<hbox>
+									<space />
+									<space />
+									<vbox>
+										<label
+											style="font-family: Verdana, Arial, Helvetica, sans-serif;font-size: 15px;color: #333333;text-decoration: none;padding-top: 5px;text-align: left;"
+											value="Usuario" />
+									</vbox>
+								</hbox>
+								<hbox>
+									<space />
+									<space />
+									<textbox sclass="ftextboxlogin"
+										id="txt_usuario" width="250px" focus="true" type="text"
+										onBlur='luser.setVisible(false);'
+										onFocus='luser.setVisible(true)'>
+									</textbox>
+									<separator></separator>
+									<label id="luser"
+										style="font-family: Verdana, Arial, Helvetica, sans-serif;font-size: 10px;color: #009900;text-decoration: none;padding-top: 5px;text-align: left;"
+										value="Ingrese su nombre de Usuario" visible="false" />
+								</hbox>
+								<separator></separator>
+							</vbox>
+							<vbox>
+								<hbox>
+									<space />
+									<space />
+									<vbox>
+										<label
+											style="font-family: Verdana, Arial, Helvetica, sans-serif;font-size: 15px;color: #333333;text-decoration: none;padding-top: 5px;text-align: left;"
+											value="Contraseña" />
+									</vbox>
+								</hbox>
+								<hbox>
+									<space />
+									<space />
+									<textbox sclass="ftextboxlogin"
+										id="txt_clave" type="password" width="250px"
+										onBlur='lcalve.setVisible(false); SetStyleClave(); '
+										onFocus='lcalve.setVisible(true)'>
+									</textbox>
+									<separator></separator>
+									<label id="lcalve"
+										style="font-family: Verdana, Arial, Helvetica, sans-serif;font-size: 10px;color: #009900;text-decoration: none;padding-top: 5px;text-align: left;"
+										value="Ingrese su Clave" visible="false" />
+								</hbox>
+							</vbox>
+							<zscript><![CDATA[
+								public void SetStyleClave() {
+									txt_clave
+											.setStyle("text-transform: uppercase;font-family: Verdana, Arial, Helvetica, sans-serif;font-size: 11px;color: #666666;text-decoration: none;border: 1px solid #CCCCCC;padding-left: 4px;");
+								}
+								public void SetStyleUser() {
+									txt_usuario
+											.setStyle("text-transform: uppercase;font-family: Verdana, Arial, Helvetica, sans-serif;font-size: 11px;color: #666666;text-decoration: none;border: 1px solid #CCCCCC;padding-left: 4px;");
+								}
+							]]></zscript>
+							<separator spacing="4px" />
+							<space />
+							<space />
+							<space />
+							<toolbarbutton width="80px" id="btn_entrar"
+								tooltiptext="Ingresar al sistema" label="Continuar"
+								sclass="foo-pretty"
+								style="background-color: #E4F3D9;color: #58A758;border: 1px solid #439e32;font-size:15px;font-family: Verdana, Arial, Helvetica, sans-serif; margin-top:15px;padding-top: 2px;padding-bottom: 2px;-moz-border-radius: 3px;-webkit-border-radius: 3px;text-align: center;" />
+							<separator bar="true" spacing="30px"
+								style="color: #0081C3" />
+							<label value="v1.0.0"
+								style="color: #009900; font-size: 11px;" />
+							<label
+								value="Navegadores Compatibles: Firefox, Chrome, Safari, iOS Safari, Opera, Android Browser, Internet Explorer 6+, Edge"
+								style="color: #BBBBBB; font-size: 10px; float: right;" />
+							
+						</div>
+					</vbox>
+				</center>
+				<east size="5%" border="none" flex="true"></east>
+			</borderlayout>
+
+		</center>
+		<south size="25%" border="none" flex="true">
+			<borderlayout>
+				<center border="none" flex="true">
+					<image id="img_pie" src="img/degradado_pie.png" />
+				</center>
+			</borderlayout>
+		</south>
+	</borderlayout>
+</zk>

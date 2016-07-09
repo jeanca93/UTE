@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Jul 4, 2016 12:16:50 PM by Hibernate Tools 4.0.0.Final -->
+<hibernate-mapping>
+    <class name="entidades.Arbolopciones" table="arbolopciones" catalog="gaha">
+        <composite-id name="id" class="entidades.ArbolopcionesId">
+            <key-property name="padre" type="int">
+                <column name="Padre" />
+            </key-property>
+            <key-property name="hijo" type="int">
+                <column name="Hijo" />
+            </key-property>
+            <key-property name="profundidad" type="int">
+                <column name="Profundidad" />
+            </key-property>
+        </composite-id>
+    </class>
+</hibernate-mapping>

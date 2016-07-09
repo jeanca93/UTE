@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Jul 4, 2016 12:16:50 PM by Hibernate Tools 4.0.0.Final -->
+<hibernate-mapping>
+    <class name="entidades.Horas" table="horas" catalog="gaha">
+        <id name="idHora" type="java.lang.Integer">
+            <column name="ID_Hora" />
+            <generator class="identity" />
+        </id>
+        <property name="horaIni" type="time">
+            <column name="HoraIni" length="8" not-null="true" />
+        </property>
+        <property name="horaFin" type="time">
+            <column name="HoraFin" length="8" not-null="true" />
+        </property>
+        <property name="comentarios" type="string">
+            <column name="Comentarios" length="200" />
+        </property>
+        <property name="estado" type="char">
+            <column name="Estado" length="1" not-null="true" />
+        </property>
+        <property name="fechaCreacion" type="timestamp">
+            <column name="FechaCreacion" length="19" not-null="true" />
+        </property>
+        <property name="usuarioCrea" type="int">
+            <column name="UsuarioCrea" not-null="true" />
+        </property>
+        <property name="fechaModificacion" type="timestamp">
+            <column name="FechaModificacion" length="19" />
+        </property>
+        <property name="usuarioModifica" type="java.lang.Integer">
+            <column name="UsuarioModifica" />
+        </property>
+        <set name="horariosdetalles" table="horariosdetalle" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="ID_Hora" not-null="true" />
+            </key>
+            <one-to-many class="entidades.Horariosdetalle" />
+        </set>
+        <set name="dispprofesoreses" table="dispprofesores" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="ID_Hora" not-null="true" />
+            </key>
+            <one-to-many class="entidades.Dispprofesores" />
+        </set>
+    </class>
+</hibernate-mapping>

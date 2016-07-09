@@ -1,0 +1,248 @@
+/*
+   Copyright 2016 Jean Carlos Trivino Calderon
+
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+*/
+
+@CHARSET "ISO-8859-1";
+
+.myText.z-textbox.z-textbox-focus{
+    background: #ffffaa none;
+    border: solid 1px #ffffaa;
+}
+
+/* textboxlogin*/
+.ftextboxlogin.z-textbox.z-textbox-focus {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	color: #666666;
+	text-decoration: none;
+	background: #ffffaa none;
+    border: solid 1px #ffffaa;
+    padding-left: 4px;
+	border-style: solid;
+	border-color: green;
+	text-transform: uppercase;
+}
+
+/* textbox*/
+.ftextbox.z-textbox.z-textbox-focus {
+	border-style: solid;
+	border: 1px double;
+	border-color: green;
+	/*text-transform: uppercase;*/
+}
+
+/* intbox*/
+.fintbox.z-intbox.z-intbox-focus {
+	border-style: solid;
+	border: 1px double;
+	border-color: green;
+}
+
+/* combobox*/
+.fcombofocus.z-combobox.z-combobox-focus .z-combobox-inp {
+	border-style: solid;
+	border-width: 1px;
+	border-color: green;
+}
+
+/* datebox*/
+.fdatefocus.z-datebox.z-datebox-focus .z-datebox-inp {
+	border-style: solid;
+	border-width: 1px;
+	border-color: green;
+}
+
+/*.mydb {
+        border: 1px double;
+}*/
+
+/*button*/
+.blue {
+	
+	color: #d9eef7;
+	border: solid 1px #0076a3;
+	background: #0095cd;
+	background: -webkit-gradient(linear, left top, left bottom, from(#00adee),
+		to(#0078a5));
+	background: -moz-linear-gradient(top, #00adee, #0078a5);
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#00adee',
+		endColorstr='#0078a5');
+}
+
+.blue:hover {
+	background: #007ead;
+	background: -webkit-gradient(linear, left top, left bottom, from(#0095cc),
+		to(#00678e));
+	background: -moz-linear-gradient(top, #0095cc, #00678e);
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#0095cc',
+		endColorstr='#00678e');
+}
+
+.blue:active {
+	color: #80bed6;
+	background: -webkit-gradient(linear, left top, left bottom, from(#0078a5),
+		to(#00adee));
+	background: -moz-linear-gradient(top, #0078a5, #00adee);
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#0078a5',
+		endColorstr='#00adee');
+}
+
+.green {
+	color: #e8f0de;
+	border: solid 1px #538312;
+	width: 100px;
+	height: 25px;
+	font-weight: bold;
+	background: #64991e;
+	background: -webkit-gradient(linear, left top, left bottom, from(#7db72f),
+		to(#4e7d0e));
+	background: -moz-linear-gradient(top, #7db72f, #4e7d0e);
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#7db72f',
+		endColorstr='#4e7d0e');
+}
+
+.green:hover {
+	background: #538018;
+	background: -webkit-gradient(linear, left top, left bottom, from(#6b9d28),
+		to(#436b0c));
+	background: -moz-linear-gradient(top, #6b9d28, #436b0c);
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#6b9d28',
+		endColorstr='#436b0c');
+}
+
+.green:active {
+	color: #a9c08c;
+	background: -webkit-gradient(linear, left top, left bottom, from(#4e7d0e),
+		to(#7db72f));
+	background: -moz-linear-gradient(top, #4e7d0e, #7db72f);
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#4e7d0e',
+		endColorstr='#7db72f');
+}
+
+.greenb {
+	width: 100px;
+	height:35px;
+	 /*padding: 10px 15px;*/
+	 -webkit-transition-duration: 0.2s;
+    -moz-transition-duration: 0.2s;
+    transition-duration: 0.2s;
+	 
+	border: 1px solid #8bcf54;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
+	font-size: 12px;
+	font-family: arial, helvetica, sans-serif;
+	padding: 10px 10px 10px 10px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	text-shadow: -1px -1px 0 rgba(0, 0, 0, 0.3);
+	font-weight: bold;
+	color: #FFFFFF;
+	background-color: #a9db80;
+	background-image: -webkit-gradient(linear, left top, left bottom, from(#a9db80),
+		to(#96c56f));
+	background-image: -webkit-linear-gradient(top, #a9db80, #96c56f);
+	background-image: -moz-linear-gradient(top, #a9db80, #96c56f);
+	background-image: -ms-linear-gradient(top, #a9db80, #96c56f);
+	background-image: -o-linear-gradient(top, #a9db80, #96c56f);
+	background-image: linear-gradient(to bottom, #a9db80, #96c56f);
+	filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,
+		startColorstr=#a9db80, endColorstr=#96c56f);
+}
+
+.greenb:hover {
+	/*width: 120px;*/
+	padding-right:150px;
+	border: 1px solid #74bf36;
+	background-color: #8ed058;
+	background-image: -webkit-gradient(linear, left top, left bottom, from(#8ed058),
+		to(#7bb64b));
+	background-image: -webkit-linear-gradient(top, #8ed058, #7bb64b);
+	background-image: -moz-linear-gradient(top, #8ed058, #7bb64b);
+	background-image: -ms-linear-gradient(top, #8ed058, #7bb64b);
+	background-image: -o-linear-gradient(top, #8ed058, #7bb64b);
+	background-image: linear-gradient(to bottom, #8ed058, #7bb64b);
+	filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,
+		startColorstr=#8ed058, endColorstr=#7bb64b);
+}
+
+/*Menu*/
+.z-menubar-hor .z-menu-btn,.z-menubar-hor .z-menu-item-btn,.z-menubar-ver .z-menu-btn,.z-menubar-ver .z-menu-item-btn
+	{
+	font-family: Tahoma, Arial, Helvetica, sans-serif;
+	text-decoration: none;
+	font-size: 11px;
+	color: #FFFFFF;
+	display: block;
+	background-image: url(/img/degradado_azul.gif);
+    width : 130px;
+	padding-top: 5px;
+	padding-bottom: 4px;
+	padding-left: 3px;
+	font-weight: bold;
+	background-repeat: no-repeat;
+	background-position: -2px 0px;
+	width: 130px;
+}
+
+.z-menu-body-over .z-menu-inner-m .z-menu-btn,.z-menu-item-body-over .z-menu-item-inner-m .z-menu-btn
+	{
+	background-image: url(/img/degradado_azul.gif);
+
+}
+
+.z-menu-popup-cnt a.z-menu-cnt,.z-menu-popup-cnt a.z-menu-item-cnt {
+	font-family: Tahoma, Arial, Helvetica, sans-serif, Tahoma;
+	font-size: 12px;
+	color: #EDF2F7;
+	text-decoration: none;
+	display: block;
+	line-height: 22px;
+	padding-right: 3px;
+	padding-left: 3px;
+}
+
+.z-menu-popup-cnt .z-menu-over,.z-menu-popup-cnt .z-menu-item-over {
+	color: #FFFFFF;
+	text-decoration: underline;
+}
+
+.z-toolbar a, .z-toolbar a:visited, .z-toolbar a:hover {
+
+            color: #FFFFFF;
+        text-decoration: underline;
+        }
+        .vista {
+            background:#F2fee5 ;
+            color:white;
+            padding-top:7px;
+        }
+        .p-vista .z-panel-children {
+            background-color: #008BB6;
+            border-bottom: 0 none;
+        }
+        
+ /*Label*/
+ 
+ .zlabel{
+ 	font-family: Verdana, Arial, Helvetica, sans-serif;
+ 	font-size: 11px;
+ 	color: #333333;
+ 	text-decoration: none;
+ 	padding-top: 5px;
+ 	text-align: left;
+ }

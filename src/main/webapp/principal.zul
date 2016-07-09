@@ -1,0 +1,116 @@
+<!-- 
+   Copyright 2016 Jean Carlos Trivino Calderon
+
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+ -->
+
+<?page title="Menu" contentType="text/html;charset=UTF-8"?>
+<?link rel="stylesheet" type="text/css" href="/bootstrap/css/bootstrap.css"?>
+<?script src="/bootstrap/js/bootstrap.js"?>
+
+<zk xmlns:h="http://www.w3.org/1999/xhtml" xmlns:zk="http://www.zkoss.org/2005/zk">	
+	<style>
+		body {padding: 0 0;}
+
+		.z-treerow{
+			background-color: transparent;
+		}
+	</style>
+	<borderlayout id="bdlPrincipal" apply="controladores.MenuComposer">
+		<north size="17%" border="none" flex="true">
+			<borderlayout>
+				<center border="none" flex="false" style='background-image:url("img/degradado_azul.png"); background-repeat:repeat; background-position: center;'>
+				</center>
+			</borderlayout>
+		</north>
+		<center>
+			<borderlayout>
+				<north border="none" flex="true">
+					<div>
+						<menubar id="mnbMenu" autodrop="true">
+							<custom-attributes org.zkoss.zul.image.preload="true" />
+						</menubar>
+					</div>
+				</north>
+				<center id = "centerLayout" border="none" flex="true">
+					<div>
+		            	<include id="icdEspacio"></include>
+		        	</div>
+				</center>
+			</borderlayout>
+		</center>
+		<west open="true" size="20%" flex="true"  splittable="true" collapsible="true" autoscroll="true">
+			<div style="padding: 0 0;" >
+				<div class="navbar-header navbar-inverse" style="background-color: #000080;">
+					<h:button style="background-color: #000080;border-color:#000080" type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navHeaderCollapse" aria-expanded="false">
+						<span class="icon-bar"></span>
+				        <span class="icon-bar"></span>
+				        <span class="icon-bar"></span>
+			        </h:button>
+				</div>
+				<div style = "padding: 0 0;" class="collapse navbar-collapse navHeaderCollapse">
+					<tree id="mtree" style="border:none;">
+						<treecols>
+							<treecol style = "color:#000080;font-size:20px;"  label="Menu" />
+						</treecols>
+						<!-- 
+						<treechildren id="mtreeChil" style="background-color: transparent">
+					 		<treeitem open = "false">
+					 			<treerow>
+					 				<treecell image="/img/brut.png" style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;font-size: 16px;border-bottom: thin solid #ddd;" label="OpcionA"/>
+					 			</treerow>
+					 			<treechildren>
+					 				<treeitem>
+							 			<treerow>
+							 				<treecell style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;font-size: 14px;border-bottom: thin solid #ddd;" label="OpcionAA"/>
+							 			</treerow>
+							 		</treeitem>
+							 	</treechildren>
+					 		</treeitem>
+					 		<treeitem>
+					 			<treerow>
+					 				<treecell style = "font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;font-size: 16px;border-bottom: thin solid #ddd;" label="OpcionC"/>
+					 			</treerow>
+					 		</treeitem>
+					 		<treeitem>
+					 			<treerow>
+					 				<treecell style = "font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;font-size: 16px;border-bottom: thin solid #ddd;" label="OpcionE"/>
+					 			</treerow>
+			            	</treeitem>
+						</treechildren>
+						 -->
+					</tree>
+					
+					<!-- 					
+					<h:ul class="nav nav-list">
+					<h:li>
+					<label class = "tree-toggle nav-header" value="Administracion" />
+					<h:ul class = "nav nav-pills tree">
+						<h:li><a href="#">Materias</a></h:li>
+						<h:li><a href="#">Profesores</a></h:li>
+						<h:li><a href="#">Reportes</a></h:li>
+					</h:ul>
+					</h:li>
+					<h:li>
+					<label class = "tree-toggle nav-header" value="Procesos" />
+					<h:ul class = "nav nav-pills tree">
+						<h:li><a href="#">Generacion de Horarios</a></h:li>
+					</h:ul>
+					</h:li>
+					</h:ul>
+					 -->
+				</div>
+			</div>
+		</west>
+	</borderlayout>
+</zk>
