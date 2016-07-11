@@ -2,7 +2,6 @@ package entidadesDAO;
 // Generated Jun 5, 2016 11:08:49 PM by Hibernate Tools 4.0.0.Final
 
 import java.util.List;
-import javax.naming.InitialContext;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.hibernate.LockMode;
@@ -101,7 +100,7 @@ public class AulasrecursosHome extends MydbBaseHibernateDAO{
 	public List<Aulasrecursos> findByExample(Aulasrecursos instance) {
 		log.debug("finding Aulasrecursos instance by example");
 		try {
-			List<Aulasrecursos> results = (List<Aulasrecursos>) sessionFactory.getCurrentSession()
+			List<Aulasrecursos> results = sessionFactory.getCurrentSession()
 					.createCriteria("entidadesDAO.Aulasrecursos").add(create(instance)).list();
 			log.debug("find by example successful, result size: " + results.size());
 			return results;

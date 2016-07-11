@@ -67,10 +67,10 @@ public class AulasDAO extends MydbBaseHibernateDAO{
         }
     }
 
-    public List findByExample(Aulas instance) {
+    public List<Aulas> findByExample(Aulas instance) {
        // log.debug("finding Usuario instance by example");
         try {
-            List results = MydbHibernateSessionFactory.getSession().createCriteria(
+            List<Aulas> results = MydbHibernateSessionFactory.getSession().createCriteria(
                     "parquil.entidades.Aulas")
                     .add(Example.create(instance)).list();
             //log.debug("find by example successful, result size: "
@@ -82,7 +82,7 @@ public class AulasDAO extends MydbBaseHibernateDAO{
         }
     }
 
-    public List findByProperty(String propertyName, Object value) {
+    public List<Aulas> findByProperty(String propertyName, Object value) {
         //log.debug("finding Usuario instance with property: " + propertyName
          //       + ", value: " + value);
         try {
@@ -97,7 +97,7 @@ public class AulasDAO extends MydbBaseHibernateDAO{
         }
     }
 
-    public List findAll() {
+    public List<Aulas> findAll() {
         //log.debug("finding all Usuario instances");
         try {
             String queryString = "from Aulas";

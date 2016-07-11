@@ -45,13 +45,10 @@ public class LoginComposer extends GenericForwardComposer {
 	private static final long serialVersionUID = -3215403323220236995L;
 	private Textbox txtUsuario;
 	private Textbox txtClave;
-	private String validar = "", texto_desencriptado = "", validar_fecha = "";
-	private String[] app = null;
 	private Button btnEntrar;
 	public static String grupo = "";
 	private String app_name = "1";
-	private BigInteger e, n;
-	private static Window win;
+	private BigInteger e;
 	Musuario musuario = new Musuario();
 
 	@Override

@@ -33,13 +33,13 @@ public class OpcionesList {
 		for(Opciones ops: listOp){
 			if(ops.getOrden().split("-").length == 1){
 				if (opExt.conteoOpciones(usuario, ops.getIdOpcion()) == 1){
-					treeOpcion[count1] = new OpcionesTreeNode(new Opcion(ops.getIdOpcion(), ops.getTituloMenu(),ops.getUrl(),ops.getImagen()));
+					treeOpcion[count1] = new OpcionesTreeNode(new Opcion(ops.getIdOpcion(), ops.getTituloMenu(), ops.getUrl(), ops.getImagen(), true));
 					
 					count1 ++;
 				}else{
 					if (listOpciones != null){
 						if(listOpciones.size() > 0){
-							treeOpcion[count1] = new OpcionesTreeNode(opcion, listOpciones.get(0),true);
+							treeOpcion[count1] = new OpcionesTreeNode(opcion, listOpciones.get(0), true);
 							
 							count1 ++;
 							
@@ -56,10 +56,13 @@ public class OpcionesList {
 					listOpciones = new ArrayList<OpcionesTreeNode[]>();
 					listOpciones.add(new OpcionesTreeNode[RegistrosXnivel(listOp, ops.getOrden().split("-").length, ops.getOpcionContenedora())]);
 					
-					opcion2 = new Opcion(ops.getIdOpcion(), ops.getTituloMenu());
-					
-					if (opExt.conteoOpciones(usuario, ops.getIdOpcion()) == 1)
+					if (opExt.conteoOpciones(usuario, ops.getIdOpcion()) == 1){
+						opcion2 = new Opcion(ops.getIdOpcion(), ops.getTituloMenu(), ops.getUrl(), ops.getImagen());
+						
 						listOpciones.get(0)[count2] = new OpcionesTreeNode(opcion2);
+					}else{
+						opcion2 = new Opcion(ops.getIdOpcion(), ops.getTituloMenu());
+					}
 				}else{
 					if (ops.getOpcionContenedora() == opcion2.getIdOpcion()){
 						if (listOpciones.size() == 1)

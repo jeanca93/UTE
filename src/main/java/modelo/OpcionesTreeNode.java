@@ -18,6 +18,7 @@ public class OpcionesTreeNode extends DefaultTreeNode<Opcion> {
     
     public OpcionesTreeNode(Opcion data) {
         super(data);
+        setOpen(true);
     }
      
     public boolean isOpen() {

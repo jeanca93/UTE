@@ -17,25 +17,17 @@
 
 package controladores;
 
-import java.io.IOException;
 import java.rmi.RemoteException;
-import java.util.Iterator;
 import java.util.List;
 
-import javax.xml.parsers.ParserConfigurationException;
-
 import org.hibernate.service.spi.ServiceException;
-import org.xml.sax.SAXException;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.event.Events;
-import org.zkoss.zk.ui.util.Clients;
 import org.zkoss.zk.ui.util.GenericForwardComposer;
 import org.zkoss.zul.*;
 
-import com.sun.swing.internal.plaf.metal.resources.metal;
 
 import entidades.Opciones;
-import entidadesDAO.OpcionesHome;
 import entidadesDAO.OpcionesHomeExt;
 import modelo.AdvancedTreeModel;
 import modelo.OpcionesList;
@@ -57,10 +49,6 @@ public class MenuComposer extends GenericForwardComposer<Component> {
 	private Menuitem menuitem;
 	
 	private Tree mtree;
-	private Treechildren mtreeChil;
-	private Treerow treerowPadre;
-	private Treecell treecellPadre;
-	private Treechildren treechildren;
 	
 	private Center centerLayout;
 	
@@ -142,7 +130,7 @@ public class MenuComposer extends GenericForwardComposer<Component> {
 			}
 		}
 		AdvancedTreeModel opcionesTreeModel = new AdvancedTreeModel(new OpcionesList(session.getAttribute("usuario").toString()).getRoot());
-		mtree.setItemRenderer(new OpcionesTreeRenderer());
+		mtree.setItemRenderer(new OpcionesTreeRenderer(centerLayout, icdEspacio));
 		mtree.setModel(opcionesTreeModel);
         
 		/*
@@ -236,27 +224,5 @@ public class MenuComposer extends GenericForwardComposer<Component> {
 		}
 		
 		return menuitem;
-	}
-	
-	private Treecell addTreeCell(final Opciones ops)
-	{
-		treecellPadre = new Treecell();
-		
-		treecellPadre.setLabel(ops.getTituloMenu());
-		if (ops.getImagen() != null)
-			treecellPadre.setImage(ops.getImagen());
-		if (ops.getUrl() != null){
-			treecellPadre.addEventListener(Events.ON_CLICK, new org.zkoss.zk.ui.event.EventListener() {
-
-                public void onEvent(final org.zkoss.zk.ui.event.Event event) throws InterruptedException, Exception, RemoteException, ServiceException {
-                	Clients.showBusy(centerLayout, "Procesando...");
-                	icdEspacio.setSrc(ops.getUrl());	
-                	Clients.clearBusy(centerLayout);
-					//treeitemPadre.setOpen(true);
-                }
-            });
-		}
-		
-		return treecellPadre;
 	}
 }
