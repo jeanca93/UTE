@@ -1,4 +1,4 @@
-package modelo;
+package modelo.opciones;
 
 import org.zkoss.zk.ui.Session;
 import org.zkoss.zk.ui.Sessions;

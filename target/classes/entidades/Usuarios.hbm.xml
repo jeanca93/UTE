@@ -15,7 +15,7 @@
             <column name="Usuario" length="15" not-null="true" />
         </property>
         <property name="password" type="string">
-            <column name="Password" length="256" not-null="true" />
+            <column name="Password" length="256"/>
         </property>
         <property name="nombres" type="string">
             <column name="Nombres" length="35" not-null="true" />

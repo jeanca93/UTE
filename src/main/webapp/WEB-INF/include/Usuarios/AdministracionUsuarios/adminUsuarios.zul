@@ -1,0 +1,105 @@
+<!-- 
+   Copyright 2016 Jean Carlos Trivino Calderon
+
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+ -->
+
+<?page title="new page title" contentType="text/html;charset=UTF-8"?>
+<?link rel="stylesheet" type="text/css" href="/bootstrap/css/bootstrap.css" ?>
+<zk>
+<style dynamic="true">
+        .z-toolbar a, .z-toolbar a:visited, .z-toolbar a:hover{
+            border-radius: 10px;
+    		border: 1px thin #0080c0;
+        }
+</style>
+<panel id="container" title="Administracion de Usuarios" vflex="1" validationMessages="@id('vmsgs')"
+        viewModel="@id('vm') @init('modelo.usuarios.UsuariosModel')">
+    <toolbar>
+    	<toolbarbutton image="/img/agregar.png" label="Nuevo" onClick="@command('nuevoUsuario')"/>
+    	<toolbarbutton image="/img/trash.png" label="Eliminar" onClick="@command('eliminarUsuarios')"/>
+    </toolbar>
+    <panelchildren>
+    	 <zscript>
+			constraint.NoSpacesConstraint customConstraint = new constraint.NoSpacesConstraint();
+		</zscript>
+        <grid id="GridUsuarios" mold="paging" pagingPosition="bottom"
+        	model="@load(vm.allUsuarios) @template((vm.displayEdit and each.editingStatus) ? 'editable' : 'noneditable')"
+            autopaging="true" vflex="1" emptyMessage="No hay registros">
+            
+            <columns>
+            	<column width="30px" align="center" >
+            		<checkbox id="selectAllCheckBox" onCheck="@command('selectedCheckBox', CheckEvent=event)"/>
+        	    </column>
+                <column width="80px" label="Id Usuario" align="center" sort="auto(usuario.idUsuario)" />
+                <column width="250px" label="Nombres" align="left" sort="auto(usuario.nombres)"/>
+                <column width="250px" label="Apellidos" align="left" sort="auto(usuario.apellidos)"/>
+                <column width="120px" label="Usuario" align="left" sort="auto(usuario.usuario)"/>
+                <column width="180px" label="Correo" align="left" sort="auto(usuario.correo)"/>
+                <column width="170px" label="Perfil de Usuario" align="center" sort="auto(usuario.perfilesusuario.perfil)"/>
+                <column width="120px" label="Edit" visible="@load(vm.displayEdit)"/>
+            </columns>
+            <template name="editable">
+                <row>
+                	<checkbox checked="${each.seleccionado}" disabled="true"/>
+                    <textbox disabled="true" style="text-align: center;" hflex="1" 
+                        value="@load(each.usuario.idUsuario) @save(each.usuario.idUsuario, before='confirm')" />
+                    <textbox focus="true" constraint="no empty:Campo obligatorio" hflex="1" 
+                        value="@load(each.usuario.nombres) @save(each.usuario.nombres, before='confirm')" />
+                    <textbox constraint="no empty:Campo obligatorio" hflex="1" 
+                        value="@load(each.usuario.apellidos) @save(each.usuario.apellidos, before='confirm')" />
+                    <textbox constraint="${customConstraint}" hflex="1" 
+                        value="@load(each.usuario.usuario) @save(each.usuario.usuario, before='confirm')" />
+                    <textbox constraint="no empty:Campo obligatorio, /.+@.+\.[a-z]+/:Correo invalido" hflex="1" 
+                        value="@load(each.usuario.correo) @save(each.usuario.correo, before='confirm')" />
+                    <combobox inplace="true" mold="rounded" readonly="true"
+                        model="@load(vm.allPerfiles)" constraint="no empty:Campo obligatorio"
+                        selectedItem="@bind(each.usuario.perfilesusuario)" hflex="1" errorMessage="@load(vmsgs['perfil'])">
+                        <template name="model">
+                        	<comboitem value="@load(each.idPerfilUsuario)" label="@load(each.perfil)"/>
+                    	</template>
+                    </combobox>
+                    <div>
+                        <button
+                            image="/img/tick-small.png"
+                            onClick="@command('confirm', UsuarioStatus=each)" />
+                        <button
+                            image="/img/cross-small.png"
+                            onClick="@command('changeEditableStatus', UsuarioStatus=each)" />
+                    </div>
+                </row>
+            </template>
+            <template name="noneditable">
+                <row>
+                	<checkbox checked="${each.seleccionado}" disabled="false"/>
+                    <label value="@load(each.usuario.idUsuario)" hflex="1"/>
+                    <label value="@load(each.usuario.nombres)" hflex="1"/>
+                    <label value="@load(each.usuario.apellidos)" hflex="1"/>
+                    <label value="@load(each.usuario.usuario)" hflex="1"/>
+                    <label value="@load(each.usuario.correo)" hflex="1"/>
+                    <combobox disabled="true" inplace="true" mold="rounded"
+                        model="@load(vm.allPerfiles)" 
+                        selectedItem="@bind(each.usuario.perfilesusuario)" hflex="1">
+                       <template name="model">
+                        	<comboitem value="@load(each.idPerfilUsuario)" label="@load(each.perfil)"/>
+                    	</template>
+                    </combobox>
+                    <button
+                        image="/img/pencil-small.png"
+                        onClick="@command('changeEditableStatus', UsuarioStatus=each)" />
+                </row>
+            </template>
+        </grid>
+    </panelchildren>
+</panel>
+</zk>

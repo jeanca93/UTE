@@ -32,7 +32,6 @@ import org.zkoss.zk.ui.util.Clients;
 import org.zkoss.zk.ui.util.GenericForwardComposer;
 import org.zkoss.zul.*;
 
-import controladores.modelo.Musuario;
 import entidadesDAO.UsuariosHomeExt;
 
 /**
@@ -42,39 +41,17 @@ import entidadesDAO.UsuariosHomeExt;
 
 public class LoginComposer extends GenericForwardComposer {
 
-	private static final long serialVersionUID = -3215403323220236995L;
+	private static final long serialVersionUID = 1L;
 	private Textbox txtUsuario;
 	private Textbox txtClave;
 	private Button btnEntrar;
 	public static String grupo = "";
 	private String app_name = "1";
 	private BigInteger e;
-	Musuario musuario = new Musuario();
 
 	@Override
 	public void doAfterCompose(Component comp) throws Exception {
 		super.doAfterCompose(comp);
-		init(minClave());
-
-	}
-
-	public String minClave() {
-		String valor = "8";
-		return valor;
-	}
-
-	private void init(String minClave) throws InstantiationException,
-			IllegalAccessException {
-		txtUsuario.setFocus(true);
-		txtUsuario.setConstraint("no empty: "
-				+ "Debe ingresar el nombre de usuario");
-
-		txtClave
-				.setConstraint("no empty, /^.*(?=.{" + minClave + ",64}).*$/,no future: " //$NON-NLS-1$
-						+ "La clave no es valida." + "\n\n"
-						+ "Una clave valida debe:" + "\n\n- "
-						+ "Tener al menos " + minClave
-						+ " caracteres de longitud.");
 
 	}
 
@@ -103,15 +80,16 @@ public class LoginComposer extends GenericForwardComposer {
 		else{
 			UsuariosHomeExt userExt = new UsuariosHomeExt();
 			
-			boolean existeUsuario = userExt.validaUsuario(user, password);
+			Integer existeUsuario = userExt.validaUsuario(user, password);
 			
-			if (existeUsuario){
+			if (existeUsuario > 0){
 				Session session = Sessions.getCurrent();
+				session.setAttribute("idUsuario", existeUsuario);
 				session.setAttribute("usuario", user);
 				
 				Executions.sendRedirect("/principal.zul");
 			}else
-				Clients.showNotification("Usuario o contraseña inválido");
+				Clients.showNotification("Usuario o contraseña inválido",Clients.NOTIFICATION_TYPE_ERROR, null, null, 0);
 		}
 	}
 

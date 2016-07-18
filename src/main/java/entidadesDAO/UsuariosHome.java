@@ -7,6 +7,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.hibernate.LockMode;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 
 import entidades.Usuarios;
 import sessionfactory.MydbHibernateSessionFactory;
@@ -36,12 +37,22 @@ public class UsuariosHome extends MydbBaseHibernateDAO{
 	}
 
 	public void attachDirty(Usuarios instance) {
+		Transaction tx = null;
+		
 		log.debug("attaching dirty Usuarios instance");
 		try {
+			tx = sessionFactory.getCurrentSession().beginTransaction();
+			
 			sessionFactory.getCurrentSession().saveOrUpdate(instance);
+			
 			log.debug("attach successful");
+			
+			tx.commit();
 		} catch (RuntimeException re) {
+			tx.rollback();
+			
 			log.error("attach failed", re);
+			
 			throw re;
 		}
 	}
@@ -58,12 +69,22 @@ public class UsuariosHome extends MydbBaseHibernateDAO{
 	}
 
 	public void delete(Usuarios persistentInstance) {
+		Transaction tx = null;
+		
 		log.debug("deleting Usuarios instance");
 		try {
+			tx = sessionFactory.getCurrentSession().beginTransaction();
+			
 			sessionFactory.getCurrentSession().delete(persistentInstance);
+			
 			log.debug("delete successful");
+			
+			tx.commit();
 		} catch (RuntimeException re) {
+			tx.rollback();
+			
 			log.error("delete failed", re);
+			
 			throw re;
 		}
 	}
@@ -83,7 +104,7 @@ public class UsuariosHome extends MydbBaseHibernateDAO{
 	public Usuarios findById(java.lang.Integer id) {
 		log.debug("getting Usuarios instance with id: " + id);
 		try {
-			Usuarios instance = (Usuarios) sessionFactory.getCurrentSession().get("entidadesDAO.Usuarios", id);
+			Usuarios instance = (Usuarios) sessionFactory.getCurrentSession().get("entidades.Usuarios", id);
 			if (instance == null) {
 				log.debug("get successful, no instance found");
 			} else {
@@ -100,7 +121,7 @@ public class UsuariosHome extends MydbBaseHibernateDAO{
 		log.debug("finding Usuarios instance by example");
 		try {
 			List<Usuarios> results = (List<Usuarios>) sessionFactory.getCurrentSession()
-					.createCriteria("entidadesDAO.Usuarios").add(create(instance)).list();
+					.createCriteria("entidades.Usuarios").add(create(instance)).list();
 			log.debug("find by example successful, result size: " + results.size());
 			return results;
 		} catch (RuntimeException re) {

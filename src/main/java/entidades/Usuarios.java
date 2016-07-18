@@ -25,12 +25,13 @@ public class Usuarios implements java.io.Serializable {
 	}
 
 	public Usuarios(Perfilesusuario perfilesusuario, String usuario, String password, String nombres, String apellidos,
-			char estado, Date fechaCreacion, int usuarioCrea) {
+			String correo, char estado, Date fechaCreacion, int usuarioCrea) {
 		this.perfilesusuario = perfilesusuario;
 		this.usuario = usuario;
 		this.password = password;
 		this.nombres = nombres;
 		this.apellidos = apellidos;
+		this.correo = correo;
 		this.estado = estado;
 		this.fechaCreacion = fechaCreacion;
 		this.usuarioCrea = usuarioCrea;

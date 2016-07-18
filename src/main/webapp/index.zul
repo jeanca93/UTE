@@ -21,18 +21,25 @@
 <zk>
 	<style>
 		body {padding: 0 0; min-width:1080px; min-height:642px;}
+		
+		.z-notification .z-notification-content {
+			padding-top: 30px;
+			width: 200px;
+			height: 75px;
+			min-height: 50px;
+		}
 	</style>
 	
 	<borderlayout id="blLogging" height="100%" width="100%" sclass="fondo" apply="controladores.LoginComposer" >
-		<north size="25%" border="none" flex="true" style="background:transparent;">
+		<north size="25%" border="none" hflex="1" vflex="min" style="background:transparent;">
 		
 		</north>
 			
-		<west size="38%" border="none" flex="true" style="background:transparent;">
+		<west size="38%" border="none" hflex="min" vflex="1" style="background:transparent;">
 			
 		</west>
 		
-		<center border="none" flex="true" style=" background-color: #F7F7F7;
+		<center border="none" hflex="1" vflex="1" style=" background-color: #F7F7F7;
 							    padding: 20px 25px 30px;								    
 							    -moz-border-radius: 2px;
 							    -webkit-border-radius: 2px;
@@ -43,9 +50,9 @@
 				<separator></separator>
 						
 				<textbox sclass="myTextboxLogin" 
-									id="txtUsuario"  focus="true" type="text" placeholder="Usuario" />
+									id="txtUsuario"  focus="true" type="text" placeholder="Usuario" constraint="no empty:Campo obligatorio"/>
 				<textbox sclass="myTextboxPassword"
-									id="txtClave" type="password" placeholder="Clave" />
+									id="txtClave" type="password" placeholder="Clave" constraint="no empty:Campo obligatorio, /^.*(?=.{8,64}).*$/:Clave debe tener minimo 8 caracteres"/>
 				
 				<separator spacing="8px" />
 				
@@ -63,11 +70,11 @@
 			</div>
 		</center>
 		
-		<east size="38%" border="none" flex="true" style="background:transparent;">
+		<east size="38%" border="none" hflex="min" vflex="1" style="background:transparent;">
 			
 		</east>
 		
-		<south size="25%" border="none" flex="true" style="background:transparent;">
+		<south size="25%" border="none" hflex="1" vflex="min" style="background:transparent;">
 			
 		</south>
 	</borderlayout>	

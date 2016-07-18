@@ -25,31 +25,42 @@
 		.z-treerow{
 			background-color: transparent;
 		}
+		
+		.z-notification .z-notification-content {
+			width: 250px;
+			height: 75px;
+			min-height: 50px;
+		}
 	</style>
 	<borderlayout id="bdlPrincipal" apply="controladores.MenuComposer">
-		<north size="17%" border="none" flex="true">
+		<north size="17%" border="none" vflex="min" hflex="1">
 			<borderlayout>
-				<center border="none" flex="false" style='background-image:url("img/degradado_azul.png"); background-repeat:repeat; background-position: center;'>
+				<center border="none" hflex="1" vflex="1" style='background-image:url("img/degradado_azul.png"); background-repeat:repeat; background-position: center;'>
 				</center>
 			</borderlayout>
 		</north>
-		<center>
+		<center id = "centerLayout" border="none">
+			<div vflex="1" hflex="1">
+				<include id="icdEspacio"></include>
+		    </div>
+			<!--   
 			<borderlayout>
-				<north border="none" flex="true">
+				<north border="none" hflex="1" vflex="1">
 					<div>
 						<menubar id="mnbMenu" autodrop="true">
 							<custom-attributes org.zkoss.zul.image.preload="true" />
 						</menubar>
 					</div>
 				</north>
-				<center id = "centerLayout" border="none" flex="true">
+				<center id = "centerLayout" border="none" hflex="1" vflex="1">
 					<div>
 		            	<include id="icdEspacio"></include>
 		        	</div>
 				</center>
 			</borderlayout>
+			-->
 		</center>
-		<west open="true" size="22%" flex="true"  splittable="true" collapsible="true" autoscroll="true">
+		<west id="westLayout" open="true" size="22%" vflex="1" hflex="min" splittable="true" collapsible="true" autoscroll="true">
 			<div style="padding: 0 0;" >
 				<div class="navbar-header navbar-inverse" style="background-color: #000080;">
 					<h:button style="background-color: #000080;border-color:#000080" type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navHeaderCollapse" aria-expanded="false">

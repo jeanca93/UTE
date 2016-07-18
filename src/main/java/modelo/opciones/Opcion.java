@@ -1,4 +1,4 @@
-package modelo;
+package modelo.opciones;
 
 public class Opcion {
 	private final Integer idOpcion;

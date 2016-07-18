@@ -7,6 +7,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.hibernate.LockMode;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 
 import entidades.Perfilesusuario;
 import sessionfactory.MydbHibernateSessionFactory;
@@ -81,17 +82,26 @@ public class PerfilesusuarioHome extends MydbBaseHibernateDAO{
 	}
 
 	public Perfilesusuario findById(java.lang.Integer id) {
+		Transaction tx = null;
+		
 		log.debug("getting Perfilesusuario instance with id: " + id);
 		try {
+			tx = sessionFactory.getCurrentSession().beginTransaction();
+			
 			Perfilesusuario instance = (Perfilesusuario) sessionFactory.getCurrentSession()
-					.get("entidadesDAO.Perfilesusuario", id);
+					.get("entidades.Perfilesusuario", id);
 			if (instance == null) {
 				log.debug("get successful, no instance found");
 			} else {
 				log.debug("get successful, instance found");
 			}
+			
+			tx.commit();
+			
 			return instance;
 		} catch (RuntimeException re) {
+			tx.rollback();
+			
 			log.error("get failed", re);
 			throw re;
 		}
@@ -101,7 +111,7 @@ public class PerfilesusuarioHome extends MydbBaseHibernateDAO{
 		log.debug("finding Perfilesusuario instance by example");
 		try {
 			List<Perfilesusuario> results = (List<Perfilesusuario>) sessionFactory.getCurrentSession()
-					.createCriteria("entidadesDAO.Perfilesusuario").add(create(instance)).list();
+					.createCriteria("entidades.Perfilesusuario").add(create(instance)).list();
 			log.debug("find by example successful, result size: " + results.size());
 			return results;
 		} catch (RuntimeException re) {

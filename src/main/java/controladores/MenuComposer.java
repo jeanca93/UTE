@@ -14,24 +14,17 @@
    limitations under the License.
 */
 
-
 package controladores;
 
-import java.rmi.RemoteException;
-import java.util.List;
-
-import org.hibernate.service.spi.ServiceException;
 import org.zkoss.zk.ui.Component;
-import org.zkoss.zk.ui.event.Events;
+import org.zkoss.zk.ui.Executions;
+import org.zkoss.zk.ui.util.Clients;
 import org.zkoss.zk.ui.util.GenericForwardComposer;
 import org.zkoss.zul.*;
 
-
-import entidades.Opciones;
-import entidadesDAO.OpcionesHomeExt;
-import modelo.AdvancedTreeModel;
-import modelo.OpcionesList;
-import modelo.OpcionesTreeRenderer;
+import modelo.opciones.AdvancedTreeModel;
+import modelo.opciones.OpcionesList;
+import modelo.opciones.OpcionesTreeRenderer;
 
 /**
  *
@@ -39,23 +32,37 @@ import modelo.OpcionesTreeRenderer;
  */
 
 public class MenuComposer extends GenericForwardComposer<Component> {
-
+	private static final long serialVersionUID = 2L;
+	/*
 	private Menubar mnbMenu;
-	private Include icdEspacio;
-	
 	private Menu menu;
 	private Menu menu2;
 	private Menupopup menupopup;
 	private Menuitem menuitem;
+	*/
 	
-	private Tree mtree;
-	
+	private Tree mtree;	
 	private Center centerLayout;
+	private West westLayout;
+	private Include icdEspacio;
 	
 	@Override
 	public void doAfterCompose(Component comp) throws Exception {
 		super.doAfterCompose(comp);
 		
+		String user = (session.getAttribute("usuario")!= null?session.getAttribute("usuario").toString():"");
+		
+		if(user.length() == 0)
+			Executions.sendRedirect("/index.zul");
+		else{
+			String pagina = (session.getAttribute("pagina")!= null?session.getAttribute("pagina").toString():"");
+			
+			if(pagina.trim().length() != 0)
+				icdEspacio.setSrc(pagina);
+		}
+		
+		Clients.showBusy("Cargando...");
+		/*
 		Menupopup menupopupTMP = null;
 		
 		OpcionesHomeExt opExt = new OpcionesHomeExt();
@@ -129,86 +136,16 @@ public class MenuComposer extends GenericForwardComposer<Component> {
 				}
 			}
 		}
-		AdvancedTreeModel opcionesTreeModel = new AdvancedTreeModel(new OpcionesList(session.getAttribute("usuario").toString()).getRoot());
+		*/
+		
+		AdvancedTreeModel opcionesTreeModel = new AdvancedTreeModel(new OpcionesList(user).getRoot());
 		mtree.setItemRenderer(new OpcionesTreeRenderer(centerLayout, icdEspacio));
 		mtree.setModel(opcionesTreeModel);
-        
-		/*
-		for(final Opciones ops: listOp){
-			final Treeitem treeitemPadre = new Treeitem();
-			treerowPadre = new Treerow();
-			treecellPadre = new Treecell();
-			treecellPadre.setLabel("Personas");
-			treechildren = new Treechildren();
-			if (ops.getOpcionContenedora() == null){			
-				if (ops.getOpcion().toUpperCase().equals("INICIO")){
-					mnbMenu.appendChild(addMenuItem(ops));
-				}else{
-					if (menu == null)
-						menu = new Menu();
-					menu.setLabel(ops.getTituloMenu());
-					mnbMenu.appendChild(menu);
-				}
-			}else{
-				if (menupopup == null)
-					menupopup = new Menupopup();
-				
-				if (ops.getOrden().split("-").length == 2)
-				{
-					if (opExt.conteoOpciones("admin", ops.getIdOpcion()) > 1)
-					{
-						if (menu2 == null)
-							menu2 = new Menu();
-						menu2.setLabel(ops.getTituloMenu());
-					}else{
-						menupopup.appendChild(addMenuItem(ops));
-					}				
-					
-				}else if (ops.getOrden().split("-").length == 3)
-				{
-					
-					if (menupopupTMP == null)
-						menupopupTMP = new Menupopup();
-										
-					menupopupTMP.appendChild(addMenuItem(ops));
-					
-					if (ops.getIdOpcion() == opExt.verificaUltimo("admin", ops.getOpcionContenedora()))
-					{
-						menu2.appendChild(menupopupTMP);
-						
-						menupopup.appendChild(menu2);
-						
-						menupopupTMP = null;
-						menu2 = null;
-					}
-				}	
-				
-				Boolean flag = true, flag2 = true;
-				
-				if (ops.getOrden().split("-").length == 3){
-					if (ops.getOpcionContenedora() != opExt.verificaUltimo("admin", opExt.opcionPadreInicial(ops.getIdOpcion())))
-					{
-						flag = false;
-					}
-				}else{
-					if (opExt.conteoOpciones("admin", ops.getIdOpcion()) > 1)
-						flag2 = false;
-				}
-						
-				
-				if ((ops.getIdOpcion() == opExt.verificaUltimo("admin", ops.getOpcionContenedora())) && (flag == true) && (flag2 == true))
-				{
-					if (menupopup.getChildren().size() > 0){
-						menu.appendChild(menupopup);
-						
-						menupopup = null;
-						menu = null;
-					}
-				}
-			}
-		}*/
+		
+		Clients.clearBusy();
 	}
 	
+	/*
 	private Menuitem addMenuItem(final Opciones ops)
 	{
 		menuitem = new Menuitem();
@@ -225,4 +162,5 @@ public class MenuComposer extends GenericForwardComposer<Component> {
 		
 		return menuitem;
 	}
+	*/
 }

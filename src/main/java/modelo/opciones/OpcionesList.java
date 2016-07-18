@@ -1,4 +1,4 @@
-package modelo;
+package modelo.opciones;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -127,32 +127,6 @@ public class OpcionesList {
 		
 		root = new OpcionesTreeNode(null, treeOpcion, true);
 		root.setOpen(true);
-		
-		/*
-        root = new OpcionesTreeNode(null,
-            new OpcionesTreeNode[] {
-                new OpcionesTreeNode(new Opcion("Friend"),new OpcionesTreeNode[] {
-                    new OpcionesTreeNode(new Opcion("High School"), new OpcionesTreeNode[] {
-                        new OpcionesTreeNode(new Opcion("Fernando Terrell", null, "/img/brut.png")),
-                        new OpcionesTreeNode(new Opcion("Stanley Larson", null, "/img/brut.png"))
-                    },true),
-                    new OpcionesTreeNode(new Opcion("University"), new OpcionesTreeNode[] {
-                        new OpcionesTreeNode(new Opcion("Camryn Breanna", null, "/img/brut.png")),
-                        new OpcionesTreeNode(new Opcion("Juliana Isabela",null,"/img/brut.png")),
-                        new OpcionesTreeNode(new Opcion("Holden Craig",null, "/img/brut.png"))
-                    },true),
-                    new OpcionesTreeNode(new Opcion("Emma Jones",null, "/img/brut.png")),
-                    new OpcionesTreeNode(new Opcion("Eric Franklin",null,  "/img/brut.png")),
-                    new OpcionesTreeNode(new Opcion("Alfred Wong",null, "/img/brut.png")),
-                    new OpcionesTreeNode(new Opcion("Miguel Soto", null, "/img/brut.png"))
-                },true),
-                new OpcionesTreeNode(new Opcion("Work"),new OpcionesTreeNode[] {
-                    new OpcionesTreeNode(new Opcion("Andrew Willis", null, "/img/brut.png")),
-                    new OpcionesTreeNode(new Opcion("Russell Thomas",null,  "/img/brut.png")),
-                    new OpcionesTreeNode(new Opcion("Donovan Marcus", null, "/img/brut.png"))
-                },true)
-            },true
-        );*/
     }
     
     public OpcionesTreeNode getRoot() {
