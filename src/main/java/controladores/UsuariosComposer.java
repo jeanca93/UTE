@@ -70,7 +70,7 @@ public class UsuariosComposer extends GenericForwardComposer<Component>{
 				Integer perfil = cmbPerfiles.getSelectedItem().getValue();
 				Session session = Sessions.getCurrent();
 				
-				new UsuariosHomeExt().crearNuevoUsuario(new Usuarios(new PerfilesusuarioHome().findById(perfil), usuario, null, nombres, apellidos, correo, 'P', new Date(), Integer.parseInt(session.getAttribute("idUsuario").toString())), clave);
+				new UsuariosHomeExt().crearNuevoUsuario(new Usuarios(new PerfilesusuarioHome().findById(perfil), usuario, null, nombres, apellidos, correo, 'A', new Date(), Integer.parseInt(session.getAttribute("idUsuario").toString())), clave);
 				
 				modalDialog.detach();
 				

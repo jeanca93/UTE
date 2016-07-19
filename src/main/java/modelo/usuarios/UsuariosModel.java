@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.hibernate.Transaction;
+import org.zkoss.bind.BindUtils;
 import org.zkoss.bind.ValidationContext;
 import org.zkoss.bind.Validator;
 import org.zkoss.bind.annotation.AfterCompose;
@@ -14,6 +15,7 @@ import org.zkoss.bind.annotation.BindingParam;
 import org.zkoss.bind.annotation.Command;
 import org.zkoss.bind.annotation.ContextParam;
 import org.zkoss.bind.annotation.ContextType;
+import org.zkoss.bind.annotation.GlobalCommand;
 import org.zkoss.bind.annotation.NotifyChange;
 import org.zkoss.bind.validator.AbstractValidator;
 import org.zkoss.zk.ui.Component;
@@ -27,6 +29,7 @@ import org.zkoss.zk.ui.event.InputEvent;
 import org.zkoss.zk.ui.select.Selectors;
 import org.zkoss.zk.ui.select.annotation.Wire;
 import org.zkoss.zk.ui.util.Clients;
+import org.zkoss.zkplus.databind.AnnotateDataBinder;
 import org.zkoss.zul.Checkbox;
 import org.zkoss.zul.Grid;
 import org.zkoss.zul.Label;
@@ -43,25 +46,27 @@ import entidades.Usuarios;
 import entidadesDAO.UsuariosHomeExt;
 
 public class UsuariosModel {
-	private List<Perfilesusuario> allPerfiles = new ArrayList<Perfilesusuario>();
-	private ListModelList<UsuarioStatus> allUsuariosStatus = new ListModelList<UsuarioStatus>();
-	private List<Usuarios> listUserTMP = new ArrayList<Usuarios>();
+	private List<Perfilesusuario> allPerfiles;
+	private ListModelList<UsuarioStatus> allUsuariosStatus;
+	private List<Usuarios> listUserTMP;
 	private boolean displayEdit = true;
 	
 	@Wire
 	private Grid GridUsuarios;
 	
 	public UsuariosModel(){
-		UsuarioDatos userDatos = new UsuarioDatos();
+		super();
 		
-		genListModel(userDatos.getAllUsuarios());
-			
-		allPerfiles = userDatos.getAllPerfiles();
+		allPerfiles  = new ArrayList<Perfilesusuario>();
+		allUsuariosStatus = new ListModelList<UsuarioStatus>();		
+		listUserTMP = new ArrayList<Usuarios>();
 	}
 	
 	@AfterCompose
 	public void initSetup(@ContextParam(ContextType.VIEW) Component view){
 		Selectors.wireComponents(view, this, false);
+		
+		refresh();		
 	}
 	
 	@NotifyChange({"allUsuarios", "displayEdit"})
@@ -100,27 +105,38 @@ public class UsuariosModel {
 	   }else{
 		   Messagebox.show("Esta seguro que desea continuar?", "Mensaje de Confirmación", Messagebox.YES | Messagebox.NO, Messagebox.QUESTION, new EventListener<Event>() {
 			
-			public void onEvent(Event event) throws Exception {
-				// TODO Auto-generated method stub
-				if (event.getName().equals("onYes")) {
-					try{
-						for(Usuarios usuario:usersDelete){
-							new UsuariosHomeExt().delete(usuario);
+				public void onEvent(Event event) throws Exception {
+					// TODO Auto-generated method stub
+					if (event.getName().equals("onYes")) {								
+						try{
+							for(Usuarios usuario:usersDelete){
+								new UsuariosHomeExt().delete(usuario);
+							}
+							
+							BindUtils.postNotifyChange(null, null,this, "*");
+							
+							refresh();
+							
+							Clients.showNotification("Eliminado correctamente");
+						}catch(RuntimeException re){
+							throw re;
 						}
-						
-						Clients.showNotification("Eliminado correctamente");
-						
-						allUsuariosStatus = new ListModelList<UsuarioStatus>();
-						genListModel(new UsuarioDatos().getAllUsuarios());
-						GridUsuarios.setModel(getAllUsuarios());
-					}catch(RuntimeException re){
-						throw re;
-					}
-		        }
-			}
-		});
-		   
+			        }
+				}
+		   });
 	   }
+	}
+	
+	public void refresh() {
+		UsuarioDatos userDatos = new  UsuarioDatos();
+		
+		allPerfiles = new ArrayList<Perfilesusuario>();
+		allPerfiles = new UsuarioDatos().getAllPerfiles();
+		
+		
+		allUsuariosStatus = new ListModelList<UsuarioStatus>();
+		allUsuariosStatus = genListModel(userDatos.getAllUsuarios());
+		GridUsuarios.setModel(allUsuariosStatus);
 	}
 	
 	@Command
@@ -171,6 +187,8 @@ public class UsuariosModel {
         		usr.getUsuario().setFechaModificacion(new Date());
         		new UsuariosHomeExt().attachDirty(usr.getUsuario());
         		
+        		refresh();
+        		
         		Clients.showNotification("Modificado correctamente");
         	}catch(RuntimeException re){
         		throw re;
@@ -179,7 +197,7 @@ public class UsuariosModel {
         
         listUserTMP.remove(usrTMP);
     }
-    
+	
     private void infoUsuarioInicial(Usuarios user)
     {
     	boolean flag = false;
@@ -210,10 +228,12 @@ public class UsuariosModel {
     	allUsuariosStatus.set(allUsuariosStatus.indexOf(usr), usr);
     }
 	
-    private void genListModel(List<Usuarios> lsUsuarios){
+    private ListModelList<UsuarioStatus> genListModel(List<Usuarios> lsUsuarios){
     	for(Usuarios usr: lsUsuarios){
 			allUsuariosStatus.add(new UsuarioStatus(usr, false, false));
 		}
+    	
+    	return allUsuariosStatus;
     }
     
 	public ListModelList<UsuarioStatus> getAllUsuarios() {

@@ -32,7 +32,7 @@ public class NoSpacesConstraint implements Constraint, Serializable{
 				if (StringUtils.countMatches((String)value, " ") > 0 )
 					throw new WrongValueException(comp, "Espacios no son permitidos");
 				
-				if (((String)value).length() < 8)
+				if (((String)value).length() < 5)
 					throw new WrongValueException(comp, "Usuario debe tener minimo 8 caracteres");
 				
 				Pattern regex = Pattern.compile("[^A-Za-z0-9\\.]");

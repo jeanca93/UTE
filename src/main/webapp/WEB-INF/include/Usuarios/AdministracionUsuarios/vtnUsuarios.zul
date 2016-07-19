@@ -3,7 +3,7 @@
 <window id = "modalDialog" title="Nuevo Usuario" border="normal" width="810px"
     apply="controladores.UsuariosComposer"
     position="center,center" closable="true"
-    action="show: slideDown;hide: slideUp">
+    action="show: slideDown">
     <style src="/css/Focus.css" />
     <zscript>
 		constraint.NoSpacesConstraint customConstraint = new constraint.NoSpacesConstraint();
