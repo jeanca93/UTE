@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.hibernate.LockMode;
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
 import entidades.Aulas;
@@ -21,12 +22,12 @@ public class AulasHome extends MydbBaseHibernateDAO{
 
 	private static final Log log = LogFactory.getLog(AulasHome.class);
 
-	private final SessionFactory sessionFactory = MydbHibernateSessionFactory.getSessionFactory();
+	private final Session session = MydbHibernateSessionFactory.getSession();
 
 	public void persist(Aulas transientInstance) {
 		log.debug("persisting Aulas instance");
 		try {
-			sessionFactory.getCurrentSession().persist(transientInstance);
+			session.persist(transientInstance);
 			log.debug("persist successful");
 		} catch (RuntimeException re) {
 			log.error("persist failed", re);
@@ -37,7 +38,7 @@ public class AulasHome extends MydbBaseHibernateDAO{
 	public void attachDirty(Aulas instance) {
 		log.debug("attaching dirty Aulas instance");
 		try {
-			sessionFactory.getCurrentSession().saveOrUpdate(instance);
+			session.saveOrUpdate(instance);
 			log.debug("attach successful");
 		} catch (RuntimeException re) {
 			log.error("attach failed", re);
@@ -48,7 +49,7 @@ public class AulasHome extends MydbBaseHibernateDAO{
 	public void attachClean(Aulas instance) {
 		log.debug("attaching clean Aulas instance");
 		try {
-			sessionFactory.getCurrentSession().lock(instance, LockMode.NONE);
+			session.lock(instance, LockMode.NONE);
 			log.debug("attach successful");
 		} catch (RuntimeException re) {
 			log.error("attach failed", re);
@@ -59,7 +60,7 @@ public class AulasHome extends MydbBaseHibernateDAO{
 	public void delete(Aulas persistentInstance) {
 		log.debug("deleting Aulas instance");
 		try {
-			sessionFactory.getCurrentSession().delete(persistentInstance);
+			session.delete(persistentInstance);
 			log.debug("delete successful");
 		} catch (RuntimeException re) {
 			log.error("delete failed", re);
@@ -70,7 +71,7 @@ public class AulasHome extends MydbBaseHibernateDAO{
 	public Aulas merge(Aulas detachedInstance) {
 		log.debug("merging Aulas instance");
 		try {
-			Aulas result = (Aulas) sessionFactory.getCurrentSession().merge(detachedInstance);
+			Aulas result = (Aulas) session.merge(detachedInstance);
 			log.debug("merge successful");
 			return result;
 		} catch (RuntimeException re) {
@@ -82,7 +83,7 @@ public class AulasHome extends MydbBaseHibernateDAO{
 	public Aulas findById(java.lang.Integer id) {
 		log.debug("getting Aulas instance with id: " + id);
 		try {
-			Aulas instance = (Aulas) sessionFactory.getCurrentSession().get("entidadesDAO.Aulas", id);
+			Aulas instance = (Aulas) session.get("entidadesDAO.Aulas", id);
 			if (instance == null) {
 				log.debug("get successful, no instance found");
 			} else {
@@ -98,7 +99,7 @@ public class AulasHome extends MydbBaseHibernateDAO{
 	public List<Aulas> findByExample(Aulas instance) {
 		log.debug("finding Aulas instance by example");
 		try {
-			List<Aulas> results = (List<Aulas>) sessionFactory.getCurrentSession().createCriteria("entidadesDAO.Aulas")
+			List<Aulas> results = (List<Aulas>) session.createCriteria("entidadesDAO.Aulas")
 					.add(create(instance)).list();
 			log.debug("find by example successful, result size: " + results.size());
 			return results;

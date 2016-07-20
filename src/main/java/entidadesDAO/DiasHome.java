@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.hibernate.LockMode;
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
 import entidades.Dias;
@@ -21,12 +22,12 @@ public class DiasHome extends MydbBaseHibernateDAO{
 
 	private static final Log log = LogFactory.getLog(DiasHome.class);
 
-	private final SessionFactory sessionFactory = MydbHibernateSessionFactory.getSessionFactory();
+	private final Session session = MydbHibernateSessionFactory.getSession();
 
 	public void persist(Dias transientInstance) {
 		log.debug("persisting Dias instance");
 		try {
-			sessionFactory.getCurrentSession().persist(transientInstance);
+			session.persist(transientInstance);
 			log.debug("persist successful");
 		} catch (RuntimeException re) {
 			log.error("persist failed", re);
@@ -37,7 +38,7 @@ public class DiasHome extends MydbBaseHibernateDAO{
 	public void attachDirty(Dias instance) {
 		log.debug("attaching dirty Dias instance");
 		try {
-			sessionFactory.getCurrentSession().saveOrUpdate(instance);
+			session.saveOrUpdate(instance);
 			log.debug("attach successful");
 		} catch (RuntimeException re) {
 			log.error("attach failed", re);
@@ -48,7 +49,7 @@ public class DiasHome extends MydbBaseHibernateDAO{
 	public void attachClean(Dias instance) {
 		log.debug("attaching clean Dias instance");
 		try {
-			sessionFactory.getCurrentSession().lock(instance, LockMode.NONE);
+			session.lock(instance, LockMode.NONE);
 			log.debug("attach successful");
 		} catch (RuntimeException re) {
 			log.error("attach failed", re);
@@ -59,7 +60,7 @@ public class DiasHome extends MydbBaseHibernateDAO{
 	public void delete(Dias persistentInstance) {
 		log.debug("deleting Dias instance");
 		try {
-			sessionFactory.getCurrentSession().delete(persistentInstance);
+			session.delete(persistentInstance);
 			log.debug("delete successful");
 		} catch (RuntimeException re) {
 			log.error("delete failed", re);
@@ -70,7 +71,7 @@ public class DiasHome extends MydbBaseHibernateDAO{
 	public Dias merge(Dias detachedInstance) {
 		log.debug("merging Dias instance");
 		try {
-			Dias result = (Dias) sessionFactory.getCurrentSession().merge(detachedInstance);
+			Dias result = (Dias) session.merge(detachedInstance);
 			log.debug("merge successful");
 			return result;
 		} catch (RuntimeException re) {
@@ -82,7 +83,7 @@ public class DiasHome extends MydbBaseHibernateDAO{
 	public Dias findById(java.lang.String id) {
 		log.debug("getting Dias instance with id: " + id);
 		try {
-			Dias instance = (Dias) sessionFactory.getCurrentSession().get("entidadesDAO.Dias", id);
+			Dias instance = (Dias) session.get("entidadesDAO.Dias", id);
 			if (instance == null) {
 				log.debug("get successful, no instance found");
 			} else {
@@ -98,7 +99,7 @@ public class DiasHome extends MydbBaseHibernateDAO{
 	public List<Dias> findByExample(Dias instance) {
 		log.debug("finding Dias instance by example");
 		try {
-			List<Dias> results = (List<Dias>) sessionFactory.getCurrentSession().createCriteria("entidadesDAO.Dias")
+			List<Dias> results = (List<Dias>) session.createCriteria("entidadesDAO.Dias")
 					.add(create(instance)).list();
 			log.debug("find by example successful, result size: " + results.size());
 			return results;

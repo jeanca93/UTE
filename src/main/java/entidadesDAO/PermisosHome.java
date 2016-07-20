@@ -6,6 +6,7 @@ import javax.naming.InitialContext;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.hibernate.LockMode;
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
 import entidades.Permisos;
@@ -22,12 +23,12 @@ public class PermisosHome extends MydbBaseHibernateDAO{
 
 	private static final Log log = LogFactory.getLog(PermisosHome.class);
 
-	private final SessionFactory sessionFactory = MydbHibernateSessionFactory.getSessionFactory();
+	private final Session session = MydbHibernateSessionFactory.getSession();
 
 	public void persist(Permisos transientInstance) {
 		log.debug("persisting Permisos instance");
 		try {
-			sessionFactory.getCurrentSession().persist(transientInstance);
+			session.persist(transientInstance);
 			log.debug("persist successful");
 		} catch (RuntimeException re) {
 			log.error("persist failed", re);
@@ -38,7 +39,7 @@ public class PermisosHome extends MydbBaseHibernateDAO{
 	public void attachDirty(Permisos instance) {
 		log.debug("attaching dirty Permisos instance");
 		try {
-			sessionFactory.getCurrentSession().saveOrUpdate(instance);
+			session.saveOrUpdate(instance);
 			log.debug("attach successful");
 		} catch (RuntimeException re) {
 			log.error("attach failed", re);
@@ -49,7 +50,7 @@ public class PermisosHome extends MydbBaseHibernateDAO{
 	public void attachClean(Permisos instance) {
 		log.debug("attaching clean Permisos instance");
 		try {
-			sessionFactory.getCurrentSession().lock(instance, LockMode.NONE);
+			session.lock(instance, LockMode.NONE);
 			log.debug("attach successful");
 		} catch (RuntimeException re) {
 			log.error("attach failed", re);
@@ -60,7 +61,7 @@ public class PermisosHome extends MydbBaseHibernateDAO{
 	public void delete(Permisos persistentInstance) {
 		log.debug("deleting Permisos instance");
 		try {
-			sessionFactory.getCurrentSession().delete(persistentInstance);
+			session.delete(persistentInstance);
 			log.debug("delete successful");
 		} catch (RuntimeException re) {
 			log.error("delete failed", re);
@@ -71,7 +72,7 @@ public class PermisosHome extends MydbBaseHibernateDAO{
 	public Permisos merge(Permisos detachedInstance) {
 		log.debug("merging Permisos instance");
 		try {
-			Permisos result = (Permisos) sessionFactory.getCurrentSession().merge(detachedInstance);
+			Permisos result = (Permisos) session.merge(detachedInstance);
 			log.debug("merge successful");
 			return result;
 		} catch (RuntimeException re) {
@@ -83,7 +84,7 @@ public class PermisosHome extends MydbBaseHibernateDAO{
 	public Permisos findById(java.lang.Integer id) {
 		log.debug("getting Permisos instance with id: " + id);
 		try {
-			Permisos instance = (Permisos) sessionFactory.getCurrentSession().get("entidadesDAO.Permisos", id);
+			Permisos instance = (Permisos) session.get("entidadesDAO.Permisos", id);
 			if (instance == null) {
 				log.debug("get successful, no instance found");
 			} else {
@@ -99,8 +100,7 @@ public class PermisosHome extends MydbBaseHibernateDAO{
 	public List<Permisos> findByExample(Permisos instance) {
 		log.debug("finding Permisos instance by example");
 		try {
-			List<Permisos> results = (List<Permisos>) sessionFactory.getCurrentSession()
-					.createCriteria("entidadesDAO.Permisos").add(create(instance)).list();
+			List<Permisos> results = (List<Permisos>) session.createCriteria("entidadesDAO.Permisos").add(create(instance)).list();
 			log.debug("find by example successful, result size: " + results.size());
 			return results;
 		} catch (RuntimeException re) {

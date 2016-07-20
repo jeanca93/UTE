@@ -7,6 +7,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.hibernate.SessionFactory;
 import org.hibernate.LockMode;
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
@@ -25,12 +26,12 @@ public class OpcionesHome extends MydbBaseHibernateDAO{
 
 	private static final Log log = LogFactory.getLog(OpcionesHome.class);
 
-	private final SessionFactory sessionFactory = MydbHibernateSessionFactory.getSessionFactory();
+	private final Session session = MydbHibernateSessionFactory.getSession();
 
 	public void persist(Opciones transientInstance) {
 		log.debug("persisting Opciones instance");
 		try {
-			sessionFactory.getCurrentSession().persist(transientInstance);
+			session.persist(transientInstance);
 			log.debug("persist successful");
 		} catch (RuntimeException re) {
 			log.error("persist failed", re);
@@ -41,7 +42,7 @@ public class OpcionesHome extends MydbBaseHibernateDAO{
 	public void attachDirty(Opciones instance) {
 		log.debug("attaching dirty Opciones instance");
 		try {
-			sessionFactory.getCurrentSession().saveOrUpdate(instance);
+			session.saveOrUpdate(instance);
 			log.debug("attach successful");
 		} catch (RuntimeException re) {
 			log.error("attach failed", re);
@@ -52,7 +53,7 @@ public class OpcionesHome extends MydbBaseHibernateDAO{
 	public void attachClean(Opciones instance) {
 		log.debug("attaching clean Opciones instance");
 		try {
-			sessionFactory.getCurrentSession().lock(instance, LockMode.NONE);
+			session.lock(instance, LockMode.NONE);
 			log.debug("attach successful");
 		} catch (RuntimeException re) {
 			log.error("attach failed", re);
@@ -63,7 +64,7 @@ public class OpcionesHome extends MydbBaseHibernateDAO{
 	public void delete(Opciones persistentInstance) {
 		log.debug("deleting Opciones instance");
 		try {
-			sessionFactory.getCurrentSession().delete(persistentInstance);
+			session.delete(persistentInstance);
 			log.debug("delete successful");
 		} catch (RuntimeException re) {
 			log.error("delete failed", re);
@@ -74,7 +75,7 @@ public class OpcionesHome extends MydbBaseHibernateDAO{
 	public Opciones merge(Opciones detachedInstance) {
 		log.debug("merging Opciones instance");
 		try {
-			Opciones result = (Opciones) sessionFactory.getCurrentSession().merge(detachedInstance);
+			Opciones result = (Opciones) session.merge(detachedInstance);
 			log.debug("merge successful");
 			return result;
 		} catch (RuntimeException re) {
@@ -86,7 +87,7 @@ public class OpcionesHome extends MydbBaseHibernateDAO{
 	public Opciones findById(java.lang.Integer id) {
 		log.debug("getting Opciones instance with id: " + id);
 		try {
-			Opciones instance = (Opciones) sessionFactory.getCurrentSession().get("entidadesDAO.Opciones", id);
+			Opciones instance = (Opciones) session.get("entidadesDAO.Opciones", id);
 			if (instance == null) {
 				log.debug("get successful, no instance found");
 			} else {
@@ -102,8 +103,7 @@ public class OpcionesHome extends MydbBaseHibernateDAO{
 	public List<Opciones> findByExample(Opciones instance) {
 		log.debug("finding Opciones instance by example");
 		try {
-			List<Opciones> results = (List<Opciones>) sessionFactory.getCurrentSession()
-					.createCriteria("entidadesDAO.Opciones").add(create(instance)).list();
+			List<Opciones> results = (List<Opciones>) session.createCriteria("entidadesDAO.Opciones").add(create(instance)).list();
 			log.debug("find by example successful, result size: " + results.size());
 			return results;
 		} catch (RuntimeException re) {

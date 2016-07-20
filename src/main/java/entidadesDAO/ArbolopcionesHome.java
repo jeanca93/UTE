@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.hibernate.LockMode;
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
 import entidades.Arbolopciones;
@@ -22,12 +23,12 @@ public class ArbolopcionesHome extends MydbBaseHibernateDAO{
 
 	private static final Log log = LogFactory.getLog(ArbolopcionesHome.class);
 
-	private final SessionFactory sessionFactory = MydbHibernateSessionFactory.getSessionFactory();
+	private final Session session = MydbHibernateSessionFactory.getSession();
 
 	public void persist(Arbolopciones transientInstance) {
 		log.debug("persisting Arbolopciones instance");
 		try {
-			sessionFactory.getCurrentSession().persist(transientInstance);
+			session.persist(transientInstance);
 			log.debug("persist successful");
 		} catch (RuntimeException re) {
 			log.error("persist failed", re);
@@ -38,7 +39,7 @@ public class ArbolopcionesHome extends MydbBaseHibernateDAO{
 	public void attachDirty(Arbolopciones instance) {
 		log.debug("attaching dirty Arbolopciones instance");
 		try {
-			sessionFactory.getCurrentSession().saveOrUpdate(instance);
+			session.saveOrUpdate(instance);
 			log.debug("attach successful");
 		} catch (RuntimeException re) {
 			log.error("attach failed", re);
@@ -49,7 +50,7 @@ public class ArbolopcionesHome extends MydbBaseHibernateDAO{
 	public void attachClean(Arbolopciones instance) {
 		log.debug("attaching clean Arbolopciones instance");
 		try {
-			sessionFactory.getCurrentSession().lock(instance, LockMode.NONE);
+			session.lock(instance, LockMode.NONE);
 			log.debug("attach successful");
 		} catch (RuntimeException re) {
 			log.error("attach failed", re);
@@ -60,7 +61,7 @@ public class ArbolopcionesHome extends MydbBaseHibernateDAO{
 	public void delete(Arbolopciones persistentInstance) {
 		log.debug("deleting Arbolopciones instance");
 		try {
-			sessionFactory.getCurrentSession().delete(persistentInstance);
+			session.delete(persistentInstance);
 			log.debug("delete successful");
 		} catch (RuntimeException re) {
 			log.error("delete failed", re);
@@ -71,7 +72,7 @@ public class ArbolopcionesHome extends MydbBaseHibernateDAO{
 	public Arbolopciones merge(Arbolopciones detachedInstance) {
 		log.debug("merging Arbolopciones instance");
 		try {
-			Arbolopciones result = (Arbolopciones) sessionFactory.getCurrentSession().merge(detachedInstance);
+			Arbolopciones result = (Arbolopciones) session.merge(detachedInstance);
 			log.debug("merge successful");
 			return result;
 		} catch (RuntimeException re) {
@@ -83,7 +84,7 @@ public class ArbolopcionesHome extends MydbBaseHibernateDAO{
 	public Arbolopciones findById(ArbolopcionesId id) {
 		log.debug("getting Arbolopciones instance with id: " + id);
 		try {
-			Arbolopciones instance = (Arbolopciones) sessionFactory.getCurrentSession()
+			Arbolopciones instance = (Arbolopciones) session
 					.get("entidadesDAO.Arbolopciones", id);
 			if (instance == null) {
 				log.debug("get successful, no instance found");
@@ -100,8 +101,7 @@ public class ArbolopcionesHome extends MydbBaseHibernateDAO{
 	public List<Arbolopciones> findByExample(Arbolopciones instance) {
 		log.debug("finding Arbolopciones instance by example");
 		try {
-			List<Arbolopciones> results = (List<Arbolopciones>) sessionFactory.getCurrentSession()
-					.createCriteria("entidadesDAO.Arbolopciones").add(create(instance)).list();
+			List<Arbolopciones> results = (List<Arbolopciones>) session.createCriteria("entidadesDAO.Arbolopciones").add(create(instance)).list();
 			log.debug("find by example successful, result size: " + results.size());
 			return results;
 		} catch (RuntimeException re) {

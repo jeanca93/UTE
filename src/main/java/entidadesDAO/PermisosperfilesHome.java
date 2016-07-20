@@ -6,6 +6,7 @@ import javax.naming.InitialContext;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.hibernate.LockMode;
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
 import entidades.Permisosperfiles;
@@ -23,7 +24,7 @@ public class PermisosperfilesHome extends MydbBaseHibernateDAO{
 
 	private static final Log log = LogFactory.getLog(PermisosperfilesHome.class);
 
-	private final SessionFactory sessionFactory = MydbHibernateSessionFactory.getSessionFactory();
+	private final Session session = MydbHibernateSessionFactory.getSession();
 
 	protected SessionFactory getSessionFactory() {
 		try {
@@ -37,7 +38,7 @@ public class PermisosperfilesHome extends MydbBaseHibernateDAO{
 	public void persist(Permisosperfiles transientInstance) {
 		log.debug("persisting Permisosperfiles instance");
 		try {
-			sessionFactory.getCurrentSession().persist(transientInstance);
+			session.persist(transientInstance);
 			log.debug("persist successful");
 		} catch (RuntimeException re) {
 			log.error("persist failed", re);
@@ -48,7 +49,7 @@ public class PermisosperfilesHome extends MydbBaseHibernateDAO{
 	public void attachDirty(Permisosperfiles instance) {
 		log.debug("attaching dirty Permisosperfiles instance");
 		try {
-			sessionFactory.getCurrentSession().saveOrUpdate(instance);
+			session.saveOrUpdate(instance);
 			log.debug("attach successful");
 		} catch (RuntimeException re) {
 			log.error("attach failed", re);
@@ -59,7 +60,7 @@ public class PermisosperfilesHome extends MydbBaseHibernateDAO{
 	public void attachClean(Permisosperfiles instance) {
 		log.debug("attaching clean Permisosperfiles instance");
 		try {
-			sessionFactory.getCurrentSession().lock(instance, LockMode.NONE);
+			session.lock(instance, LockMode.NONE);
 			log.debug("attach successful");
 		} catch (RuntimeException re) {
 			log.error("attach failed", re);
@@ -70,7 +71,7 @@ public class PermisosperfilesHome extends MydbBaseHibernateDAO{
 	public void delete(Permisosperfiles persistentInstance) {
 		log.debug("deleting Permisosperfiles instance");
 		try {
-			sessionFactory.getCurrentSession().delete(persistentInstance);
+			session.delete(persistentInstance);
 			log.debug("delete successful");
 		} catch (RuntimeException re) {
 			log.error("delete failed", re);
@@ -81,7 +82,7 @@ public class PermisosperfilesHome extends MydbBaseHibernateDAO{
 	public Permisosperfiles merge(Permisosperfiles detachedInstance) {
 		log.debug("merging Permisosperfiles instance");
 		try {
-			Permisosperfiles result = (Permisosperfiles) sessionFactory.getCurrentSession().merge(detachedInstance);
+			Permisosperfiles result = (Permisosperfiles) session.merge(detachedInstance);
 			log.debug("merge successful");
 			return result;
 		} catch (RuntimeException re) {
@@ -93,7 +94,7 @@ public class PermisosperfilesHome extends MydbBaseHibernateDAO{
 	public Permisosperfiles findById(PermisosperfilesId id) {
 		log.debug("getting Permisosperfiles instance with id: " + id);
 		try {
-			Permisosperfiles instance = (Permisosperfiles) sessionFactory.getCurrentSession()
+			Permisosperfiles instance = (Permisosperfiles) session
 					.get("entidadesDAO.Permisosperfiles", id);
 			if (instance == null) {
 				log.debug("get successful, no instance found");
@@ -110,8 +111,7 @@ public class PermisosperfilesHome extends MydbBaseHibernateDAO{
 	public List<Permisosperfiles> findByExample(Permisosperfiles instance) {
 		log.debug("finding Permisosperfiles instance by example");
 		try {
-			List<Permisosperfiles> results = (List<Permisosperfiles>) sessionFactory.getCurrentSession()
-					.createCriteria("entidadesDAO.Permisosperfiles").add(create(instance)).list();
+			List<Permisosperfiles> results = (List<Permisosperfiles>) session.createCriteria("entidadesDAO.Permisosperfiles").add(create(instance)).list();
 			log.debug("find by example successful, result size: " + results.size());
 			return results;
 		} catch (RuntimeException re) {
