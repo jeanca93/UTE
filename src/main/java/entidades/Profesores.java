@@ -25,8 +25,9 @@ public class Profesores implements java.io.Serializable {
 	public Profesores() {
 	}
 
-	public Profesores(String profesor, int maxHorasPorSemana, char estado, Date fechaCreacion, int usuarioCrea) {
+	public Profesores(String profesor, String titulo, int maxHorasPorSemana, char estado, Date fechaCreacion, int usuarioCrea) {
 		this.profesor = profesor;
+		this.titulo = titulo;
 		this.maxHorasPorSemana = maxHorasPorSemana;
 		this.estado = estado;
 		this.fechaCreacion = fechaCreacion;

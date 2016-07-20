@@ -91,7 +91,7 @@ public class MateriasModel {
 	   if(materiaDelete.size() == 0){
 		   Clients.alert("Debe seleccionar mínimo un registro para continuar", "Error", null);
 	   }else{
-		   Messagebox.show("Esta seguro que desea continuar?", "Mensaje de Confirmación", Messagebox.YES | Messagebox.NO, Messagebox.QUESTION, new EventListener<Event>() {
+		   Messagebox.show("Esta seguro que desea continuar?", "Mensaje de Confirmaci�n", Messagebox.YES | Messagebox.NO, Messagebox.QUESTION, new EventListener<Event>() {
 			
 				public void onEvent(Event event) throws Exception {
 					// TODO Auto-generated method stub

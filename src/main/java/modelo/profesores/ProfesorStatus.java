@@ -1,43 +1,44 @@
-package modelo.usuarios;
+package modelo.profesores;
 
-import entidades.Usuarios;
+import entidades.Profesores;
 
-public class UsuarioStatus {
-	private Usuarios usuario;
+public class ProfesorStatus {
+	private Profesores profesor;
 	private boolean seleccionado;
 	private boolean editingStatus;
 	
-	public UsuarioStatus(){
+	public ProfesorStatus() {
 		super();
+		// TODO Auto-generated constructor stub
 	}
-	
-	public UsuarioStatus(Usuarios usuario, boolean seleccionado, boolean editingStatus) {
+
+	public ProfesorStatus(Profesores profesor, boolean seleccionado, boolean editingStatus) {
 		super();
-		this.usuario = usuario;
+		this.profesor = profesor;
 		this.seleccionado = seleccionado;
 		this.editingStatus = editingStatus;
 	}
 
-	public Usuarios getUsuario() {
-		return usuario;
+	public Profesores getProfesor() {
+		return profesor;
 	}
-	
-	public void setUsuario(Usuarios usuario) {
-		this.usuario = usuario;
+
+	public void setProfesor(Profesores profesor) {
+		this.profesor = profesor;
 	}
-	
+
 	public boolean isSeleccionado() {
 		return seleccionado;
 	}
-	
+
 	public void setSeleccionado(boolean seleccionado) {
 		this.seleccionado = seleccionado;
 	}
-	
+
 	public boolean isEditingStatus() {
 		return editingStatus;
 	}
-	
+
 	public void setEditingStatus(boolean editingStatus) {
 		this.editingStatus = editingStatus;
 	}

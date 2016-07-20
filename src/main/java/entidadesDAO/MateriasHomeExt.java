@@ -8,20 +8,19 @@ import org.hibernate.criterion.Restrictions;
 import entidades.Materias;
 
 public class MateriasHomeExt extends MateriasHome{
-	private Session session;
-
     public MateriasHomeExt() {
-
         super();
-
-        session = getSession();
         
     }
     
-    public ArrayList<Materias> listMateriasActivos() {
+    public ArrayList<Materias> listMateriasActivos() {    	
+    	Session session = null;
     	ArrayList<Materias> results;
 		
     	try {
+    		this.getSession().clear();
+    		session=  this.getSession();
+    		
 			results = (ArrayList<Materias>) session.createCriteria(Materias.class).add(Restrictions.eq("estado",'A')).list();			
 		} catch (RuntimeException re) {
 			
