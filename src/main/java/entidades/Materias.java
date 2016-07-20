@@ -24,9 +24,10 @@ public class Materias implements java.io.Serializable {
 	public Materias() {
 	}
 
-	public Materias(String idMateria, String materia, char estado, Date fechaCreacion, int usuarioCrea) {
+	public Materias(String idMateria, String materia, Integer horasSemana, char estado, Date fechaCreacion, int usuarioCrea) {
 		this.idMateria = idMateria;
 		this.materia = materia;
+		this.horasSemana = horasSemana;
 		this.estado = estado;
 		this.fechaCreacion = fechaCreacion;
 		this.usuarioCrea = usuarioCrea;

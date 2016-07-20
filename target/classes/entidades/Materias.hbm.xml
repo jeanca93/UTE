@@ -12,7 +12,7 @@
             <column name="Materia" length="100" not-null="true" />
         </property>
         <property name="horasSemana" type="java.lang.Integer">
-            <column name="HorasSemana" />
+            <column name="HorasSemana"  not-null="true"  />
         </property>
         <property name="estado" type="char">
             <column name="Estado" length="1" not-null="true" />
