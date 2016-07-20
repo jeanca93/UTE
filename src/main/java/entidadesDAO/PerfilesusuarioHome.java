@@ -42,14 +42,13 @@ public class PerfilesusuarioHome extends MydbBaseHibernateDAO{
 		
 		log.debug("attaching dirty Perfilesusuario instance");
 		try {
-<<<<<<< HEAD
-			tx = sessionFactory.getCurrentSession().beginTransaction();
 			
-			sessionFactory.getCurrentSession().saveOrUpdate(instance);
+			tx = session.beginTransaction();
 			
-=======
 			session.saveOrUpdate(instance);
->>>>>>> 6e494ce03107f883f67d1999dd4c7f91a6f2d17f
+			
+			session.saveOrUpdate(instance);
+			
 			log.debug("attach successful");
 			
 			tx.commit();
@@ -78,14 +77,13 @@ public class PerfilesusuarioHome extends MydbBaseHibernateDAO{
 		
 		log.debug("deleting Perfilesusuario instance");
 		try {
-<<<<<<< HEAD
-			tx = sessionFactory.getCurrentSession().beginTransaction();
 			
-			sessionFactory.getCurrentSession().delete(persistentInstance);
+			tx = session.beginTransaction();
 			
-=======
 			session.delete(persistentInstance);
->>>>>>> 6e494ce03107f883f67d1999dd4c7f91a6f2d17f
+			
+			session.delete(persistentInstance);
+			
 			log.debug("delete successful");
 			
 			tx.commit();
