@@ -6,6 +6,7 @@ import javax.naming.InitialContext;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.hibernate.LockMode;
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
 import entidades.Profesores;
@@ -22,12 +23,12 @@ public class ProfesoresHome extends MydbBaseHibernateDAO{
 
 	private static final Log log = LogFactory.getLog(ProfesoresHome.class);
 
-	private final SessionFactory sessionFactory = MydbHibernateSessionFactory.getSessionFactory();
+	private final Session session = MydbHibernateSessionFactory.getSession();
 
 	public void persist(Profesores transientInstance) {
 		log.debug("persisting Profesores instance");
 		try {
-			sessionFactory.getCurrentSession().persist(transientInstance);
+			session.persist(transientInstance);
 			log.debug("persist successful");
 		} catch (RuntimeException re) {
 			log.error("persist failed", re);
@@ -38,7 +39,7 @@ public class ProfesoresHome extends MydbBaseHibernateDAO{
 	public void attachDirty(Profesores instance) {
 		log.debug("attaching dirty Profesores instance");
 		try {
-			sessionFactory.getCurrentSession().saveOrUpdate(instance);
+			session.saveOrUpdate(instance);
 			log.debug("attach successful");
 		} catch (RuntimeException re) {
 			log.error("attach failed", re);
@@ -49,7 +50,7 @@ public class ProfesoresHome extends MydbBaseHibernateDAO{
 	public void attachClean(Profesores instance) {
 		log.debug("attaching clean Profesores instance");
 		try {
-			sessionFactory.getCurrentSession().lock(instance, LockMode.NONE);
+			session.lock(instance, LockMode.NONE);
 			log.debug("attach successful");
 		} catch (RuntimeException re) {
 			log.error("attach failed", re);
@@ -60,7 +61,7 @@ public class ProfesoresHome extends MydbBaseHibernateDAO{
 	public void delete(Profesores persistentInstance) {
 		log.debug("deleting Profesores instance");
 		try {
-			sessionFactory.getCurrentSession().delete(persistentInstance);
+			session.delete(persistentInstance);
 			log.debug("delete successful");
 		} catch (RuntimeException re) {
 			log.error("delete failed", re);
@@ -71,7 +72,7 @@ public class ProfesoresHome extends MydbBaseHibernateDAO{
 	public Profesores merge(Profesores detachedInstance) {
 		log.debug("merging Profesores instance");
 		try {
-			Profesores result = (Profesores) sessionFactory.getCurrentSession().merge(detachedInstance);
+			Profesores result = (Profesores) session.merge(detachedInstance);
 			log.debug("merge successful");
 			return result;
 		} catch (RuntimeException re) {
@@ -83,7 +84,7 @@ public class ProfesoresHome extends MydbBaseHibernateDAO{
 	public Profesores findById(java.lang.Integer id) {
 		log.debug("getting Profesores instance with id: " + id);
 		try {
-			Profesores instance = (Profesores) sessionFactory.getCurrentSession().get("entidadesDAO.Profesores", id);
+			Profesores instance = (Profesores) session.get("entidadesDAO.Profesores", id);
 			if (instance == null) {
 				log.debug("get successful, no instance found");
 			} else {
@@ -99,8 +100,7 @@ public class ProfesoresHome extends MydbBaseHibernateDAO{
 	public List<Profesores> findByExample(Profesores instance) {
 		log.debug("finding Profesores instance by example");
 		try {
-			List<Profesores> results = (List<Profesores>) sessionFactory.getCurrentSession()
-					.createCriteria("entidadesDAO.Profesores").add(create(instance)).list();
+			List<Profesores> results = (List<Profesores>) session.createCriteria("entidadesDAO.Profesores").add(create(instance)).list();
 			log.debug("find by example successful, result size: " + results.size());
 			return results;
 		} catch (RuntimeException re) {

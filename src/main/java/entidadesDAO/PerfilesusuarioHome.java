@@ -6,6 +6,7 @@ import javax.naming.InitialContext;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.hibernate.LockMode;
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
@@ -23,12 +24,12 @@ public class PerfilesusuarioHome extends MydbBaseHibernateDAO{
 
 	private static final Log log = LogFactory.getLog(PerfilesusuarioHome.class);
 
-	private final SessionFactory sessionFactory = MydbHibernateSessionFactory.getSessionFactory();
+	private final Session session = MydbHibernateSessionFactory.getSession();
 
 	public void persist(Perfilesusuario transientInstance) {
 		log.debug("persisting Perfilesusuario instance");
 		try {
-			sessionFactory.getCurrentSession().persist(transientInstance);
+			session.persist(transientInstance);
 			log.debug("persist successful");
 		} catch (RuntimeException re) {
 			log.error("persist failed", re);
@@ -39,7 +40,7 @@ public class PerfilesusuarioHome extends MydbBaseHibernateDAO{
 	public void attachDirty(Perfilesusuario instance) {
 		log.debug("attaching dirty Perfilesusuario instance");
 		try {
-			sessionFactory.getCurrentSession().saveOrUpdate(instance);
+			session.saveOrUpdate(instance);
 			log.debug("attach successful");
 		} catch (RuntimeException re) {
 			log.error("attach failed", re);
@@ -50,7 +51,7 @@ public class PerfilesusuarioHome extends MydbBaseHibernateDAO{
 	public void attachClean(Perfilesusuario instance) {
 		log.debug("attaching clean Perfilesusuario instance");
 		try {
-			sessionFactory.getCurrentSession().lock(instance, LockMode.NONE);
+			session.lock(instance, LockMode.NONE);
 			log.debug("attach successful");
 		} catch (RuntimeException re) {
 			log.error("attach failed", re);
@@ -61,7 +62,7 @@ public class PerfilesusuarioHome extends MydbBaseHibernateDAO{
 	public void delete(Perfilesusuario persistentInstance) {
 		log.debug("deleting Perfilesusuario instance");
 		try {
-			sessionFactory.getCurrentSession().delete(persistentInstance);
+			session.delete(persistentInstance);
 			log.debug("delete successful");
 		} catch (RuntimeException re) {
 			log.error("delete failed", re);
@@ -72,7 +73,7 @@ public class PerfilesusuarioHome extends MydbBaseHibernateDAO{
 	public Perfilesusuario merge(Perfilesusuario detachedInstance) {
 		log.debug("merging Perfilesusuario instance");
 		try {
-			Perfilesusuario result = (Perfilesusuario) sessionFactory.getCurrentSession().merge(detachedInstance);
+			Perfilesusuario result = (Perfilesusuario) session.merge(detachedInstance);
 			log.debug("merge successful");
 			return result;
 		} catch (RuntimeException re) {
@@ -86,9 +87,9 @@ public class PerfilesusuarioHome extends MydbBaseHibernateDAO{
 		
 		log.debug("getting Perfilesusuario instance with id: " + id);
 		try {
-			tx = sessionFactory.getCurrentSession().beginTransaction();
+			tx = session.beginTransaction();
 			
-			Perfilesusuario instance = (Perfilesusuario) sessionFactory.getCurrentSession()
+			Perfilesusuario instance = (Perfilesusuario) session
 					.get("entidades.Perfilesusuario", id);
 			if (instance == null) {
 				log.debug("get successful, no instance found");
@@ -110,8 +111,7 @@ public class PerfilesusuarioHome extends MydbBaseHibernateDAO{
 	public List<Perfilesusuario> findByExample(Perfilesusuario instance) {
 		log.debug("finding Perfilesusuario instance by example");
 		try {
-			List<Perfilesusuario> results = (List<Perfilesusuario>) sessionFactory.getCurrentSession()
-					.createCriteria("entidades.Perfilesusuario").add(create(instance)).list();
+			List<Perfilesusuario> results = (List<Perfilesusuario>) session.createCriteria("entidades.Perfilesusuario").add(create(instance)).list();
 			log.debug("find by example successful, result size: " + results.size());
 			return results;
 		} catch (RuntimeException re) {

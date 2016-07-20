@@ -6,6 +6,7 @@ import javax.naming.InitialContext;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.hibernate.LockMode;
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
 import entidades.Recursos;
@@ -22,12 +23,12 @@ public class RecursosHome extends MydbBaseHibernateDAO{
 
 	private static final Log log = LogFactory.getLog(RecursosHome.class);
 
-	private final SessionFactory sessionFactory = MydbHibernateSessionFactory.getSessionFactory();
+	private final Session session = MydbHibernateSessionFactory.getSession();
 
 	public void persist(Recursos transientInstance) {
 		log.debug("persisting Recursos instance");
 		try {
-			sessionFactory.getCurrentSession().persist(transientInstance);
+			session.persist(transientInstance);
 			log.debug("persist successful");
 		} catch (RuntimeException re) {
 			log.error("persist failed", re);
@@ -38,7 +39,7 @@ public class RecursosHome extends MydbBaseHibernateDAO{
 	public void attachDirty(Recursos instance) {
 		log.debug("attaching dirty Recursos instance");
 		try {
-			sessionFactory.getCurrentSession().saveOrUpdate(instance);
+			session.saveOrUpdate(instance);
 			log.debug("attach successful");
 		} catch (RuntimeException re) {
 			log.error("attach failed", re);
@@ -49,7 +50,7 @@ public class RecursosHome extends MydbBaseHibernateDAO{
 	public void attachClean(Recursos instance) {
 		log.debug("attaching clean Recursos instance");
 		try {
-			sessionFactory.getCurrentSession().lock(instance, LockMode.NONE);
+			session.lock(instance, LockMode.NONE);
 			log.debug("attach successful");
 		} catch (RuntimeException re) {
 			log.error("attach failed", re);
@@ -60,7 +61,7 @@ public class RecursosHome extends MydbBaseHibernateDAO{
 	public void delete(Recursos persistentInstance) {
 		log.debug("deleting Recursos instance");
 		try {
-			sessionFactory.getCurrentSession().delete(persistentInstance);
+			session.delete(persistentInstance);
 			log.debug("delete successful");
 		} catch (RuntimeException re) {
 			log.error("delete failed", re);
@@ -71,7 +72,7 @@ public class RecursosHome extends MydbBaseHibernateDAO{
 	public Recursos merge(Recursos detachedInstance) {
 		log.debug("merging Recursos instance");
 		try {
-			Recursos result = (Recursos) sessionFactory.getCurrentSession().merge(detachedInstance);
+			Recursos result = (Recursos) session.merge(detachedInstance);
 			log.debug("merge successful");
 			return result;
 		} catch (RuntimeException re) {
@@ -83,7 +84,7 @@ public class RecursosHome extends MydbBaseHibernateDAO{
 	public Recursos findById(java.lang.Integer id) {
 		log.debug("getting Recursos instance with id: " + id);
 		try {
-			Recursos instance = (Recursos) sessionFactory.getCurrentSession().get("entidadesDAO.Recursos", id);
+			Recursos instance = (Recursos) session.get("entidadesDAO.Recursos", id);
 			if (instance == null) {
 				log.debug("get successful, no instance found");
 			} else {
@@ -99,8 +100,7 @@ public class RecursosHome extends MydbBaseHibernateDAO{
 	public List<Recursos> findByExample(Recursos instance) {
 		log.debug("finding Recursos instance by example");
 		try {
-			List<Recursos> results = (List<Recursos>) sessionFactory.getCurrentSession()
-					.createCriteria("entidadesDAO.Recursos").add(create(instance)).list();
+			List<Recursos> results = (List<Recursos>) session.createCriteria("entidadesDAO.Recursos").add(create(instance)).list();
 			log.debug("find by example successful, result size: " + results.size());
 			return results;
 		} catch (RuntimeException re) {
