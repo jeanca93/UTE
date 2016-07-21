@@ -1,43 +1,44 @@
-package modelo.usuarios;
+package modelo.perfiles;
 
-import entidades.Usuarios;
+import entidades.Perfilesusuario;
 
-public class UsuarioStatus {
-	private Usuarios usuario;
+public class PerfilStatus {
+	private Perfilesusuario perfil;
 	private boolean seleccionado;
 	private boolean editingStatus;
 	
-	public UsuarioStatus(){
+	public PerfilStatus() {
 		super();
+		// TODO Auto-generated constructor stub
 	}
-	
-	public UsuarioStatus(Usuarios usuario, boolean seleccionado, boolean editingStatus) {
+
+	public PerfilStatus(Perfilesusuario perfil, boolean seleccionado, boolean editingStatus) {
 		super();
-		this.usuario = usuario;
+		this.perfil = perfil;
 		this.seleccionado = seleccionado;
 		this.editingStatus = editingStatus;
 	}
 
-	public Usuarios getUsuario() {
-		return usuario;
+	public Perfilesusuario getPerfil() {
+		return perfil;
 	}
-	
-	public void setUsuario(Usuarios usuario) {
-		this.usuario = usuario;
+
+	public void setPerfil(Perfilesusuario perfil) {
+		this.perfil = perfil;
 	}
-	
+
 	public boolean isSeleccionado() {
 		return seleccionado;
 	}
-	
+
 	public void setSeleccionado(boolean seleccionado) {
 		this.seleccionado = seleccionado;
 	}
-	
+
 	public boolean isEditingStatus() {
 		return editingStatus;
 	}
-	
+
 	public void setEditingStatus(boolean editingStatus) {
 		this.editingStatus = editingStatus;
 	}

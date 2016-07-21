@@ -7,17 +7,19 @@
         <property name="hibernate.bytecode.use_reflection_optimizer">false</property>
         <property name="hibernate.c3p0.preferredTestQuery">select 1 from dual;</property>
         <property name="hibernate.c3p0.testConnectionOnCheckin">true</property>
-        <property name="hibernate.cache.provider_class">org.hibernate.cache.NoCacheProvider</property>
+        <property name="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</property>
         <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
         <property name="hibernate.connection.password">GAHA2016</property>
         <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/gaha</property>
         <property name="hibernate.connection.username">root</property>
-        <property name="hibernate.current_session_context_class">thread</property>
-        <property name="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</property>
         <property name="hibernate.max_fetch_depth">1</property>
-        <property name="hibernate.search.autoregister_listeners">false</property>
         <property name="hibernate.show_sql">false</property>
+        <property name="hibernate.current_session_context_class">thread</property>
+        <property name="hibernate.cache.provider_class">org.hibernate.cache.NoCacheProvider</property>
+        <property name="hibernate.search.autoregister_listeners">false</property>
         <property name="hibernate.validator.apply_to_ddl">false</property>
+        <property name="hibernate.temp.use_jdbc_metadata_defaults">false</property>
+        
         <mapping resource="entidades/Cursos.hbm.xml" />
         <mapping resource="entidades/Permisosperfiles.hbm.xml" />
         <mapping resource="entidades/Arbolopciones.hbm.xml" />

@@ -8,6 +8,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.WrongValueException;
 import org.zkoss.zul.Constraint;
+import org.zkoss.zul.Intbox;
 import org.zkoss.zul.Textbox;
 
 public class MaximoMateriasConstraint  implements Constraint, Serializable {
@@ -17,16 +18,16 @@ public class MaximoMateriasConstraint  implements Constraint, Serializable {
 	}
 	public void validate(Component comp, Object value) throws WrongValueException {
 		// TODO Auto-generated method stub
-		if (comp instanceof Textbox) {
+		if (comp instanceof Intbox) {
 
 			// no need for checking ?
-			if (((Textbox) comp).isDisabled())
+			if (((Intbox) comp).isDisabled())
 				return;
 			
-			if (((String)value).equals(""))
+			if (((Integer)value).equals(null))
 				throw new WrongValueException(comp, "Campo obligatorio");
 			else{
-				if (Integer.parseInt((String)value) > 15 )
+				if ((Integer)value> 15 )
 					throw new WrongValueException(comp, "Cantidad de Horas no permitidas");
 				
 					

@@ -24,8 +24,9 @@ public class Perfilesusuario implements java.io.Serializable {
 	public Perfilesusuario() {
 	}
 
-	public Perfilesusuario(String perfil, char estado, Date fechaCreacion, int usuarioCrea) {
+	public Perfilesusuario(String perfil, String comentarios, char estado, Date fechaCreacion, int usuarioCrea) {
 		this.perfil = perfil;
+		this.comentarios = comentarios;
 		this.estado = estado;
 		this.fechaCreacion = fechaCreacion;
 		this.usuarioCrea = usuarioCrea;

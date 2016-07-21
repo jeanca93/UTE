@@ -6,25 +6,26 @@ import org.hibernate.Session;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 
-import entidades.Perfilesusuario;
+import entidades.Profesores;
 
-public class PerfilesusuarioHomeExt extends  PerfilesusuarioHome{
-	public PerfilesusuarioHomeExt(){	
+
+public class ProfesoresHomeExt extends ProfesoresHome{
+	public ProfesoresHomeExt(){		
 		super();
 		
 	}
 	
-	public ArrayList<Perfilesusuario> listPerfilesActivos() {
+	public ArrayList<Profesores> listProfesoresActivos() {
 		Session session = null;
-    	ArrayList<Perfilesusuario> results;
+    	ArrayList<Profesores> results;
 		
     	try {
     		this.getSession().clear();
     		session = this.getSession();
     		
-			results = (ArrayList<Perfilesusuario>) session.createCriteria(Perfilesusuario.class)
+			results = (ArrayList<Profesores>) session.createCriteria(Profesores.class)
 						.add(Restrictions.eq("estado", 'A'))
-						.addOrder(Order.asc("idPerfilUsuario"))
+						.addOrder(Order.asc("idProfesor"))
 						.list();
 						
 		} catch (RuntimeException re) {

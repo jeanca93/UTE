@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.hibernate.Query;
 import org.hibernate.Session;
+import org.hibernate.Transaction;
 
 import entidades.Opciones;
 
@@ -39,7 +40,7 @@ public class OpcionesHomeExt extends OpcionesHome{
         	sbquery.append("	and op.opcionContenedora.idOpcion =" + idOpcion);
         
         sbquery.append(" order by op.orden asc");
-        	
+        
         Query query = session.createQuery(sbquery.toString());
         query.setString("usuario", usuario);
         

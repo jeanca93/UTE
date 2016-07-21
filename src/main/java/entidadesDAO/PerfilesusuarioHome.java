@@ -38,12 +38,25 @@ public class PerfilesusuarioHome extends MydbBaseHibernateDAO{
 	}
 
 	public void attachDirty(Perfilesusuario instance) {
+		Transaction tx = null;
+		
 		log.debug("attaching dirty Perfilesusuario instance");
 		try {
+			
+			tx = session.beginTransaction();
+			
 			session.saveOrUpdate(instance);
+			
+			session.saveOrUpdate(instance);
+			
 			log.debug("attach successful");
+			
+			tx.commit();
 		} catch (RuntimeException re) {
+			tx.rollback();
+			
 			log.error("attach failed", re);
+			
 			throw re;
 		}
 	}
@@ -60,12 +73,25 @@ public class PerfilesusuarioHome extends MydbBaseHibernateDAO{
 	}
 
 	public void delete(Perfilesusuario persistentInstance) {
+		Transaction tx = null;
+		
 		log.debug("deleting Perfilesusuario instance");
 		try {
+			
+			tx = session.beginTransaction();
+			
 			session.delete(persistentInstance);
+			
+			session.delete(persistentInstance);
+			
 			log.debug("delete successful");
+			
+			tx.commit();
 		} catch (RuntimeException re) {
+			tx.rollback();
+			
 			log.error("delete failed", re);
+			
 			throw re;
 		}
 	}

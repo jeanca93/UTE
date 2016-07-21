@@ -10,27 +10,27 @@ import org.hibernate.criterion.Restrictions;
 import entidades.Usuarios;
 
 public class UsuariosHomeExt extends UsuariosHome{
-	private Session session;
-
     public UsuariosHomeExt() {
-
         super();
-
-        session = getSession();
         
     }
     
     public Integer validaUsuario(String user, String password){
+    	Session session = null;
     	Integer existe;
     	
     	try{
+    		this.getSession().clear();
+    		session = this.getSession();
+    		
     		StringBuffer sbquery = new StringBuffer();
     		sbquery.append("select valida_login('" + user + "','" + password + "')");
-        	
+        	    		
             Query query = session.createSQLQuery(sbquery.toString());
             
             existe = (Integer) query.uniqueResult();
     	}catch(RuntimeException re){
+    		
     		existe = 0;
     		
     		throw re;	
@@ -40,9 +40,13 @@ public class UsuariosHomeExt extends UsuariosHome{
     }
     
     public ArrayList<Usuarios> listUsuariosActivos() {
+    	Session session = null;
     	ArrayList<Usuarios> results;
 		
     	try {
+    		this.getSession().clear();
+    		session = this.getSession();
+    		
 			results = (ArrayList<Usuarios>) session.createCriteria(Usuarios.class).add(Restrictions.eq("estado", 'A')).list();			
 		} catch (RuntimeException re) {
 			
@@ -53,11 +57,15 @@ public class UsuariosHomeExt extends UsuariosHome{
 	}
     
     public Boolean crearNuevoUsuario(Usuarios user, String clave){
+    	Session session = null;
     	Transaction tx = null;
     	Boolean flag = false;
     	
     	try{
     		attachDirty(user);
+    		
+    		this.getSession().clear();
+    		session = this.getSession();
     		
     		tx = session.beginTransaction();
     		

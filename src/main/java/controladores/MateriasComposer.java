@@ -25,6 +25,7 @@ import entidades.Materias;
 import entidadesDAO.MateriasHomeExt;
 import modelo.materias.MateriaDatos;
 import modelo.materias.MateriaStatus;
+import modelo.materias.MateriasModel;
 
 public class MateriasComposer extends GenericForwardComposer<Component>{
 	private static final long serialVersionUID = 4L;
@@ -63,6 +64,8 @@ public class MateriasComposer extends GenericForwardComposer<Component>{
 				new MateriasHomeExt().attachDirty(new Materias(idmateria,materia, horassemana, 'A', new Date(), Integer.parseInt(session.getAttribute("idUsuario").toString())));
 				
 				modalDialog.detach();
+				
+				BindUtils.postNotifyChange(null, null, this, "*");
 								
 				allMateriasStatus = new ListModelList<MateriaStatus>();
 				genListModel(new MateriaDatos().getAllMaterias());
