@@ -25,10 +25,11 @@ public class Aulas implements java.io.Serializable {
 	public Aulas() {
 	}
 
-	public Aulas(String idAula, String aula, int asientos, char estado, Date fechaCreacion, int usuarioCrea) {
+	public Aulas(String idAula, String aula, int asientos, String comentarios, char estado, Date fechaCreacion, int usuarioCrea) {
 		this.idAula = idAula;
 		this.aula = aula;
 		this.asientos = asientos;
+		this.comentarios = comentarios;
 		this.estado = estado;
 		this.fechaCreacion = fechaCreacion;
 		this.usuarioCrea = usuarioCrea;
