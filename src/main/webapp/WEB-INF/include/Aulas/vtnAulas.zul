@@ -1,0 +1,80 @@
+<?page title="new page title" contentType="text/html;charset=UTF-8"?>
+<zk>
+<window id = "modalDialog" title="Nueva Aula" border="normal" width="810px"
+    apply="controladores.AulasComposer"
+    position="center,center" closable="true"
+    action="show: slideDown">
+    <style src="/css/Focus.css" />
+    <zscript>
+		constraint.NoSpacesConstraint customConstraint = new constraint.NoSpacesConstraint();
+	</zscript>
+    <style>
+        .z-toolbar a, .z-toolbar a:visited, .z-toolbar a:hover{
+            border-radius: 10px;
+    		border: 1px thin #0080c0;
+        }
+	</style>
+	<vbox style="overflow:auto;">
+		<div id="div_check">
+			<groupbox mold="3d">
+				<caption label="Datos de Aula"></caption>
+				<grid>
+					<columns>
+						<column width="110px" />
+						<column width="250px"/>
+						<column width="20px" />
+						<column width="110px" />
+						<column width="250px"/>
+						<column width="20px" />
+					</columns>
+
+					<rows xmlns:w="client">
+						<row>
+							<label value="Id Aula:" />
+							<textbox sclass="ftextbox" id="txtIdAula"
+								width="120px" constraint="${customConstraint}"/>
+							<label value="*" style="color:red" />
+							
+							<label value="Aula" />
+							<textbox sclass="ftextbox" id="txtAula" 
+								style="text-transform: uppercase" width="240px" constraint="no empty:Campo obligatorio"/>
+							<label value="*" style="color:red" />
+						</row>
+						<row>
+							<label value="Asientos" />
+							<intbox sclass="ftextbox" id="txtAsientos"
+								style="text-transform: uppercase" width="240px" constraint="no empty:Campo obligatorio"/>
+							<label value="*" style="color:red" />
+
+							<label value="Comentarios:" />
+							<textbox sclass="ftextbox" id="txtComentarios"
+								style="text-transform: uppercase" width="240px" constraint="no empty:Campo obligatorio"/>
+							<label value="*" style="color:red" />
+						</row>
+
+						<row>
+							 
+							<label value="Estado: " />
+							<combobox id="cmbEstados" inplace="true" mold="rounded" autodrop="true"
+		                        model="${modalDialog$composer.allEstados}" constraint="no empty:Campo obligatorio" vflex="1">
+		                       <template name="model">
+		                        	<comboitem value="${each.codigo}" label="${each.estado}"/>
+		                    	</template>
+		                    </combobox>
+							<label value="*" style="color:red" />
+						</row>
+
+					</rows>
+				</grid>
+				<separator />
+				<label
+					value="Los campos con * deben ser llenados obligatoriamente"
+					style="color:red" />
+			</groupbox>
+		</div>
+		<toolbar>
+			<toolbarbutton id="tbbGrabar" image="/img/save.png" label="Grabar"/>
+		</toolbar>
+	</vbox>
+</window>
+</zk>
