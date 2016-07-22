@@ -18,8 +18,6 @@ public class Perfilesusuario implements java.io.Serializable {
 	private int usuarioCrea;
 	private Date fechaModificacion;
 	private Integer usuarioModifica;
-	private Set<Usuarios> usuarioses = new HashSet<Usuarios>(0);
-	private Set<Permisosperfiles> permisosperfileses = new HashSet<Permisosperfiles>(0);
 
 	public Perfilesusuario() {
 	}
@@ -33,8 +31,7 @@ public class Perfilesusuario implements java.io.Serializable {
 	}
 
 	public Perfilesusuario(String perfil, String comentarios, char estado, Date fechaCreacion, int usuarioCrea,
-			Date fechaModificacion, Integer usuarioModifica, Set<Usuarios> usuarioses,
-			Set<Permisosperfiles> permisosperfileses) {
+			Date fechaModificacion, Integer usuarioModifica) {
 		this.perfil = perfil;
 		this.comentarios = comentarios;
 		this.estado = estado;
@@ -42,8 +39,6 @@ public class Perfilesusuario implements java.io.Serializable {
 		this.usuarioCrea = usuarioCrea;
 		this.fechaModificacion = fechaModificacion;
 		this.usuarioModifica = usuarioModifica;
-		this.usuarioses = usuarioses;
-		this.permisosperfileses = permisosperfileses;
 	}
 
 	public Integer getIdPerfilUsuario() {
@@ -109,21 +104,5 @@ public class Perfilesusuario implements java.io.Serializable {
 	public void setUsuarioModifica(Integer usuarioModifica) {
 		this.usuarioModifica = usuarioModifica;
 	}
-
-	public Set<Usuarios> getUsuarioses() {
-		return this.usuarioses;
-	}
-
-	public void setUsuarioses(Set<Usuarios> usuarioses) {
-		this.usuarioses = usuarioses;
-	}
-
-	public Set<Permisosperfiles> getPermisosperfileses() {
-		return this.permisosperfileses;
-	}
-
-	public void setPermisosperfileses(Set<Permisosperfiles> permisosperfileses) {
-		this.permisosperfileses = permisosperfileses;
-	}
-
+	
 }

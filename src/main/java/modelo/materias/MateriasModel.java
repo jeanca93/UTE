@@ -2,9 +2,7 @@ package modelo.materias;
 
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.zkoss.bind.BindUtils;
 import org.zkoss.bind.annotation.AfterCompose;
@@ -31,7 +29,7 @@ import org.zkoss.zul.Row;
 import org.zkoss.zul.Window;
 
 import entidades.Materias;
-import entidadesDAO.MateriasHomeExt;
+import entidadesDAO.MateriasHome;
 
 public class MateriasModel {
 
@@ -45,16 +43,15 @@ public class MateriasModel {
 	public MateriasModel(){
 		super();
 		
+		allMateriasStatus = new ListModelList<MateriaStatus>();
+		allMateriasStatus = genListModel(new  MateriaDatos().getAllMaterias());
 		
-		allMateriasStatus = new ListModelList<MateriaStatus>();		
 		listMateriaTMP = new ArrayList<Materias>();
 	}
 	
 	@AfterCompose
 	public void initSetup(@ContextParam(ContextType.VIEW) Component view){
 		Selectors.wireComponents(view, this, false);
-		
-		refresh();		
 	}
 	
 	@NotifyChange({"allMaterias", "displayEdit"})
@@ -64,12 +61,18 @@ public class MateriasModel {
 	
 	@Command
     public void nuevaMateria() {
+		/*
 		Map<String, Object> parameters = new HashMap<String, Object>();
 		parameters.put("modelPrincipal",allMateriasStatus );
 		parameters.put("gridPrincipal",GridMaterias );
 		
 		Window window = (Window)Executions.createComponents(
                 "/WEB-INF/include/Materias/vtnMaterias.zul", null, parameters);
+        window.doModal();
+        */
+		
+		Window window = (Window)Executions.createComponents(
+                "/WEB-INF/include/Materias/vtnMaterias.zul", null, null);
         window.doModal();
     }
 	
@@ -98,7 +101,7 @@ public class MateriasModel {
 					if (event.getName().equals("onYes")) {								
 						try{
 							for(Materias materia:materiaDelete){
-								new MateriasHomeExt().delete(materia);
+								new MateriasHome().delete(materia);
 							}
 							
 							BindUtils.postNotifyChange(null, null,this, "*");
@@ -167,7 +170,7 @@ public class MateriasModel {
         		Session session = Sessions.getCurrent();
 				mate.getMateria().setUsuarioModifica(Integer.parseInt(session.getAttribute("idUsuario").toString()));
 				mate.getMateria().setFechaModificacion(new Date());
-        		new MateriasHomeExt().attachDirty(mate.getMateria());
+        		new MateriasHome().update(mate.getMateria());
         		
         		refresh();
         		

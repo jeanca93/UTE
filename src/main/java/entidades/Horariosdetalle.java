@@ -9,11 +9,9 @@ import java.util.Date;
 public class Horariosdetalle implements java.io.Serializable {
 
 	private HorariosdetalleId id;
-	private Horarioscabecera horarioscabecera;
-	private Dias dias;
 	private Profesoresmaterias profesoresmaterias;
+	private Dispprofesores dispprofesores;
 	private Aulas aulas;
-	private Horas horas;
 	private String paralelo;
 	private char estado;
 	private Date fechaCreacion;
@@ -24,30 +22,26 @@ public class Horariosdetalle implements java.io.Serializable {
 	public Horariosdetalle() {
 	}
 
-	public Horariosdetalle(HorariosdetalleId id, Horarioscabecera horarioscabecera, Dias dias,
-			Profesoresmaterias profesoresmaterias, Aulas aulas, Horas horas, String paralelo, char estado,
+	public Horariosdetalle(HorariosdetalleId id, Profesoresmaterias profesoresmaterias, 
+			Dispprofesores dispprofesores, Aulas aulas, String paralelo, char estado, 
 			Date fechaCreacion, int usuarioCrea) {
 		this.id = id;
-		this.horarioscabecera = horarioscabecera;
-		this.dias = dias;
 		this.profesoresmaterias = profesoresmaterias;
+		this.dispprofesores = dispprofesores;
 		this.aulas = aulas;
-		this.horas = horas;
 		this.paralelo = paralelo;
 		this.estado = estado;
 		this.fechaCreacion = fechaCreacion;
 		this.usuarioCrea = usuarioCrea;
 	}
 
-	public Horariosdetalle(HorariosdetalleId id, Horarioscabecera horarioscabecera, Dias dias,
-			Profesoresmaterias profesoresmaterias, Aulas aulas, Horas horas, String paralelo, char estado,
+	public Horariosdetalle(HorariosdetalleId id, Profesoresmaterias profesoresmaterias, 
+			Dispprofesores dispprofesores, Aulas aulas, String paralelo, char estado,
 			Date fechaCreacion, int usuarioCrea, Date fechaModificacion, Integer usuarioModifica) {
 		this.id = id;
-		this.horarioscabecera = horarioscabecera;
-		this.dias = dias;
 		this.profesoresmaterias = profesoresmaterias;
+		this.dispprofesores = dispprofesores;
 		this.aulas = aulas;
-		this.horas = horas;
 		this.paralelo = paralelo;
 		this.estado = estado;
 		this.fechaCreacion = fechaCreacion;
@@ -64,22 +58,6 @@ public class Horariosdetalle implements java.io.Serializable {
 		this.id = id;
 	}
 
-	public Horarioscabecera getHorarioscabecera() {
-		return this.horarioscabecera;
-	}
-
-	public void setHorarioscabecera(Horarioscabecera horarioscabecera) {
-		this.horarioscabecera = horarioscabecera;
-	}
-
-	public Dias getDias() {
-		return this.dias;
-	}
-
-	public void setDias(Dias dias) {
-		this.dias = dias;
-	}
-
 	public Profesoresmaterias getProfesoresmaterias() {
 		return this.profesoresmaterias;
 	}
@@ -88,20 +66,20 @@ public class Horariosdetalle implements java.io.Serializable {
 		this.profesoresmaterias = profesoresmaterias;
 	}
 
+	public Dispprofesores getDispprofesores() {
+		return dispprofesores;
+	}
+
+	public void setDispprofesores(Dispprofesores dispprofesores) {
+		this.dispprofesores = dispprofesores;
+	}
+
 	public Aulas getAulas() {
 		return this.aulas;
 	}
 
 	public void setAulas(Aulas aulas) {
 		this.aulas = aulas;
-	}
-
-	public Horas getHoras() {
-		return this.horas;
-	}
-
-	public void setHoras(Horas horas) {
-		this.horas = horas;
 	}
 
 	public String getParalelo() {

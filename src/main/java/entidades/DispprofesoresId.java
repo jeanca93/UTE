@@ -6,77 +6,41 @@ package entidades;
  */
 public class DispprofesoresId implements java.io.Serializable {
 
-	private int idDispProfesor;
-	private int idProfesor;
-	private String idDia;
-	private int idHora;
+	private Profesores profesores;
+	private Dias dias;
+	private Horas horas;
 
 	public DispprofesoresId() {
 	}
-
-	public DispprofesoresId(int idDispProfesor, int idProfesor, String idDia, int idHora) {
-		this.idDispProfesor = idDispProfesor;
-		this.idProfesor = idProfesor;
-		this.idDia = idDia;
-		this.idHora = idHora;
+	
+	public DispprofesoresId(Profesores profesores, Dias dias, Horas horas) {
+		super();
+		this.profesores = profesores;
+		this.dias = dias;
+		this.horas = horas;
 	}
 
-	public int getIdDispProfesor() {
-		return this.idDispProfesor;
+	public Profesores getProfesores() {
+		return profesores;
 	}
 
-	public void setIdDispProfesor(int idDispProfesor) {
-		this.idDispProfesor = idDispProfesor;
+	public void setProfesores(Profesores profesores) {
+		this.profesores = profesores;
 	}
 
-	public int getIdProfesor() {
-		return this.idProfesor;
+	public Dias getDias() {
+		return dias;
 	}
 
-	public void setIdProfesor(int idProfesor) {
-		this.idProfesor = idProfesor;
+	public void setDias(Dias dias) {
+		this.dias = dias;
 	}
 
-	public String getIdDia() {
-		return this.idDia;
+	public Horas getHoras() {
+		return horas;
 	}
 
-	public void setIdDia(String idDia) {
-		this.idDia = idDia;
+	public void setHoras(Horas horas) {
+		this.horas = horas;
 	}
-
-	public int getIdHora() {
-		return this.idHora;
-	}
-
-	public void setIdHora(int idHora) {
-		this.idHora = idHora;
-	}
-
-	public boolean equals(Object other) {
-		if ((this == other))
-			return true;
-		if ((other == null))
-			return false;
-		if (!(other instanceof DispprofesoresId))
-			return false;
-		DispprofesoresId castOther = (DispprofesoresId) other;
-
-		return (this.getIdDispProfesor() == castOther.getIdDispProfesor())
-				&& (this.getIdProfesor() == castOther.getIdProfesor())
-				&& ((this.getIdDia() == castOther.getIdDia()) || (this.getIdDia() != null
-						&& castOther.getIdDia() != null && this.getIdDia().equals(castOther.getIdDia())))
-				&& (this.getIdHora() == castOther.getIdHora());
-	}
-
-	public int hashCode() {
-		int result = 17;
-
-		result = 37 * result + this.getIdDispProfesor();
-		result = 37 * result + this.getIdProfesor();
-		result = 37 * result + (getIdDia() == null ? 0 : this.getIdDia().hashCode());
-		result = 37 * result + this.getIdHora();
-		return result;
-	}
-
 }

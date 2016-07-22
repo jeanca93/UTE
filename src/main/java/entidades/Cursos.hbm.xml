@@ -23,17 +23,11 @@
         <property name="usuarioCrea" type="int">
             <column name="UsuarioCrea" not-null="true" />
         </property>
-        <property name="usuarioModificacion" type="timestamp">
+        <property name="FechaModificacion" type="timestamp">
             <column name="UsuarioModificacion" length="19" />
         </property>
         <property name="usuarioModifica" type="java.lang.Integer">
             <column name="UsuarioModifica" />
         </property>
-        <set name="materiascursoses" table="materiascursos" inverse="true" lazy="true" fetch="select">
-            <key>
-                <column name="ID_Curso" length="5" not-null="true" />
-            </key>
-            <one-to-many class="entidades.Materiascursos" />
-        </set>
     </class>
 </hibernate-mapping>

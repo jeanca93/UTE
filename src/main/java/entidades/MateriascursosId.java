@@ -6,54 +6,31 @@ package entidades;
  */
 public class MateriascursosId implements java.io.Serializable {
 
-	private String idMateria;
-	private String idCurso;
+	private Materias materias;
+	private Cursos cursos;
 
 	public MateriascursosId() {
 	}
-
-	public MateriascursosId(String idMateria, String idCurso) {
-		this.idMateria = idMateria;
-		this.idCurso = idCurso;
+	
+	public MateriascursosId(Materias materias, Cursos cursos) {
+		super();
+		this.materias = materias;
+		this.cursos = cursos;
 	}
 
-	public String getIdMateria() {
-		return this.idMateria;
+	public Materias getMaterias() {
+		return materias;
 	}
 
-	public void setIdMateria(String idMateria) {
-		this.idMateria = idMateria;
+	public void setMaterias(Materias materias) {
+		this.materias = materias;
 	}
 
-	public String getIdCurso() {
-		return this.idCurso;
+	public Cursos getCursos() {
+		return cursos;
 	}
 
-	public void setIdCurso(String idCurso) {
-		this.idCurso = idCurso;
+	public void setCursos(Cursos cursos) {
+		this.cursos = cursos;
 	}
-
-	public boolean equals(Object other) {
-		if ((this == other))
-			return true;
-		if ((other == null))
-			return false;
-		if (!(other instanceof MateriascursosId))
-			return false;
-		MateriascursosId castOther = (MateriascursosId) other;
-
-		return ((this.getIdMateria() == castOther.getIdMateria()) || (this.getIdMateria() != null
-				&& castOther.getIdMateria() != null && this.getIdMateria().equals(castOther.getIdMateria())))
-				&& ((this.getIdCurso() == castOther.getIdCurso()) || (this.getIdCurso() != null
-						&& castOther.getIdCurso() != null && this.getIdCurso().equals(castOther.getIdCurso())));
-	}
-
-	public int hashCode() {
-		int result = 17;
-
-		result = 37 * result + (getIdMateria() == null ? 0 : this.getIdMateria().hashCode());
-		result = 37 * result + (getIdCurso() == null ? 0 : this.getIdCurso().hashCode());
-		return result;
-	}
-
 }

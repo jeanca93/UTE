@@ -11,40 +11,31 @@ import java.util.Set;
 public class Profesoresmaterias implements java.io.Serializable {
 
 	private ProfesoresmateriasId id;
-	private Profesores profesores;
-	private Materiascursos materiascursos;
-	private char estado;
+	char estado;
 	private Date fechaCreacion;
 	private int usuarioCrea;
 	private Date fechaModificacion;
 	private Integer usuarioModifica;
-	private Set<Horariosdetalle> horariosdetalles = new HashSet<Horariosdetalle>(0);
 
 	public Profesoresmaterias() {
 	}
 
-	public Profesoresmaterias(ProfesoresmateriasId id, Profesores profesores, Materiascursos materiascursos,
+	public Profesoresmaterias(ProfesoresmateriasId id, 
 			char estado, Date fechaCreacion, int usuarioCrea) {
 		this.id = id;
-		this.profesores = profesores;
-		this.materiascursos = materiascursos;
 		this.estado = estado;
 		this.fechaCreacion = fechaCreacion;
 		this.usuarioCrea = usuarioCrea;
 	}
 
-	public Profesoresmaterias(ProfesoresmateriasId id, Profesores profesores, Materiascursos materiascursos,
-			char estado, Date fechaCreacion, int usuarioCrea, Date fechaModificacion, Integer usuarioModifica,
-			Set<Horariosdetalle> horariosdetalles) {
+	public Profesoresmaterias(ProfesoresmateriasId id,
+			char estado, Date fechaCreacion, int usuarioCrea, Date fechaModificacion, Integer usuarioModifica) {
 		this.id = id;
-		this.profesores = profesores;
-		this.materiascursos = materiascursos;
 		this.estado = estado;
 		this.fechaCreacion = fechaCreacion;
 		this.usuarioCrea = usuarioCrea;
 		this.fechaModificacion = fechaModificacion;
 		this.usuarioModifica = usuarioModifica;
-		this.horariosdetalles = horariosdetalles;
 	}
 
 	public ProfesoresmateriasId getId() {
@@ -54,23 +45,7 @@ public class Profesoresmaterias implements java.io.Serializable {
 	public void setId(ProfesoresmateriasId id) {
 		this.id = id;
 	}
-
-	public Profesores getProfesores() {
-		return this.profesores;
-	}
-
-	public void setProfesores(Profesores profesores) {
-		this.profesores = profesores;
-	}
-
-	public Materiascursos getMateriascursos() {
-		return this.materiascursos;
-	}
-
-	public void setMateriascursos(Materiascursos materiascursos) {
-		this.materiascursos = materiascursos;
-	}
-
+	
 	public char getEstado() {
 		return this.estado;
 	}
@@ -110,13 +85,5 @@ public class Profesoresmaterias implements java.io.Serializable {
 	public void setUsuarioModifica(Integer usuarioModifica) {
 		this.usuarioModifica = usuarioModifica;
 	}
-
-	public Set<Horariosdetalle> getHorariosdetalles() {
-		return this.horariosdetalles;
-	}
-
-	public void setHorariosdetalles(Set<Horariosdetalle> horariosdetalles) {
-		this.horariosdetalles = horariosdetalles;
-	}
-
+	
 }

@@ -2,9 +2,7 @@ package modelo.perfiles;
 
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.zkoss.bind.BindUtils;
 import org.zkoss.bind.annotation.AfterCompose;
@@ -31,7 +29,7 @@ import org.zkoss.zul.Row;
 import org.zkoss.zul.Window;
 
 import entidades.Perfilesusuario;
-import entidadesDAO.PerfilesusuarioHomeExt;
+import entidadesDAO.PerfilesusuarioHome;
 
 public class PerfilesModel {
 	private ListModelList<PerfilStatus> allPerfilStatus;
@@ -62,12 +60,18 @@ public class PerfilesModel {
 	
 	@Command
     public void nuevoPerfil() {
+		/*
 		Map<String, Object> parameters = new HashMap<String, Object>();
 		parameters.put("modelPrincipal",allPerfilStatus );
 		parameters.put("gridPrincipal",GridPerfiles );
 		
 		Window window = (Window)Executions.createComponents(
                 "/WEB-INF/include/Usuarios/AdministracionPerfiles/vtnPerfiles.zul", null, parameters);
+        window.doModal();
+        */
+		
+		Window window = (Window)Executions.createComponents(
+                "/WEB-INF/include/Usuarios/AdministracionPerfiles/vtnPerfiles.zul", null, null);
         window.doModal();
     }
 	
@@ -96,7 +100,7 @@ public class PerfilesModel {
 					if (event.getName().equals("onYes")) {								
 						try{
 							for(Perfilesusuario perfil:perfilesDelete){
-								new PerfilesusuarioHomeExt().delete(perfil);
+								new PerfilesusuarioHome().delete(perfil);
 							}
 							
 							BindUtils.postNotifyChange(null, null,this, "*");
@@ -135,7 +139,7 @@ public class PerfilesModel {
 	
 	@Command
     public void changeEditableStatus(@BindingParam("PerfilStatus") PerfilStatus perfil) {
-		infoUsuarioInicial(perfil.getPerfil());
+		infoPerfilInicial(perfil.getPerfil());
 		
 		perfil.setEditingStatus(!perfil.isEditingStatus());
         refreshRowTemplate(perfil);
@@ -165,7 +169,7 @@ public class PerfilesModel {
         		Session session = Sessions.getCurrent();
         		perfil.getPerfil().setUsuarioModifica(Integer.parseInt(session.getAttribute("idUsuario").toString()));
         		perfil.getPerfil().setFechaModificacion(new Date());
-        		new PerfilesusuarioHomeExt().attachDirty(perfil.getPerfil());
+        		new PerfilesusuarioHome().update(perfil.getPerfil());
         		
         		refresh();
         		
@@ -178,7 +182,7 @@ public class PerfilesModel {
         listPerfilesTMP.remove(perfilTMP);
     }
 	
-    private void infoUsuarioInicial(Perfilesusuario perfil)
+    private void infoPerfilInicial(Perfilesusuario perfil)
     {
     	boolean flag = false;
     	

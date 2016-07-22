@@ -26,17 +26,5 @@
         <property name="usuarioModifica" type="java.lang.Integer">
             <column name="UsuarioModifica" />
         </property>
-        <set name="dispprofesoreses" table="dispprofesores" inverse="true" lazy="true" fetch="select">
-            <key>
-                <column name="ID_Dia" length="5" not-null="true" />
-            </key>
-            <one-to-many class="entidades.Dispprofesores" />
-        </set>
-        <set name="horariosdetalles" table="horariosdetalle" inverse="true" lazy="true" fetch="select">
-            <key>
-                <column name="ID_Dia" length="5" not-null="true" />
-            </key>
-            <one-to-many class="entidades.Horariosdetalle" />
-        </set>
     </class>
 </hibernate-mapping>

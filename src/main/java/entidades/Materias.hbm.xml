@@ -11,8 +11,11 @@
         <property name="materia" type="string">
             <column name="Materia" length="100" not-null="true" />
         </property>
-        <property name="horasSemana" type="java.lang.Integer">
-            <column name="HorasSemana"  not-null="true"  />
+        <property name="duracionClase" type="time">
+            <column name="DuracionClase" length="5" not-null="true"  />
+        </property>
+        <property name="horasSemana" type="time">
+            <column name="HorasSemana" length="5" not-null="true"  />
         </property>
         <property name="estado" type="char">
             <column name="Estado" length="1" not-null="true" />
@@ -29,17 +32,5 @@
         <property name="usuarioModifica" type="java.lang.Integer">
             <column name="UsuarioModifica" />
         </property>
-        <set name="materiasrecursoses" table="materiasrecursos" inverse="true" lazy="true" fetch="select">
-            <key>
-                <column name="ID_Materia" length="20" not-null="true" />
-            </key>
-            <one-to-many class="entidades.Materiasrecursos" />
-        </set>
-        <set name="materiascursoses" table="materiascursos" inverse="true" lazy="true" fetch="select">
-            <key>
-                <column name="ID_Materia" length="20" not-null="true" />
-            </key>
-            <one-to-many class="entidades.Materiascursos" />
-        </set>
     </class>
 </hibernate-mapping>

@@ -2,22 +2,15 @@ package modelo.usuarios;
 
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
-import org.hibernate.Transaction;
 import org.zkoss.bind.BindUtils;
-import org.zkoss.bind.ValidationContext;
-import org.zkoss.bind.Validator;
 import org.zkoss.bind.annotation.AfterCompose;
 import org.zkoss.bind.annotation.BindingParam;
 import org.zkoss.bind.annotation.Command;
 import org.zkoss.bind.annotation.ContextParam;
 import org.zkoss.bind.annotation.ContextType;
-import org.zkoss.bind.annotation.GlobalCommand;
 import org.zkoss.bind.annotation.NotifyChange;
-import org.zkoss.bind.validator.AbstractValidator;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.Session;
@@ -25,24 +18,19 @@ import org.zkoss.zk.ui.Sessions;
 import org.zkoss.zk.ui.event.CheckEvent;
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.event.EventListener;
-import org.zkoss.zk.ui.event.InputEvent;
 import org.zkoss.zk.ui.select.Selectors;
 import org.zkoss.zk.ui.select.annotation.Wire;
 import org.zkoss.zk.ui.util.Clients;
-import org.zkoss.zkplus.databind.AnnotateDataBinder;
 import org.zkoss.zul.Checkbox;
 import org.zkoss.zul.Grid;
-import org.zkoss.zul.Label;
-import org.zkoss.zul.ListModel;
 import org.zkoss.zul.ListModelList;
 import org.zkoss.zul.Messagebox;
-import org.zkoss.zul.Panel;
 import org.zkoss.zul.Row;
-import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Window;
 
 import entidades.Perfilesusuario;
 import entidades.Usuarios;
+import entidadesDAO.UsuariosHome;
 import entidadesDAO.UsuariosHomeExt;
 
 public class UsuariosModel {
@@ -57,16 +45,20 @@ public class UsuariosModel {
 	public UsuariosModel(){
 		super();
 		
-		allPerfiles  = new ArrayList<Perfilesusuario>();
-		allUsuariosStatus = new ListModelList<UsuarioStatus>();		
+		UsuarioDatos userDatos = new  UsuarioDatos();		
+		
+		allUsuariosStatus = new ListModelList<UsuarioStatus>();
+		allUsuariosStatus = genListModel(userDatos.getAllUsuarios());
+		
+		allPerfiles = new ArrayList<Perfilesusuario>();
+		allPerfiles = userDatos.getAllPerfiles();
+		
 		listUserTMP = new ArrayList<Usuarios>();
 	}
 	
 	@AfterCompose
 	public void initSetup(@ContextParam(ContextType.VIEW) Component view){
 		Selectors.wireComponents(view, this, false);
-		
-		refresh();		
 	}
 	
 	@NotifyChange({"allUsuarios", "displayEdit"})
@@ -76,12 +68,18 @@ public class UsuariosModel {
 	
 	@Command
     public void nuevoUsuario() {
+		/*
 		Map<String, Object> parameters = new HashMap<String, Object>();
 		parameters.put("modelPrincipal",allUsuariosStatus );
 		parameters.put("gridPrincipal",GridUsuarios );
 		
 		Window window = (Window)Executions.createComponents(
                 "/WEB-INF/include/Usuarios/AdministracionUsuarios/vtnUsuarios.zul", null, parameters);
+        window.doModal();
+        */
+		
+		Window window = (Window)Executions.createComponents(
+                "/WEB-INF/include/Usuarios/AdministracionUsuarios/vtnUsuarios.zul", null, null);
         window.doModal();
     }
 	
@@ -110,7 +108,7 @@ public class UsuariosModel {
 					if (event.getName().equals("onYes")) {								
 						try{
 							for(Usuarios usuario:usersDelete){
-								new UsuariosHomeExt().delete(usuario);
+								new UsuariosHome().delete(usuario);
 							}
 							
 							BindUtils.postNotifyChange(null, null,this, "*");
@@ -129,11 +127,10 @@ public class UsuariosModel {
 	
 	public void refresh() {
 		UsuarioDatos userDatos = new  UsuarioDatos();
-		
+		/*
 		allPerfiles = new ArrayList<Perfilesusuario>();
-		allPerfiles = new UsuarioDatos().getAllPerfiles();
-		
-		
+		allPerfiles = userDatos.getAllPerfiles();
+		*/		
 		allUsuariosStatus = new ListModelList<UsuarioStatus>();
 		allUsuariosStatus = genListModel(userDatos.getAllUsuarios());
 		GridUsuarios.setModel(allUsuariosStatus);
@@ -185,7 +182,7 @@ public class UsuariosModel {
         		Session session = Sessions.getCurrent();
 				usr.getUsuario().setUsuarioModifica(Integer.parseInt(session.getAttribute("idUsuario").toString()));
         		usr.getUsuario().setFechaModificacion(new Date());
-        		new UsuariosHomeExt().attachDirty(usr.getUsuario());
+        		new UsuariosHome().update(usr.getUsuario());
         		
         		refresh();
         		

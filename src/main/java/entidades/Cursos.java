@@ -16,9 +16,8 @@ public class Cursos implements java.io.Serializable {
 	private Character estado;
 	private Date fechaCreacion;
 	private int usuarioCrea;
-	private Date usuarioModificacion;
+	private Date FechaModificacion;
 	private Integer usuarioModifica;
-	private Set<Materiascursos> materiascursoses = new HashSet<Materiascursos>(0);
 
 	public Cursos() {
 	}
@@ -32,16 +31,15 @@ public class Cursos implements java.io.Serializable {
 	}
 
 	public Cursos(String idCurso, String curso, int paralelos, Character estado, Date fechaCreacion, int usuarioCrea,
-			Date usuarioModificacion, Integer usuarioModifica, Set<Materiascursos> materiascursoses) {
+			Date FechaModificacion, Integer usuarioModifica) {
 		this.idCurso = idCurso;
 		this.curso = curso;
 		this.paralelos = paralelos;
 		this.estado = estado;
 		this.fechaCreacion = fechaCreacion;
 		this.usuarioCrea = usuarioCrea;
-		this.usuarioModificacion = usuarioModificacion;
+		this.FechaModificacion = FechaModificacion;
 		this.usuarioModifica = usuarioModifica;
-		this.materiascursoses = materiascursoses;
 	}
 
 	public String getIdCurso() {
@@ -92,12 +90,12 @@ public class Cursos implements java.io.Serializable {
 		this.usuarioCrea = usuarioCrea;
 	}
 
-	public Date getUsuarioModificacion() {
-		return this.usuarioModificacion;
+	public Date getFechaModificacion() {
+		return this.FechaModificacion;
 	}
 
-	public void setUsuarioModificacion(Date usuarioModificacion) {
-		this.usuarioModificacion = usuarioModificacion;
+	public void setFechaModificacion(Date FechaModificacion) {
+		this.FechaModificacion = FechaModificacion;
 	}
 
 	public Integer getUsuarioModifica() {
@@ -106,14 +104,6 @@ public class Cursos implements java.io.Serializable {
 
 	public void setUsuarioModifica(Integer usuarioModifica) {
 		this.usuarioModifica = usuarioModifica;
-	}
-
-	public Set<Materiascursos> getMateriascursoses() {
-		return this.materiascursoses;
-	}
-
-	public void setMateriascursoses(Set<Materiascursos> materiascursoses) {
-		this.materiascursoses = materiascursoses;
 	}
 
 }

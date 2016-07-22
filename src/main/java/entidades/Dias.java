@@ -17,8 +17,6 @@ public class Dias implements java.io.Serializable {
 	private int usuarioCrea;
 	private Date fechaModificacion;
 	private Integer usuarioModifica;
-	private Set<Dispprofesores> dispprofesoreses = new HashSet<Dispprofesores>(0);
-	private Set<Horariosdetalle> horariosdetalles = new HashSet<Horariosdetalle>(0);
 
 	public Dias() {
 	}
@@ -32,7 +30,7 @@ public class Dias implements java.io.Serializable {
 	}
 
 	public Dias(String idDia, String dia, char estado, Date fechaCreacion, int usuarioCrea, Date fechaModificacion,
-			Integer usuarioModifica, Set<Dispprofesores> dispprofesoreses, Set<Horariosdetalle> horariosdetalles) {
+			Integer usuarioModifica) {
 		this.idDia = idDia;
 		this.dia = dia;
 		this.estado = estado;
@@ -40,8 +38,6 @@ public class Dias implements java.io.Serializable {
 		this.usuarioCrea = usuarioCrea;
 		this.fechaModificacion = fechaModificacion;
 		this.usuarioModifica = usuarioModifica;
-		this.dispprofesoreses = dispprofesoreses;
-		this.horariosdetalles = horariosdetalles;
 	}
 
 	public String getIdDia() {
@@ -98,22 +94,6 @@ public class Dias implements java.io.Serializable {
 
 	public void setUsuarioModifica(Integer usuarioModifica) {
 		this.usuarioModifica = usuarioModifica;
-	}
-
-	public Set<Dispprofesores> getDispprofesoreses() {
-		return this.dispprofesoreses;
-	}
-
-	public void setDispprofesoreses(Set<Dispprofesores> dispprofesoreses) {
-		this.dispprofesoreses = dispprofesoreses;
-	}
-
-	public Set<Horariosdetalle> getHorariosdetalles() {
-		return this.horariosdetalles;
-	}
-
-	public void setHorariosdetalles(Set<Horariosdetalle> horariosdetalles) {
-		this.horariosdetalles = horariosdetalles;
 	}
 
 }

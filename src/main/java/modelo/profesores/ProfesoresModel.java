@@ -2,9 +2,7 @@ package modelo.profesores;
 
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.zkoss.bind.BindUtils;
 import org.zkoss.bind.annotation.AfterCompose;
@@ -31,7 +29,7 @@ import org.zkoss.zul.Row;
 import org.zkoss.zul.Window;
 
 import entidades.Profesores;
-import entidadesDAO.ProfesoresHomeExt;
+import entidadesDAO.ProfesoresHome;
 
 public class ProfesoresModel {
 	private ListModelList<ProfesorStatus> allProfesoresStatus;
@@ -62,12 +60,18 @@ public class ProfesoresModel {
 	
 	@Command
     public void nuevoProfesor() {
+		/*
 		Map<String, Object> parameters = new HashMap<String, Object>();
 		parameters.put("modelPrincipal",allProfesoresStatus );
 		parameters.put("gridPrincipal",GridProfesores );
 		
 		Window window = (Window)Executions.createComponents(
                 "/WEB-INF/include/Profesores/AdministracionProfesores/vtnProfesores.zul", null, parameters);
+        window.doModal();
+        */
+		
+		Window window = (Window)Executions.createComponents(
+                "/WEB-INF/include/Profesores/AdministracionProfesores/vtnProfesores.zul", null, null);
         window.doModal();
     }
 	
@@ -96,7 +100,7 @@ public class ProfesoresModel {
 					if (event.getName().equals("onYes")) {								
 						try{
 							for(Profesores profesor:profesoresDelete){
-								new ProfesoresHomeExt().delete(profesor);
+								new ProfesoresHome().delete(profesor);
 							}
 							
 							BindUtils.postNotifyChange(null, null,this, "*");
@@ -135,7 +139,7 @@ public class ProfesoresModel {
 	
 	@Command
     public void changeEditableStatus(@BindingParam("ProfesorStatus") ProfesorStatus prof) {
-		infoUsuarioInicial(prof.getProfesor());
+		infoProfesorInicial(prof.getProfesor());
 		
 		prof.setEditingStatus(!prof.isEditingStatus());
         refreshRowTemplate(prof);
@@ -166,7 +170,7 @@ public class ProfesoresModel {
         		Session session = Sessions.getCurrent();
 				prof.getProfesor().setUsuarioModifica(Integer.parseInt(session.getAttribute("idUsuario").toString()));
 				prof.getProfesor().setFechaModificacion(new Date());
-        		new ProfesoresHomeExt().attachDirty(prof.getProfesor());
+        		new ProfesoresHome().update(prof.getProfesor());
         		
         		refresh();
         		
@@ -179,7 +183,7 @@ public class ProfesoresModel {
         listProfesorTMP.remove(profTMP);
     }
 	
-    private void infoUsuarioInicial(Profesores profesor)
+    private void infoProfesorInicial(Profesores profesor)
     {
     	boolean flag = false;
     	

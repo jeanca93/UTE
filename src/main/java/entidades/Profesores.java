@@ -19,8 +19,6 @@ public class Profesores implements java.io.Serializable {
 	private int usuarioCrea;
 	private Date fechaModificacion;
 	private Integer usuarioModifica;
-	private Set<Profesoresmaterias> profesoresmateriases = new HashSet<Profesoresmaterias>(0);
-	private Set<Dispprofesores> dispprofesoreses = new HashSet<Dispprofesores>(0);
 
 	public Profesores() {
 	}
@@ -35,8 +33,7 @@ public class Profesores implements java.io.Serializable {
 	}
 
 	public Profesores(String profesor, String titulo, int maxHorasPorSemana, char estado, Date fechaCreacion,
-			int usuarioCrea, Date fechaModificacion, Integer usuarioModifica,
-			Set<Profesoresmaterias> profesoresmateriases, Set<Dispprofesores> dispprofesoreses) {
+			int usuarioCrea, Date fechaModificacion, Integer usuarioModifica) {
 		this.profesor = profesor;
 		this.titulo = titulo;
 		this.maxHorasPorSemana = maxHorasPorSemana;
@@ -45,8 +42,6 @@ public class Profesores implements java.io.Serializable {
 		this.usuarioCrea = usuarioCrea;
 		this.fechaModificacion = fechaModificacion;
 		this.usuarioModifica = usuarioModifica;
-		this.profesoresmateriases = profesoresmateriases;
-		this.dispprofesoreses = dispprofesoreses;
 	}
 
 	public Integer getIdProfesor() {
@@ -119,22 +114,6 @@ public class Profesores implements java.io.Serializable {
 
 	public void setUsuarioModifica(Integer usuarioModifica) {
 		this.usuarioModifica = usuarioModifica;
-	}
-
-	public Set<Profesoresmaterias> getProfesoresmateriases() {
-		return this.profesoresmateriases;
-	}
-
-	public void setProfesoresmateriases(Set<Profesoresmaterias> profesoresmateriases) {
-		this.profesoresmateriases = profesoresmateriases;
-	}
-
-	public Set<Dispprofesores> getDispprofesoreses() {
-		return this.dispprofesoreses;
-	}
-
-	public void setDispprofesoreses(Set<Dispprofesores> dispprofesoreses) {
-		this.dispprofesoreses = dispprofesoreses;
 	}
 
 }

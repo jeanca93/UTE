@@ -6,51 +6,32 @@ package entidades;
  */
 public class PermisosperfilesId implements java.io.Serializable {
 
-	private int idPerfil;
-	private int idPermiso;
+	private Perfilesusuario perfilesusuario;
+	private Permisos permisos;
 
 	public PermisosperfilesId() {
 	}
 
-	public PermisosperfilesId(int idPerfil, int idPermiso) {
-		this.idPerfil = idPerfil;
-		this.idPermiso = idPermiso;
+	public PermisosperfilesId(Perfilesusuario perfilesusuario, Permisos permisos) {
+		super();
+		this.perfilesusuario = perfilesusuario;
+		this.permisos = permisos;
 	}
 
-	public int getIdPerfil() {
-		return this.idPerfil;
+	public Perfilesusuario getPerfilesusuario() {
+		return perfilesusuario;
 	}
 
-	public void setIdPerfil(int idPerfil) {
-		this.idPerfil = idPerfil;
+	public void setPerfilesusuario(Perfilesusuario perfilesusuario) {
+		this.perfilesusuario = perfilesusuario;
 	}
 
-	public int getIdPermiso() {
-		return this.idPermiso;
+	public Permisos getPermisos() {
+		return permisos;
 	}
 
-	public void setIdPermiso(int idPermiso) {
-		this.idPermiso = idPermiso;
+	public void setPermisos(Permisos permisos) {
+		this.permisos = permisos;
 	}
-
-	public boolean equals(Object other) {
-		if ((this == other))
-			return true;
-		if ((other == null))
-			return false;
-		if (!(other instanceof PermisosperfilesId))
-			return false;
-		PermisosperfilesId castOther = (PermisosperfilesId) other;
-
-		return (this.getIdPerfil() == castOther.getIdPerfil()) && (this.getIdPermiso() == castOther.getIdPermiso());
-	}
-
-	public int hashCode() {
-		int result = 17;
-
-		result = 37 * result + this.getIdPerfil();
-		result = 37 * result + this.getIdPermiso();
-		return result;
-	}
-
+	
 }

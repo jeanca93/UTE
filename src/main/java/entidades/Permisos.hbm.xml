@@ -26,17 +26,5 @@
         <property name="usuarioModifica" type="java.lang.Integer">
             <column name="UsuarioModifica" />
         </property>
-        <set name="opcioneses" table="opciones" inverse="true" lazy="true" fetch="select">
-            <key>
-                <column name="ID_Permiso" />
-            </key>
-            <one-to-many class="entidades.Opciones" />
-        </set>
-        <set name="permisosperfileses" table="permisosperfiles" inverse="true" lazy="true" fetch="select">
-            <key>
-                <column name="ID_Permiso" not-null="true" />
-            </key>
-            <one-to-many class="entidades.Permisosperfiles" />
-        </set>
     </class>
 </hibernate-mapping>

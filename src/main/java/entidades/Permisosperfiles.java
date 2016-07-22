@@ -9,8 +9,6 @@ import java.util.Date;
 public class Permisosperfiles implements java.io.Serializable {
 
 	private PermisosperfilesId id;
-	private Perfilesusuario perfilesusuario;
-	private Permisos permisos;
 	private char estado;
 	private Date fechaCreacion;
 	private int usuarioCrea;
@@ -20,21 +18,17 @@ public class Permisosperfiles implements java.io.Serializable {
 	public Permisosperfiles() {
 	}
 
-	public Permisosperfiles(PermisosperfilesId id, Perfilesusuario perfilesusuario, Permisos permisos, char estado,
+	public Permisosperfiles(PermisosperfilesId id, char estado,
 			Date fechaCreacion, int usuarioCrea) {
 		this.id = id;
-		this.perfilesusuario = perfilesusuario;
-		this.permisos = permisos;
 		this.estado = estado;
 		this.fechaCreacion = fechaCreacion;
 		this.usuarioCrea = usuarioCrea;
 	}
 
-	public Permisosperfiles(PermisosperfilesId id, Perfilesusuario perfilesusuario, Permisos permisos, char estado,
+	public Permisosperfiles(PermisosperfilesId id, char estado,
 			Date fechaCreacion, int usuarioCrea, Date fechaModificacion, Integer usuarioModifica) {
 		this.id = id;
-		this.perfilesusuario = perfilesusuario;
-		this.permisos = permisos;
 		this.estado = estado;
 		this.fechaCreacion = fechaCreacion;
 		this.usuarioCrea = usuarioCrea;
@@ -48,22 +42,6 @@ public class Permisosperfiles implements java.io.Serializable {
 
 	public void setId(PermisosperfilesId id) {
 		this.id = id;
-	}
-
-	public Perfilesusuario getPerfilesusuario() {
-		return this.perfilesusuario;
-	}
-
-	public void setPerfilesusuario(Perfilesusuario perfilesusuario) {
-		this.perfilesusuario = perfilesusuario;
-	}
-
-	public Permisos getPermisos() {
-		return this.permisos;
-	}
-
-	public void setPermisos(Permisos permisos) {
-		this.permisos = permisos;
 	}
 
 	public char getEstado() {

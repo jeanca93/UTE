@@ -6,7 +6,7 @@
     action="show: slideDown">
     <style src="/css/Focus.css" />
     <zscript>
-		constraint.MaximoMateriasConstraint customConstraint = new constraint.MaximoMateriasConstraint();
+		constraint.MaximoMateriasConstraint cc = new constraint.MaximoMateriasConstraint();
 	</zscript>
     <style>
         .z-toolbar a, .z-toolbar a:visited, .z-toolbar a:hover{
@@ -43,7 +43,7 @@
 						<row>
 							<label value="Horas Semana:" />
 							<intbox sclass="ftextbox" id="txtHorasSemana"
-								width="120px" constraint="${customConstraint}"/>
+								width="120px" constraint="${cc}"/>
 							<label value="*" style="color:red" />
 						</row>
 					</rows>
