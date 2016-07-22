@@ -1,30 +1,26 @@
 package entidadesDAO;
-// Generated Jun 5, 2016 11:08:49 PM by Hibernate Tools 4.0.0.Final
+
+import static org.hibernate.criterion.Example.create;
 
 import java.util.List;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.hibernate.LockMode;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
-import entidades.Aulas;
+import entidades.Schollaryear;
 
-import static org.hibernate.criterion.Example.create;
 
-/**
- * Home object for domain model class Aulas.
- * @see entidadesDAO.Aulas
- * @author Hibernate Tools
- */
-public class AulasHome extends MydbBaseHibernateDAO{
+public class SchollaryearHome extends MydbBaseHibernateDAO{
 
-	private static final Log log = LogFactory.getLog(AulasHome.class);
+	private static final Log log = LogFactory.getLog(SchollaryearHome.class);
 
-	public void persist(Aulas transientInstance) {
+	public void persist(Schollaryear transientInstance) {
 		Session session = this.getSession();
 		
-		log.debug("persisting Aulas instance");
+		log.debug("persisting Schollaryear instance");
 		
 		try {
 			session.persist(transientInstance);
@@ -37,27 +33,34 @@ public class AulasHome extends MydbBaseHibernateDAO{
 		}
 	}
 
-	public void attachDirty(Aulas instance) {
+	public void attachDirty(Schollaryear instance) {
 		Session session = this.getSession();
+		Transaction tx = null;
 		
-		log.debug("attaching dirty Aulas instance");
+		log.debug("attaching dirty Schollaryear instance");
 		
 		try {
+			tx = session.beginTransaction();
+			
 			session.saveOrUpdate(instance);
 			
 			log.debug("attach successful");
+			
+			tx.commit();
 		} catch (RuntimeException re) {
+			tx.rollback();
+			
 			log.error("attach failed", re);
 			
 			throw re;
 		}
 	}
 	
-	public void save(Aulas instance) {
+	public void save(Schollaryear instance) {
 		Session session = this.getSession();
 		Transaction tx = null;
 		
-		log.debug("attaching dirty Usuarios instance");
+		log.debug("attaching dirty Schollaryear instance");
 		
 		try {
 			tx = session.beginTransaction();
@@ -76,11 +79,11 @@ public class AulasHome extends MydbBaseHibernateDAO{
 		}
 	}
 	
-	public void update(Aulas instance) {
+	public void update(Schollaryear instance) {
 		Session session = this.getSession();
 		Transaction tx = null;
 		
-		log.debug("attaching dirty Usuarios instance");
+		log.debug("attaching dirty Schollaryear instance");
 		
 		try {
 			tx = session.beginTransaction();
@@ -99,10 +102,10 @@ public class AulasHome extends MydbBaseHibernateDAO{
 		}
 	}
 
-	public void attachClean(Aulas instance) {
+	public void attachClean(Schollaryear instance) {
 		Session session = this.getSession();
 		
-		log.debug("attaching clean Aulas instance");
+		log.debug("attaching clean Schollaryear instance");
 		
 		try {
 			session.lock(instance, LockMode.NONE);
@@ -115,34 +118,36 @@ public class AulasHome extends MydbBaseHibernateDAO{
 		}
 	}
 
-	public void delete(Aulas persistentInstance) {
+	public void delete(Schollaryear persistentInstance) {
 		Session session = this.getSession();
-		
 		Transaction tx = null;
-
-		log.debug("deleting Aulas instance");
+		
+		log.debug("deleting Schollaryear instance");
 		
 		try {
 			tx = session.beginTransaction();
+			
 			session.delete(persistentInstance);
 			
 			log.debug("delete successful");
+			
 			tx.commit();
 		} catch (RuntimeException re) {
 			tx.rollback();
+			
 			log.error("delete failed", re);
 			
 			throw re;
 		}
 	}
 
-	public Aulas merge(Aulas detachedInstance) {
+	public Schollaryear merge(Schollaryear detachedInstance) {
 		Session session = this.getSession();
 		
-		log.debug("merging Aulas instance");
+		log.debug("merging Schollaryear instance");
 		
 		try {
-			Aulas result = (Aulas) session.merge(detachedInstance);
+			Schollaryear result = (Schollaryear) session.merge(detachedInstance);
 			
 			log.debug("merge successful");
 			
@@ -154,13 +159,13 @@ public class AulasHome extends MydbBaseHibernateDAO{
 		}
 	}
 
-	public Aulas findById(java.lang.Integer id) {
+	public Schollaryear findById(java.lang.Integer id) {
 		Session session = this.getSession();
 		
-		log.debug("getting Aulas instance with id: " + id);
+		log.debug("getting Schollaryear instance with id: " + id);
 		
 		try {
-			Aulas instance = (Aulas) session.get("entidadesDAO.Aulas", id);
+			Schollaryear instance = (Schollaryear) session.get("entidades.Schollaryear", id);
 			
 			if (instance == null) {
 				log.debug("get successful, no instance found");
@@ -176,14 +181,13 @@ public class AulasHome extends MydbBaseHibernateDAO{
 		}
 	}
 
-	public List<Aulas> findByExample(Aulas instance) {
+	public List<Schollaryear> findByExample(Schollaryear instance) {
 		Session session = this.getSession();
 		
-		log.debug("finding Aulas instance by example");
+		log.debug("finding Schollaryear instance by example");
 		
 		try {
-			List<Aulas> results = (List<Aulas>) session.createCriteria("entidadesDAO.Aulas")
-					.add(create(instance)).list();
+			List<Schollaryear> results = (List<Schollaryear>) session.createCriteria("entidades.Schollaryear").add(create(instance)).list();
 			
 			log.debug("find by example successful, result size: " + results.size());
 			
@@ -194,4 +198,5 @@ public class AulasHome extends MydbBaseHibernateDAO{
 			throw re;
 		}
 	}
+
 }

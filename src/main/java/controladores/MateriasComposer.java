@@ -1,6 +1,7 @@
 package controladores;
 
 import java.io.IOException;
+import java.util.Calendar;
 import java.util.Date;
 
 import javax.xml.parsers.ParserConfigurationException;
@@ -25,7 +26,7 @@ public class MateriasComposer extends GenericForwardComposer<Component>{
 	private static final long serialVersionUID = 4L;
 	//private Window modalDialog;
 	private Textbox txtMateria,txtIdMateria;
-	private Intbox txtHorasSemana;
+	private Timebox txtDuracionClases, txtHorasSemana;
 	//private ListModelList<MateriaStatus> allMateriasStatus;
 	//private Grid GridMaterias;
 
@@ -41,6 +42,14 @@ public class MateriasComposer extends GenericForwardComposer<Component>{
 		//final Execution execution = Executions.getCurrent();
 		//allMateriasStatus = (ListModelList<MateriaStatus>)execution.getArg().get("modelPrincipal");
 		//GridMaterias = (Grid)execution.getArg().get("gridPrincipal");
+		
+		Calendar cal = Calendar.getInstance();
+        cal.set(Calendar.HOUR_OF_DAY,0);
+        cal.set(Calendar.MINUTE,45);
+        cal.set(Calendar.SECOND,0);
+        cal.set(Calendar.MILLISECOND,0);
+
+        txtDuracionClases.setValue(cal.getTime());
 	}
 	
 	public void onClick$tbbGrabar() throws InterruptedException,
@@ -50,11 +59,12 @@ public class MateriasComposer extends GenericForwardComposer<Component>{
 			try{
 				String idmateria = txtIdMateria.getValue().trim();
 				String materia = txtMateria.getValue().trim();
-				Integer horassemana = txtHorasSemana.getValue();
+				Date horassemana = txtHorasSemana.getValue();
+				Date duracionclases = txtDuracionClases.getValue();
 				
 				Session session = Sessions.getCurrent();
 				
-				new MateriasHome().save(new Materias(idmateria,materia, new Date(), new Date(), 'A', new Date(), Integer.parseInt(session.getAttribute("idUsuario").toString())));
+				new MateriasHome().save(new Materias(idmateria,materia, duracionclases, horassemana, 'A', new Date(), Integer.parseInt(session.getAttribute("idUsuario").toString())));
 				
 				Messagebox.show("Creado correctamente", "Exito", Messagebox.OK,  Messagebox.EXCLAMATION, new EventListener<Event>() {
 					

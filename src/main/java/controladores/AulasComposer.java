@@ -13,6 +13,8 @@ import org.zkoss.zk.ui.Execution;
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.Session;
 import org.zkoss.zk.ui.Sessions;
+import org.zkoss.zk.ui.event.Event;
+import org.zkoss.zk.ui.event.EventListener;
 import org.zkoss.zk.ui.util.Clients;
 import org.zkoss.zk.ui.util.GenericForwardComposer;
 import org.zkoss.zul.Combobox;
@@ -20,11 +22,12 @@ import org.zkoss.zul.Grid;
 import org.zkoss.zul.Intbox;
 import org.zkoss.zul.ListModel;
 import org.zkoss.zul.ListModelList;
+import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Window;
 
 import entidades.Aulas;
-import entidadesDAO.AulasHomeExt;
+import entidadesDAO.AulasHome;
 import modelo.aulas.AulasDatos;
 import modelo.aulas.AulasStatus;
 import modelo.estados.Estados;
@@ -33,7 +36,7 @@ import modelo.estados.EstadosDatos;
 
 public class AulasComposer extends GenericForwardComposer<Component>{
 	private static final long serialVersionUID = 3L;
-	private ListModelList<Estados> allEstados = new ListModelList<Estados>();
+	private ListModelList<String> allEstados = new ListModelList<String>();
 	private Window modalDialog;
 	private Combobox cmbEstados;
 	private Textbox txtIdAula, txtAula, txtComentarios;
@@ -44,9 +47,8 @@ public class AulasComposer extends GenericForwardComposer<Component>{
 	public AulasComposer() {
 		// TODO Auto-generated constructor stub
 		
-		for(Estados estado:new EstadosDatos().getAllEstados()){
+		for(String estado:new EstadosDatos().getAllEstados()){
 			allEstados.add(estado);
-			
 		}
 		
 	}
@@ -76,8 +78,18 @@ public class AulasComposer extends GenericForwardComposer<Component>{
 				char estados = cmbEstados.getSelectedItem().getValue();
 				Session session = Sessions.getCurrent();
 				
-				new AulasHomeExt().attachDirty(new Aulas(idAula,aula,asientos,comentarios, 'A', new Date(), Integer.parseInt(session.getAttribute("idUsuario").toString())));
-											   
+				new AulasHome().save(new Aulas(idAula,aula,asientos,comentarios, 'A', new Date(), Integer.parseInt(session.getAttribute("idUsuario").toString())));
+				
+				
+				Messagebox.show("Creado correctamente", "Exito", Messagebox.OK,  Messagebox.EXCLAMATION, new EventListener<Event>() {
+					
+					public void onEvent(Event event) throws Exception {
+						// TODO Auto-generated method stub
+						Executions.sendRedirect("");
+					}
+				});
+
+				/*							
 				modalDialog.detach();
 				
 				allAulasStatus = new ListModelList<AulasStatus>();
@@ -85,20 +97,21 @@ public class AulasComposer extends GenericForwardComposer<Component>{
 				GridAulas.setModel(allAulasStatus);
 				
 				Clients.showNotification("Creado correctamente");
+				*/	
 			}catch(RuntimeException re){
 				throw re;
 			}
 		}
 	}
 	
-	public ListModel<Estados> getAllEstados() {
+	public ListModel<String> getAllEstados() {
 		return allEstados;
 	}
-	
+	/*
 	private void genListModel(List<Aulas> lsAulas){
     	for(Aulas aul: lsAulas){
 			allAulasStatus.add(new AulasStatus(aul, false, false));
 		}
     }
-
+	*/
 }

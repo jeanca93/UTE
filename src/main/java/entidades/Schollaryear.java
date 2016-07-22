@@ -23,8 +23,9 @@ public class Schollaryear implements java.io.Serializable {
 	public Schollaryear() {
 	}
 
-	public Schollaryear(String schollarYear, Date fechaInicio, Date fechaFin, char estado, Date fechaCreacion,
+	public Schollaryear(Integer idSchoolarYear, String schollarYear, Date fechaInicio, Date fechaFin, char estado, Date fechaCreacion,
 			int usuarioCrea) {
+		this.idSchoolarYear= idSchoolarYear;
 		this.schollarYear = schollarYear;
 		this.fechaInicio = fechaInicio;
 		this.fechaFin = fechaFin;
