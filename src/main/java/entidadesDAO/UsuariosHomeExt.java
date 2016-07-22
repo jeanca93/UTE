@@ -10,19 +10,12 @@ import org.hibernate.criterion.Restrictions;
 import entidades.Usuarios;
 
 public class UsuariosHomeExt extends UsuariosHome{
-    public UsuariosHomeExt() {
-        super();
-        
-    }
-    
+	
     public Integer validaUsuario(String user, String password){
-    	Session session = null;
-    	Integer existe;
+    	Session session = this.getSession();
+    	Integer existe = 0;
     	
     	try{
-    		this.getSession().clear();
-    		session = this.getSession();
-    		
     		StringBuffer sbquery = new StringBuffer();
     		sbquery.append("select valida_login('" + user + "','" + password + "')");
         	    		
@@ -30,9 +23,6 @@ public class UsuariosHomeExt extends UsuariosHome{
             
             existe = (Integer) query.uniqueResult();
     	}catch(RuntimeException re){
-    		
-    		existe = 0;
-    		
     		throw re;	
     	}
         
@@ -40,16 +30,14 @@ public class UsuariosHomeExt extends UsuariosHome{
     }
     
     public ArrayList<Usuarios> listUsuariosActivos() {
-    	Session session = null;
-    	ArrayList<Usuarios> results;
+    	Session session = this.getSession();
+    	ArrayList<Usuarios> results = new ArrayList<Usuarios>();
 		
     	try {
-    		this.getSession().clear();
-    		session = this.getSession();
-    		
-			results = (ArrayList<Usuarios>) session.createCriteria(Usuarios.class).add(Restrictions.eq("estado", 'A')).list();			
-		} catch (RuntimeException re) {
-			
+			results = (ArrayList<Usuarios>) session.createCriteria(Usuarios.class)
+						.add(Restrictions.eq("estado", 'A'))
+						.list();			
+		} catch (RuntimeException re) {			
 			throw re;
 		}
 		
@@ -57,15 +45,12 @@ public class UsuariosHomeExt extends UsuariosHome{
 	}
     
     public Boolean crearNuevoUsuario(Usuarios user, String clave){
-    	Session session = null;
+    	Session session = this.getSession();
     	Transaction tx = null;
     	Boolean flag = false;
     	
     	try{
-    		attachDirty(user);
-    		
-    		this.getSession().clear();
-    		session = this.getSession();
+    		save(user);
     		
     		tx = session.beginTransaction();
     		

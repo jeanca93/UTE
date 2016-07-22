@@ -2,16 +2,13 @@ package entidadesDAO;
 // Generated Jun 5, 2016 11:08:49 PM by Hibernate Tools 4.0.0.Final
 
 import java.util.List;
-import javax.naming.InitialContext;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.hibernate.LockMode;
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
 import entidades.Perfilesusuario;
-import sessionfactory.MydbHibernateSessionFactory;
 
 import static org.hibernate.criterion.Example.create;
 
@@ -24,28 +21,30 @@ public class PerfilesusuarioHome extends MydbBaseHibernateDAO{
 
 	private static final Log log = LogFactory.getLog(PerfilesusuarioHome.class);
 
-	private final Session session = MydbHibernateSessionFactory.getSession();
-
 	public void persist(Perfilesusuario transientInstance) {
+		Session session = this.getSession();
+		
 		log.debug("persisting Perfilesusuario instance");
+		
 		try {
 			session.persist(transientInstance);
+			
 			log.debug("persist successful");
 		} catch (RuntimeException re) {
 			log.error("persist failed", re);
+			
 			throw re;
 		}
 	}
 
 	public void attachDirty(Perfilesusuario instance) {
+		Session session = this.getSession();
 		Transaction tx = null;
 		
 		log.debug("attaching dirty Perfilesusuario instance");
+		
 		try {
-			
 			tx = session.beginTransaction();
-			
-			session.saveOrUpdate(instance);
 			
 			session.saveOrUpdate(instance);
 			
@@ -60,27 +59,77 @@ public class PerfilesusuarioHome extends MydbBaseHibernateDAO{
 			throw re;
 		}
 	}
+	
+	public void save(Perfilesusuario instance) {
+		Session session = this.getSession();
+		Transaction tx = null;
+		
+		log.debug("attaching dirty Usuarios instance");
+		
+		try {
+			tx = session.beginTransaction();
+			
+			session.save(instance);
+			
+			log.debug("attach successful");
+			
+			tx.commit();
+		} catch (RuntimeException re) {
+			tx.rollback();
+			
+			log.error("attach failed", re);
+			
+			throw re;
+		}
+	}
+	
+	public void update(Perfilesusuario instance) {
+		Session session = this.getSession();
+		Transaction tx = null;
+		
+		log.debug("attaching dirty Usuarios instance");
+		
+		try {
+			tx = session.beginTransaction();
+			
+			session.update(instance);
+			
+			log.debug("attach successful");
+			
+			tx.commit();
+		} catch (RuntimeException re) {
+			tx.rollback();
+			
+			log.error("attach failed", re);
+			
+			throw re;
+		}
+	}
 
 	public void attachClean(Perfilesusuario instance) {
+		Session session = this.getSession();
+		
 		log.debug("attaching clean Perfilesusuario instance");
+		
 		try {
 			session.lock(instance, LockMode.NONE);
+			
 			log.debug("attach successful");
 		} catch (RuntimeException re) {
 			log.error("attach failed", re);
+			
 			throw re;
 		}
 	}
 
 	public void delete(Perfilesusuario persistentInstance) {
+		Session session = this.getSession();
 		Transaction tx = null;
 		
 		log.debug("deleting Perfilesusuario instance");
+		
 		try {
-			
 			tx = session.beginTransaction();
-			
-			session.delete(persistentInstance);
 			
 			session.delete(persistentInstance);
 			
@@ -97,21 +146,29 @@ public class PerfilesusuarioHome extends MydbBaseHibernateDAO{
 	}
 
 	public Perfilesusuario merge(Perfilesusuario detachedInstance) {
+		Session session = this.getSession();
+		
 		log.debug("merging Perfilesusuario instance");
+		
 		try {
 			Perfilesusuario result = (Perfilesusuario) session.merge(detachedInstance);
+			
 			log.debug("merge successful");
+			
 			return result;
 		} catch (RuntimeException re) {
 			log.error("merge failed", re);
+			
 			throw re;
 		}
 	}
 
 	public Perfilesusuario findById(java.lang.Integer id) {
+		Session session = this.getSession();
 		Transaction tx = null;
 		
 		log.debug("getting Perfilesusuario instance with id: " + id);
+		
 		try {
 			tx = session.beginTransaction();
 			
@@ -130,18 +187,25 @@ public class PerfilesusuarioHome extends MydbBaseHibernateDAO{
 			tx.rollback();
 			
 			log.error("get failed", re);
+			
 			throw re;
 		}
 	}
 
 	public List<Perfilesusuario> findByExample(Perfilesusuario instance) {
+		Session session = this.getSession();
+		
 		log.debug("finding Perfilesusuario instance by example");
+		
 		try {
 			List<Perfilesusuario> results = (List<Perfilesusuario>) session.createCriteria("entidades.Perfilesusuario").add(create(instance)).list();
+			
 			log.debug("find by example successful, result size: " + results.size());
+			
 			return results;
 		} catch (RuntimeException re) {
 			log.error("find by example failed", re);
+			
 			throw re;
 		}
 	}

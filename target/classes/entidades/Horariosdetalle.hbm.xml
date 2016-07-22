@@ -8,26 +8,22 @@
             <key-property name="idHorarioDet" type="int">
                 <column name="ID_HorarioDet" />
             </key-property>
-            <key-property name="idHorarioCab" type="int">
-                <column name="ID_HorarioCab" />
-            </key-property>
+            <key-many-to-one class="entidades.Horarioscabecera" lazy="false" name="horarioscabecera">
+        		<column name="ID_HorarioCab" not-null="true" />
+        	</key-many-to-one>
         </composite-id>
-        <many-to-one name="horarioscabecera" class="entidades.Horarioscabecera" update="false" insert="false" fetch="select">
-            <column name="ID_HorarioCab" not-null="true" />
-        </many-to-one>
-        <many-to-one name="dias" class="entidades.Dias" fetch="select">
-            <column name="ID_Dia" length="5" not-null="true" />
-        </many-to-one>
         <many-to-one name="profesoresmaterias" class="entidades.Profesoresmaterias" fetch="select">
             <column name="ID_Profesor" not-null="true" />
             <column name="ID_Materia" length="20" not-null="true" />
             <column name="ID_Curso" length="5" not-null="true" />
         </many-to-one>
+        <many-to-one name="dispprofesores" class="entidades.Dispprofesores" fetch="select">
+         	<formula>ID_Profesor</formula>
+            <column name="ID_Dia" length="5" not-null="true" />
+            <column name="ID_Hora" not-null="true" />
+        </many-to-one>
         <many-to-one name="aulas" class="entidades.Aulas" fetch="select">
             <column name="ID_Aula" length="10" not-null="true" />
-        </many-to-one>
-        <many-to-one name="horas" class="entidades.Horas" fetch="select">
-            <column name="ID_Hora" not-null="true" />
         </many-to-one>
         <property name="paralelo" type="string">
             <column name="Paralelo" length="5" not-null="true" />

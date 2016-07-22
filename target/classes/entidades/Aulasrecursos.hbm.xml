@@ -5,19 +5,13 @@
 <hibernate-mapping>
     <class name="entidades.Aulasrecursos" table="aulasrecursos" catalog="gaha">
         <composite-id name="id" class="entidades.AulasrecursosId">
-            <key-property name="idAula" type="string">
-                <column name="ID_Aula" length="10" />
-            </key-property>
-            <key-property name="idRecurso" type="int">
-                <column name="ID_Recurso" />
-            </key-property>
+        	<key-many-to-one class="entidades.Aulas" lazy="false" name="aulas">
+        		<column name="ID_Aula" length="10" not-null="true" />
+        	</key-many-to-one>
+		    <key-many-to-one class="entidades.Recursos" lazy="false" name="recursos">
+        		<column name="ID_Recurso" not-null="true" />
+        	</key-many-to-one>
         </composite-id>
-        <many-to-one name="recursos" class="entidades.Recursos" update="false" insert="false" fetch="select">
-            <column name="ID_Recurso" not-null="true" />
-        </many-to-one>
-        <many-to-one name="aulas" class="entidades.Aulas" update="false" insert="false" fetch="select">
-            <column name="ID_Aula" length="10" not-null="true" />
-        </many-to-one>
         <property name="stockAsignado" type="int">
             <column name="StockAsignado" not-null="true" />
         </property>

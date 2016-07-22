@@ -23,15 +23,15 @@
     		border: 1px thin #0080c0;
         }
 </style>
-<panel id="container" title="Administracion de Materias" vflex="1" validationMessages="@id('vmsgs')"
+<panel id="container" title="Administracion de Materias" vflex="1" 
         viewModel="@id('vm') @init('modelo.materias.MateriasModel')">
     <toolbar>
     	<toolbarbutton image="/img/agregar.png" label="Nuevo" onClick="@command('nuevaMateria')"/>
     	<toolbarbutton image="/img/trash.png" label="Eliminar" onClick="@command('eliminarMaterias')"/>
     </toolbar>
     <panelchildren>
-    	 <zscript>
-			constraint.MaximoMateriasConstraint customConstraint = new constraint.MaximoMateriasConstraint();
+    	<zscript>
+			constraint.MaximoMateriasConstraint cc = new constraint.MaximoMateriasConstraint();
 		</zscript>
         <grid id="GridMaterias" mold="paging" pagingPosition="bottom"
         	model="@load(vm.allMaterias) @template((vm.displayEdit and each.editingStatus) ? 'editable' : 'noneditable')"
@@ -53,8 +53,8 @@
                         value="@load(each.materia.idMateria) @save(each.materia.idMateria, before='confirm')" />
                     <textbox focus="true" constraint="no empty:Campo obligatorio" hflex="1" 
                         value="@load(each.materia.materia) @save(each.materia.materia, before='confirm')" />
-                    <intbox constraint="${customConstraint}" hflex="1" 
-                            value="@load(each.materia.horasSemana) @save(each.materia.horasSemana, before='confirm')" ></intbox>
+                    <intbox constraint="${cc}" hflex="1" 
+                            value="@load(each.materia.horasSemana) @save(each.materia.horasSemana, before='confirm')" />
                                        
                     <div>
                         <button

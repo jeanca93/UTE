@@ -11,8 +11,6 @@ import java.util.Set;
 public class Materiascursos implements java.io.Serializable {
 
 	private MateriascursosId id;
-	private Materias materias;
-	private Cursos cursos;
 	private char estado;
 	private Date fechaCreacion;
 	private int usuarioCrea;
@@ -23,22 +21,18 @@ public class Materiascursos implements java.io.Serializable {
 	public Materiascursos() {
 	}
 
-	public Materiascursos(MateriascursosId id, Materias materias, Cursos cursos, char estado, Date fechaCreacion,
+	public Materiascursos(MateriascursosId id, char estado, Date fechaCreacion,
 			int usuarioCrea) {
 		this.id = id;
-		this.materias = materias;
-		this.cursos = cursos;
 		this.estado = estado;
 		this.fechaCreacion = fechaCreacion;
 		this.usuarioCrea = usuarioCrea;
 	}
 
-	public Materiascursos(MateriascursosId id, Materias materias, Cursos cursos, char estado, Date fechaCreacion,
+	public Materiascursos(MateriascursosId id, char estado, Date fechaCreacion,
 			int usuarioCrea, Date fechaModificacion, Integer usuarioModifica,
 			Set<Profesoresmaterias> profesoresmateriases) {
 		this.id = id;
-		this.materias = materias;
-		this.cursos = cursos;
 		this.estado = estado;
 		this.fechaCreacion = fechaCreacion;
 		this.usuarioCrea = usuarioCrea;
@@ -54,23 +48,7 @@ public class Materiascursos implements java.io.Serializable {
 	public void setId(MateriascursosId id) {
 		this.id = id;
 	}
-
-	public Materias getMaterias() {
-		return this.materias;
-	}
-
-	public void setMaterias(Materias materias) {
-		this.materias = materias;
-	}
-
-	public Cursos getCursos() {
-		return this.cursos;
-	}
-
-	public void setCursos(Cursos cursos) {
-		this.cursos = cursos;
-	}
-
+	
 	public char getEstado() {
 		return this.estado;
 	}

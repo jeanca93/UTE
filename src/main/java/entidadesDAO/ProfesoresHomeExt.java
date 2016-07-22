@@ -10,26 +10,22 @@ import entidades.Profesores;
 
 
 public class ProfesoresHomeExt extends ProfesoresHome{
+	
 	public ProfesoresHomeExt(){		
 		super();
 		
 	}
 	
 	public ArrayList<Profesores> listProfesoresActivos() {
-		Session session = null;
-    	ArrayList<Profesores> results;
+		Session session = this.getSession();
+    	ArrayList<Profesores> results = new ArrayList<Profesores>();
 		
     	try {
-    		this.getSession().clear();
-    		session = this.getSession();
-    		
 			results = (ArrayList<Profesores>) session.createCriteria(Profesores.class)
 						.add(Restrictions.eq("estado", 'A'))
 						.addOrder(Order.asc("idProfesor"))
-						.list();
-						
-		} catch (RuntimeException re) {
-			
+						.list();						
+		} catch (RuntimeException re) {			
 			throw re;
 		}
 		

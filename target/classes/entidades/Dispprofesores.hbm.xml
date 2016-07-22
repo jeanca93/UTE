@@ -5,28 +5,16 @@
 <hibernate-mapping>
     <class name="entidades.Dispprofesores" table="dispprofesores" catalog="gaha">
         <composite-id name="id" class="entidades.DispprofesoresId">
-            <key-property name="idDispProfesor" type="int">
-                <column name="ID_DispProfesor" />
-            </key-property>
-            <key-property name="idProfesor" type="int">
-                <column name="ID_Profesor" />
-            </key-property>
-            <key-property name="idDia" type="string">
-                <column name="ID_Dia" length="5" />
-            </key-property>
-            <key-property name="idHora" type="int">
-                <column name="ID_Hora" />
-            </key-property>
+        	<key-many-to-one class="entidades.Profesores" lazy="false" name="profesores">
+        		<column name="ID_Profesor" not-null="true" />
+        	</key-many-to-one>
+		    <key-many-to-one class="entidades.Dias" lazy="false" name="dias">
+        		<column name="ID_Dia" length="5" not-null="true" />
+        	</key-many-to-one>
+        	<key-many-to-one class="entidades.Horas" lazy="false" name="horas">
+        		 <column name="ID_Hora" not-null="true" />
+        	</key-many-to-one>
         </composite-id>
-        <many-to-one name="dias" class="entidades.Dias" update="false" insert="false" fetch="select">
-            <column name="ID_Dia" length="5" not-null="true" />
-        </many-to-one>
-        <many-to-one name="profesores" class="entidades.Profesores" update="false" insert="false" fetch="select">
-            <column name="ID_Profesor" not-null="true" />
-        </many-to-one>
-        <many-to-one name="horas" class="entidades.Horas" update="false" insert="false" fetch="select">
-            <column name="ID_Hora" not-null="true" />
-        </many-to-one>
         <property name="disponible" type="char">
             <column name="Disponible" length="1" not-null="true" />
         </property>

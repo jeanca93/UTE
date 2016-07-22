@@ -12,40 +12,38 @@ public class Materias implements java.io.Serializable {
 
 	private String idMateria;
 	private String materia;
-	private Integer horasSemana;
+	private Date duracionClase;
+	private Date horasSemana;
 	private char estado;
 	private Date fechaCreacion;
 	private int usuarioCrea;
 	private Date fechaModificacion;
 	private Integer usuarioModifica;
-	private Set<Materiasrecursos> materiasrecursoses = new HashSet<Materiasrecursos>(0);
-	private Set<Materiascursos> materiascursoses = new HashSet<Materiascursos>(0);
 
 	public Materias() {
 	}
 
-	public Materias(String idMateria, String materia, Integer horasSemana, char estado, Date fechaCreacion, int usuarioCrea) {
+	public Materias(String idMateria, String materia, Date duracionClase, Date horasSemana, char estado, Date fechaCreacion, int usuarioCrea) {
 		this.idMateria = idMateria;
 		this.materia = materia;
+		this.duracionClase = duracionClase;
 		this.horasSemana = horasSemana;
 		this.estado = estado;
 		this.fechaCreacion = fechaCreacion;
 		this.usuarioCrea = usuarioCrea;
 	}
 
-	public Materias(String idMateria, String materia, Integer horasSemana, char estado, Date fechaCreacion,
-			int usuarioCrea, Date fechaModificacion, Integer usuarioModifica, Set<Materiasrecursos> materiasrecursoses,
-			Set<Materiascursos> materiascursoses) {
+	public Materias(String idMateria, String materia, Date duracionClase, Date horasSemana, char estado, Date fechaCreacion,
+			int usuarioCrea, Date fechaModificacion, Integer usuarioModifica) {
 		this.idMateria = idMateria;
 		this.materia = materia;
+		this.duracionClase = duracionClase;
 		this.horasSemana = horasSemana;
 		this.estado = estado;
 		this.fechaCreacion = fechaCreacion;
 		this.usuarioCrea = usuarioCrea;
 		this.fechaModificacion = fechaModificacion;
 		this.usuarioModifica = usuarioModifica;
-		this.materiasrecursoses = materiasrecursoses;
-		this.materiascursoses = materiascursoses;
 	}
 
 	public String getIdMateria() {
@@ -64,11 +62,19 @@ public class Materias implements java.io.Serializable {
 		this.materia = materia;
 	}
 
-	public Integer getHorasSemana() {
-		return this.horasSemana;
+	public Date getDuracionClase() {
+		return duracionClase;
 	}
 
-	public void setHorasSemana(Integer horasSemana) {
+	public void setDuracionClase(Date duracionClase) {
+		this.duracionClase = duracionClase;
+	}
+
+	public Date getHorasSemana() {
+		return horasSemana;
+	}
+
+	public void setHorasSemana(Date horasSemana) {
 		this.horasSemana = horasSemana;
 	}
 
@@ -111,21 +117,5 @@ public class Materias implements java.io.Serializable {
 	public void setUsuarioModifica(Integer usuarioModifica) {
 		this.usuarioModifica = usuarioModifica;
 	}
-
-	public Set<Materiasrecursos> getMateriasrecursoses() {
-		return this.materiasrecursoses;
-	}
-
-	public void setMateriasrecursoses(Set<Materiasrecursos> materiasrecursoses) {
-		this.materiasrecursoses = materiasrecursoses;
-	}
-
-	public Set<Materiascursos> getMateriascursoses() {
-		return this.materiascursoses;
-	}
-
-	public void setMateriascursoses(Set<Materiascursos> materiascursoses) {
-		this.materiascursoses = materiascursoses;
-	}
-
+	
 }

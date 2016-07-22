@@ -11,12 +11,15 @@ import org.zkoss.zk.ui.Execution;
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.Session;
 import org.zkoss.zk.ui.Sessions;
+import org.zkoss.zk.ui.event.Event;
+import org.zkoss.zk.ui.event.EventListener;
 import org.zkoss.zk.ui.util.Clients;
 import org.zkoss.zk.ui.util.GenericForwardComposer;
 import org.zkoss.zul.Combobox;
 import org.zkoss.zul.Grid;
 import org.zkoss.zul.ListModel;
 import org.zkoss.zul.ListModelList;
+import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Window;
 
@@ -28,13 +31,13 @@ import modelo.usuarios.UsuarioDatos;
 import modelo.usuarios.UsuarioStatus;
 
 public class UsuariosComposer extends GenericForwardComposer<Component>{
-	private static final long serialVersionUID = 3L;
 	private ListModelList<Perfilesusuario> allPerfiles = new ListModelList<Perfilesusuario>();
+	private static final long serialVersionUID = 3L;
 	private Window modalDialog;
 	private Combobox cmbPerfiles;
 	private Textbox txtUsuario, txtClave, txtNombres, txtApellidos, txtCorreo;
-	private ListModelList<UsuarioStatus> allUsuariosStatus;
-	private Grid GridUsuarios;
+	//private ListModelList<UsuarioStatus> allUsuariosStatus;
+	//private Grid GridUsuarios;
 	
 	public UsuariosComposer() {
 		// TODO Auto-generated constructor stub
@@ -48,10 +51,9 @@ public class UsuariosComposer extends GenericForwardComposer<Component>{
 	public void doAfterCompose(Component comp) throws Exception {
 		super.doAfterCompose(comp);
 		
-		final Execution execution = Executions.getCurrent();
-		allUsuariosStatus = (ListModelList<UsuarioStatus>)execution.getArg().get("modelPrincipal");
-		GridUsuarios = (Grid)execution.getArg().get("gridPrincipal");
-		
+		//final Execution execution = Executions.getCurrent();
+		//allUsuariosStatus = (ListModelList<UsuarioStatus>)execution.getArg().get("modelPrincipal");
+		//GridUsuarios = (Grid)execution.getArg().get("gridPrincipal");
 	}
 	
 	public void onClick$tbbGrabar() throws InterruptedException,
@@ -71,7 +73,16 @@ public class UsuariosComposer extends GenericForwardComposer<Component>{
 				Session session = Sessions.getCurrent();
 				
 				new UsuariosHomeExt().crearNuevoUsuario(new Usuarios(new PerfilesusuarioHome().findById(perfil), usuario, null, nombres, apellidos, correo, 'A', new Date(), Integer.parseInt(session.getAttribute("idUsuario").toString())), clave);
+							
+				Messagebox.show("Creado correctamente", "Exito", Messagebox.OK,  Messagebox.EXCLAMATION, new EventListener<Event>() {
+					
+					public void onEvent(Event event) throws Exception {
+						// TODO Auto-generated method stub
+						Executions.sendRedirect("");
+					}
+				});
 				
+				/*
 				modalDialog.detach();
 				
 				allUsuariosStatus = new ListModelList<UsuarioStatus>();
@@ -79,19 +90,23 @@ public class UsuariosComposer extends GenericForwardComposer<Component>{
 				GridUsuarios.setModel(allUsuariosStatus);
 				
 				Clients.showNotification("Creado correctamente");
+				*/
 			}catch(RuntimeException re){
 				throw re;
 			}
 		}
 	}
 	
+	
 	public ListModel<Perfilesusuario> getAllPerfiles() {
 		return allPerfiles;
 	}
 	
+	/*
 	private void genListModel(List<Usuarios> lsUsuarios){
     	for(Usuarios usr: lsUsuarios){
 			allUsuariosStatus.add(new UsuarioStatus(usr, false, false));
 		}
     }
+    */
 }

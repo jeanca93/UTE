@@ -7,51 +7,31 @@ package entidades;
 public class HorariosdetalleId implements java.io.Serializable {
 
 	private int idHorarioDet;
-	private int idHorarioCab;
+	private Horarioscabecera horarioscabecera;
 
 	public HorariosdetalleId() {
 	}
 
-	public HorariosdetalleId(int idHorarioDet, int idHorarioCab) {
+	public HorariosdetalleId(int idHorarioDet, Horarioscabecera horarioscabecera) {
+		super();
 		this.idHorarioDet = idHorarioDet;
-		this.idHorarioCab = idHorarioCab;
+		this.horarioscabecera = horarioscabecera;
 	}
 
 	public int getIdHorarioDet() {
-		return this.idHorarioDet;
+		return idHorarioDet;
 	}
 
 	public void setIdHorarioDet(int idHorarioDet) {
 		this.idHorarioDet = idHorarioDet;
 	}
 
-	public int getIdHorarioCab() {
-		return this.idHorarioCab;
+	public Horarioscabecera getHorarioscabecera() {
+		return horarioscabecera;
 	}
 
-	public void setIdHorarioCab(int idHorarioCab) {
-		this.idHorarioCab = idHorarioCab;
-	}
-
-	public boolean equals(Object other) {
-		if ((this == other))
-			return true;
-		if ((other == null))
-			return false;
-		if (!(other instanceof HorariosdetalleId))
-			return false;
-		HorariosdetalleId castOther = (HorariosdetalleId) other;
-
-		return (this.getIdHorarioDet() == castOther.getIdHorarioDet())
-				&& (this.getIdHorarioCab() == castOther.getIdHorarioCab());
-	}
-
-	public int hashCode() {
-		int result = 17;
-
-		result = 37 * result + this.getIdHorarioDet();
-		result = 37 * result + this.getIdHorarioCab();
-		return result;
+	public void setHorarioscabecera(Horarioscabecera horarioscabecera) {
+		this.horarioscabecera = horarioscabecera;
 	}
 
 }

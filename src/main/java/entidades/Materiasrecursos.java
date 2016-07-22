@@ -9,8 +9,6 @@ import java.util.Date;
 public class Materiasrecursos implements java.io.Serializable {
 
 	private MateriasrecursosId id;
-	private Recursos recursos;
-	private Materias materias;
 	private int stockNecesario;
 	private char estado;
 	private Date fechaCreacion;
@@ -21,22 +19,18 @@ public class Materiasrecursos implements java.io.Serializable {
 	public Materiasrecursos() {
 	}
 
-	public Materiasrecursos(MateriasrecursosId id, Recursos recursos, Materias materias, int stockNecesario,
+	public Materiasrecursos(MateriasrecursosId id, int stockNecesario,
 			char estado, Date fechaCreacion, int usuarioCrea) {
 		this.id = id;
-		this.recursos = recursos;
-		this.materias = materias;
 		this.stockNecesario = stockNecesario;
 		this.estado = estado;
 		this.fechaCreacion = fechaCreacion;
 		this.usuarioCrea = usuarioCrea;
 	}
 
-	public Materiasrecursos(MateriasrecursosId id, Recursos recursos, Materias materias, int stockNecesario,
+	public Materiasrecursos(MateriasrecursosId id, int stockNecesario,
 			char estado, Date fechaCreacion, int usuarioCrea, Date fechaModificacion, Integer usuarioModifica) {
 		this.id = id;
-		this.recursos = recursos;
-		this.materias = materias;
 		this.stockNecesario = stockNecesario;
 		this.estado = estado;
 		this.fechaCreacion = fechaCreacion;
@@ -51,22 +45,6 @@ public class Materiasrecursos implements java.io.Serializable {
 
 	public void setId(MateriasrecursosId id) {
 		this.id = id;
-	}
-
-	public Recursos getRecursos() {
-		return this.recursos;
-	}
-
-	public void setRecursos(Recursos recursos) {
-		this.recursos = recursos;
-	}
-
-	public Materias getMaterias() {
-		return this.materias;
-	}
-
-	public void setMaterias(Materias materias) {
-		this.materias = materias;
 	}
 
 	public int getStockNecesario() {

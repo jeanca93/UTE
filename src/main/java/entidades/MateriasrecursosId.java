@@ -6,53 +6,26 @@ package entidades;
  */
 public class MateriasrecursosId implements java.io.Serializable {
 
-	private String idMateria;
-	private int idRecurso;
+	private Recursos recursos;
+	private Materias materias;
 
 	public MateriasrecursosId() {
 	}
 
-	public MateriasrecursosId(String idMateria, int idRecurso) {
-		this.idMateria = idMateria;
-		this.idRecurso = idRecurso;
+	public Recursos getRecursos() {
+		return recursos;
 	}
 
-	public String getIdMateria() {
-		return this.idMateria;
+	public void setRecursos(Recursos recursos) {
+		this.recursos = recursos;
 	}
 
-	public void setIdMateria(String idMateria) {
-		this.idMateria = idMateria;
+	public Materias getMaterias() {
+		return materias;
 	}
 
-	public int getIdRecurso() {
-		return this.idRecurso;
+	public void setMaterias(Materias materias) {
+		this.materias = materias;
 	}
-
-	public void setIdRecurso(int idRecurso) {
-		this.idRecurso = idRecurso;
-	}
-
-	public boolean equals(Object other) {
-		if ((this == other))
-			return true;
-		if ((other == null))
-			return false;
-		if (!(other instanceof MateriasrecursosId))
-			return false;
-		MateriasrecursosId castOther = (MateriasrecursosId) other;
-
-		return ((this.getIdMateria() == castOther.getIdMateria()) || (this.getIdMateria() != null
-				&& castOther.getIdMateria() != null && this.getIdMateria().equals(castOther.getIdMateria())))
-				&& (this.getIdRecurso() == castOther.getIdRecurso());
-	}
-
-	public int hashCode() {
-		int result = 17;
-
-		result = 37 * result + (getIdMateria() == null ? 0 : this.getIdMateria().hashCode());
-		result = 37 * result + this.getIdRecurso();
-		return result;
-	}
-
+	
 }

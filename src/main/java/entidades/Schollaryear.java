@@ -19,7 +19,6 @@ public class Schollaryear implements java.io.Serializable {
 	private int usuarioCrea;
 	private Date fechaModificacion;
 	private Integer usuarioModifica;
-	private Set<Horarioscabecera> horarioscabeceras = new HashSet<Horarioscabecera>(0);
 
 	public Schollaryear() {
 	}
@@ -35,7 +34,7 @@ public class Schollaryear implements java.io.Serializable {
 	}
 
 	public Schollaryear(String schollarYear, Date fechaInicio, Date fechaFin, char estado, Date fechaCreacion,
-			int usuarioCrea, Date fechaModificacion, Integer usuarioModifica, Set<Horarioscabecera> horarioscabeceras) {
+			int usuarioCrea, Date fechaModificacion, Integer usuarioModifica) {
 		this.schollarYear = schollarYear;
 		this.fechaInicio = fechaInicio;
 		this.fechaFin = fechaFin;
@@ -44,7 +43,6 @@ public class Schollaryear implements java.io.Serializable {
 		this.usuarioCrea = usuarioCrea;
 		this.fechaModificacion = fechaModificacion;
 		this.usuarioModifica = usuarioModifica;
-		this.horarioscabeceras = horarioscabeceras;
 	}
 
 	public Integer getIdSchoolarYear() {
@@ -117,14 +115,6 @@ public class Schollaryear implements java.io.Serializable {
 
 	public void setUsuarioModifica(Integer usuarioModifica) {
 		this.usuarioModifica = usuarioModifica;
-	}
-
-	public Set<Horarioscabecera> getHorarioscabeceras() {
-		return this.horarioscabeceras;
-	}
-
-	public void setHorarioscabeceras(Set<Horarioscabecera> horarioscabeceras) {
-		this.horarioscabeceras = horarioscabeceras;
 	}
 
 }

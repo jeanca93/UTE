@@ -43,5 +43,6 @@
         <mapping resource="entidades/Horariosdetalletmp.hbm.xml" />
         <mapping resource="entidades/Opciones.hbm.xml" />
         <mapping resource="entidades/Recursos.hbm.xml" />
+        <mapping resource="entidades/Tipoaula.hbm.xml" />
     </session-factory>
 </hibernate-configuration>

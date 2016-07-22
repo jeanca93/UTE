@@ -19,8 +19,6 @@ public class Recursos implements java.io.Serializable {
 	private int usuarioCrea;
 	private Date fechaModificacion;
 	private String usuarioModifica;
-	private Set<Materiasrecursos> materiasrecursoses = new HashSet<Materiasrecursos>(0);
-	private Set<Aulasrecursos> aulasrecursoses = new HashSet<Aulasrecursos>(0);
 
 	public Recursos() {
 	}
@@ -34,8 +32,7 @@ public class Recursos implements java.io.Serializable {
 	}
 
 	public Recursos(String recurso, int stockDisponible, String comentarios, char estado, Date fechaCreacion,
-			int usuarioCrea, Date fechaModificacion, String usuarioModifica, Set<Materiasrecursos> materiasrecursoses,
-			Set<Aulasrecursos> aulasrecursoses) {
+			int usuarioCrea, Date fechaModificacion, String usuarioModifica) {
 		this.recurso = recurso;
 		this.stockDisponible = stockDisponible;
 		this.comentarios = comentarios;
@@ -44,8 +41,6 @@ public class Recursos implements java.io.Serializable {
 		this.usuarioCrea = usuarioCrea;
 		this.fechaModificacion = fechaModificacion;
 		this.usuarioModifica = usuarioModifica;
-		this.materiasrecursoses = materiasrecursoses;
-		this.aulasrecursoses = aulasrecursoses;
 	}
 
 	public Integer getIdRecurso() {
@@ -118,22 +113,6 @@ public class Recursos implements java.io.Serializable {
 
 	public void setUsuarioModifica(String usuarioModifica) {
 		this.usuarioModifica = usuarioModifica;
-	}
-
-	public Set<Materiasrecursos> getMateriasrecursoses() {
-		return this.materiasrecursoses;
-	}
-
-	public void setMateriasrecursoses(Set<Materiasrecursos> materiasrecursoses) {
-		this.materiasrecursoses = materiasrecursoses;
-	}
-
-	public Set<Aulasrecursos> getAulasrecursoses() {
-		return this.aulasrecursoses;
-	}
-
-	public void setAulasrecursoses(Set<Aulasrecursos> aulasrecursoses) {
-		this.aulasrecursoses = aulasrecursoses;
 	}
 
 }

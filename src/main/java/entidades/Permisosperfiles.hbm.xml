@@ -5,19 +5,13 @@
 <hibernate-mapping>
     <class name="entidades.Permisosperfiles" table="permisosperfiles" catalog="gaha">
         <composite-id name="id" class="entidades.PermisosperfilesId">
-            <key-property name="idPerfil" type="int">
-                <column name="ID_Perfil" />
-            </key-property>
-            <key-property name="idPermiso" type="int">
-                <column name="ID_Permiso" />
-            </key-property>
+        	<key-many-to-one class="entidades.Perfilesusuario" lazy="false" name="perfilesusuario">
+        		<column name="ID_Perfil" not-null="true" />
+        	</key-many-to-one>
+            <key-many-to-one class="entidades.Permisos" lazy="false" name="permisos">
+        		<column name="ID_Permiso" not-null="true" />
+        	</key-many-to-one>
         </composite-id>
-        <many-to-one name="perfilesusuario" class="entidades.Perfilesusuario" update="false" insert="false" fetch="select">
-            <column name="ID_Perfil" not-null="true" />
-        </many-to-one>
-        <many-to-one name="permisos" class="entidades.Permisos" update="false" insert="false" fetch="select">
-            <column name="ID_Permiso" not-null="true" />
-        </many-to-one>
         <property name="estado" type="char">
             <column name="Estado" length="1" not-null="true" />
         </property>

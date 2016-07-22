@@ -9,9 +9,6 @@ import java.util.Date;
 public class Dispprofesores implements java.io.Serializable {
 
 	private DispprofesoresId id;
-	private Dias dias;
-	private Profesores profesores;
-	private Horas horas;
 	private char disponible;
 	private char estado;
 	private Date fechaCreacion;
@@ -21,25 +18,19 @@ public class Dispprofesores implements java.io.Serializable {
 
 	public Dispprofesores() {
 	}
-
-	public Dispprofesores(DispprofesoresId id, Dias dias, Profesores profesores, Horas horas, char disponible,
+	
+	public Dispprofesores(DispprofesoresId id, char disponible,
 			char estado, Date fechaCreacion, int usuarioCrea) {
 		this.id = id;
-		this.dias = dias;
-		this.profesores = profesores;
-		this.horas = horas;
 		this.disponible = disponible;
 		this.estado = estado;
 		this.fechaCreacion = fechaCreacion;
 		this.usuarioCrea = usuarioCrea;
 	}
 
-	public Dispprofesores(DispprofesoresId id, Dias dias, Profesores profesores, Horas horas, char disponible,
+	public Dispprofesores(DispprofesoresId id, char disponible,
 			char estado, Date fechaCreacion, int usuarioCrea, Date fechaModificacion, Integer usuarioModifica) {
 		this.id = id;
-		this.dias = dias;
-		this.profesores = profesores;
-		this.horas = horas;
 		this.disponible = disponible;
 		this.estado = estado;
 		this.fechaCreacion = fechaCreacion;
@@ -54,30 +45,6 @@ public class Dispprofesores implements java.io.Serializable {
 
 	public void setId(DispprofesoresId id) {
 		this.id = id;
-	}
-
-	public Dias getDias() {
-		return this.dias;
-	}
-
-	public void setDias(Dias dias) {
-		this.dias = dias;
-	}
-
-	public Profesores getProfesores() {
-		return this.profesores;
-	}
-
-	public void setProfesores(Profesores profesores) {
-		this.profesores = profesores;
-	}
-
-	public Horas getHoras() {
-		return this.horas;
-	}
-
-	public void setHoras(Horas horas) {
-		this.horas = horas;
 	}
 
 	public char getDisponible() {
