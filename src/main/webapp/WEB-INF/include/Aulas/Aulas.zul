@@ -61,9 +61,9 @@
                         value="@load(each.aula.comentarios) @save(each.aula.comentarios, before='confirm')" />
                     <combobox inplace="true" mold="rounded" readonly="true"
                         model="@load(vm.allEstados)" constraint="no empty:Campo obligatorio"
-                        selectedItem="@bind(each.aula.estado)" hflex="1" errorMessage="@load(vmsgs['estado'])">
+                        selectedItem="@bind(each.aula.estado)" hflex="1">
                         <template name="model">
-                        	<comboitem value="@load(each.estado)" label="@load(each.estado)"/>
+                        	<comboitem value="@load(each)" label="@load(each eq 'A'? 'Activo' : 'Inactivo')"/>
                     	</template>
                     </combobox>
                     <div>
@@ -87,7 +87,7 @@
                         model="@load(vm.allEstados)" 
                         selectedItem="@bind(each.aula.estado)" hflex="1">
                        <template name="model">
-                        	<comboitem value="@load(each.estado)" label="@load(each.estado)"/>
+                        	<comboitem value="@load(each)" label="@load(each eq 'A'? 'Activo' : 'Inactivo')"/>
                     	</template>
                     </combobox>
                     <button

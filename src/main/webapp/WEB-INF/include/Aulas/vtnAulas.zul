@@ -32,7 +32,7 @@
 						<row>
 							<label value="Id Aula:" />
 							<textbox sclass="ftextbox" id="txtIdAula"
-								width="120px" constraint="${customConstraint}"/>
+								width="120px" maxlength="10" constraint="/^.*(?=.{2,10}).*$/:El Id del Aula debe tener minimo 2 caracteres"/>
 							<label value="*" style="color:red" />
 							
 							<label value="Aula" />
