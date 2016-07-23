@@ -64,20 +64,20 @@ public class PerfilesusuarioHome extends MydbBaseHibernateDAO{
 		Session session = this.getSession();
 		Transaction tx = null;
 		
-		log.debug("attaching dirty Usuarios instance");
+		log.debug("saving Perfilesusuario instance");
 		
 		try {
 			tx = session.beginTransaction();
 			
 			session.save(instance);
 			
-			log.debug("attach successful");
+			log.debug("save successful");
 			
 			tx.commit();
 		} catch (RuntimeException re) {
 			tx.rollback();
 			
-			log.error("attach failed", re);
+			log.error("save failed", re);
 			
 			throw re;
 		}
@@ -87,20 +87,20 @@ public class PerfilesusuarioHome extends MydbBaseHibernateDAO{
 		Session session = this.getSession();
 		Transaction tx = null;
 		
-		log.debug("attaching dirty Usuarios instance");
+		log.debug("updating Perfilesusuario instance");
 		
 		try {
 			tx = session.beginTransaction();
 			
 			session.update(instance);
 			
-			log.debug("attach successful");
+			log.debug("update successful");
 			
 			tx.commit();
 		} catch (RuntimeException re) {
 			tx.rollback();
 			
-			log.error("attach failed", re);
+			log.error("update failed", re);
 			
 			throw re;
 		}

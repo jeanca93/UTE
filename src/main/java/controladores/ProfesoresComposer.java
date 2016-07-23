@@ -28,7 +28,6 @@ public class ProfesoresComposer extends GenericForwardComposer<Component>{
 	
 	public ProfesoresComposer() {
 		// TODO Auto-generated constructor stub
-		
 		super();
 	}
 	

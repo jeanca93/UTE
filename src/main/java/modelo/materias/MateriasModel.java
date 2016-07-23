@@ -87,7 +87,7 @@ public class MateriasModel {
 	      
 	      if(ck.isChecked()){
 	    	  MateriaStatus materStatus = (MateriaStatus)row.getValue();
-	    	  materiaDelete.add(materStatus.getMateria());
+	    	  materiaDelete.add(materStatus.getMaterias());
 	      }
 	   }
 	    
@@ -140,7 +140,7 @@ public class MateriasModel {
 	
 	@Command
     public void changeEditableStatus(@BindingParam("MateriaStatus") MateriaStatus mate) {
-		infoMateriaInicial(mate.getMateria());
+		infoMateriaInicial(mate.getMaterias());
 		
 		mate.setEditingStatus(!mate.isEditingStatus());
         refreshRowTemplate(mate);
@@ -155,8 +155,8 @@ public class MateriasModel {
         boolean flagCambio = false;
         
         for(Materias materia:listMateriaTMP){
-        	if(materia.getIdMateria() == mate.getMateria().getIdMateria()){
-        		if(materia.getMateria() != mate.getMateria().getMateria() || materia.getHorasSemana() != mate.getMateria().getHorasSemana() )
+        	if(materia.getIdMateria() == mate.getMaterias().getIdMateria()){
+        		if(materia.getMateria() != mate.getMaterias().getMateria() || materia.getHorasSemana() != mate.getMaterias().getHorasSemana() )
         			flagCambio = true;
         		
         		mateTMP = materia;
@@ -168,11 +168,11 @@ public class MateriasModel {
         if (flagCambio){
         	try{
         		Session session = Sessions.getCurrent();
-				mate.getMateria().setUsuarioModifica(Integer.parseInt(session.getAttribute("idUsuario").toString()));
-				mate.getMateria().setFechaModificacion(new Date());
-        		new MateriasHome().update(mate.getMateria());
+				mate.getMaterias().setUsuarioModifica(Integer.parseInt(session.getAttribute("idUsuario").toString()));
+				mate.getMaterias().setFechaModificacion(new Date());
+        		new MateriasHome().update(mate.getMaterias());
         		
-        		refresh();
+        		//refresh();
         		
         		Clients.showNotification("Materia Modificada correctamente");
         	}catch(RuntimeException re){

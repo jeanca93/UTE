@@ -23,8 +23,8 @@
         <property name="usuarioCrea" type="int">
             <column name="UsuarioCrea" not-null="true" />
         </property>
-        <property name="FechaModificacion" type="timestamp">
-            <column name="UsuarioModificacion" length="19" />
+        <property name="fechaModificacion" type="timestamp">
+            <column name="FechaModificacion" length="19" />
         </property>
         <property name="usuarioModifica" type="java.lang.Integer">
             <column name="UsuarioModifica" />

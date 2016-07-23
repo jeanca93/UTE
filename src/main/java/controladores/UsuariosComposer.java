@@ -73,7 +73,7 @@ public class UsuariosComposer extends GenericForwardComposer<Component>{
 				Session session = Sessions.getCurrent();
 				
 				new UsuariosHomeExt().crearNuevoUsuario(new Usuarios(new PerfilesusuarioHome().findById(perfil), usuario, null, nombres, apellidos, correo, 'A', new Date(), Integer.parseInt(session.getAttribute("idUsuario").toString())), clave);
-							
+						
 				Messagebox.show("Creado correctamente", "Exito", Messagebox.OK,  Messagebox.EXCLAMATION, new EventListener<Event>() {
 					
 					public void onEvent(Event event) throws Exception {

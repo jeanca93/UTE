@@ -25,9 +25,10 @@
 </style>
 <panel id="container" title="Administracion de Profesores" vflex="1"
         viewModel="@id('vm') @init('modelo.profesores.ProfesoresModel')">
-    <toolbar>
+    <toolbar id="tbGrid">
     	<toolbarbutton image="/img/agregar.png" label="Nuevo" onClick="@command('nuevoProfesor')"/>
     	<toolbarbutton image="/img/trash.png" label="Eliminar" onClick="@command('eliminarProfesores')"/>
+    	<toolbarbutton image="" label="Materias de Profesor" onClick="@command('materiasProfesor')"/>
     </toolbar>
     <panelchildren>
         <grid id="GridProfesores" mold="paging" pagingPosition="bottom"
