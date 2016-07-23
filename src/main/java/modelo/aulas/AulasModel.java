@@ -176,12 +176,8 @@ public class AulasModel {
         		aul.getAula().setUsuarioModifica(Integer.parseInt(session.getAttribute("idUsuario").toString()));
         		aul.getAula().setFechaModificacion(new Date());
         		new AulasHome().update(aul.getAula());
-        		
-<<<<<<< HEAD
+
         		//refresh();
-=======
-        	//	refresh();
->>>>>>> 8d6cb18c17474c6fe6950d6810df62ba25c9ae16
         		
         		Clients.showNotification("Materia Modificada correctamente");
         	}catch(RuntimeException re){
