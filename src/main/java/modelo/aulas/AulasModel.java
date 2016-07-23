@@ -31,17 +31,14 @@ import org.zkoss.zul.Row;
 import org.zkoss.zul.Window;
 
 import entidades.Aulas;
-import entidades.Perfilesusuario;
-import entidadesDAO.AulasHomeExt;
+import entidadesDAO.AulasHome;
 import modelo.estados.Estados;
+import modelo.estados.EstadosDatos;
 
 public class AulasModel {
-	
-
-	
 	private ListModelList<AulasStatus> allAulasStatus;
 	private List<Aulas> listAulaTMP;
-	private List<Estados> allEstados;
+	private List<String> allEstados;
 	private boolean displayEdit = true;
 	
 	@Wire
@@ -50,16 +47,18 @@ public class AulasModel {
 	public AulasModel(){
 		super();
 		
-		allAulasStatus = new ListModelList<AulasStatus>();		
+		allEstados = new ArrayList<String>();
+		allEstados = new EstadosDatos().getAllEstados();
+
+		allAulasStatus = new ListModelList<AulasStatus>();
+		allAulasStatus = genListModel(new AulasDatos().getAllAula());
+		
 		listAulaTMP = new ArrayList<Aulas>();
-		allEstados = new ArrayList<Estados>();
 	}
 	
 	@AfterCompose
 	public void initSetup(@ContextParam(ContextType.VIEW) Component view){
 		Selectors.wireComponents(view, this, false);
-		
-		refresh();		
 	}
 	
 	@NotifyChange({"allAulas", "displayEdit"})
@@ -103,7 +102,7 @@ public class AulasModel {
 					if (event.getName().equals("onYes")) {								
 						try{
 							for(Aulas aula:aulaDelete){
-								new AulasHomeExt().delete(aula);
+								new AulasHome().delete(aula);
 							}
 							
 							BindUtils.postNotifyChange(null, null,this, "*");
@@ -121,12 +120,11 @@ public class AulasModel {
 	}
 	
 	public void refresh() {
-		AulasDatos aulaDatos = new  AulasDatos();
-				
-		allEstados = new ArrayList<Estados>();
+		allEstados = new ArrayList<String>();
+		allEstados = new EstadosDatos().getAllEstados();
 
 		allAulasStatus = new ListModelList<AulasStatus>();
-		allAulasStatus = genListModel(aulaDatos.getAllAula());
+		allAulasStatus = genListModel(new AulasDatos().getAllAula());
 		GridAulas.setModel(allAulasStatus);
 	}
 	
@@ -177,9 +175,13 @@ public class AulasModel {
         		Session session = Sessions.getCurrent();
         		aul.getAula().setUsuarioModifica(Integer.parseInt(session.getAttribute("idUsuario").toString()));
         		aul.getAula().setFechaModificacion(new Date());
-        		new AulasHomeExt().attachDirty(aul.getAula());
+        		new AulasHome().update(aul.getAula());
         		
+<<<<<<< HEAD
         		//refresh();
+=======
+        	//	refresh();
+>>>>>>> 8d6cb18c17474c6fe6950d6810df62ba25c9ae16
         		
         		Clients.showNotification("Materia Modificada correctamente");
         	}catch(RuntimeException re){
@@ -232,11 +234,15 @@ public class AulasModel {
 		return allAulasStatus;
 	}
 	
-
-	public List<Estados> getAllEstados() {
+	public List<String> getAllEstados() {
 		return allEstados;
 	}
 	
+	/*
+	public List<Estados> getAllEstados() {
+		return allEstados;
+	}
+	*/
 	public boolean isDisplayEdit() {
         return displayEdit;
     }
