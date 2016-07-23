@@ -2,7 +2,9 @@ package modelo.usuarios;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.zkoss.bind.BindUtils;
 import org.zkoss.bind.annotation.AfterCompose;
@@ -81,6 +83,7 @@ public class UsuariosModel {
 		Window window = (Window)Executions.createComponents(
                 "/WEB-INF/include/Usuarios/AdministracionUsuarios/vtnUsuarios.zul", null, null);
         window.doModal();
+        
     }
 	
 	@Command
@@ -127,10 +130,10 @@ public class UsuariosModel {
 	
 	public void refresh() {
 		UsuarioDatos userDatos = new  UsuarioDatos();
-		/*
+		
 		allPerfiles = new ArrayList<Perfilesusuario>();
 		allPerfiles = userDatos.getAllPerfiles();
-		*/		
+		
 		allUsuariosStatus = new ListModelList<UsuarioStatus>();
 		allUsuariosStatus = genListModel(userDatos.getAllUsuarios());
 		GridUsuarios.setModel(allUsuariosStatus);
@@ -184,7 +187,7 @@ public class UsuariosModel {
         		usr.getUsuario().setFechaModificacion(new Date());
         		new UsuariosHome().update(usr.getUsuario());
         		
-        		refresh();
+        		//refresh();
         		
         		Clients.showNotification("Modificado correctamente");
         	}catch(RuntimeException re){

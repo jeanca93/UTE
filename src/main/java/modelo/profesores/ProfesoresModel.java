@@ -2,7 +2,9 @@ package modelo.profesores;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.zkoss.bind.BindUtils;
 import org.zkoss.bind.annotation.AfterCompose;
@@ -73,6 +75,33 @@ public class ProfesoresModel {
 		Window window = (Window)Executions.createComponents(
                 "/WEB-INF/include/Profesores/AdministracionProfesores/vtnProfesores.zul", null, null);
         window.doModal();
+    }
+	
+	@Command
+    public void materiasProfesor() {
+		List<Row> components = GridProfesores.getRows().getChildren();
+	    List<Profesores> profesorMateria = new ArrayList<Profesores>();
+	    
+	    for(Row row:components){
+	      Checkbox ck = (Checkbox) row.getChildren().get(0);
+	      
+	      if(ck.isChecked()){
+	    	  ProfesorStatus profesorStatus = (ProfesorStatus)row.getValue();
+	    	  profesorMateria.add(profesorStatus.getProfesor());
+	      }
+	   }
+	   
+	   if(profesorMateria.size() > 1){
+		   Clients.alert("Solo puede seleccionar un profesor a la vez", "Error", null);
+	   }else if(profesorMateria.size() == 1){
+		   Map<String, Object> parameters = new HashMap<String, Object>();
+		   parameters.put("profesor",profesorMateria.get(0));
+						
+		   Window window = (Window)Executions.createComponents(
+				   "/WEB-INF/include/Profesores/AdministracionProfesores/vtnProfesoresMaterias.zul", null, parameters);
+		   window.doModal();
+	   }else
+	       Clients.alert("Debe seleccionar un profesor para continuar", "Error", null);
     }
 	
 	@Command

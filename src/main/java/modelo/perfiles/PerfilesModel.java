@@ -105,7 +105,7 @@ public class PerfilesModel {
 							
 							BindUtils.postNotifyChange(null, null,this, "*");
 							
-							refresh();
+							//refresh();
 							
 							Clients.showNotification("Eliminado correctamente");
 						}catch(RuntimeException re){

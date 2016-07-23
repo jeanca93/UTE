@@ -4,7 +4,7 @@ import entidades.Materias;
 
 public class MateriaStatus {
 	
-	private Materias materia;
+	private Materias materias;
 	private boolean seleccionado;
 	private boolean editingStatus;
 	
@@ -12,19 +12,19 @@ public class MateriaStatus {
 		
 	}
 
-	public MateriaStatus(Materias materia, boolean seleccionado, boolean editingStatus) {
+	public MateriaStatus(Materias materias, boolean seleccionado, boolean editingStatus) {
 		super();
-		this.materia = materia;
+		this.materias = materias;
 		this.seleccionado = seleccionado;
 		this.editingStatus = editingStatus;
 	}
 
-	public Materias getMateria() {
-		return materia;
+	public Materias getMaterias() {
+		return materias;
 	}
 
-	public void setMateria(Materias materia) {
-		this.materia = materia;
+	public void setMaterias(Materias materias) {
+		this.materias = materias;
 	}
 
 	public boolean isSeleccionado() {

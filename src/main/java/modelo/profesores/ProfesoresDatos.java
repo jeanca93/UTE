@@ -11,7 +11,7 @@ import entidadesDAO.ProfesoresHomeExt;
 import entidadesDAO.UsuariosHomeExt;
 
 public class ProfesoresDatos {
-private List<Profesores> allProfesores = new ArrayList<Profesores>();
+	private List<Profesores> allProfesores = new ArrayList<Profesores>();
 	
 	public ProfesoresDatos(){
 		ProfesoresHomeExt profExt = new ProfesoresHomeExt();

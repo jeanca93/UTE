@@ -2,16 +2,14 @@ package entidadesDAO;
 // Generated Jun 5, 2016 11:08:49 PM by Hibernate Tools 4.0.0.Final
 
 import java.util.List;
-import javax.naming.InitialContext;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.hibernate.LockMode;
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 
 import entidades.Profesoresmaterias;
 import entidades.ProfesoresmateriasId;
-import sessionfactory.MydbHibernateSessionFactory;
 
 import static org.hibernate.criterion.Example.create;
 
@@ -55,6 +53,52 @@ public class ProfesoresmateriasHome extends MydbBaseHibernateDAO {
 			throw re;
 		}
 	}
+	
+	public void save(Profesoresmaterias instance) {
+		Session session = this.getSession();
+		Transaction tx = null;
+		
+		log.debug("saving Profesoresmaterias Usuarios instance");
+		
+		try {
+			tx = session.beginTransaction();
+			
+			session.save(instance);
+			
+			log.debug("save successful");
+			
+			tx.commit();
+		} catch (RuntimeException re) {
+			tx.rollback();
+			
+			log.error("save failed", re);
+			
+			throw re;
+		}
+	}
+	
+	public void update(Profesoresmaterias instance) {
+		Session session = this.getSession();
+		Transaction tx = null;
+		
+		log.debug("updating Profesoresmaterias instance");
+		
+		try {
+			tx = session.beginTransaction();
+			
+			session.update(instance);
+			
+			log.debug("update successful");
+			
+			tx.commit();
+		} catch (RuntimeException re) {
+			tx.rollback();
+			
+			log.error("update failed", re);
+			
+			throw re;
+		}
+	}
 
 	public void attachClean(Profesoresmaterias instance) {
 		Session session = this.getSession();
@@ -74,14 +118,21 @@ public class ProfesoresmateriasHome extends MydbBaseHibernateDAO {
 
 	public void delete(Profesoresmaterias persistentInstance) {
 		Session session = this.getSession();
+		Transaction tx = null;
 		
 		log.debug("deleting Profesoresmaterias instance");
 		
 		try {
+			tx = session.beginTransaction();
+					
 			session.delete(persistentInstance);
 			
 			log.debug("delete successful");
+			
+			tx.commit();
 		} catch (RuntimeException re) {
+			tx.rollback();
+			
 			log.error("delete failed", re);
 			
 			throw re;

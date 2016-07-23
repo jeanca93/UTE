@@ -179,7 +179,7 @@ public class AulasModel {
         		aul.getAula().setFechaModificacion(new Date());
         		new AulasHomeExt().attachDirty(aul.getAula());
         		
-        		refresh();
+        		//refresh();
         		
         		Clients.showNotification("Materia Modificada correctamente");
         	}catch(RuntimeException re){

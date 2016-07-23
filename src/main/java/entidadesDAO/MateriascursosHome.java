@@ -6,11 +6,10 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.hibernate.LockMode;
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 
 import entidades.Materiascursos;
 import entidades.MateriascursosId;
-import sessionfactory.MydbHibernateSessionFactory;
 
 import static org.hibernate.criterion.Example.create;
 
@@ -50,6 +49,52 @@ public class MateriascursosHome extends MydbBaseHibernateDAO{
 			log.debug("attach successful");
 		} catch (RuntimeException re) {
 			log.error("attach failed", re);
+			
+			throw re;
+		}
+	}
+	
+	public void save(Materiascursos instance) {
+		Session session = this.getSession();
+		Transaction tx = null;
+		
+		log.debug("saving Materiascursos instance");
+		
+		try {
+			tx = session.beginTransaction();
+			
+			session.save(instance);
+			
+			log.debug("save successful");
+			
+			tx.commit();
+		} catch (RuntimeException re) {
+			tx.rollback();
+			
+			log.error("save failed", re);
+			
+			throw re;
+		}
+	}
+	
+	public void update(Materiascursos instance) {
+		Session session = this.getSession();
+		Transaction tx = null;
+		
+		log.debug("updating Materiascursos instance");
+		
+		try {
+			tx = session.beginTransaction();
+			
+			session.update(instance);
+			
+			log.debug("update successful");
+			
+			tx.commit();
+		} catch (RuntimeException re) {
+			tx.rollback();
+			
+			log.error("update failed", re);
 			
 			throw re;
 		}

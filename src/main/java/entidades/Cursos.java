@@ -16,7 +16,7 @@ public class Cursos implements java.io.Serializable {
 	private Character estado;
 	private Date fechaCreacion;
 	private int usuarioCrea;
-	private Date FechaModificacion;
+	private Date fechaModificacion;
 	private Integer usuarioModifica;
 
 	public Cursos() {
@@ -31,14 +31,14 @@ public class Cursos implements java.io.Serializable {
 	}
 
 	public Cursos(String idCurso, String curso, int paralelos, Character estado, Date fechaCreacion, int usuarioCrea,
-			Date FechaModificacion, Integer usuarioModifica) {
+			Date fechaModificacion, Integer usuarioModifica) {
 		this.idCurso = idCurso;
 		this.curso = curso;
 		this.paralelos = paralelos;
 		this.estado = estado;
 		this.fechaCreacion = fechaCreacion;
 		this.usuarioCrea = usuarioCrea;
-		this.FechaModificacion = FechaModificacion;
+		this.fechaModificacion = fechaModificacion;
 		this.usuarioModifica = usuarioModifica;
 	}
 
@@ -90,12 +90,12 @@ public class Cursos implements java.io.Serializable {
 		this.usuarioCrea = usuarioCrea;
 	}
 
-	public Date getFechaModificacion() {
-		return this.FechaModificacion;
+	public Date getfechaModificacion() {
+		return this.fechaModificacion;
 	}
 
-	public void setFechaModificacion(Date FechaModificacion) {
-		this.FechaModificacion = FechaModificacion;
+	public void setfechaModificacion(Date fechaModificacion) {
+		this.fechaModificacion = fechaModificacion;
 	}
 
 	public Integer getUsuarioModifica() {
