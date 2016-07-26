@@ -18,7 +18,7 @@ public class Recursos implements java.io.Serializable {
 	private Date fechaCreacion;
 	private int usuarioCrea;
 	private Date fechaModificacion;
-	private String usuarioModifica;
+	private Integer usuarioModifica;
 
 	public Recursos() {
 	}
@@ -32,7 +32,7 @@ public class Recursos implements java.io.Serializable {
 	}
 
 	public Recursos(String recurso, int stockDisponible, String comentarios, char estado, Date fechaCreacion,
-			int usuarioCrea, Date fechaModificacion, String usuarioModifica) {
+			int usuarioCrea, Date fechaModificacion, Integer usuarioModifica) {
 		this.recurso = recurso;
 		this.stockDisponible = stockDisponible;
 		this.comentarios = comentarios;
@@ -107,11 +107,11 @@ public class Recursos implements java.io.Serializable {
 		this.fechaModificacion = fechaModificacion;
 	}
 
-	public String getUsuarioModifica() {
+	public Integer getUsuarioModifica() {
 		return this.usuarioModifica;
 	}
 
-	public void setUsuarioModifica(String usuarioModifica) {
+	public void setUsuarioModifica(Integer usuarioModifica) {
 		this.usuarioModifica = usuarioModifica;
 	}
 

@@ -28,6 +28,7 @@
     <toolbar>
     	<toolbarbutton image="/img/agregar.png" label="Nuevo" onClick="@command('nuevoPerfil')"/>
     	<toolbarbutton image="/img/trash.png" label="Eliminar" onClick="@command('eliminarPerfiles')"/>
+    	<toolbarbutton image="/img/trash.png" label="Asignar permisos" onClick="@command('asignarPermisos')"/>
     </toolbar>
     <panelchildren>
         <grid id="GridPerfiles" mold="paging" pagingPosition="bottom"

@@ -105,6 +105,33 @@ public class ProfesoresModel {
     }
 	
 	@Command
+    public void horariosProfesor() {
+		List<Row> components = GridProfesores.getRows().getChildren();
+	    List<Profesores> profesorMateria = new ArrayList<Profesores>();
+	    
+	    for(Row row:components){
+	      Checkbox ck = (Checkbox) row.getChildren().get(0);
+	      
+	      if(ck.isChecked()){
+	    	  ProfesorStatus profesorStatus = (ProfesorStatus)row.getValue();
+	    	  profesorMateria.add(profesorStatus.getProfesor());
+	      }
+	   }
+	   
+	   if(profesorMateria.size() > 1){
+		   Clients.alert("Solo puede seleccionar un profesor a la vez", "Error", null);
+	   }else if(profesorMateria.size() == 1){
+		   Map<String, Object> parameters = new HashMap<String, Object>();
+		   parameters.put("profesor",profesorMateria.get(0));
+						
+		   Window window = (Window)Executions.createComponents(
+				   "/WEB-INF/include/Profesores/AdministracionProfesores/vtnProfesoresHorarios.zul", null, parameters);
+		   window.doModal();
+	   }else
+	       Clients.alert("Debe seleccionar un profesor para continuar", "Error", null);
+    }
+	
+	@Command
 	public void eliminarProfesores(){
 		List<Row> components = GridProfesores.getRows().getChildren();
 	    final List<Profesores> profesoresDelete = new ArrayList<Profesores>();

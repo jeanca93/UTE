@@ -51,7 +51,7 @@
             </columns>
             <template name="editable">
                 <row>
-                	<checkbox checked="${each.seleccionado}" disabled="true"/>
+                	<checkbox checked="@load(each.seleccionado) @save(each.seleccionado, before='confirm')" disabled="true"/>
                     <textbox disabled="true" style="text-align: center;" hflex="1" 
                         value="@load(each.usuario.idUsuario) @save(each.usuario.idUsuario, before='confirm')" />
                     <textbox focus="true" constraint="no empty:Campo obligatorio" hflex="1" 

@@ -29,6 +29,7 @@
     	<toolbarbutton image="/img/agregar.png" label="Nuevo" onClick="@command('nuevoProfesor')"/>
     	<toolbarbutton image="/img/trash.png" label="Eliminar" onClick="@command('eliminarProfesores')"/>
     	<toolbarbutton image="" label="Materias de Profesor" onClick="@command('materiasProfesor')"/>
+    	<toolbarbutton image="/img/agregar.png" label="Horario de Profesor" onClick="@command('horariosProfesor')"/>
     </toolbar>
     <panelchildren>
         <grid id="GridProfesores" mold="paging" pagingPosition="bottom"
@@ -47,7 +48,7 @@
             </columns>
             <template name="editable">
                 <row>
-                	<checkbox checked="${each.seleccionado}" disabled="true"/>
+                	<checkbox checked="@load(each.seleccionado) @save(each.seleccionado, before='confirm')" disabled="true"/>
                     <textbox disabled="true" style="text-align: center;" hflex="1" 
                         value="@load(each.profesor.idProfesor) @save(each.profesor.idProfesor, before='confirm')" />
                     <textbox focus="true" constraint="no empty:Campo obligatorio" hflex="1" 

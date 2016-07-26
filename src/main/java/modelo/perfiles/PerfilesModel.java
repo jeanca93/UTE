@@ -2,7 +2,9 @@ package modelo.perfiles;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.zkoss.bind.BindUtils;
 import org.zkoss.bind.annotation.AfterCompose;
@@ -115,6 +117,33 @@ public class PerfilesModel {
 				}
 		   });
 	   }
+	}
+	
+	@Command
+	public void asignarPermisos(){
+		List<Row> components = GridPerfiles.getRows().getChildren();
+	    List<Perfilesusuario> perfiles = new ArrayList<Perfilesusuario>();
+	    
+	    for(Row row:components){
+	      Checkbox ck = (Checkbox) row.getChildren().get(0);
+	      
+	      if(ck.isChecked()){
+	    	  PerfilStatus perfilStatus = (PerfilStatus)row.getValue();
+	    	  perfiles.add(perfilStatus.getPerfil());
+	      }
+	   }
+	   
+	   if(perfiles.size() > 1){
+		   Clients.alert("Solo puede seleccionar un perfil a la vez", "Error", null);
+	   }else if(perfiles.size() == 1){
+		   Map<String, Object> parameters = new HashMap<String, Object>();
+		   parameters.put("perfil",perfiles.get(0));
+						
+		   Window window = (Window)Executions.createComponents(
+				   "/WEB-INF/include/Usuarios/AdministracionPerfiles/vtnPermisosPerfil.zul", null, parameters);
+		   window.doModal();
+	   }else
+	       Clients.alert("Debe seleccionar un perfil para continuar", "Error", null);
 	}
 	
 	public void refresh() {

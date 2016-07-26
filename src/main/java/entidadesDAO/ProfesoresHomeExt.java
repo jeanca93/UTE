@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 import org.hibernate.Session;
 import org.hibernate.criterion.Order;
-import org.hibernate.criterion.Restrictions;
 
 import entidades.Profesores;
 
@@ -22,7 +21,6 @@ public class ProfesoresHomeExt extends ProfesoresHome{
 		
     	try {
 			results = (ArrayList<Profesores>) session.createCriteria(Profesores.class)
-						.add(Restrictions.eq("estado", 'A'))
 						.addOrder(Order.asc("idProfesor"))
 						.list();						
 		} catch (RuntimeException re) {			

@@ -4,9 +4,9 @@
 <!-- Generated Jul 4, 2016 12:16:50 PM by Hibernate Tools 4.0.0.Final -->
 <hibernate-mapping>
     <class name="entidades.Dias" table="dias" catalog="gaha">
-        <id name="idDia" type="string">
-            <column name="ID_Dia" length="5" />
-            <generator class="assigned" />
+        <id name="idDia" type="java.lang.Integer">
+            <column name="ID_Dia" />
+           	<generator class="identity" />
         </id>
         <property name="dia" type="string">
             <column name="Dia" length="10" not-null="true" />

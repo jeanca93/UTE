@@ -18,8 +18,9 @@ package sessionfactory;
 
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
-import org.hibernate.cfg.AnnotationConfiguration;
+import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
+import org.hibernate.service.ServiceRegistry;
 
 /**
  *
@@ -36,14 +37,17 @@ public class MydbHibernateSessionFactory {
      */
     private static String CONFIG_FILE_LOCATION = "/hibernate.cfg.xml";
     private static final ThreadLocal<Session> threadLocal = new ThreadLocal<Session>();
-    private static Configuration configuration = new AnnotationConfiguration();
+    private static ServiceRegistry serviceRegistry;
+    private static Configuration configuration = new Configuration();
     private static org.hibernate.SessionFactory sessionFactory;
     private static String configFile = CONFIG_FILE_LOCATION;
 
     static {
         try {
             configuration.configure(configFile);
-            sessionFactory = configuration.buildSessionFactory();
+            serviceRegistry = new StandardServiceRegistryBuilder().applySettings(
+                    configuration.getProperties()).build();
+            sessionFactory = configuration.buildSessionFactory(serviceRegistry);
         } catch (Exception e) {
             System.err
                     .println("%%%% Error Creating SessionFactory %%%%");
@@ -90,7 +94,9 @@ public class MydbHibernateSessionFactory {
     public static void rebuildSessionFactory() {
         try {
             configuration.configure(configFile);
-            sessionFactory = configuration.buildSessionFactory();
+            serviceRegistry = new StandardServiceRegistryBuilder().applySettings(
+                    configuration.getProperties()).build();
+            sessionFactory = configuration.buildSessionFactory(serviceRegistry);
         } catch (Exception e) {
             System.err
                     .println("%%%% Error Creating SessionFactory %%%%");

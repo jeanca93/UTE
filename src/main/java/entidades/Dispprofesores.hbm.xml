@@ -9,15 +9,12 @@
         		<column name="ID_Profesor" not-null="true" />
         	</key-many-to-one>
 		    <key-many-to-one class="entidades.Dias" lazy="false" name="dias">
-        		<column name="ID_Dia" length="5" not-null="true" />
+        		<column name="ID_Dia" not-null="true" />
         	</key-many-to-one>
         	<key-many-to-one class="entidades.Horas" lazy="false" name="horas">
         		 <column name="ID_Hora" not-null="true" />
         	</key-many-to-one>
         </composite-id>
-        <property name="disponible" type="char">
-            <column name="Disponible" length="1" not-null="true" />
-        </property>
         <property name="estado" type="char">
             <column name="Estado" length="1" not-null="true" />
         </property>

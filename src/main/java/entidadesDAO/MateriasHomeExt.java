@@ -13,6 +13,7 @@ public class MateriasHomeExt extends MateriasHome{
 		super();
 		
 	}
+	
     public ArrayList<Materias> listMateriasActivos() {
     	Session session = this.getSession();
     	ArrayList<Materias> results = new ArrayList<Materias>();

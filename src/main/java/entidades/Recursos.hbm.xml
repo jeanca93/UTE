@@ -30,7 +30,7 @@
             <column name="FechaModificacion" length="19" />
         </property>
         <property name="usuarioModifica" type="string">
-            <column name="UsuarioModifica" length="45" />
+            <column name="UsuarioModifica" />
         </property>
     </class>
 </hibernate-mapping>
