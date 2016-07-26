@@ -2,9 +2,7 @@ package modelo.anioescolar;
 
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.zkoss.bind.BindUtils;
 import org.zkoss.bind.annotation.AfterCompose;
@@ -36,7 +34,6 @@ import entidadesDAO.SchollaryearHome;
 import modelo.estados.EstadosDatos;
 
 public class AnioEscolarModel {
-	
 	private ListModelList<AnioEscolarStatus> allAnioEscolarStatus;
 	private List<Schollaryear> listAnioTMP;
 	private List<String> allEstados;
@@ -69,12 +66,12 @@ public class AnioEscolarModel {
 	
 	@Command
     public void nuevoAnioEscolar() {
-		Map<String, Object> parameters = new HashMap<String, Object>();
-		parameters.put("modelPrincipal",allAnioEscolarStatus );
-		parameters.put("gridPrincipal",GridAnioEscolar );
+		//Map<String, Object> parameters = new HashMap<String, Object>();
+		//parameters.put("modelPrincipal",allAnioEscolarStatus );
+		//parameters.put("gridPrincipal",GridAnioEscolar );
 		
 		Window window = (Window)Executions.createComponents(
-                "/WEB-INF/include/Aulas/vtnAnioEscolar.zul", null, parameters);
+                "/WEB-INF/include/AnioEscolar/vtnAnioEscolar.zul", null, null);
         window.doModal();
     }
 	

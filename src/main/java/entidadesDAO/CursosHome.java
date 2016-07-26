@@ -7,7 +7,9 @@ import org.apache.commons.logging.LogFactory;
 import org.hibernate.LockMode;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 
+import entidades.Aulas;
 import entidades.Cursos;
 import sessionfactory.MydbHibernateSessionFactory;
 
@@ -54,6 +56,49 @@ public class CursosHome extends MydbBaseHibernateDAO{
 		}
 	}
 
+	public void save(Cursos instance) {
+		Session session = this.getSession();
+		Transaction tx = null;
+		
+		log.debug("saving Cursos instance");
+		
+		try {
+			tx = session.beginTransaction();
+			session.save(instance);
+			
+			log.debug("attach successful");
+			tx.commit();
+		} catch (RuntimeException re) {
+			tx.rollback();
+			log.error("attach failed", re);
+			
+			throw re;
+		}
+	}
+	
+	public void update(Cursos instance) {
+		Session session = this.getSession();
+		Transaction tx = null;
+		
+		log.debug("updating Cursos instance");
+		
+		try {
+			tx = session.beginTransaction();
+			
+			session.update(instance);
+			
+			log.debug("update successful");
+			
+			tx.commit();
+		} catch (RuntimeException re) {
+			tx.rollback();
+			
+			log.error("update failed", re);
+			
+			throw re;
+		}
+	}
+
 	public void attachClean(Cursos instance) {
 		Session session = this.getSession();
 		
@@ -73,13 +118,18 @@ public class CursosHome extends MydbBaseHibernateDAO{
 	public void delete(Cursos persistentInstance) {
 		Session session = this.getSession();
 		
+		Transaction tx = null;
+		
 		log.debug("deleting Cursos instance");
 		
 		try {
+			tx = session.beginTransaction();			
 			session.delete(persistentInstance);
 			
 			log.debug("delete successful");
+			tx.commit();			
 		} catch (RuntimeException re) {
+			tx.rollback();			
 			log.error("delete failed", re);
 			
 			throw re;

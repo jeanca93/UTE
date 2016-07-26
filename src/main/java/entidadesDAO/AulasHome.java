@@ -60,8 +60,7 @@ public class AulasHome extends MydbBaseHibernateDAO{
 		log.debug("saving Aulas instance");
 		
 		try {
-			tx = session.beginTransaction();
-			
+			tx = session.beginTransaction();			
 			session.save(instance);
 			
 			log.debug("save successful");

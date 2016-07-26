@@ -118,14 +118,18 @@ public class MateriascursosHome extends MydbBaseHibernateDAO{
 
 	public void delete(Materiascursos persistentInstance) {
 		Session session = this.getSession();
+		Transaction tx = null;
 		
 		log.debug("deleting Materiascursos instance");
 		
 		try {
+			tx = session.beginTransaction();
 			session.delete(persistentInstance);
 			
 			log.debug("delete successful");
+			tx.commit();
 		} catch (RuntimeException re) {
+			tx.rollback();
 			log.error("delete failed", re);
 			
 			throw re;

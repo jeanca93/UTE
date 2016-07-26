@@ -23,7 +23,6 @@ import entidadesDAO.SchollaryearHome;
 public class AnioEscolarComposer extends GenericForwardComposer<Component>{
 	private static final long serialVersionUID = 4L;
 	private Textbox txtAnioEscolar;
-	private Intbox txtIdAnioEscolar;
 	private Datebox txtFechaInicio, txtFechaFin;
 	
 
@@ -45,14 +44,14 @@ public class AnioEscolarComposer extends GenericForwardComposer<Component>{
 			InstantiationException, IllegalAccessException {		
 		
 			try{
-				Integer idanioescolar = txtIdAnioEscolar.getValue();
+				
 				String anioescolar = txtAnioEscolar.getValue().trim();
 				Date fechainicio = txtFechaInicio.getValue();
 				Date fechafin = txtFechaFin.getValue();
 				
 				Session session = Sessions.getCurrent();
 				
-				new SchollaryearHome().save(new Schollaryear(idanioescolar,anioescolar, fechainicio, fechafin, 'A', new Date(), Integer.parseInt(session.getAttribute("idUsuario").toString())));
+				new SchollaryearHome().save(new Schollaryear(anioescolar, fechainicio, fechafin, 'A', new Date(), Integer.parseInt(session.getAttribute("idUsuario").toString())));
 		
 				Messagebox.show("Creado correctamente", "Exito", Messagebox.OK,  Messagebox.EXCLAMATION, new EventListener<Event>() {
 					

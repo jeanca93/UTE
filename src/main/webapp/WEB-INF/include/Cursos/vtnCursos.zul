@@ -1,7 +1,7 @@
 <?page title="new page title" contentType="text/html;charset=UTF-8"?>
 <zk>
-<window id = "modalDialog" title="Nueva Aula" border="normal" width="810px"
-    apply="controladores.AulasComposer"
+<window id = "modalDialog" title="Nuevo Curso" border="normal" width="810px"
+    apply="controladores.CursosComposer"
     position="center,center" closable="true"
     action="show: slideDown">
     <style src="/css/Focus.css" />
@@ -17,39 +17,34 @@
 	<vbox style="overflow:auto;">
 		<div id="div_check">
 			<groupbox mold="3d">
-				<caption label="Datos de Aula"></caption>
+				<caption label="Datos del Curso"></caption>
 				<grid>
 					<columns>
 						<column width="110px" />
 						<column width="250px"/>
 						<column width="20px" />
-						<column width="110px" />
-						<column width="250px"/>
-						<column width="20px" />
+						
 					</columns>
 
 					<rows xmlns:w="client">
 						<row>
-							<label value="Id Aula:" />
-							<textbox sclass="ftextbox" id="txtIdAula"
-								width="120px" maxlength="10" constraint="/^.*(?=.{2,10}).*$/:El Id del Aula debe tener minimo 2 caracteres"/>
+							<label value="Id Curso:" />
+							<textbox sclass="ftextbox" id="txtIdCurso"
+								width="120px" maxlength="5" constraint="/^.*(?=.{2,5}).*$/:El Id del Curso debe tener minimo 2 caracteres"/>
 							<label value="*" style="color:red" />
-							
-							<label value="Aula" />
-							<textbox sclass="ftextbox" id="txtAula" 
-								style="text-transform: uppercase" width="240px" constraint="no empty:Campo obligatorio"/>
+					   </row>
+					   <row>
+							<label value="Curso" />
+							<textbox sclass="ftextbox" id="txtCurso" 
+								width="120px" maxlength="10" constraint="/^.*(?=.{2,10}).*$/:El Id del Curso debe tener minimo 2 caracteres"/>
 							<label value="*" style="color:red" />
 						</row>
 						<row>
-							<label value="Asientos" />
-							<intbox sclass="ftextbox" id="txtAsientos"
+							<label value="Paralelo" />
+							<intbox sclass="ftextbox" id="txtParalelo"
 								style="text-transform: uppercase" width="240px" constraint="no empty:Campo obligatorio"/>
 							<label value="*" style="color:red" />
 
-							<label value="Comentarios:" />
-							<textbox sclass="ftextbox" id="txtComentarios"
-								style="text-transform: uppercase" width="240px" />
-							<label value="" style="color:red" />
 						</row>
 
 					<!--  	<row>

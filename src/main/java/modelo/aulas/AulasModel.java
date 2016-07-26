@@ -68,12 +68,12 @@ public class AulasModel {
 	
 	@Command
     public void nuevaAula() {
-		Map<String, Object> parameters = new HashMap<String, Object>();
-		parameters.put("modelPrincipal",allAulasStatus );
-		parameters.put("gridPrincipal",GridAulas );
+		//Map<String, Object> parameters = new HashMap<String, Object>();
+		//parameters.put("modelPrincipal",allAulasStatus );
+		//parameters.put("gridPrincipal",GridAulas );
 		
 		Window window = (Window)Executions.createComponents(
-                "/WEB-INF/include/Aulas/vtnAulas.zul", null, parameters);
+                "/WEB-INF/include/Aulas/vtnAulas.zul", null, null);
         window.doModal();
     }
 	

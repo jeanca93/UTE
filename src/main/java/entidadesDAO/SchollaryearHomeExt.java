@@ -8,8 +8,6 @@ import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
 import entidades.Schollaryear;
 
-
-
 public class SchollaryearHomeExt  extends SchollaryearHome{
 	
 	public SchollaryearHomeExt(){

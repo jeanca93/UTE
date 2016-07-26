@@ -23,28 +23,28 @@
     		border: 1px thin #0080c0;
         }
 </style>
-<panel id="container" title="Administracion de Aulas" vflex="1" validationMessages="@id('vmsgs')"
-        viewModel="@id('vm') @init('modelo.aulas.AulasModel')">
+<panel id="container" title="Cursos" vflex="1" validationMessages="@id('vmsgs')"
+        viewModel="@id('vm') @init('modelo.cursos.CursosModel')">
     <toolbar>
-    	<toolbarbutton image="/img/agregar.png" label="Nuevo" onClick="@command('nuevaAula')"/>
-    	<toolbarbutton image="/img/trash.png" label="Eliminar" onClick="@command('eliminarAulas')"/>
+    	<toolbarbutton image="/img/agregar.png" label="Nuevo" onClick="@command('nuevoCurso')"/>
+    	<toolbarbutton image="/img/trash.png" label="Eliminar" onClick="@command('eliminarCursos')"/>
+    	<toolbarbutton image="/img/agregar.png" label="Materias Cursos" onClick="@command('materiasCurso')"/>
     </toolbar>
     <panelchildren>
     	 <zscript>
 			constraint.NoSpacesConstraint customConstraint = new constraint.NoSpacesConstraint();
 		</zscript>
-        <grid id="GridAulas" mold="paging" pagingPosition="bottom"
-        	model="@load(vm.allAulas) @template((vm.displayEdit and each.editingStatus) ? 'editable' : 'noneditable')"
+        <grid id="GridCursos" mold="paging" pagingPosition="bottom"
+        	model="@load(vm.allCursos) @template((vm.displayEdit and each.editingStatus) ? 'editable' : 'noneditable')"
             autopaging="true" vflex="1" emptyMessage="No hay registros">
             
             <columns>
             	<column width="30px" align="center" >
             		<checkbox id="selectAllCheckBox" onCheck="@command('selectedCheckBox', CheckEvent=event)"/>
         	    </column>
-                <column width="80px" label="Id Aula" align="center" sort="auto(aula.idAula)" />
-                <column width="250px" label="Aula" align="left" sort="auto(aula.aulas)"/>
-                <column width="250px" label="Asientos" align="left" sort="auto(aula.asientos)"/>
-                <column width="120px" label="Comentarios" align="left" sort="auto(aula.comentarios)"/>
+                <column width="80px" label="Id Curso" align="center" sort="auto(curso.idCurso)" />
+                <column width="250px" label="Curso" align="left" sort="auto(curso.curso)"/>
+                <column width="250px" label="Paralelo" align="left" sort="auto(curso.paralelos)"/>
                 <column width="170px" label="Estado" align="center" sort="auto(aula.estado)"/>
                 <column width="120px" label="Edit" visible="@load(vm.displayEdit)"/>
             </columns>
@@ -52,16 +52,14 @@
                 <row>
                 	<checkbox checked="${each.seleccionado}" disabled="true"/>
                     <textbox disabled="true" style="text-align: center;" hflex="1" 
-                        value="@load(each.aula.idAula) @save(each.aula.idAula, before='confirm')" />
+                        value="@load(each.curso.idCurso) @save(each.curso.idCurso, before='confirm')" />
                     <textbox focus="true" constraint="no empty:Campo obligatorio" hflex="1" 
-                        value="@load(each.aula.aula) @save(each.aula.aula, before='confirm')" />
+                        value="@load(each.curso.curso) @save(each.curso.curso, before='confirm')" />
                     <intbox constraint="no empty:Campo obligatorio" hflex="1" 
-                        value="@load(each.aula.asientos) @save(each.aula.asientos, before='confirm')" />
-                    <textbox hflex="1" 
-                        value="@load(each.aula.comentarios) @save(each.aula.comentarios, before='confirm')" />
+                        value="@load(each.curso.paralelos) @save(each.curso.paralelos, before='confirm')" />
                     <combobox inplace="true" mold="rounded" readonly="true"
                         model="@load(vm.allEstados)" constraint="no empty:Campo obligatorio"
-                        selectedItem="@bind(each.aula.estado)" hflex="1">
+                        selectedItem="@bind(each.curso.estado)" hflex="1">
                         <template name="model">
                         	<comboitem value="@load(each)" label="@load(each eq 'A'? 'Activo' : 'Inactivo')"/>
                     	</template>
@@ -69,30 +67,29 @@
                     <div>
                         <button
                             image="/img/tick-small.png"
-                            onClick="@command('confirm', AulasStatus=each)" />
+                            onClick="@command('confirm', CursosStatus=each)" />
                         <button
                             image="/img/cross-small.png"
-                            onClick="@command('changeEditableStatus', AulasStatus=each)" />
+                            onClick="@command('changeEditableStatus', CursosStatus=each)" />
                     </div>
                 </row>
             </template>
             <template name="noneditable">
                 <row>
                 	<checkbox checked="${each.seleccionado}" disabled="false"/>
-                    <label value="@load(each.aula.idAula)" hflex="1"/>
-                    <label value="@load(each.aula.aula)" hflex="1"/>
-                    <label value="@load(each.aula.asientos)" hflex="1"/>
-                    <label value="@load(each.aula.comentarios)" hflex="1"/>
+                    <label value="@load(each.curso.idCurso)" hflex="1"/>
+                    <label value="@load(each.curso.curso)" hflex="1"/>
+                    <label value="@load(each.curso.paralelos)" hflex="1"/>
                     <combobox disabled="true" inplace="true" mold="rounded"
                         model="@load(vm.allEstados)" 
-                        selectedItem="@bind(each.aula.estado)" hflex="1">
+                        selectedItem="@bind(each.curso.estado)" hflex="1">
                        <template name="model">
                         	<comboitem value="@load(each)" label="@load(each eq 'A'? 'Activo' : 'Inactivo')"/>
                     	</template>
                     </combobox>
                     <button
                         image="/img/pencil-small.png"
-                        onClick="@command('changeEditableStatus', AulasStatus=each)" />
+                        onClick="@command('changeEditableStatus', CursosStatus=each)" />
                 </row>
             </template>
         </grid>

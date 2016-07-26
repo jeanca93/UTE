@@ -26,13 +26,7 @@
 					</columns>
 
 					<rows xmlns:w="client">
-						<row>
-							<label value="Id Año Lectivo:" />
-							<textbox sclass="ftextbox" id="txtIdAnioEscolar"
-								style="text-transform: uppercase" width="240px" constraint="no empty:Campo obligatorio"/>
-							<label value="*" style="color:red" />
-
-						</row>
+					
 						<row>
 							<label value="Año Lectivo:" />
 							<textbox sclass="ftextbox" id="txtAnioEscolar"
@@ -42,13 +36,13 @@
 						</row>
 						<row>
 							<label value="Fecha Inicio:" />
-							<timebox  id="txtFechaInicio" constraint="no empty: Campo Obligatorio"  format="dd/mm/yyyy" 
+							<datebox  id="txtFechaInicio" constraint="no empty: Campo Obligatorio"  format="dd/MM/yyyy" 
 							 width="120px" mold="rounded"/>
 							<label value="*" style="color:red" />
 						</row>
 						<row>
 							<label value="Fecha Fin:" />
-							<timebox  id="txtFechaFin" constraint="no empty: Campo Obligatorio"  format="dd/mm/yyyy" 
+							<datebox  id="txtFechaFin" constraint="no empty: Campo Obligatorio"  format="dd/MM/yyyy" 
 							 width="120px" mold="rounded"/>
 							<label value="*" style="color:red" />
 						</row>

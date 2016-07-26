@@ -41,7 +41,7 @@
             	<column width="30px" align="center" >
             		<checkbox id="selectAllCheckBox" onCheck="@command('selectedCheckBox', CheckEvent=event)"/>
         	    </column>
-                <column width="80px" label="Id Anio Escolar" align="center" sort="auto(anioescolar.idSchoolarYear)" />
+                <column width="80px" label="Id Anio Escolar" align="center" sort="auto(anioescolar.idSchoolarYear))" />
                 <column width="250px" label="Anio Escolar" align="left" sort="auto(anioescolar.schollarYear)"/>
                 <column width="250px" label="Fecha Inicio" align="left" sort="auto(anioescolar.fechaInicio)"/>
                 <column width="250px" label="Fecha Fin" align="left" sort="auto(anioescolar.fechaFin)"/>
@@ -54,9 +54,9 @@
                         value="@load(each.anioescolar.idSchoolarYear) @save(each.anioescolar.idSchoolarYear, before='confirm')" />
                     <textbox focus="true" constraint="no empty:Campo obligatorio" hflex="1" 
                         value="@load(each.anioescolar.schollarYear) @save(each.anioescolar.schollarYear, before='confirm')" />
-                    <timebox constraint="no empty: Campo Obligatorio"  format="HH:mm"  mold="rounded"
+                    <datebox constraint="no empty: Campo Obligatorio"  format="dd/MM/yyyy"  mold="rounded"
                             value="@load(each.anioescolar.fechaInicio) @save(each.anioescolar.fechaInicio, before='confirm')" />
-                    <timebox constraint="no empty: Campo Obligatorio"  format="HH:mm"  mold="rounded"
+                    <datebox constraint="no empty: Campo Obligatorio"  format="dd/MM/yyyy"  mold="rounded"
                             value="@load(each.anioescolar.fechaFin) @save(each.anioescolar.fechaFin, before='confirm')" />
                                                                    
                     <div>
@@ -74,14 +74,14 @@
                 	<checkbox checked="${each.seleccionado}" disabled="false"/>
                     <label value="@load(each.anioescolar.idSchoolarYear)" hflex="1"/>
                     <label value="@load(each.anioescolar.schollarYear)" hflex="1"/>
-                    <datebox constraint="no empty: Campo Obligatorio"  format="dd/mm/yyyy"  mold="rounded"
+                    <datebox constraint="no empty: Campo Obligatorio"  format="dd/MM/yyyy"  mold="rounded"
                             value="@load(each.anioescolar.fechaInicio)" disabled="true"/>
-                    <datebox constraint="no empty: Campo Obligatorio"  format="dd/mm/yyyy"  mold="rounded"
+                    <datebox constraint="no empty: Campo Obligatorio"  format="dd/MM/yyyy"  mold="rounded"
                             value="@load(each.anioescolar.fechaFin)" disabled="true"/>
                     
                     <button
                         image="/img/pencil-small.png"
-                        onClick="@command('changeEditableStatus', MateriaStatus=each)" />
+                        onClick="@command('changeEditableStatus', AnioEscolarStatus=each)" />
                 </row>
             </template>
         </grid>
