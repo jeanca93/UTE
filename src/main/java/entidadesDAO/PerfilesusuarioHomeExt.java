@@ -2,6 +2,7 @@ package entidadesDAO;
 
 import java.util.ArrayList;
 
+import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
@@ -15,15 +16,19 @@ public class PerfilesusuarioHomeExt extends  PerfilesusuarioHome{
 		
 	}
 	
-	public ArrayList<Perfilesusuario> listPerfilesActivos() {
+	public ArrayList<Perfilesusuario> listPerfilesActivos(boolean activos) {
 		Session session = this.getSession();
     	ArrayList<Perfilesusuario> results = new ArrayList<Perfilesusuario>();
 		
     	try {
-			results = (ArrayList<Perfilesusuario>) session.createCriteria(Perfilesusuario.class)
-						.add(Restrictions.eq("estado", 'A'))
-						.addOrder(Order.asc("idPerfilUsuario"))
-						.list();						
+    		Criteria criteria = session.createCriteria(Perfilesusuario.class);
+    		
+    		if(activos)
+    			criteria.add(Restrictions.eq("estado", 'A'));
+    		
+    		criteria.addOrder(Order.asc("idPerfilUsuario"));
+    		
+			results = (ArrayList<Perfilesusuario>) criteria.list();						
 		} catch (RuntimeException re) {			
 			throw re;
 		}

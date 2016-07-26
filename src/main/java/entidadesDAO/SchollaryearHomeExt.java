@@ -2,13 +2,9 @@ package entidadesDAO;
 
 import java.util.ArrayList;
 
-import org.hibernate.Query;
 import org.hibernate.Session;
-import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
 import entidades.Schollaryear;
-
-
 
 public class SchollaryearHomeExt  extends SchollaryearHome{
 	

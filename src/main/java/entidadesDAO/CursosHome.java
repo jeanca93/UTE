@@ -6,10 +6,9 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.hibernate.LockMode;
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 
+import basehibernate.MydbBaseHibernateDAO;
 import entidades.Cursos;
-import sessionfactory.MydbHibernateSessionFactory;
 
 import static org.hibernate.criterion.Example.create;
 

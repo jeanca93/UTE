@@ -2,16 +2,15 @@ package entidadesDAO;
 // Generated Jun 5, 2016 11:08:49 PM by Hibernate Tools 4.0.0.Final
 
 import java.util.List;
-import javax.naming.InitialContext;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.hibernate.LockMode;
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 
+import basehibernate.MydbBaseHibernateDAO;
 import entidades.Permisosperfiles;
 import entidades.PermisosperfilesId;
-import sessionfactory.MydbHibernateSessionFactory;
 
 import static org.hibernate.criterion.Example.create;
 
@@ -67,6 +66,52 @@ public class PermisosperfilesHome extends MydbBaseHibernateDAO{
 			log.debug("attach successful");
 		} catch (RuntimeException re) {
 			log.error("attach failed", re);
+			
+			throw re;
+		}
+	}
+	
+	public void save(Permisosperfiles instance) {
+		Session session = this.getSession();
+		Transaction tx = null;
+		
+		log.debug("saving Permisosperfiles instance");
+		
+		try {
+			tx = session.beginTransaction();
+			
+			session.save(instance);
+			
+			log.debug("save successful");
+			
+			tx.commit();
+		} catch (RuntimeException re) {
+			tx.rollback();
+			
+			log.error("save failed", re);
+			
+			throw re;
+		}
+	}
+	
+	public void update(Permisosperfiles instance) {
+		Session session = this.getSession();
+		Transaction tx = null;
+		
+		log.debug("updating Permisosperfiles instance");
+		
+		try {
+			tx = session.beginTransaction();
+			
+			session.update(instance);
+			
+			log.debug("update successful");
+			
+			tx.commit();
+		} catch (RuntimeException re) {
+			tx.rollback();
+			
+			log.error("update failed", re);
 			
 			throw re;
 		}

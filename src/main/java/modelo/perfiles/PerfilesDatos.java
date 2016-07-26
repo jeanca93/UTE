@@ -13,7 +13,7 @@ public class PerfilesDatos {
 
 	public PerfilesDatos(){
 		PerfilesusuarioHomeExt prfExt = new PerfilesusuarioHomeExt();		
-		allPerfiles = prfExt.listPerfilesActivos();		
+		allPerfiles = prfExt.listPerfilesActivos(false);		
 	}
 	
 	public List<Perfilesusuario> getAllPerfiles() {

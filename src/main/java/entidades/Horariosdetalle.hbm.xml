@@ -19,7 +19,7 @@
         </many-to-one>
         <many-to-one name="dispprofesores" class="entidades.Dispprofesores" fetch="select">
          	<formula>ID_Profesor</formula>
-            <column name="ID_Dia" length="5" not-null="true" />
+            <column name="ID_Dia" not-null="true" />
             <column name="ID_Hora" not-null="true" />
         </many-to-one>
         <many-to-one name="aulas" class="entidades.Aulas" fetch="select">

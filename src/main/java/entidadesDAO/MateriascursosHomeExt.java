@@ -3,8 +3,6 @@ package entidadesDAO;
 import java.util.ArrayList;
 
 import org.hibernate.Session;
-import org.hibernate.criterion.Order;
-import org.hibernate.criterion.Restrictions;
 
 import entidades.Materiascursos;
 

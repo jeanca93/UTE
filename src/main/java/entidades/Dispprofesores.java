@@ -9,7 +9,6 @@ import java.util.Date;
 public class Dispprofesores implements java.io.Serializable {
 
 	private DispprofesoresId id;
-	private char disponible;
 	private char estado;
 	private Date fechaCreacion;
 	private int usuarioCrea;
@@ -19,19 +18,17 @@ public class Dispprofesores implements java.io.Serializable {
 	public Dispprofesores() {
 	}
 	
-	public Dispprofesores(DispprofesoresId id, char disponible,
-			char estado, Date fechaCreacion, int usuarioCrea) {
+	public Dispprofesores(DispprofesoresId id, char estado,
+			Date fechaCreacion, int usuarioCrea) {
 		this.id = id;
-		this.disponible = disponible;
 		this.estado = estado;
 		this.fechaCreacion = fechaCreacion;
 		this.usuarioCrea = usuarioCrea;
 	}
 
-	public Dispprofesores(DispprofesoresId id, char disponible,
-			char estado, Date fechaCreacion, int usuarioCrea, Date fechaModificacion, Integer usuarioModifica) {
+	public Dispprofesores(DispprofesoresId id, char estado,
+			Date fechaCreacion, int usuarioCrea, Date fechaModificacion, Integer usuarioModifica) {
 		this.id = id;
-		this.disponible = disponible;
 		this.estado = estado;
 		this.fechaCreacion = fechaCreacion;
 		this.usuarioCrea = usuarioCrea;
@@ -46,15 +43,7 @@ public class Dispprofesores implements java.io.Serializable {
 	public void setId(DispprofesoresId id) {
 		this.id = id;
 	}
-
-	public char getDisponible() {
-		return this.disponible;
-	}
-
-	public void setDisponible(char disponible) {
-		this.disponible = disponible;
-	}
-
+	
 	public char getEstado() {
 		return this.estado;
 	}
