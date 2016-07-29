@@ -42,7 +42,7 @@
                 <column width="80px" label="ID Perfil" align="center" sort="auto(perfil.idPerfilUsuario)" />
                 <column width="150px" label="Perfil" align="left" sort="auto(perfil.perfil)"/>
                 <column width="250px" label="Comentarios" align="left" sort="auto(perfil.comentarios)"/>
-               <!-- <column width="120px" label="Estado" align="left" sort="auto(perfil.estado)"/>  -->
+                <column width="120px" label="Estado" align="left" sort="auto(perfil.estado)"/>  
                 <column width="120px" label="Edit" visible="@load(vm.displayEdit)"/>
             </columns>
             <template name="editable">
@@ -54,15 +54,13 @@
                         value="@load(each.perfil.perfil) @save(each.perfil.perfil, before='confirm')" />
                     <textbox hflex="1" maxlength="200"
                         value="@load(each.perfil.comentarios) @save(each.perfil.comentarios, before='confirm')" />
-                    <!-- 
                     <combobox inplace="true" mold="rounded" readonly="true"
                         model="@load(vm.allEstados)" constraint="no empty:Campo obligatorio"
                         selectedItem="@bind(each.perfil.estado)" hflex="1">
                         <template name="model">
-                        	<comboitem value="@load(each.codestado)" label="@load(each.estado)"/>
+                        	<comboitem value="@load(each.idEstado)" label="@load(each.estado)"/>
                     	</template>
                     </combobox>
-                     -->
                     <div>
                         <button
                             image="/img/tick-small.png"
@@ -79,15 +77,13 @@
                     <label value="@load(each.perfil.idPerfilUsuario)" hflex="1"/>
                     <label value="@load(each.perfil.perfil)" hflex="1"/>
                     <label value="@load(each.perfil.comentarios)" hflex="1"/>
-                    <!-- 
-                    <combobox disabled="true" inplace="true" mold="rounded"
+                     <combobox disabled="true" inplace="true" mold="rounded"
                         model="@load(vm.allEstados)" 
                         selectedItem="@bind(each.perfil.estado)" hflex="1">
                        <template name="model">
-                        	<comboitem value="@load(each.codestado)" label="@load(each.estado)"/>
+                        	<comboitem value="@load(each.idEstado)" label="@load(each.estado)"/>
                     	</template>
                     </combobox>
-                     -->
                     <button
                         image="/img/pencil-small.png"
                         onClick="@command('changeEditableStatus', PerfilStatus=each)" />

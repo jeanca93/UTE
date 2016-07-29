@@ -42,6 +42,7 @@
                 <column width="250px" label="Aula" align="left" sort="auto(aula.aulas)"/>
                 <column width="250px" label="Asientos" align="left" sort="auto(aula.asientos)"/>
                 <column width="120px" label="Comentarios" align="left" sort="auto(aula.comentarios)"/>
+                <column width="120px" label="Tipo de Aula" align="left" sort="auto(aula.tipoaula.TipoAula)"/> 
                 <column width="170px" label="Estado" align="center" sort="auto(aula.estado)"/>
                 <column width="120px" label="Edit" visible="@load(vm.displayEdit)"/>
             </columns>
@@ -56,11 +57,18 @@
                         value="@load(each.aula.asientos) @save(each.aula.asientos, before='confirm')" />
                     <textbox hflex="1" maxlength="200"
                         value="@load(each.aula.comentarios) @save(each.aula.comentarios, before='confirm')" />
+                    <combobox inplace="true" mold="rounded" readonly="true" maxlength="60"
+                        model="@load(vm.allTipoAula)" constraint="no empty:Campo obligatorio"
+                        selectedItem="@bind(each.aula.tipoaula)" hflex="1">
+                        <template name="model">
+                        	<comboitem value="@load(each.idTipoaula)" label="@load(each.perfil)"/>
+                    	</template>
+                    </combobox>
                     <combobox inplace="true" mold="rounded" readonly="true"
                         model="@load(vm.allEstados)" constraint="no empty:Campo obligatorio"
                         selectedItem="@bind(each.aula.estado)" hflex="1">
                         <template name="model">
-                        	<comboitem value="@load(each)" label="@load(each eq 'A'? 'Activo' : 'Inactivo')"/>
+                        	<comboitem value="@load(each.idEstado)" label="@load(each.estado)"/>
                     	</template>
                     </combobox>
                     <div>
@@ -80,11 +88,18 @@
                     <label value="@load(each.aula.aula)" hflex="1"/>
                     <label value="@load(each.aula.asientos)" hflex="1"/>
                     <label value="@load(each.aula.comentarios)" hflex="1"/>
+                     <combobox disabled="true" inplace="true" mold="rounded"
+                        model="@load(vm.allTipoAula)" 
+                        selectedItem="@bind(each.aula.tipoaula)" hflex="1">
+                       <template name="model">
+                        	<comboitem value="@load(each.idTipoaula)" label="@load(each.tipoaula)"/>
+                    	</template>
+                    </combobox>
                     <combobox disabled="true" inplace="true" mold="rounded"
                         model="@load(vm.allEstados)" 
                         selectedItem="@bind(each.aula.estado)" hflex="1">
                        <template name="model">
-                        	<comboitem value="@load(each)" label="@load(each eq 'A'? 'Activo' : 'Inactivo')"/>
+                        	<comboitem value="@load(each.idEstado)" label="@load(each.estado)"/>
                     	</template>
                     </combobox>
                     <button

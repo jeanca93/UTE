@@ -47,6 +47,7 @@
                 <column width="120px" label="Usuario" align="left" sort="auto(usuario.usuario)"/>
                 <column width="180px" label="Correo" align="left" sort="auto(usuario.correo)"/>
                 <column width="170px" label="Perfil de Usuario" align="center" sort="auto(usuario.perfilesusuario.perfil)"/>
+                <column width="170px" label="Estado" align="center" sort="auto(usuario.estado)"/>                               
                 <column width="120px" label="Edit" visible="@load(vm.displayEdit)"/>
             </columns>
             <template name="editable">
@@ -69,6 +70,14 @@
                         	<comboitem value="@load(each.idPerfilUsuario)" label="@load(each.perfil)"/>
                     	</template>
                     </combobox>
+					<combobox inplace="true" mold="rounded" readonly="true"
+                        model="@load(vm.allEstados)" constraint="no empty:Campo obligatorio"
+                        selectedItem="@bind(each.usuario.estado)" hflex="1">
+                        <template name="model">
+                        	<comboitem value="@load(each.idEstado)" label="@load(each.estado)"/>
+                    	</template>
+                    </combobox>
+
                     <div>
                         <button
                             image="/img/tick-small.png"
@@ -92,6 +101,13 @@
                         selectedItem="@bind(each.usuario.perfilesusuario)" hflex="1">
                        <template name="model">
                         	<comboitem value="@load(each.idPerfilUsuario)" label="@load(each.perfil)"/>
+                    	</template>
+                    </combobox>
+                    <combobox disabled="true" inplace="true" mold="rounded"
+                        model="@load(vm.allEstados)" 
+                        selectedItem="@bind(each.usuario.estado)" hflex="1">
+                       <template name="model">
+                        	<comboitem value="@load(each.idEstado)" label="@load(each.estado)"/>
                     	</template>
                     </combobox>
                     <button

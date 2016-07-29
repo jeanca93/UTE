@@ -32,10 +32,14 @@ import org.zkoss.zul.Window;
 
 import entidades.Aulas;
 import entidades.Estados;
+import entidades.Perfilesusuario;
+import entidades.Tipoaula;
 import entidadesDAO.AulasHome;
 import modelo.estados.EstadosDatos;
+import modelo.usuarios.UsuarioDatos;
 
 public class AulasModel {
+	private List<Tipoaula> allTipoAulas;
 	private ListModelList<AulasStatus> allAulasStatus;
 	private List<Aulas> listAulaTMP;
 	private List<Estados> allEstados;
@@ -47,8 +51,13 @@ public class AulasModel {
 	public AulasModel(){
 		super();
 		
+		AulasDatos aulaDatos = new  AulasDatos();	
+		
 		allEstados = new ArrayList<Estados>();
 		allEstados = new EstadosDatos().getAllEstados();
+		
+		allTipoAulas = new ArrayList<Tipoaula>();
+		allTipoAulas = aulaDatos.getAllTipoAula();
 
 		allAulasStatus = new ListModelList<AulasStatus>();
 		allAulasStatus = genListModel(new AulasDatos().getAllAula());
@@ -95,7 +104,7 @@ public class AulasModel {
 	   if(aulaDelete.size() == 0){
 		   Clients.alert("Debe seleccionar m&iacute;nimo un registro para continuar", "Error", null);
 	   }else{
-		   Messagebox.show("¿Est&aacute; seguro que desea continuar?", "Mensaje de Confirmaci&oacute;n", Messagebox.YES | Messagebox.NO, Messagebox.QUESTION, new EventListener<Event>() {
+		   Messagebox.show("ï¿½Est&aacute; seguro que desea continuar?", "Mensaje de Confirmaci&oacute;n", Messagebox.YES | Messagebox.NO, Messagebox.QUESTION, new EventListener<Event>() {
 			
 				public void onEvent(Event event) throws Exception {
 					// TODO Auto-generated method stub
@@ -120,6 +129,11 @@ public class AulasModel {
 	}
 	
 	public void refresh() {
+		
+		AulasDatos aulaDatos = new  AulasDatos();	
+		allTipoAulas = new ArrayList<Tipoaula>();
+		allTipoAulas = aulaDatos.getAllTipoAula();
+		
 		allAulasStatus = new ListModelList<AulasStatus>();
 		allAulasStatus = genListModel(new AulasDatos().getAllAula());
 		GridAulas.setModel(allAulasStatus);
@@ -226,6 +240,11 @@ public class AulasModel {
 	public ListModelList<AulasStatus> getAllAulas() {
 		return allAulasStatus;
 	}
+	
+	public List<Tipoaula> getAllTipoAula() {
+		return allTipoAulas;
+	}
+	
 	
 	public List<Estados> getAllEstados() {
 		return allEstados;

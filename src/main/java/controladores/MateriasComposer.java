@@ -15,18 +15,30 @@ import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.event.EventListener;
 import org.zkoss.zk.ui.util.Clients;
 import org.zkoss.zk.ui.util.GenericForwardComposer;
+import org.zkoss.zul.Combobox;
 import org.zkoss.zul.Intbox;
+import org.zkoss.zul.ListModel;
+import org.zkoss.zul.ListModelList;
 import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Timebox;
+import org.zkoss.zul.Window;
 
+import entidades.Estados;
 import entidades.Materias;
+import entidades.Perfilesusuario;
+import entidades.Tipoaula;
 import entidadesDAO.EstadosHome;
 import entidadesDAO.MateriasHome;
+import entidadesDAO.TipoAulaHome;
+import modelo.aulas.AulasDatos;
+import modelo.usuarios.UsuarioDatos;
 
 public class MateriasComposer extends GenericForwardComposer<Component>{
 	private static final long serialVersionUID = 6L;
-	//private Window modalDialog;
+	private ListModelList<Tipoaula> allTipoAula = new ListModelList<Tipoaula>();
+	private Window modalDialog;
+	private Combobox cmbTipoAulas;
 	private Textbox txtMateria,txtIdMateria;
 	private Timebox txtDuracionClases, txtHorasSemana;
 	//private ListModelList<MateriaStatus> allMateriasStatus;
@@ -34,7 +46,9 @@ public class MateriasComposer extends GenericForwardComposer<Component>{
 
 	public MateriasComposer() {
 		// TODO Auto-generated constructor stub
-		
+		for(Tipoaula tipo:new AulasDatos().getAllTipoAula()){
+			allTipoAula.add(tipo);
+		}
 	}
 	
 	@Override
@@ -56,7 +70,12 @@ public class MateriasComposer extends GenericForwardComposer<Component>{
 	
 	public void onClick$tbbGrabar() throws InterruptedException,
 			ParserConfigurationException, SAXException, IOException,
-			InstantiationException, IllegalAccessException {		
+			InstantiationException, IllegalAccessException {	
+				
+			if(cmbTipoAulas.getSelectedItem() == null){
+				
+				Clients.showNotification("Debe escoger un Tipo de Aula valido", Clients.NOTIFICATION_TYPE_ERROR, cmbTipoAulas,  null, 0);
+			}else{
 		
 			try{
 				String idmateria = txtIdMateria.getValue().trim();
@@ -65,12 +84,13 @@ public class MateriasComposer extends GenericForwardComposer<Component>{
 				long minutosClases = duracionclases.getTime()/60000L;
 				Date horassemana = txtHorasSemana.getValue();
 				long minutosSemana = horassemana.getTime()/60000L;
+				Integer tipoAula = cmbTipoAulas.getSelectedItem().getValue();
 				
 				if (minutosClases % 15 == 0){
 					if(minutosSemana / minutosClases == 0){
 						Session session = Sessions.getCurrent();
 						
-						new MateriasHome().save(new Materias(idmateria,materia, duracionclases, horassemana,  new EstadosHome().findById(1), new Date(), Integer.parseInt(session.getAttribute("idUsuario").toString())));
+						new MateriasHome().save(new Materias(idmateria,materia, duracionclases, horassemana,new TipoAulaHome().findById(tipoAula), new EstadosHome().findById(1), new Date(), Integer.parseInt(session.getAttribute("idUsuario").toString())));
 						
 						Messagebox.show("Registro creado correctamente", "Exito", Messagebox.OK,  Messagebox.EXCLAMATION, new EventListener<Event>() {
 							
@@ -98,9 +118,14 @@ public class MateriasComposer extends GenericForwardComposer<Component>{
 			}catch(RuntimeException re){
 				throw re;
 			}
+			}
 		
 	}
 	
+	
+	public ListModel<Tipoaula> getAllTipoAula() {
+		return allTipoAula;
+	}
 	/*
 	private void genListModel(List<Materias> lsMaterias){
     	for(Materias mate: lsMaterias){

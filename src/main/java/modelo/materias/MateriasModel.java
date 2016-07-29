@@ -30,10 +30,13 @@ import org.zkoss.zul.Window;
 
 import entidades.Estados;
 import entidades.Materias;
+import entidades.Tipoaula;
 import entidadesDAO.MateriasHome;
+import modelo.aulas.AulasDatos;
 import modelo.estados.EstadosDatos;
 
 public class MateriasModel {
+	private List<Tipoaula> allTipoAulas;
 	private ListModelList<MateriaStatus> allMateriasStatus;
 	private List<Materias> listMateriaTMP;
 	private List<Estados> allEstados;
@@ -44,6 +47,10 @@ public class MateriasModel {
 	
 	public MateriasModel(){
 		super();
+		
+		AulasDatos aulaDatos = new  AulasDatos();	
+		allTipoAulas = new ArrayList<Tipoaula>();
+		allTipoAulas = aulaDatos.getAllTipoAula();
 		
 		allEstados = new ArrayList<Estados>();
 		allEstados = new EstadosDatos().getAllEstados();
@@ -99,7 +106,7 @@ public class MateriasModel {
 	   if(materiaDelete.size() == 0){
 		   Clients.alert("Debe seleccionar m&iacute;nimo un registro para continuar", "Error", null);
 	   }else{
-		   Messagebox.show("¿Est&aacute; seguro que desea continuar?", "Mensaje de Confirmaci&oacute;n", Messagebox.YES | Messagebox.NO, Messagebox.QUESTION, new EventListener<Event>() {
+		   Messagebox.show("ï¿½Est&aacute; seguro que desea continuar?", "Mensaje de Confirmaci&oacute;n", Messagebox.YES | Messagebox.NO, Messagebox.QUESTION, new EventListener<Event>() {
 			
 				public void onEvent(Event event) throws Exception {
 					// TODO Auto-generated method stub
@@ -124,6 +131,10 @@ public class MateriasModel {
 	}
 	
 	public void refresh() {
+		AulasDatos aulaDatos = new  AulasDatos();	
+		allTipoAulas = new ArrayList<Tipoaula>();
+		allTipoAulas = aulaDatos.getAllTipoAula();
+		
 		allMateriasStatus = new ListModelList<MateriaStatus>();
 		allMateriasStatus = genListModel(new  MateriaDatos(false).getAllMaterias());
 		GridMaterias.setModel(allMateriasStatus);
@@ -224,6 +235,10 @@ public class MateriasModel {
     
 	public ListModelList<MateriaStatus> getAllMaterias() {
 		return allMateriasStatus;
+	}
+	
+	public List<Tipoaula> getAllTipoAula() {
+		return allTipoAulas;
 	}
 	
 	public List<Estados> getAllEstados() {

@@ -52,6 +52,15 @@
 							 width="120px" mold="rounded" maxlength="5"/>
 							<label value="*" style="color:red" />
 						</row>
+						<row>
+							<combobox id="cmbTipoAulas" inplace="true" mold="rounded" autodrop="true" maxlength="60"
+		                        model="${modalDialog$composer.allTipoAulas}" constraint="no empty:Campo obligatorio" vflex="1">
+		                       <template name="model">
+		                        	<comboitem value="${each.idTipoAula}" label="${each.tipoAula}"/>
+		                    	</template>
+		                    </combobox>
+							<label value="*" style="color:red" />
+						</row>
 					</rows>
 				</grid>
 				<separator />
