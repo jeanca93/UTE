@@ -1,34 +1,53 @@
 <?page title="new page title" contentType="text/html;charset=UTF-8"?>
 <zk>
-<window id = "modalDialog" title="Materias de profesor" border="normal" width="625px" height="500px"
+<window id = "modalDialog" title="Disponibilidad de profesor" border="normal" width="535px" height="500px"
     position="center,center" closable="true"
     action="show: slideDown">
 
 <panel id="container" vflex="1" hflex="1"
-        viewModel="@id('vm') @init('modelo.profesores.ProfesoresMateriasModel')">
+        viewModel="@id('vm') @init('modelo.profesores.ProfesoresHorariosModel')">
     <toolbar>
-    	<toolbarbutton image="/img/save.png" label="Grabar" onClick="@command('grabarProfMaterias')"/>
+    	<toolbarbutton image="/img/save.png" label="Grabar" onClick="@command('grabarHorarioProfesor')"/>
     </toolbar>
     <panelchildren>
-        <grid id="GridProfMaterias" mold="paging" pagingPosition="bottom"
-        	model="@load(vm.allMateriascursos) @template('noneditable')"
+        <grid id="GridProfHoras" mold="paging" pagingPosition="bottom"
+        	model="@load(vm.allProfesoreshorarios) @template('noneditable')"
             autopaging="true" vflex="1" hflex="1"  emptyMessage="No hay registros">
             
             <columns>
             	<column width="33px" align="center" >
             		<checkbox id="selectAllCheckBox" onCheck="@command('selectedCheckBox', CheckEvent=event)"/>
         	    </column>
-                <column width="80px" label="Id Materia" align="center" sort="auto(materiascursos.id.materias.idMateria)" />
-                <column width="250px" label="Materia" align="left" sort="auto(materiascursos.id.materias.materia)"/>
-                <column width="100px" label="Curso" align="left" sort="auto(materiascursos.id.cursos.curso)"/>
+                <column width="80px" label="ID Día" align="center"/>
+                <column width="250px" label="Día" align="left"/>
+                <column width="150px" label="Horario" align="left"/>
             </columns>
             <template name="noneditable">
                 <row>
                 	<checkbox checked="${each.seleccionado}" disabled="false"/>
-                    <label value="@load(each.materiascursos.id.materias.idMateria)" hflex="1"/>
-                    <label value="@load(each.materiascursos.id.materias.materia)" hflex="1"/>
-                    <bandbox>
-	                    <bandpopup> 
+                    <label value="@load(each.dias.idDia)" hflex="1"/>
+                    <label value="@load(each.dias.dia)" hflex="1"/>
+                    <bandbox readonly="true" mold="rounded" hflex="1" value="@load(each.listHoras.size() gt 0?'Registrado':'')">
+	                    <bandpopup>
+	                    	<listbox selectedItems="@load(each.listHoras)" checkmark="true" multiple="true" width="370px" mold="paging" autopaging="true"
+				                model="@load(vm.allhoras)" onSelect="@command('itemSeleccinado', SelectEvent=event)">
+				                <listhead>
+				                    <listheader label="ID Hora" width="80px"/>
+				                    <listheader label="Hora Inicio" width="140px"/>
+				                    <listheader label="Hora Fin" width="140px"/>
+				                </listhead>
+				                <template name="model">
+						            <listitem>
+						                <listcell label="@load(each.idHora)" hflex="1"/>
+						                <listcell hflex="1">
+						                	<timebox disabled="true" format="HH:mm" mold="rounded" value="@load(each.horaIni)"/>
+						                </listcell>
+						                <listcell hflex="1">
+						                	<timebox disabled="true" format="HH:mm" mold="rounded" value="@load(each.horaFin)"/>
+						                </listcell>
+						            </listitem>
+						        </template>
+				            </listbox>
 	                    </bandpopup>
                     </bandbox>
                 </row>

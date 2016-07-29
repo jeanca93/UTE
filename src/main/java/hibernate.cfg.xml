@@ -44,5 +44,6 @@
         <mapping resource="entidades/Opciones.hbm.xml" />
         <mapping resource="entidades/Recursos.hbm.xml" />
         <mapping resource="entidades/Tipoaula.hbm.xml" />
+        <mapping resource="entidades/Estados.hbm.xml" />
     </session-factory>
 </hibernate-configuration>

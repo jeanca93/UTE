@@ -23,16 +23,13 @@
     		border: 1px thin #0080c0;
         }
 </style>
-<panel id="container" title="Año Escolar" vflex="1" 
+<panel id="container" title="Administración de Años Escolares" vflex="1" 
         viewModel="@id('vm') @init('modelo.anioescolar.AnioEscolarModel')">
     <toolbar>
     	<toolbarbutton image="/img/agregar.png" label="Nuevo" onClick="@command('nuevoAnioEscolar')"/>
     	<toolbarbutton image="/img/trash.png" label="Eliminar" onClick="@command('eliminarAnioEscolar')"/>
     </toolbar>
     <panelchildren>
-    	<zscript>
-			
-		</zscript>
         <grid id="GridAnioEscolar" mold="paging" pagingPosition="bottom"
         	model="@load(vm.allAnioEscolar) @template((vm.displayEdit and each.editingStatus) ? 'editable' : 'noneditable')"
             autopaging="true" vflex="1" emptyMessage="No hay registros">
@@ -41,8 +38,8 @@
             	<column width="30px" align="center" >
             		<checkbox id="selectAllCheckBox" onCheck="@command('selectedCheckBox', CheckEvent=event)"/>
         	    </column>
-                <column width="80px" label="Id Anio Escolar" align="center" sort="auto(anioescolar.idSchoolarYear)" />
-                <column width="250px" label="Anio Escolar" align="left" sort="auto(anioescolar.schollarYear)"/>
+                <column width="80px" label="ID Año Lectivo" align="center" sort="auto(anioescolar.idSchoolarYear))" />
+                <column width="250px" label="Año Lectivo" align="left" sort="auto(anioescolar.schollarYear)"/>
                 <column width="250px" label="Fecha Inicio" align="left" sort="auto(anioescolar.fechaInicio)"/>
                 <column width="250px" label="Fecha Fin" align="left" sort="auto(anioescolar.fechaFin)"/>
                 <column width="120px" label="Edit" visible="@load(vm.displayEdit)"/>
@@ -52,11 +49,11 @@
                 	<checkbox checked="${each.seleccionado}" disabled="true"/>
                     <intbox disabled="true" style="text-align: center;" hflex="1" 
                         value="@load(each.anioescolar.idSchoolarYear) @save(each.anioescolar.idSchoolarYear, before='confirm')" />
-                    <textbox focus="true" constraint="no empty:Campo obligatorio" hflex="1" 
+                    <textbox focus="true" constraint="no empty:Campo obligatorio" hflex="1" maxlength="20"
                         value="@load(each.anioescolar.schollarYear) @save(each.anioescolar.schollarYear, before='confirm')" />
-                    <timebox constraint="no empty: Campo Obligatorio"  format="HH:mm"  mold="rounded"
+                    <datebox constraint="no empty: Campo Obligatorio"  format="dd/MM/yyyy"  mold="rounded"
                             value="@load(each.anioescolar.fechaInicio) @save(each.anioescolar.fechaInicio, before='confirm')" />
-                    <timebox constraint="no empty: Campo Obligatorio"  format="HH:mm"  mold="rounded"
+                    <datebox constraint="no empty: Campo Obligatorio"  format="dd/MM/yyyy"  mold="rounded"
                             value="@load(each.anioescolar.fechaFin) @save(each.anioescolar.fechaFin, before='confirm')" />
                                                                    
                     <div>
@@ -74,14 +71,14 @@
                 	<checkbox checked="${each.seleccionado}" disabled="false"/>
                     <label value="@load(each.anioescolar.idSchoolarYear)" hflex="1"/>
                     <label value="@load(each.anioescolar.schollarYear)" hflex="1"/>
-                    <datebox constraint="no empty: Campo Obligatorio"  format="dd/mm/yyyy"  mold="rounded"
+                    <datebox constraint="no empty: Campo Obligatorio"  format="dd/MM/yyyy"  mold="rounded"
                             value="@load(each.anioescolar.fechaInicio)" disabled="true"/>
-                    <datebox constraint="no empty: Campo Obligatorio"  format="dd/mm/yyyy"  mold="rounded"
+                    <datebox constraint="no empty: Campo Obligatorio"  format="dd/MM/yyyy"  mold="rounded"
                             value="@load(each.anioescolar.fechaFin)" disabled="true"/>
                     
                     <button
                         image="/img/pencil-small.png"
-                        onClick="@command('changeEditableStatus', MateriaStatus=each)" />
+                        onClick="@command('changeEditableStatus', AnioEscolarStatus=each)" />
                 </row>
             </template>
         </grid>

@@ -57,7 +57,7 @@ public class ProfesoresmateriasHomeExt extends ProfesoresmateriasHome{
 			throw re;
 		}
     	
-    	return false;
+    	return flag;
 	}	
 	
 }

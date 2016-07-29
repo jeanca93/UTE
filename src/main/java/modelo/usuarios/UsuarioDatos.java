@@ -19,7 +19,7 @@ public class UsuarioDatos {
 		allUsuarios = userExt.listUsuariosActivos();
 		
 		PerfilesusuarioHomeExt prfExt = new PerfilesusuarioHomeExt();		
-		allPerfiles = prfExt.listPerfilesActivos();		
+		allPerfiles = prfExt.listPerfilesActivos(true);		
 	}
 	
 	public List<Usuarios> getAllUsuarios() {

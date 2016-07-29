@@ -1,6 +1,6 @@
 <?page title="new page title" contentType="text/html;charset=UTF-8"?>
 <zk>
-<window id = "modalDialog" title="Nuevo Usuario" border="normal" width="810px"
+<window id = "modalDialog" title="Nuevo Profesor" border="normal" width="810px"
     apply="controladores.ProfesoresComposer"
     position="center,center" closable="true"
     action="show: slideDown">
@@ -17,7 +17,7 @@
 	<vbox style="overflow:auto;">
 		<div id="div_check">
 			<groupbox mold="3d">
-				<caption label="Datos del Usuario"></caption>
+				<caption label="Datos del Profesor"></caption>
 				<grid>
 					<columns>
 						<column width="110px" />
@@ -31,18 +31,18 @@
 					<rows xmlns:w="client">
 						<row>
 							<label value="Profesor:" />
-							<textbox sclass="ftextbox" id="txtProfesor"
+							<textbox sclass="ftextbox" id="txtProfesor" maxlength="100"
 								style="text-transform: uppercase"  width="240px" constraint="no empty:Campo obligatorio"/>
 							<label value="*" style="color:red" />
 							
-							<label value="Titulo:" />
-							<textbox sclass="ftextbox" id="txtTitulo"
-								style="text-transform: uppercase"  width="240px" constraint="no empty:Campo obligatorio"/>
+							<label value="Título:" />
+							<textbox sclass="ftextbox" id="txtTitulo" maxlength="100"
+								style="text-transform: uppercase"  width="240px"/>
 							<label value="*" style="color:red" />
 						</row>
 						<row>
-							<label value="Max. Horas por semana" />
-							<intbox sclass="ftextbox"  id="txtMaxhoras" width="50px" 
+							<label value="Máx. Horas por semana" />
+							<intbox sclass="ftextbox"  id="txtMaxhoras" width="50px" maxlength="2"
 								constraint="no empty:Campo obligatorio"/>
 							<label value="*" style="color:red" />
 						</row>

@@ -10,7 +10,7 @@ import java.util.Set;
  */
 public class Dias implements java.io.Serializable {
 
-	private String idDia;
+	private Integer idDia;
 	private String dia;
 	private char estado;
 	private Date fechaCreacion;
@@ -21,7 +21,7 @@ public class Dias implements java.io.Serializable {
 	public Dias() {
 	}
 
-	public Dias(String idDia, String dia, char estado, Date fechaCreacion, int usuarioCrea) {
+	public Dias(Integer idDia, String dia, char estado, Date fechaCreacion, int usuarioCrea) {
 		this.idDia = idDia;
 		this.dia = dia;
 		this.estado = estado;
@@ -29,7 +29,7 @@ public class Dias implements java.io.Serializable {
 		this.usuarioCrea = usuarioCrea;
 	}
 
-	public Dias(String idDia, String dia, char estado, Date fechaCreacion, int usuarioCrea, Date fechaModificacion,
+	public Dias(Integer idDia, String dia, char estado, Date fechaCreacion, int usuarioCrea, Date fechaModificacion,
 			Integer usuarioModifica) {
 		this.idDia = idDia;
 		this.dia = dia;
@@ -40,11 +40,11 @@ public class Dias implements java.io.Serializable {
 		this.usuarioModifica = usuarioModifica;
 	}
 
-	public String getIdDia() {
+	public Integer getIdDia() {
 		return this.idDia;
 	}
 
-	public void setIdDia(String idDia) {
+	public void setIdDia(Integer idDia) {
 		this.idDia = idDia;
 	}
 

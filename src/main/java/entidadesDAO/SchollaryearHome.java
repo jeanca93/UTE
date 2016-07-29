@@ -1,7 +1,5 @@
 package entidadesDAO;
 
-import static org.hibernate.criterion.Example.create;
-
 import java.util.List;
 
 import org.apache.commons.logging.Log;
@@ -10,8 +8,10 @@ import org.hibernate.LockMode;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
+import basehibernate.MydbBaseHibernateDAO;
 import entidades.Schollaryear;
 
+import static org.hibernate.criterion.Example.create;
 
 public class SchollaryearHome extends MydbBaseHibernateDAO{
 
@@ -200,3 +200,4 @@ public class SchollaryearHome extends MydbBaseHibernateDAO{
 	}
 
 }
+  

@@ -43,22 +43,6 @@
 			<div vflex="1" hflex="1">
 				<include id="icdEspacio"></include>
 		    </div>
-			<!--   
-			<borderlayout>
-				<north border="none" hflex="1" vflex="1">
-					<div>
-						<menubar id="mnbMenu" autodrop="true">
-							<custom-attributes org.zkoss.zul.image.preload="true" />
-						</menubar>
-					</div>
-				</north>
-				<center id = "centerLayout" border="none" hflex="1" vflex="1">
-					<div>
-		            	<include id="icdEspacio"></include>
-		        	</div>
-				</center>
-			</borderlayout>
-			-->
 		</center>
 		<west id="westLayout" open="true" size="22%" vflex="1" hflex="min" splittable="true" collapsible="true" autoscroll="true">
 			<div style="padding: 0 0;" >
@@ -72,7 +56,7 @@
 				<div style = "padding: 0 0;" class="collapse navbar-collapse navHeaderCollapse">
 					<tree id="mtree" style="border:none;">
 						<treecols>
-							<treecol style = "color:#000080;font-size:20px;"  label="Menu" />
+							<treecol style = "color:#000080;font-size:20px;"  label="Menú" />
 						</treecols>
 					</tree>
 				</div>

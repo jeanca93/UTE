@@ -74,9 +74,9 @@ public class LoginComposer extends GenericForwardComposer {
 		String password = txtClave.getText().trim();
 		
 		if(user.length() == 0)
-			Clients.showNotification("Debe ingresar un usuario válido","info",txtUsuario,"end_center",3000);		
+			Clients.showNotification("Debe ingresar un usuario v&aacute;lido","info",txtUsuario,"end_center",3000);		
 		else if(password.length() == 0)
-			Clients.showNotification("Debe ingresar una contraseña válida","info",txtClave,"end_center",3000);
+			Clients.showNotification("Debe ingresar una contraseña v&aacute;lida","info",txtClave,"end_center",3000);
 		else{
 			UsuariosHomeExt userExt = new UsuariosHomeExt();
 			
@@ -89,7 +89,7 @@ public class LoginComposer extends GenericForwardComposer {
 				
 				Executions.sendRedirect("/principal.zul");
 			}else
-				Clients.showNotification("Usuario o contraseña inválido",Clients.NOTIFICATION_TYPE_ERROR, null, null, 0);
+				Clients.showNotification("Usuario o contraseña inv&aacute;lido",Clients.NOTIFICATION_TYPE_ERROR, null, null, 0);
 		}
 	}
 

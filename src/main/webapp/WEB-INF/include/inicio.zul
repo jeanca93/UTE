@@ -1,0 +1,19 @@
+<?page title="new page title" contentType="text/html;charset=UTF-8"?>
+<zk>
+<style>
+	body {padding: 0 0;}
+</style>
+<borderlayout>
+<north size="20%" border="none" >
+</north>
+<center border="none">
+<image src="/img/logo.jpg" hflex="1" vflex="1"/>
+</center>
+<south size="20%" border="none" >
+</south>
+<east size="25%" border="none" >
+</east>
+<west size="25%" border="none" >
+</west>
+</borderlayout>
+</zk>

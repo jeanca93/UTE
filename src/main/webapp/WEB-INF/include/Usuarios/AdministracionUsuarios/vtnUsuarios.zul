@@ -31,35 +31,35 @@
 					<rows xmlns:w="client">
 						<row>
 							<label value="Usuario:" />
-							<textbox sclass="ftextbox" id="txtUsuario"
+							<textbox sclass="ftextbox" id="txtUsuario" maxlength="15"
 								width="120px" constraint="${customConstraint}"/>
 							<label value="*" style="color:red" />
 							
 							<label value="Clave:" />
-							<textbox sclass="ftextbox" id="txtClave" type="password"
-								width="160px" constraint="no empty:Campo obligatorio, /^.*(?=.{8,64}).*$/:Clave debe tener minimo 8 caracteres"/>
+							<textbox sclass="ftextbox" id="txtClave" type="password" maxlength="256"
+								width="160px" constraint="no empty:Campo obligatorio, /^.*(?=.{8,256}).*$/:Clave debe tener mínimo 8 caracteres"/>
 							<label value="*" style="color:red" />
 						</row>
 						<row>
 							<label value="Nombres:" />
-							<textbox sclass="ftextbox" id="txtNombres"
+							<textbox sclass="ftextbox" id="txtNombres" maxlength="50"
 								style="text-transform: uppercase" width="240px" constraint="no empty:Campo obligatorio"/>
 							<label value="*" style="color:red" />
 
 							<label value="Apellidos:" />
-							<textbox sclass="ftextbox" id="txtApellidos"
+							<textbox sclass="ftextbox" id="txtApellidos" maxlength="50"
 								style="text-transform: uppercase" width="240px" constraint="no empty:Campo obligatorio"/>
 							<label value="*" style="color:red" />
 						</row>
 
 						<row>
 							<label value="Correo:" />
-							<textbox sclass="ftextbox" id="txtCorreo"
-								width="180px" type="email" constraint="no empty:Campo obligatorio, /.+@.+\.[a-z]+/:Correo invalido"/>
+							<textbox sclass="ftextbox" id="txtCorreo" maxlength="70"
+								width="180px" type="email" constraint="no empty:Campo obligatorio, /.+@.+\.[a-z]+/:Correo inválido"/>
 							<label value="*" style="color:red" />
 							 
 							<label value="Perfil de Usuario:" />
-							<combobox id="cmbPerfiles" inplace="true" mold="rounded" autodrop="true"
+							<combobox id="cmbPerfiles" inplace="true" mold="rounded" autodrop="true" maxlength="60"
 		                        model="${modalDialog$composer.allPerfiles}" constraint="no empty:Campo obligatorio" vflex="1">
 		                       <template name="model">
 		                        	<comboitem value="${each.idPerfilUsuario}" label="${each.perfil}"/>

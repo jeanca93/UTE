@@ -19,7 +19,7 @@ import entidades.Profesores;
 import entidadesDAO.ProfesoresHome;
 
 public class ProfesoresComposer extends GenericForwardComposer<Component>{
-	private static final long serialVersionUID = 6L;
+	private static final long serialVersionUID = 5L;
 	//private Window modalDialog;
 	private Textbox txtProfesor, txtTitulo;
 	private Intbox txtMaxhoras;
@@ -50,7 +50,7 @@ public class ProfesoresComposer extends GenericForwardComposer<Component>{
 			
 			new ProfesoresHome().save(new Profesores(profesor, titulo, maxhoras, 'A', new Date(),Integer.parseInt(session.getAttribute("idUsuario").toString())));
 			
-			Messagebox.show("Creado correctamente", "Exito", Messagebox.OK,  Messagebox.EXCLAMATION, new EventListener<Event>() {
+			Messagebox.show("Registro creado correctamente", "Exito", Messagebox.OK,  Messagebox.EXCLAMATION, new EventListener<Event>() {
 				
 				public void onEvent(Event event) throws Exception {
 					// TODO Auto-generated method stub

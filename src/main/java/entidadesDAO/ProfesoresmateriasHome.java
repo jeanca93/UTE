@@ -8,6 +8,7 @@ import org.hibernate.LockMode;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
+import basehibernate.MydbBaseHibernateDAO;
 import entidades.Profesoresmaterias;
 import entidades.ProfesoresmateriasId;
 

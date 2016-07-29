@@ -2,15 +2,13 @@ package entidadesDAO;
 // Generated Jun 5, 2016 11:08:49 PM by Hibernate Tools 4.0.0.Final
 
 import java.util.List;
-import javax.naming.InitialContext;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.hibernate.LockMode;
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 
+import basehibernate.MydbBaseHibernateDAO;
 import entidades.Permisos;
-import sessionfactory.MydbHibernateSessionFactory;
 
 import static org.hibernate.criterion.Example.create;
 

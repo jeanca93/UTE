@@ -11,6 +11,7 @@ import org.zkoss.zk.ui.Execution;
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.Session;
 import org.zkoss.zk.ui.Sessions;
+import org.zkoss.zk.ui.WrongValueException;
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.event.EventListener;
 import org.zkoss.zk.ui.util.Clients;
@@ -65,32 +66,37 @@ public class UsuariosComposer extends GenericForwardComposer<Component>{
 		}else{
 			try{
 				String usuario = txtUsuario.getValue().trim();
-				String clave = txtClave.getValue().trim();
-				String nombres = txtNombres.getValue();
-				String apellidos = txtApellidos.getValue();
-				String correo = txtCorreo.getValue().trim();
-				Integer perfil = cmbPerfiles.getSelectedItem().getValue();
-				Session session = Sessions.getCurrent();
 				
-				new UsuariosHomeExt().crearNuevoUsuario(new Usuarios(new PerfilesusuarioHome().findById(perfil), usuario, null, nombres, apellidos, correo, 'A', new Date(), Integer.parseInt(session.getAttribute("idUsuario").toString())), clave);
-						
-				Messagebox.show("Creado correctamente", "Exito", Messagebox.OK,  Messagebox.EXCLAMATION, new EventListener<Event>() {
+				if(new UsuariosHomeExt().existeUsuario(usuario) > 0){
+					Clients.showNotification("Usuario ya existente", Clients.NOTIFICATION_TYPE_ERROR, txtUsuario,  null, 0);
+				}else{
+					String clave = txtClave.getValue().trim();
+					String nombres = txtNombres.getValue();
+					String apellidos = txtApellidos.getValue();
+					String correo = txtCorreo.getValue().trim();
+					Integer perfil = cmbPerfiles.getSelectedItem().getValue();
+					Session session = Sessions.getCurrent();
 					
-					public void onEvent(Event event) throws Exception {
-						// TODO Auto-generated method stub
-						Executions.sendRedirect("");
-					}
-				});
-				
-				/*
-				modalDialog.detach();
-				
-				allUsuariosStatus = new ListModelList<UsuarioStatus>();
-				genListModel(new UsuarioDatos().getAllUsuarios());
-				GridUsuarios.setModel(allUsuariosStatus);
-				
-				Clients.showNotification("Creado correctamente");
-				*/
+					new UsuariosHomeExt().crearNuevoUsuario(new Usuarios(new PerfilesusuarioHome().findById(perfil), usuario, null, nombres, apellidos, correo, 'A', new Date(), Integer.parseInt(session.getAttribute("idUsuario").toString())), clave);
+							
+					Messagebox.show("Registro creado correctamente", "Exito", Messagebox.OK,  Messagebox.EXCLAMATION, new EventListener<Event>() {
+						
+						public void onEvent(Event event) throws Exception {
+							// TODO Auto-generated method stub
+							Executions.sendRedirect("");
+						}
+					});
+					
+					/*
+					modalDialog.detach();
+					
+					allUsuariosStatus = new ListModelList<UsuarioStatus>();
+					genListModel(new UsuarioDatos().getAllUsuarios());
+					GridUsuarios.setModel(allUsuariosStatus);
+					
+					Clients.showNotification("Creado correctamente");
+					*/
+				}
 			}catch(RuntimeException re){
 				throw re;
 			}

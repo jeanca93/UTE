@@ -21,12 +21,10 @@ import entidades.Schollaryear;
 import entidadesDAO.SchollaryearHome;
 
 public class AnioEscolarComposer extends GenericForwardComposer<Component>{
-	private static final long serialVersionUID = 4L;
+	private static final long serialVersionUID = 8L;
 	private Textbox txtAnioEscolar;
-	private Intbox txtIdAnioEscolar;
 	private Datebox txtFechaInicio, txtFechaFin;
 	
-
 	public AnioEscolarComposer() {
 		// TODO Auto-generated constructor stub
 		
@@ -44,29 +42,28 @@ public class AnioEscolarComposer extends GenericForwardComposer<Component>{
 			ParserConfigurationException, SAXException, IOException,
 			InstantiationException, IllegalAccessException {		
 		
-			try{
-				Integer idanioescolar = txtIdAnioEscolar.getValue();
-				String anioescolar = txtAnioEscolar.getValue().trim();
-				Date fechainicio = txtFechaInicio.getValue();
-				Date fechafin = txtFechaFin.getValue();
+		try{
 				
-				Session session = Sessions.getCurrent();
+			String anioescolar = txtAnioEscolar.getValue().trim();
+			Date fechainicio = txtFechaInicio.getValue();
+			Date fechafin = txtFechaFin.getValue();
 				
-				new SchollaryearHome().save(new Schollaryear(idanioescolar,anioescolar, fechainicio, fechafin, 'A', new Date(), Integer.parseInt(session.getAttribute("idUsuario").toString())));
+			Session session = Sessions.getCurrent();
+				
+			new SchollaryearHome().save(new Schollaryear(anioescolar, fechainicio, fechafin, 'A', new Date(), Integer.parseInt(session.getAttribute("idUsuario").toString())));
 		
-				Messagebox.show("Creado correctamente", "Exito", Messagebox.OK,  Messagebox.EXCLAMATION, new EventListener<Event>() {
+			Messagebox.show("Registro creado correctamente", "Exito", Messagebox.OK,  Messagebox.EXCLAMATION, new EventListener<Event>() {
 					
-					public void onEvent(Event event) throws Exception {
-						// TODO Auto-generated method stub
-						Executions.sendRedirect("");
-					}
-				});
+				public void onEvent(Event event) throws Exception {
+					// TODO Auto-generated method stub
+					Executions.sendRedirect("");
+				}
+			});
 
-				
-			}catch(RuntimeException re){
-				throw re;
-			}
-		
+			
+		}catch(RuntimeException re){
+			throw re;
+		}
 	}
 	
 }

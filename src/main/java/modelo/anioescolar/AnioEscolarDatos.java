@@ -11,8 +11,7 @@ public class AnioEscolarDatos {
 	
 	public AnioEscolarDatos(){
 		SchollaryearHomeExt anioExt = new SchollaryearHomeExt();
-		allSchollaryear = anioExt.listSchollaryearActivos();	
-
+		allSchollaryear = anioExt.listSchollaryearActivos();
 	}
 	
 	public List<Schollaryear> getAllAnioEscolar() {

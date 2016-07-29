@@ -23,12 +23,13 @@
     		border: 1px thin #0080c0;
         }
 </style>
-<panel id="container" title="Administracion de Profesores" vflex="1"
+<panel id="container" title="Administración de Profesores" vflex="1"
         viewModel="@id('vm') @init('modelo.profesores.ProfesoresModel')">
     <toolbar id="tbGrid">
     	<toolbarbutton image="/img/agregar.png" label="Nuevo" onClick="@command('nuevoProfesor')"/>
     	<toolbarbutton image="/img/trash.png" label="Eliminar" onClick="@command('eliminarProfesores')"/>
     	<toolbarbutton image="" label="Materias de Profesor" onClick="@command('materiasProfesor')"/>
+    	<toolbarbutton image="/img/agregar.png" label="Horario de Profesor" onClick="@command('horariosProfesor')"/>
     </toolbar>
     <panelchildren>
         <grid id="GridProfesores" mold="paging" pagingPosition="bottom"
@@ -39,22 +40,22 @@
             	<column width="30px" align="center" >
             		<checkbox id="selectAllCheckBox" onCheck="@command('selectedCheckBox', CheckEvent=event)"/>
         	    </column>
-                <column width="80px" label="Id Profesor" align="center" sort="auto(profesor.idProfesor)" />
+                <column width="80px" label="ID Profesor" align="center" sort="auto(profesor.idProfesor)" />
                 <column width="250px" label="Profesor" align="left" sort="auto(profesor.profesor)"/>
-                <column width="250px" label="Titulo" align="left" sort="auto(profesor.titulo)"/>
-                <column width="120px" label="Max. Horas por semana" align="left" sort="auto(profesor.maxHorasPorSemana)"/>
+                <column width="250px" label="Título" align="left" sort="auto(profesor.titulo)"/>
+                <column width="120px" label="Máx. Horas por Semana" align="left" sort="auto(profesor.maxHorasPorSemana)"/>
                 <column width="120px" label="Edit" visible="@load(vm.displayEdit)"/>
             </columns>
             <template name="editable">
                 <row>
-                	<checkbox checked="${each.seleccionado}" disabled="true"/>
-                    <textbox disabled="true" style="text-align: center;" hflex="1" 
+                	<checkbox checked="@load(each.seleccionado) @save(each.seleccionado, before='confirm')" disabled="true"/>
+                    <intbox disabled="true" style="text-align: center;" hflex="1" 
                         value="@load(each.profesor.idProfesor) @save(each.profesor.idProfesor, before='confirm')" />
-                    <textbox focus="true" constraint="no empty:Campo obligatorio" hflex="1" 
+                    <textbox focus="true" constraint="no empty:Campo obligatorio" hflex="1" maxlength="100"
                         value="@load(each.profesor.profesor) @save(each.profesor.profesor, before='confirm')" />
-                    <textbox constraint="no empty:Campo obligatorio" hflex="1" 
+                    <textbox hflex="1" maxlength="100"
                         value="@load(each.profesor.titulo) @save(each.profesor.titulo, before='confirm')" />
-                    <intbox constraint="no empty:Campo obligatorio" hflex="1" 
+                    <intbox constraint="no empty:Campo obligatorio" hflex="1" maxlength="2"
                         value="@load(each.profesor.maxHorasPorSemana) @save(each.profesor.maxHorasPorSemana, before='confirm')" />
                     <!-- 
                     <combobox inplace="true" mold="rounded" readonly="true"

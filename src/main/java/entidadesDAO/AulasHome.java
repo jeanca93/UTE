@@ -8,6 +8,7 @@ import org.hibernate.LockMode;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
+import basehibernate.MydbBaseHibernateDAO;
 import entidades.Aulas;
 
 import static org.hibernate.criterion.Example.create;
@@ -60,8 +61,7 @@ public class AulasHome extends MydbBaseHibernateDAO{
 		log.debug("saving Aulas instance");
 		
 		try {
-			tx = session.beginTransaction();
-			
+			tx = session.beginTransaction();			
 			session.save(instance);
 			
 			log.debug("save successful");

@@ -13,6 +13,7 @@ import org.zkoss.zk.ui.Session;
 import org.zkoss.zk.ui.Sessions;
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.event.EventListener;
+import org.zkoss.zk.ui.util.Clients;
 import org.zkoss.zk.ui.util.GenericForwardComposer;
 import org.zkoss.zul.Intbox;
 import org.zkoss.zul.Messagebox;
@@ -23,7 +24,7 @@ import entidades.Materias;
 import entidadesDAO.MateriasHome;
 
 public class MateriasComposer extends GenericForwardComposer<Component>{
-	private static final long serialVersionUID = 4L;
+	private static final long serialVersionUID = 6L;
 	//private Window modalDialog;
 	private Textbox txtMateria,txtIdMateria;
 	private Timebox txtDuracionClases, txtHorasSemana;
@@ -59,32 +60,40 @@ public class MateriasComposer extends GenericForwardComposer<Component>{
 			try{
 				String idmateria = txtIdMateria.getValue().trim();
 				String materia = txtMateria.getValue().trim();
-				Date horassemana = txtHorasSemana.getValue();
 				Date duracionclases = txtDuracionClases.getValue();
+				long minutosClases = duracionclases.getTime()/60000L;
+				Date horassemana = txtHorasSemana.getValue();
+				long minutosSemana = horassemana.getTime()/60000L;
 				
-				Session session = Sessions.getCurrent();
-				
-				new MateriasHome().save(new Materias(idmateria,materia, duracionclases, horassemana, 'A', new Date(), Integer.parseInt(session.getAttribute("idUsuario").toString())));
-				
-				Messagebox.show("Creado correctamente", "Exito", Messagebox.OK,  Messagebox.EXCLAMATION, new EventListener<Event>() {
-					
-					public void onEvent(Event event) throws Exception {
-						// TODO Auto-generated method stub
-						Executions.sendRedirect("");
-					}
-				});
-
-				/*
-				modalDialog.detach();
-				
-				BindUtils.postNotifyChange(null, null, this, "*");
-								
-				allMateriasStatus = new ListModelList<MateriaStatus>();
-				genListModel(new MateriaDatos().getAllMaterias());
-				GridMaterias.setModel(allMateriasStatus);
-				
-				Clients.showNotification("Materia Creada correctamente");
-				*/
+				if (minutosClases % 15 == 0){
+					if(minutosSemana / minutosClases == 0){
+						Session session = Sessions.getCurrent();
+						
+						new MateriasHome().save(new Materias(idmateria,materia, duracionclases, horassemana, 'A', new Date(), Integer.parseInt(session.getAttribute("idUsuario").toString())));
+						
+						Messagebox.show("Registro creado correctamente", "Exito", Messagebox.OK,  Messagebox.EXCLAMATION, new EventListener<Event>() {
+							
+							public void onEvent(Event event) throws Exception {
+								// TODO Auto-generated method stub
+								Executions.sendRedirect("");
+							}
+						});
+		
+						/*
+						modalDialog.detach();
+						
+						BindUtils.postNotifyChange(null, null, this, "*");
+										
+						allMateriasStatus = new ListModelList<MateriaStatus>();
+						genListModel(new MateriaDatos().getAllMaterias());
+						GridMaterias.setModel(allMateriasStatus);
+						
+						Clients.showNotification("Materia Creada correctamente");
+						*/
+					}else
+						Clients.showNotification("Horas a la Semana debe ser segun duraci&oacute;n de clase", Clients.NOTIFICATION_TYPE_ERROR, txtHorasSemana,  null, 0);
+				}else
+					Clients.showNotification("Duraci&oacute;n de clases no permitida", Clients.NOTIFICATION_TYPE_ERROR, txtDuracionClases,  null, 0);
 			}catch(RuntimeException re){
 				throw re;
 			}
