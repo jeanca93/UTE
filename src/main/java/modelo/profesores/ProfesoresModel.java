@@ -30,12 +30,15 @@ import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Row;
 import org.zkoss.zul.Window;
 
+import entidades.Estados;
 import entidades.Profesores;
 import entidadesDAO.ProfesoresHome;
+import modelo.estados.EstadosDatos;
 
 public class ProfesoresModel {
 	private ListModelList<ProfesorStatus> allProfesoresStatus;
 	private List<Profesores> listProfesorTMP;
+	private List<Estados> allEstados;
 	private boolean displayEdit = true;
 	
 	@Wire
@@ -43,6 +46,9 @@ public class ProfesoresModel {
 	
 	public ProfesoresModel(){
 		super();
+		
+		allEstados = new ArrayList<Estados>();
+		allEstados = new EstadosDatos().getAllEstados();
 		
 		allProfesoresStatus = new ListModelList<ProfesorStatus>();		
 		listProfesorTMP = new ArrayList<Profesores>();
@@ -137,7 +143,6 @@ public class ProfesoresModel {
 	    final List<Profesores> profesoresDelete = new ArrayList<Profesores>();
 	    
 	    for(Row row:components){
-	      //Row comp = (Row) obj;
 	      Checkbox ck = (Checkbox) row.getChildren().get(0);
 	      
 	      if(ck.isChecked()){
@@ -147,9 +152,9 @@ public class ProfesoresModel {
 	   }
 	    
 	   if(profesoresDelete.size() == 0){
-		   Clients.alert("Debe seleccionar mínimo un registro para continuar", "Error", null);
+		   Clients.alert("Debe seleccionar m&iacute;nimo un registro para continuar", "Error", null);
 	   }else{
-		   Messagebox.show("Esta seguro que desea continuar?", "Mensaje de Confirmación", Messagebox.YES | Messagebox.NO, Messagebox.QUESTION, new EventListener<Event>() {
+		   Messagebox.show("¿Est&aacute; seguro que desea continuar?", "Mensaje de Confirmaci&oacute;n", Messagebox.YES | Messagebox.NO, Messagebox.QUESTION, new EventListener<Event>() {
 			
 				public void onEvent(Event event) throws Exception {
 					// TODO Auto-generated method stub
@@ -163,7 +168,7 @@ public class ProfesoresModel {
 							
 							refresh();
 							
-							Clients.showNotification("Eliminado correctamente");
+							Clients.showNotification("Registro eliminado correctamente");
 						}catch(RuntimeException re){
 							throw re;
 						}
@@ -230,7 +235,7 @@ public class ProfesoresModel {
         		
         		refresh();
         		
-        		Clients.showNotification("Modificado correctamente");
+        		Clients.showNotification("Registro modificado correctamente");
         	}catch(RuntimeException re){
         		throw re;
         	}
@@ -278,6 +283,10 @@ public class ProfesoresModel {
     
 	public ListModelList<ProfesorStatus> getAllProfesores() {
 		return allProfesoresStatus;
+	}
+	
+	public List<Estados> getAllEstados() {
+		return allEstados;
 	}
 		
 	public boolean isDisplayEdit() {

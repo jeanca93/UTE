@@ -23,7 +23,7 @@
     		border: 1px thin #0080c0;
         }
 </style>
-<panel id="container" title="Cursos" vflex="1" validationMessages="@id('vmsgs')"
+<panel id="container" title="Administración de Cursos" vflex="1"
         viewModel="@id('vm') @init('modelo.cursos.CursosModel')">
     <toolbar>
     	<toolbarbutton image="/img/agregar.png" label="Nuevo" onClick="@command('nuevoCurso')"/>
@@ -31,9 +31,6 @@
     	<toolbarbutton image="/img/agregar.png" label="Materias Cursos" onClick="@command('materiasCurso')"/>
     </toolbar>
     <panelchildren>
-    	 <zscript>
-			constraint.NoSpacesConstraint customConstraint = new constraint.NoSpacesConstraint();
-		</zscript>
         <grid id="GridCursos" mold="paging" pagingPosition="bottom"
         	model="@load(vm.allCursos) @template((vm.displayEdit and each.editingStatus) ? 'editable' : 'noneditable')"
             autopaging="true" vflex="1" emptyMessage="No hay registros">
@@ -42,7 +39,7 @@
             	<column width="30px" align="center" >
             		<checkbox id="selectAllCheckBox" onCheck="@command('selectedCheckBox', CheckEvent=event)"/>
         	    </column>
-                <column width="80px" label="Id Curso" align="center" sort="auto(curso.idCurso)" />
+                <column width="80px" label="ID Curso" align="center" sort="auto(curso.idCurso)" />
                 <column width="250px" label="Curso" align="left" sort="auto(curso.curso)"/>
                 <column width="250px" label="Paralelo" align="left" sort="auto(curso.paralelos)"/>
                 <column width="170px" label="Estado" align="center" sort="auto(aula.estado)"/>
@@ -51,11 +48,11 @@
             <template name="editable">
                 <row>
                 	<checkbox checked="${each.seleccionado}" disabled="true"/>
-                    <textbox disabled="true" style="text-align: center;" hflex="1" 
+                    <textbox disabled="true" style="text-align: center;" hflex="1" maxlength="5"
                         value="@load(each.curso.idCurso) @save(each.curso.idCurso, before='confirm')" />
-                    <textbox focus="true" constraint="no empty:Campo obligatorio" hflex="1" 
+                    <textbox focus="true" constraint="no empty:Campo obligatorio" hflex="1" maxlength="10"
                         value="@load(each.curso.curso) @save(each.curso.curso, before='confirm')" />
-                    <intbox constraint="no empty:Campo obligatorio" hflex="1" 
+                    <intbox constraint="no empty:Campo obligatorio" hflex="1" maxlength="2"
                         value="@load(each.curso.paralelos) @save(each.curso.paralelos, before='confirm')" />
                     <combobox inplace="true" mold="rounded" readonly="true"
                         model="@load(vm.allEstados)" constraint="no empty:Campo obligatorio"

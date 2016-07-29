@@ -30,14 +30,17 @@ import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Row;
 import org.zkoss.zul.Window;
 
+import entidades.Estados;
 import entidades.Perfilesusuario;
 import entidades.Usuarios;
 import entidadesDAO.UsuariosHome;
 import entidadesDAO.UsuariosHomeExt;
+import modelo.estados.EstadosDatos;
 
 public class UsuariosModel {
 	private List<Perfilesusuario> allPerfiles;
 	private ListModelList<UsuarioStatus> allUsuariosStatus;
+	private List<Estados> allEstados;
 	private List<Usuarios> listUserTMP;
 	private boolean displayEdit = true;
 	
@@ -54,6 +57,9 @@ public class UsuariosModel {
 		
 		allPerfiles = new ArrayList<Perfilesusuario>();
 		allPerfiles = userDatos.getAllPerfiles();
+		
+		allEstados = new ArrayList<Estados>();
+		allEstados = new EstadosDatos().getAllEstados();
 		
 		listUserTMP = new ArrayList<Usuarios>();
 	}
@@ -102,9 +108,9 @@ public class UsuariosModel {
 	   }
 	    
 	   if(usersDelete.size() == 0){
-		   Clients.alert("Debe seleccionar mínimo un registro para continuar", "Error", null);
+		   Clients.alert("Debe seleccionar m&iacute;nimo un registro para continuar", "Error", null);
 	   }else{
-		   Messagebox.show("Esta seguro que desea continuar?", "Mensaje de Confirmación", Messagebox.YES | Messagebox.NO, Messagebox.QUESTION, new EventListener<Event>() {
+		   Messagebox.show("¿Est&aacute; seguro que desea continuar?", "Mensaje de Confirmaci&iacute;n", Messagebox.YES | Messagebox.NO, Messagebox.QUESTION, new EventListener<Event>() {
 			
 				public void onEvent(Event event) throws Exception {
 					// TODO Auto-generated method stub
@@ -118,7 +124,7 @@ public class UsuariosModel {
 							
 							refresh();
 							
-							Clients.showNotification("Eliminado correctamente");
+							Clients.showNotification("Registro eliminado correctamente");
 						}catch(RuntimeException re){
 							throw re;
 						}
@@ -189,7 +195,7 @@ public class UsuariosModel {
         		
         		//refresh();
         		
-        		Clients.showNotification("Modificado correctamente");
+        		Clients.showNotification("Registro modificado correctamente");
         	}catch(RuntimeException re){
         		throw re;
         	}
@@ -242,6 +248,10 @@ public class UsuariosModel {
 	
 	public List<Perfilesusuario> getAllPerfiles() {
 		return allPerfiles;
+	}
+	
+	public List<Estados> getAllEstados() {
+		return allEstados;
 	}
 		
 	public boolean isDisplayEdit() {

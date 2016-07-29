@@ -18,7 +18,7 @@
             	<column width="33px" align="center" >
             		<checkbox id="selectAllCheckBox" onCheck="@command('selectedCheckBox', CheckEvent=event)"/>
         	    </column>
-                <column width="80px" label="Id Materia" align="center" sort="auto(materias.idMateria)" />
+                <column width="80px" label="ID Materia" align="center" sort="auto(materias.idMateria)" />
                 <column width="250px" label="Materia" align="left" sort="auto(materias.materia)"/>
             </columns>
             <template name="noneditable">

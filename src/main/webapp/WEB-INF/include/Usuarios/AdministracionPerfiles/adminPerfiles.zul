@@ -23,7 +23,7 @@
     		border: 1px thin #0080c0;
         }
 </style>
-<panel id="container" title="Administracion de Perfiles" vflex="1"
+<panel id="container" title="Administración de Perfiles" vflex="1"
         viewModel="@id('vm') @init('modelo.perfiles.PerfilesModel')">
     <toolbar>
     	<toolbarbutton image="/img/agregar.png" label="Nuevo" onClick="@command('nuevoPerfil')"/>
@@ -39,7 +39,7 @@
             	<column width="30px" align="center" >
             		<checkbox id="selectAllCheckBox" onCheck="@command('selectedCheckBox', CheckEvent=event)"/>
         	    </column>
-                <column width="80px" label="Id Perfil" align="center" sort="auto(perfil.idPerfilUsuario)" />
+                <column width="80px" label="ID Perfil" align="center" sort="auto(perfil.idPerfilUsuario)" />
                 <column width="150px" label="Perfil" align="left" sort="auto(perfil.perfil)"/>
                 <column width="250px" label="Comentarios" align="left" sort="auto(perfil.comentarios)"/>
                <!-- <column width="120px" label="Estado" align="left" sort="auto(perfil.estado)"/>  -->
@@ -48,11 +48,11 @@
             <template name="editable">
                 <row>
                 	<checkbox checked="${each.seleccionado}" disabled="true"/>
-                    <textbox disabled="true" style="text-align: center;" hflex="1" 
+                    <intbox disabled="true" style="text-align: center;" hflex="1" 
                         value="@load(each.perfil.idPerfilUsuario) @save(each.perfil.idPerfilUsuario, before='confirm')" />
-                    <textbox focus="true" constraint="no empty:Campo obligatorio" hflex="1" 
+                    <textbox focus="true" constraint="no empty:Campo obligatorio" hflex="1" maxlength="60"
                         value="@load(each.perfil.perfil) @save(each.perfil.perfil, before='confirm')" />
-                    <textbox hflex="1" 
+                    <textbox hflex="1" maxlength="200"
                         value="@load(each.perfil.comentarios) @save(each.perfil.comentarios, before='confirm')" />
                     <!-- 
                     <combobox inplace="true" mold="rounded" readonly="true"

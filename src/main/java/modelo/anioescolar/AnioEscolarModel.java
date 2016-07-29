@@ -28,7 +28,7 @@ import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Row;
 import org.zkoss.zul.Window;
 
-
+import entidades.Estados;
 import entidades.Schollaryear;
 import entidadesDAO.SchollaryearHome;
 import modelo.estados.EstadosDatos;
@@ -36,7 +36,7 @@ import modelo.estados.EstadosDatos;
 public class AnioEscolarModel {
 	private ListModelList<AnioEscolarStatus> allAnioEscolarStatus;
 	private List<Schollaryear> listAnioTMP;
-	private List<String> allEstados;
+	private List<Estados> allEstados;
 	private boolean displayEdit = true;
 	
 	@Wire
@@ -45,7 +45,7 @@ public class AnioEscolarModel {
 	public AnioEscolarModel(){
 		super();
 		
-		allEstados = new ArrayList<String>();
+		allEstados = new ArrayList<Estados>();
 		allEstados = new EstadosDatos().getAllEstados();
 
 		allAnioEscolarStatus = new ListModelList<AnioEscolarStatus>();
@@ -91,9 +91,9 @@ public class AnioEscolarModel {
 	   }
 	    
 	   if(anioDelete.size() == 0){
-		   Clients.alert("Debe seleccionar mínimo un registro para continuar", "Error", null);
+		   Clients.alert("Debe seleccionar m&iacute;nimo un registro para continuar", "Error", null);
 	   }else{
-		   Messagebox.show("Esta seguro que desea continuar?", "Mensaje de Confirmación", Messagebox.YES | Messagebox.NO, Messagebox.QUESTION, new EventListener<Event>() {
+		   Messagebox.show("�Est&aacute; seguro que desea continuar?", "Mensaje de Confirmaci&oacute;n", Messagebox.YES | Messagebox.NO, Messagebox.QUESTION, new EventListener<Event>() {
 			
 				public void onEvent(Event event) throws Exception {
 					// TODO Auto-generated method stub
@@ -107,7 +107,7 @@ public class AnioEscolarModel {
 							
 							refresh();
 							
-							Clients.showNotification("Eliminado correctamente");
+							Clients.showNotification("Registro eliminado correctamente");
 						}catch(RuntimeException re){
 							throw re;
 						}
@@ -118,9 +118,6 @@ public class AnioEscolarModel {
 	}
 	
 	public void refresh() {
-		allEstados = new ArrayList<String>();
-		allEstados = new EstadosDatos().getAllEstados();
-
 		allAnioEscolarStatus = new ListModelList<AnioEscolarStatus>();
 		allAnioEscolarStatus = genListModel(new AnioEscolarDatos().getAllAnioEscolar());
 		GridAnioEscolar.setModel(allAnioEscolarStatus);
@@ -132,8 +129,8 @@ public class AnioEscolarModel {
 	    
 	    for(Row row:rows){
 	      Checkbox ck = (Checkbox) row.getChildren().get(0);
-	      AnioEscolarStatus aulStatus = (AnioEscolarStatus)row.getValue();
-	      if(!aulStatus.isEditingStatus())
+	      AnioEscolarStatus anioStatus = (AnioEscolarStatus)row.getValue();
+	      if(!anioStatus.isEditingStatus())
 	    	  ck.setChecked(evt.isChecked());
 	   }
 	}
@@ -177,7 +174,7 @@ public class AnioEscolarModel {
         		
         	//	refresh();
         		
-        		Clients.showNotification("Anio Escolar Modificado correctamente");
+        		Clients.showNotification("Registro modificado correctamente");
         	}catch(RuntimeException re){
         		throw re;
         	}
@@ -192,7 +189,7 @@ public class AnioEscolarModel {
     	
     	if(listAnioTMP.size() != 0){    		
     		for(Schollaryear an:listAnioTMP){
-    			if(an.getSchollarYear() == anio.getSchollarYear()){
+    			if(an.getIdSchoolarYear() == anio.getIdSchoolarYear()){
     				flag = true;
     				
     				break;
@@ -228,19 +225,12 @@ public class AnioEscolarModel {
 		return allAnioEscolarStatus;
 	}
 	
-	public List<String> getAllEstados() {
-		return allEstados;
-	}
-	
-	/*
 	public List<Estados> getAllEstados() {
 		return allEstados;
 	}
-	*/
+
 	public boolean isDisplayEdit() {
         return displayEdit;
     }
-	
-
 
 }

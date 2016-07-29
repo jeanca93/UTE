@@ -1,12 +1,12 @@
 <?page title="new page title" contentType="text/html;charset=UTF-8"?>
 <zk>
-<window id = "modalDialog" title="Nueva Materia" border="normal" width="810px"
+<window id = "modalDialog" title="Nueva Materia" border="normal" width="410px"
     apply="controladores.MateriasComposer"
     position="center,center" closable="true"
     action="show: slideDown">
     <style src="/css/Focus.css" />
     <zscript>
-		constraint.MaximoMateriasConstraint cc = new constraint.MaximoMateriasConstraint();
+		constraint.TimeConstraint customTimeConstraint = new constraint.TimeConstraint();
 	</zscript>
     <style>
         .z-toolbar a, .z-toolbar a:visited, .z-toolbar a:hover{
@@ -27,29 +27,29 @@
 
 					<rows xmlns:w="client">
 						<row>
-							<label value="Id Materia:" />
-							<textbox sclass="ftextbox" id="txtIdMateria"
-								style="text-transform: uppercase" width="240px" constraint="no empty:Campo obligatorio"/>
+							<label value="ID Materia:" />
+							<textbox sclass="ftextbox" id="txtIdMateria" maxlength="20"
+								style="text-transform: uppercase" width="240px" constraint="no empty:Campo obligatorio, /^.*(?=.{3,20}).*$/:ID de Materia debe tener mínimo 3 caracteres"/>
 							<label value="*" style="color:red" />
 
 						</row>
 						<row>
 							<label value="Materia:" />
-							<textbox sclass="ftextbox" id="txtMateria"
+							<textbox sclass="ftextbox" id="txtMateria" maxlength="100"
 								style="text-transform: uppercase" width="240px" constraint="no empty:Campo obligatorio"/>
 							<label value="*" style="color:red" />
 
 						</row>
 						<row>
-							<label value="Duración Clases:" />
-							<timebox  id="txtDuracionClases" constraint="no empty: Campo Obligatorio"  format="HH:mm" 
-							 width="120px" mold="rounded"/>
+							<label value="Duración de Clases:" />
+							<timebox  id="txtDuracionClases" constraint="${customTimeConstraint}"  format="HH:mm" 
+							 width="120px" mold="rounded" maxlength="5"/>
 							<label value="*" style="color:red" />
 						</row>
 						<row>
-							<label value="Horas Semana:" />
+							<label value="Horas a la Semana:" />
 							<timebox  id="txtHorasSemana" constraint="no empty: Campo Obligatorio"  format="HH:mm" 
-							 width="120px" mold="rounded"/>
+							 width="120px" mold="rounded" maxlength="5"/>
 							<label value="*" style="color:red" />
 						</row>
 					</rows>

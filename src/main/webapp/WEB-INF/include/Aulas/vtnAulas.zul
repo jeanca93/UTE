@@ -5,9 +5,6 @@
     position="center,center" closable="true"
     action="show: slideDown">
     <style src="/css/Focus.css" />
-    <zscript>
-		constraint.NoSpacesConstraint customConstraint = new constraint.NoSpacesConstraint();
-	</zscript>
     <style>
         .z-toolbar a, .z-toolbar a:visited, .z-toolbar a:hover{
             border-radius: 10px;
@@ -30,41 +27,27 @@
 
 					<rows xmlns:w="client">
 						<row>
-							<label value="Id Aula:" />
+							<label value="ID Aula:" />
 							<textbox sclass="ftextbox" id="txtIdAula"
-								width="120px" maxlength="10" constraint="/^.*(?=.{2,10}).*$/:El Id del Aula debe tener minimo 2 caracteres"/>
+								width="120px" maxlength="10" constraint="/^.*(?=.{3,10}).*$/:ID de Aula debe tener mímo 3 caracteres"/>
 							<label value="*" style="color:red" />
 							
 							<label value="Aula" />
-							<textbox sclass="ftextbox" id="txtAula" 
+							<textbox sclass="ftextbox" id="txtAula" maxlength="10"
 								style="text-transform: uppercase" width="240px" constraint="no empty:Campo obligatorio"/>
 							<label value="*" style="color:red" />
 						</row>
 						<row>
 							<label value="Asientos" />
-							<intbox sclass="ftextbox" id="txtAsientos"
+							<intbox sclass="ftextbox" id="txtAsientos" maxlength="2"
 								style="text-transform: uppercase" width="240px" constraint="no empty:Campo obligatorio"/>
 							<label value="*" style="color:red" />
 
 							<label value="Comentarios:" />
-							<textbox sclass="ftextbox" id="txtComentarios"
+							<textbox sclass="ftextbox" id="txtComentarios" maxlength="200"
 								style="text-transform: uppercase" width="240px" />
 							<label value="" style="color:red" />
 						</row>
-
-					<!--  	<row>
-							 
-							<label value="Estado: " />
-							<combobox id="cmbEstados" inplace="true" mold="rounded" autodrop="true"
-		                        model="${modalDialog$composer.allEstados}" constraint="no empty:Campo obligatorio" vflex="1">
-		                       <template name="model">
-		                        	<comboitem value="${each.codigo}" label="${each.estado}"/>
-		                    	</template>
-		                    </combobox>
-							<label value="*" style="color:red" />
-						</row>
-					-->	
-
 					</rows>
 				</grid>
 				<separator />

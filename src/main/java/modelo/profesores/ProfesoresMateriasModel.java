@@ -54,7 +54,7 @@ public class ProfesoresMateriasModel {
 		profesor = (Profesores)execution.getArg().get("profesor");
 		
 		allMateriascursosStatus = new ListModelList<MateriascursosStatus>();
-		allMateriascursosStatus = genListModel(new  MateriascursosDatos().getAllMateriascursos());
+		allMateriascursosStatus = genListModel(new  MateriascursosDatos("").getAllMateriascursos());
 	}
 	
 	@Command
@@ -84,7 +84,7 @@ public class ProfesoresMateriasModel {
 	   }
 	    
 	   if(profMateriascursos.size() == 0){
-		   Clients.alert("Debe seleccionar una materia minimo para continuar", "Error", null);
+		   Clients.alert("Debe seleccionar una materia m&iacute;nimo para continuar", "Error", null);
 	   }else{
 		   Session session = Sessions.getCurrent();
 		   Integer idUsuario = Integer.parseInt(session.getAttribute("idUsuario").toString());
@@ -110,7 +110,7 @@ public class ProfesoresMateriasModel {
 			   
 			   modalDialog.detach();
 			   
-			   Clients.showNotification("Registrado correctamente");
+			   Clients.showNotification("Registro(s) creado(s) correctamente");
 		   }catch(RuntimeException re){
 			   throw re;
 		   }

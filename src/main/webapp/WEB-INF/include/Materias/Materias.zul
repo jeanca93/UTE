@@ -23,15 +23,15 @@
     		border: 1px thin #0080c0;
         }
 </style>
-<panel id="container" title="Administracion de Materias" vflex="1" 
+<panel id="container" title="Administración de Materias" vflex="1" 
         viewModel="@id('vm') @init('modelo.materias.MateriasModel')">
     <toolbar>
     	<toolbarbutton image="/img/agregar.png" label="Nuevo" onClick="@command('nuevaMateria')"/>
     	<toolbarbutton image="/img/trash.png" label="Eliminar" onClick="@command('eliminarMaterias')"/>
     </toolbar>
     <panelchildren>
-    	<zscript>
-			constraint.MaximoMateriasConstraint cc = new constraint.MaximoMateriasConstraint();
+     	<zscript>
+			constraint.TimeConstraint customTimeConstraint = new constraint.TimeConstraint();
 		</zscript>
         <grid id="GridMaterias" mold="paging" pagingPosition="bottom"
         	model="@load(vm.allMaterias) @template((vm.displayEdit and each.editingStatus) ? 'editable' : 'noneditable')"
@@ -41,22 +41,22 @@
             	<column width="30px" align="center" >
             		<checkbox id="selectAllCheckBox" onCheck="@command('selectedCheckBox', CheckEvent=event)"/>
         	    </column>
-                <column width="80px" label="Id Materia" align="center" sort="auto(materias.idMateria)" />
+                <column width="80px" label="ID Materia" align="center" sort="auto(materias.idMateria)" />
                 <column width="250px" label="Materia" align="left" sort="auto(materias.materia)"/>
-                <column width="250px" label="Duración Clases" align="left" sort="auto(materias.duracionClase)"/>
-                <column width="250px" label="Horas Semana" align="left" sort="auto(materias.horasSemana)"/>
+                <column width="250px" label="Duración de Clases" align="left" sort="auto(materias.duracionClase)"/>
+                <column width="250px" label="Horas a la Semana" align="left" sort="auto(materias.horasSemana)"/>
                 <column width="120px" label="Edit" visible="@load(vm.displayEdit)"/>
             </columns>
             <template name="editable">
                 <row>
                 	<checkbox checked="${each.seleccionado}" disabled="true"/>
-                    <textbox disabled="true" style="text-align: center;" hflex="1" 
+                    <textbox disabled="true" style="text-align: center;" hflex="1" maxlength="20"
                         value="@load(each.materias.idMateria) @save(each.materias.idMateria, before='confirm')" />
-                    <textbox focus="true" constraint="no empty:Campo obligatorio" hflex="1" 
+                    <textbox focus="true" constraint="no empty:Campo obligatorio" hflex="1" maxlength="100"
                         value="@load(each.materias.materia) @save(each.materias.materia, before='confirm')" />
-                    <timebox constraint="no empty: Campo Obligatorio"  format="HH:mm"  mold="rounded"
+                    <timebox constraint="${customTimeConstraint}"  format="HH:mm"  mold="rounded" maxlength="5"
                             value="@load(each.materias.duracionClase) @save(each.materias.duracionClase, before='confirm')" />
-                    <timebox constraint="no empty: Campo Obligatorio"  format="HH:mm"  mold="rounded"
+                    <timebox constraint="no empty: Campo Obligatorio"  format="HH:mm"  mold="rounded" maxlength="5"
                             value="@load(each.materias.horasSemana) @save(each.materias.horasSemana, before='confirm')" />
                                                                    
                     <div>

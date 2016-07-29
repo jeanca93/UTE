@@ -10,8 +10,10 @@ import org.zkoss.zk.ui.WrongValueException;
 import org.zkoss.zul.Constraint;
 import org.zkoss.zul.Textbox;
 
+import entidadesDAO.UsuariosHomeExt;
+
 public class NoSpacesConstraint implements Constraint, Serializable{
-	private static final long serialVersionUID = 6L;
+	private static final long serialVersionUID = 10L;
 
 	public NoSpacesConstraint() {
 		// TODO Auto-generated constructor stub
@@ -29,17 +31,17 @@ public class NoSpacesConstraint implements Constraint, Serializable{
 			if (((String)value).equals(""))
 				throw new WrongValueException(comp, "Campo obligatorio");
 			else{
-				if (StringUtils.countMatches((String)value, " ") > 0 )
-					throw new WrongValueException(comp, "Espacios no son permitidos");
-				
-				if (((String)value).length() < 5)
-					throw new WrongValueException(comp, "Usuario debe tener minimo 8 caracteres");
-				
-				Pattern regex = Pattern.compile("[^A-Za-z0-9\\.]");
-				Matcher matcher = regex.matcher((String)value);
-				if(matcher.find())
-					throw new WrongValueException(comp, "No se permite caracteres especiales");
+				if (((String)value).length() < 5 || ((String)value).length() > 15)
+					throw new WrongValueException(comp, "Usuario debe tener mínimo 5 caracteres y máximo 15 caracteres");
+				else{
+					if (StringUtils.countMatches((String)value, " ") > 0 )
+						throw new WrongValueException(comp, "Espacios no son permitidos");
 					
+					Pattern regex = Pattern.compile("[^A-Za-z0-9\\.]");
+					Matcher matcher = regex.matcher((String)value);
+					if(matcher.find())
+						throw new WrongValueException(comp, "No se permite caracteres especiales");
+				}
 			}
 		}
 	}

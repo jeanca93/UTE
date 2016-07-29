@@ -144,7 +144,7 @@ public class ProfesoresHorariosModel {
 			   
 			   modalDialog.detach();
 			   
-			   Clients.showNotification("Registrado correctamente");
+			   Clients.showNotification("Registro(s) creado(s) correctamente");
 		   }catch(RuntimeException re){
 		   	   throw re;
 		   }

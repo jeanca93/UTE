@@ -7,23 +7,20 @@ import org.hibernate.criterion.Order;
 
 import entidades.Cursos;
 
-
 public class CursosHomeExt extends CursosHome{
-	private Session session;
-
+	
     public CursosHomeExt() {
-
-        super();
-
-        session = getSession();
-        
+        super();        
     }
     
     public ArrayList<Cursos> listCursosActivos() {
-    	ArrayList<Cursos> results;
+    	Session session = this.getSession();
+    	ArrayList<Cursos> results = new ArrayList<Cursos>();
 		
     	try {
-			results = (ArrayList<Cursos>) session.createCriteria(Cursos.class).addOrder(Order.asc("idCurso")).list();			
+			results = (ArrayList<Cursos>) session.createCriteria(Cursos.class).addOrder(Order.asc("idCurso"))
+						.addOrder(Order.asc("fechaCreacion"))
+						.list();			
 		} catch (RuntimeException re) {
 			
 			throw re;

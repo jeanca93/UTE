@@ -28,12 +28,7 @@ import entidades.Cursos;
 import entidades.Materias;
 import entidades.Materiascursos;
 import entidades.MateriascursosId;
-import entidades.Profesores;
-import entidades.Profesoresmaterias;
-import entidades.ProfesoresmateriasId;
-import entidadesDAO.MateriasHomeExt;
 import entidadesDAO.MateriascursosHomeExt;
-import entidadesDAO.ProfesoresmateriasHomeExt;
 import modelo.materias.MateriaDatos;
 import modelo.materias.MateriaStatus;
 
@@ -58,7 +53,7 @@ public class MateriascursosModel {
 		curso = (Cursos)execution.getArg().get("curso");
 		
 		allMateriaStatus = new ListModelList<MateriaStatus>();
-		allMateriaStatus = genListModel(new  MateriaDatos().getAllMaterias());
+		allMateriaStatus = genListModel(new  MateriaDatos(true).getAllMaterias());
 	}
 	
 	@Command
@@ -88,7 +83,7 @@ public class MateriascursosModel {
 	   }
 	    
 	   if(materiascursos.size() == 0){
-		   Clients.alert("Debe seleccionar una materia minimo para continuar", "Error", null);
+		   Clients.alert("Debe seleccionar una materia m&iacute;nimo para continuar", "Error", null);
 	   }else{
 		   Session session = Sessions.getCurrent();
 		   Integer idUsuario = Integer.parseInt(session.getAttribute("idUsuario").toString());
@@ -114,7 +109,7 @@ public class MateriascursosModel {
 			   
 			   modalDialog.detach();
 			   
-			   Clients.showNotification("Registrado correctamente");
+			   Clients.showNotification("Registro(s) creado(s) correctamente");
 		   }catch(RuntimeException re){
 			   throw re;
 		   }
@@ -122,7 +117,7 @@ public class MateriascursosModel {
 	}
 	
 	private ListModelList<MateriaStatus> genListModel(List<Materias> lsMaterias){
-		List<Materiascursos> listMateriasCurso = new MateriascursosHomeExt().listMateriascur((curso.getIdCurso()));
+		List<Materiascursos> listMateriasCurso = new MateriascursosDatos(curso.getIdCurso()).getAllMateriascursos();
 		
     	for(Materias mate: lsMaterias){
     		boolean seleccionado = false;

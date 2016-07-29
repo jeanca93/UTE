@@ -14,21 +14,6 @@ public class PermisosHomeExt extends PermisosHome{
 		super();
 	}
 	
-	public ArrayList<Permisos> listPermisosperfiless(Integer idPerfil) {
-    	Session session = this.getSession();
-    	ArrayList<Permisos> results = new ArrayList<Permisos>();
-		
-    	try {
-			results = (ArrayList<Permisos>) session.createQuery("select pp.id.permisos from Permisosperfiles pp where pp.id.perfilesusuario.idPerfilUsuario=:perfil")
-					.setInteger("perfil", idPerfil)
-					.list();	
-		} catch (RuntimeException re) {			
-			throw re;
-		}
-		
-		return results;
-	}
-	
 	public ArrayList<Permisos> listPermisosActivos() {
     	Session session = this.getSession();
     	ArrayList<Permisos> results = new ArrayList<Permisos>();

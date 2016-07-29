@@ -21,8 +21,7 @@ import entidades.Cursos;
 import entidadesDAO.CursosHome;
 
 public class CursosComposer extends GenericForwardComposer<Component>{
-	private static final long serialVersionUID = 3L;
-	//private ListModelList<String> allEstados = new ListModelList<String>();
+	private static final long serialVersionUID = 7L;
 	//private Window modalDialog;
 	//private Combobox cmbEstados;
 	private Textbox txtIdCurso, txtCurso;
@@ -32,10 +31,6 @@ public class CursosComposer extends GenericForwardComposer<Component>{
 	
 	public CursosComposer() {
 		// TODO Auto-generated constructor stub
-		
-		//for(String estado:new EstadosDatos().getAllEstados()){
-		//	allEstados.add(estado);
-		//}
 		
 	}
 	
@@ -65,7 +60,7 @@ public class CursosComposer extends GenericForwardComposer<Component>{
 				
 				new CursosHome().save(new Cursos(idCurso,curso,paralelos,'A', new Date(), Integer.parseInt(session.getAttribute("idUsuario").toString())));
 				
-				Messagebox.show("Creado correctamente", "Exito", Messagebox.OK,  Messagebox.EXCLAMATION, new EventListener<Event>() {
+				Messagebox.show("Registro creado correctamente", "Exito", Messagebox.OK,  Messagebox.EXCLAMATION, new EventListener<Event>() {
 					
 					public void onEvent(Event event) throws Exception {
 						// TODO Auto-generated method stub
@@ -88,9 +83,6 @@ public class CursosComposer extends GenericForwardComposer<Component>{
 		//}
 	}
 	
-	//public ListModel<String> getAllEstados() {
-	//	return allEstados;
-	//}
 	/*
 	private void genListModel(List<Aulas> lsAulas){
     	for(Aulas aul: lsAulas){

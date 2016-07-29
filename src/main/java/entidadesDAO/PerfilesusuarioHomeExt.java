@@ -28,7 +28,7 @@ public class PerfilesusuarioHomeExt extends  PerfilesusuarioHome{
     		
     		criteria.addOrder(Order.asc("idPerfilUsuario"));
     		
-			results = (ArrayList<Perfilesusuario>) criteria.list();						
+			results = (ArrayList<Perfilesusuario>) criteria.list();
 		} catch (RuntimeException re) {			
 			throw re;
 		}

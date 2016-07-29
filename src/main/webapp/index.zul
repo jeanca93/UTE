@@ -52,7 +52,7 @@
 				<textbox sclass="myTextboxLogin" 
 									id="txtUsuario"  focus="true" type="text" placeholder="Usuario" constraint="no empty:Campo obligatorio"/>
 				<textbox sclass="myTextboxPassword"
-									id="txtClave" type="password" placeholder="Clave" constraint="no empty:Campo obligatorio, /^.*(?=.{8,64}).*$/:Clave debe tener minimo 8 caracteres"/>
+									id="txtClave" type="password" placeholder="Clave" constraint="no empty:Campo obligatorio, /^.*(?=.{8,64}).*$/:Clave debe tener mínimo 8 caracteres"/>
 				
 				<separator spacing="8px" />
 				
