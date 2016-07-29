@@ -60,7 +60,7 @@ public class Dias implements java.io.Serializable {
 		return this.estados;
 	}
 
-	public void setEstado(Estados estados) {
+	public void setEstados(Estados estados) {
 		this.estados = estados;
 	}
 
