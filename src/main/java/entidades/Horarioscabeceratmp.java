@@ -10,7 +10,7 @@ public class Horarioscabeceratmp implements java.io.Serializable {
 
 	private Integer idHorarioCabTmp;
 	private int idSchollarYear;
-	private char estado;
+	private int idEstado;
 	private Date fechaCreacion;
 	private int usuarioCrea;
 	private Date fechaModificacion;
@@ -19,17 +19,17 @@ public class Horarioscabeceratmp implements java.io.Serializable {
 	public Horarioscabeceratmp() {
 	}
 
-	public Horarioscabeceratmp(int idSchollarYear, char estado, Date fechaCreacion, int usuarioCrea) {
+	public Horarioscabeceratmp(int idSchollarYear, int idEstado, Date fechaCreacion, int usuarioCrea) {
 		this.idSchollarYear = idSchollarYear;
-		this.estado = estado;
+		this.idEstado = idEstado;
 		this.fechaCreacion = fechaCreacion;
 		this.usuarioCrea = usuarioCrea;
 	}
 
-	public Horarioscabeceratmp(int idSchollarYear, char estado, Date fechaCreacion, int usuarioCrea,
+	public Horarioscabeceratmp(int idSchollarYear, int idEstado, Date fechaCreacion, int usuarioCrea,
 			Date fechaModificacion, Integer usuarioModifica) {
 		this.idSchollarYear = idSchollarYear;
-		this.estado = estado;
+		this.idEstado = idEstado;
 		this.fechaCreacion = fechaCreacion;
 		this.usuarioCrea = usuarioCrea;
 		this.fechaModificacion = fechaModificacion;
@@ -52,12 +52,12 @@ public class Horarioscabeceratmp implements java.io.Serializable {
 		this.idSchollarYear = idSchollarYear;
 	}
 
-	public char getEstado() {
-		return this.estado;
+	public int getIdEstado() {
+		return this.idEstado;
 	}
 
-	public void setEstado(char estado) {
-		this.estado = estado;
+	public void setIdEstado(int idEstado) {
+		this.idEstado = idEstado;
 	}
 
 	public Date getFechaCreacion() {

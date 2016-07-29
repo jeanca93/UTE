@@ -156,7 +156,7 @@ public class AnioEscolarModel {
         		if(aniotmp.getSchollarYear() != anio.getAnioescolar().getSchollarYear() || 
         			aniotmp.getFechaInicio() != anio.getAnioescolar().getFechaInicio() ||
         			aniotmp.getFechaFin() != anio.getAnioescolar().getFechaFin()  ||
-        			aniotmp.getEstado() != anio.getAnioescolar().getEstado())
+        			aniotmp.getEstados() != anio.getAnioescolar().getEstados())
         			flagCambio = true;
         		
         		anioTMP = aniotmp;
@@ -203,7 +203,7 @@ public class AnioEscolarModel {
     		listAnioTMP.get(listAnioTMP.size()-1).setSchollarYear(anio.getSchollarYear());
     		listAnioTMP.get(listAnioTMP.size()-1).setFechaInicio(anio.getFechaInicio());
     		listAnioTMP.get(listAnioTMP.size()-1).setFechaFin(anio.getFechaFin());
-    		listAnioTMP.get(listAnioTMP.size()-1).setEstado(anio.getEstado());
+    		listAnioTMP.get(listAnioTMP.size()-1).setEstados(anio.getEstados());
     		
 		}
     }

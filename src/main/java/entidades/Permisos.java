@@ -12,7 +12,7 @@ public class Permisos implements java.io.Serializable {
 
 	private Integer idPermiso;
 	private String permiso;
-	private char estado;
+	private Estados estados;
 	private Date fechaCreacion;
 	private int usuarioCrea;
 	private Date fechaModificacion;
@@ -21,17 +21,17 @@ public class Permisos implements java.io.Serializable {
 	public Permisos() {
 	}
 
-	public Permisos(String permiso, char estado, Date fechaCreacion, int usuarioCrea) {
+	public Permisos(String permiso, Estados estados, Date fechaCreacion, int usuarioCrea) {
 		this.permiso = permiso;
-		this.estado = estado;
+		this.estados = estados;
 		this.fechaCreacion = fechaCreacion;
 		this.usuarioCrea = usuarioCrea;
 	}
 
-	public Permisos(String permiso, char estado, Date fechaCreacion, int usuarioCrea, Date fechaModificacion,
+	public Permisos(String permiso, Estados estados, Date fechaCreacion, int usuarioCrea, Date fechaModificacion,
 			Integer usuarioModifica) {
 		this.permiso = permiso;
-		this.estado = estado;
+		this.estados = estados;
 		this.fechaCreacion = fechaCreacion;
 		this.usuarioCrea = usuarioCrea;
 		this.fechaModificacion = fechaModificacion;
@@ -54,12 +54,12 @@ public class Permisos implements java.io.Serializable {
 		this.permiso = permiso;
 	}
 
-	public char getEstado() {
-		return this.estado;
+	public Estados getEstados() {
+		return this.estados;
 	}
 
-	public void setEstado(char estado) {
-		this.estado = estado;
+	public void setEstados(Estados estados) {
+		this.estados = estados;
 	}
 
 	public Date getFechaCreacion() {

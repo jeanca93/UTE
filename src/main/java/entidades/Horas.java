@@ -14,7 +14,7 @@ public class Horas implements java.io.Serializable {
 	private Date horaIni;
 	private Date horaFin;
 	private String comentarios;
-	private char estado;
+	private Estados estados;
 	private Date fechaCreacion;
 	private int usuarioCrea;
 	private Date fechaModificacion;
@@ -23,20 +23,20 @@ public class Horas implements java.io.Serializable {
 	public Horas() {
 	}
 
-	public Horas(Date horaIni, Date horaFin, char estado, Date fechaCreacion, int usuarioCrea) {
+	public Horas(Date horaIni, Date horaFin, Estados estados, Date fechaCreacion, int usuarioCrea) {
 		this.horaIni = horaIni;
 		this.horaFin = horaFin;
-		this.estado = estado;
+		this.estados = estados;
 		this.fechaCreacion = fechaCreacion;
 		this.usuarioCrea = usuarioCrea;
 	}
 
-	public Horas(Date horaIni, Date horaFin, String comentarios, char estado, Date fechaCreacion, int usuarioCrea,
+	public Horas(Date horaIni, Date horaFin, String comentarios, Estados estados, Date fechaCreacion, int usuarioCrea,
 			Date fechaModificacion, Integer usuarioModifica) {
 		this.horaIni = horaIni;
 		this.horaFin = horaFin;
 		this.comentarios = comentarios;
-		this.estado = estado;
+		this.estados = estados;
 		this.fechaCreacion = fechaCreacion;
 		this.usuarioCrea = usuarioCrea;
 		this.fechaModificacion = fechaModificacion;
@@ -75,12 +75,12 @@ public class Horas implements java.io.Serializable {
 		this.comentarios = comentarios;
 	}
 
-	public char getEstado() {
-		return this.estado;
+	public Estados getEstados() {
+		return this.estados;
 	}
 
-	public void setEstado(char estado) {
-		this.estado = estado;
+	public void setEstados(Estados estados) {
+		this.estados = estados;
 	}
 
 	public Date getFechaCreacion() {

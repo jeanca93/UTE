@@ -187,7 +187,7 @@ public class CursosModel {
 	       	if(cursos.getIdCurso() == cur.getCurso().getIdCurso()){
 	       		if(cursos.getCurso() != cur.getCurso().getCurso() || 
 	       		   cursos.getParalelos() != cur.getCurso().getParalelos() ||
-	       		   cursos.getEstado() != cur.getCurso().getEstado())
+	       		   cursos.getEstados() != cur.getCurso().getEstados())
 	       			flagCambio = true;
 	       		
 	       			curTMP = cursos;
@@ -230,7 +230,7 @@ public class CursosModel {
 	    	listCursoTMP.get(listCursoTMP.size()-1).setIdCurso(cur.getIdCurso());
 	    	listCursoTMP.get(listCursoTMP.size()-1).setCurso(cur.getCurso());
 	    	listCursoTMP.get(listCursoTMP.size()-1).setParalelos(cur.getParalelos());
-	    	listCursoTMP.get(listCursoTMP.size()-1).setEstado(cur.getEstado());	    		
+	    	listCursoTMP.get(listCursoTMP.size()-1).setEstados(cur.getEstados());	    		
 		}
 	}
 	

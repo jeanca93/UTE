@@ -28,6 +28,7 @@ import entidades.Perfilesusuario;
 import entidades.Permisos;
 import entidades.Permisosperfiles;
 import entidades.PermisosperfilesId;
+import entidadesDAO.EstadosHome;
 import entidadesDAO.PermisosHomeExt;
 import entidadesDAO.PermisosperfilesHome;
 import entidadesDAO.PermisosperfilesHomeExt;
@@ -95,7 +96,7 @@ public class PermisosPerfilesModel {
 			   id.setPermisos(permisos);
 			   
 			   permisosperfiles.setId(id);
-			   permisosperfiles.setEstado('A');
+			   permisosperfiles.setEstados(new EstadosHome().findById(1));
 			   permisosperfiles.setFechaCreacion(new Date());
 			   permisosperfiles.setUsuarioCrea(idUsuario);
 			   

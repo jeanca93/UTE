@@ -15,7 +15,7 @@ public class Usuarios implements java.io.Serializable {
 	private String nombres;
 	private String apellidos;
 	private String correo;
-	private char estado;
+	private Estados estados;
 	private Date fechaCreacion;
 	private int usuarioCrea;
 	private Date fechaModificacion;
@@ -25,20 +25,20 @@ public class Usuarios implements java.io.Serializable {
 	}
 
 	public Usuarios(Perfilesusuario perfilesusuario, String usuario, String password, String nombres, String apellidos,
-			String correo, char estado, Date fechaCreacion, int usuarioCrea) {
+			String correo, Estados estados, Date fechaCreacion, int usuarioCrea) {
 		this.perfilesusuario = perfilesusuario;
 		this.usuario = usuario;
 		this.password = password;
 		this.nombres = nombres;
 		this.apellidos = apellidos;
 		this.correo = correo;
-		this.estado = estado;
+		this.estados = estados;
 		this.fechaCreacion = fechaCreacion;
 		this.usuarioCrea = usuarioCrea;
 	}
 
 	public Usuarios(Perfilesusuario perfilesusuario, String usuario, String password, String nombres, String apellidos,
-			String correo, char estado, Date fechaCreacion, int usuarioCrea, Date fechaModificacion,
+			String correo, Estados estados, Date fechaCreacion, int usuarioCrea, Date fechaModificacion,
 			Integer usuarioModifica) {
 		this.perfilesusuario = perfilesusuario;
 		this.usuario = usuario;
@@ -46,7 +46,7 @@ public class Usuarios implements java.io.Serializable {
 		this.nombres = nombres;
 		this.apellidos = apellidos;
 		this.correo = correo;
-		this.estado = estado;
+		this.estados = estados;
 		this.fechaCreacion = fechaCreacion;
 		this.usuarioCrea = usuarioCrea;
 		this.fechaModificacion = fechaModificacion;
@@ -109,12 +109,12 @@ public class Usuarios implements java.io.Serializable {
 		this.correo = correo;
 	}
 
-	public char getEstado() {
-		return this.estado;
+	public Estados getEstados() {
+		return this.estados;
 	}
 
-	public void setEstado(char estado) {
-		this.estado = estado;
+	public void setEstados(Estados estados) {
+		this.estados = estados;
 	}
 
 	public Date getFechaCreacion() {

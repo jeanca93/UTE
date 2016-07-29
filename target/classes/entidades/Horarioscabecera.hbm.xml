@@ -11,9 +11,9 @@
         <many-to-one name="schollaryear" class="entidades.Schollaryear" fetch="select">
             <column name="ID_SchollarYear" not-null="true" />
         </many-to-one>
-        <property name="estado" type="char">
-            <column name="Estado" length="1" not-null="true" />
-        </property>
+        <many-to-one name="estados" class="entidades.Estados" fetch="select">
+            <column name="ID_Estado" not-null="true" />
+        </many-to-one>
         <property name="fechaCreacion" type="timestamp">
             <column name="FechaCreacion" length="19" not-null="true" />
         </property>

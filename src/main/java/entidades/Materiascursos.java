@@ -11,34 +11,32 @@ import java.util.Set;
 public class Materiascursos implements java.io.Serializable {
 
 	private MateriascursosId id;
-	private char estado;
+	private Estados estados;
 	private Date fechaCreacion;
 	private int usuarioCrea;
 	private Date fechaModificacion;
 	private Integer usuarioModifica;
-	private Set<Profesoresmaterias> profesoresmateriases = new HashSet<Profesoresmaterias>(0);
 
 	public Materiascursos() {
 	}
 
-	public Materiascursos(MateriascursosId id, char estado, Date fechaCreacion,
+	public Materiascursos(MateriascursosId id, Estados estados, Date fechaCreacion,
 			int usuarioCrea) {
 		this.id = id;
-		this.estado = estado;
+		this.estados = estados;
 		this.fechaCreacion = fechaCreacion;
 		this.usuarioCrea = usuarioCrea;
 	}
 
-	public Materiascursos(MateriascursosId id, char estado, Date fechaCreacion,
+	public Materiascursos(MateriascursosId id, Estados estados, Date fechaCreacion,
 			int usuarioCrea, Date fechaModificacion, Integer usuarioModifica,
 			Set<Profesoresmaterias> profesoresmateriases) {
 		this.id = id;
-		this.estado = estado;
+		this.estados = estados;
 		this.fechaCreacion = fechaCreacion;
 		this.usuarioCrea = usuarioCrea;
 		this.fechaModificacion = fechaModificacion;
 		this.usuarioModifica = usuarioModifica;
-		this.profesoresmateriases = profesoresmateriases;
 	}
 
 	public MateriascursosId getId() {
@@ -49,12 +47,12 @@ public class Materiascursos implements java.io.Serializable {
 		this.id = id;
 	}
 	
-	public char getEstado() {
-		return this.estado;
+	public Estados getEstados() {
+		return this.estados;
 	}
 
-	public void setEstado(char estado) {
-		this.estado = estado;
+	public void setEstados(Estados estados) {
+		this.estados = estados;
 	}
 
 	public Date getFechaCreacion() {
@@ -88,13 +86,5 @@ public class Materiascursos implements java.io.Serializable {
 	public void setUsuarioModifica(Integer usuarioModifica) {
 		this.usuarioModifica = usuarioModifica;
 	}
-
-	public Set<Profesoresmaterias> getProfesoresmateriases() {
-		return this.profesoresmateriases;
-	}
-
-	public void setProfesoresmateriases(Set<Profesoresmaterias> profesoresmateriases) {
-		this.profesoresmateriases = profesoresmateriases;
-	}
-
+	
 }

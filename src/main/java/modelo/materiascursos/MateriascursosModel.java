@@ -28,6 +28,7 @@ import entidades.Cursos;
 import entidades.Materias;
 import entidades.Materiascursos;
 import entidades.MateriascursosId;
+import entidadesDAO.EstadosHome;
 import entidadesDAO.MateriascursosHomeExt;
 import modelo.materias.MateriaDatos;
 import modelo.materias.MateriaStatus;
@@ -97,7 +98,7 @@ public class MateriascursosModel {
 			   id.setMaterias(mate);
 			   
 			   materiascur.setId(id);
-			   materiascur.setEstado('A');
+			   materiascur.setEstados(new EstadosHome().findById(1));
 			   materiascur.setFechaCreacion(new Date());
 			   materiascur.setUsuarioCrea(idUsuario);
 			   

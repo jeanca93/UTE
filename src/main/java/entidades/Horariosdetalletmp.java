@@ -17,7 +17,7 @@ public class Horariosdetalletmp implements java.io.Serializable {
 	private String idAula;
 	private String idDia;
 	private int idHora;
-	private char estado;
+	private int idEstado;
 	private Date fechaCreacion;
 	private int usuarioCrea;
 	private Date fechaModificacion;
@@ -27,7 +27,7 @@ public class Horariosdetalletmp implements java.io.Serializable {
 	}
 
 	public Horariosdetalletmp(int idHorarioCabTmp, int idProfesor, String idMateria, String idCurso, String paralelo,
-			String idAula, String idDia, int idHora, char estado, Date fechaCreacion, int usuarioCrea) {
+			String idAula, String idDia, int idHora, int idEstado, Date fechaCreacion, int usuarioCrea) {
 		this.idHorarioCabTmp = idHorarioCabTmp;
 		this.idProfesor = idProfesor;
 		this.idMateria = idMateria;
@@ -36,13 +36,13 @@ public class Horariosdetalletmp implements java.io.Serializable {
 		this.idAula = idAula;
 		this.idDia = idDia;
 		this.idHora = idHora;
-		this.estado = estado;
+		this.idEstado = idEstado;
 		this.fechaCreacion = fechaCreacion;
 		this.usuarioCrea = usuarioCrea;
 	}
 
 	public Horariosdetalletmp(int idHorarioCabTmp, int idProfesor, String idMateria, String idCurso, String paralelo,
-			String idAula, String idDia, int idHora, char estado, Date fechaCreacion, int usuarioCrea,
+			String idAula, String idDia, int idHora, int idEstado, Date fechaCreacion, int usuarioCrea,
 			Date fechaModificacion, Integer usuarioModifica) {
 		this.idHorarioCabTmp = idHorarioCabTmp;
 		this.idProfesor = idProfesor;
@@ -52,7 +52,7 @@ public class Horariosdetalletmp implements java.io.Serializable {
 		this.idAula = idAula;
 		this.idDia = idDia;
 		this.idHora = idHora;
-		this.estado = estado;
+		this.idEstado = idEstado;
 		this.fechaCreacion = fechaCreacion;
 		this.usuarioCrea = usuarioCrea;
 		this.fechaModificacion = fechaModificacion;
@@ -131,12 +131,12 @@ public class Horariosdetalletmp implements java.io.Serializable {
 		this.idHora = idHora;
 	}
 
-	public char getEstado() {
-		return this.estado;
+	public int getIdEstado() {
+		return this.idEstado;
 	}
 
-	public void setEstado(char estado) {
-		this.estado = estado;
+	public void setIdEstado(int idEstado) {
+		this.idEstado = idEstado;
 	}
 
 	public Date getFechaCreacion() {
