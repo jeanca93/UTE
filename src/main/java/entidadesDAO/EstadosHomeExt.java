@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import org.hibernate.Session;
 import org.hibernate.criterion.Order;
+import org.hibernate.criterion.Restrictions;
 
 import entidades.Cursos;
 import entidades.Estados;
@@ -23,7 +24,10 @@ public class EstadosHomeExt extends EstadosHome{
     	ArrayList<Estados> results = new ArrayList<Estados>();
 		
     	try {
-			results = (ArrayList<Estados>) session.createCriteria(Estados.class).addOrder(Order.asc("idEstado")).list();			
+			results = (ArrayList<Estados>) session.createCriteria(Estados.class)
+						.add(Restrictions.in("idEstado", new Integer[]{ESTADO_ACTIVO, ESTADO_INACTIVO}))
+						.addOrder(Order.asc("idEstado"))
+						.list();			
 		} catch (RuntimeException re) {
 			
 			throw re;
