@@ -26,6 +26,7 @@ import entidades.Perfilesusuario;
 import entidades.Tipoaula;
 import entidadesDAO.AulasHome;
 import entidadesDAO.EstadosHome;
+import entidadesDAO.TipoAulaHome;
 import modelo.aulas.AulasDatos;
 import modelo.usuarios.UsuarioDatos;
 
@@ -66,7 +67,7 @@ public class AulasComposer extends GenericForwardComposer<Component>{
 			Integer tipoAula = cmbAulas.getSelectedItem().getValue();
 			Session session = Sessions.getCurrent();
 				
-			new AulasHome().save(new Aulas(idAula,aula,tipoAula,asientos,comentarios, new EstadosHome().findById(1), new Date(), Integer.parseInt(session.getAttribute("idUsuario").toString())));
+			new AulasHome().save(new Aulas(idAula,aula,new TipoAulaHome().findById(tipoAula),asientos,comentarios, new EstadosHome().findById(1), new Date(), Integer.parseInt(session.getAttribute("idUsuario").toString())));
 					
 			Messagebox.show("Registro creado correctamente", "Exito", Messagebox.OK,  Messagebox.EXCLAMATION, new EventListener<Event>() {
 					
