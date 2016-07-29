@@ -26,6 +26,7 @@ import org.zkoss.zul.Window;
 
 import entidades.Perfilesusuario;
 import entidades.Usuarios;
+import entidadesDAO.EstadosHome;
 import entidadesDAO.PerfilesusuarioHome;
 import entidadesDAO.UsuariosHomeExt;
 import modelo.usuarios.UsuarioDatos;
@@ -77,7 +78,7 @@ public class UsuariosComposer extends GenericForwardComposer<Component>{
 					Integer perfil = cmbPerfiles.getSelectedItem().getValue();
 					Session session = Sessions.getCurrent();
 					
-					new UsuariosHomeExt().crearNuevoUsuario(new Usuarios(new PerfilesusuarioHome().findById(perfil), usuario, null, nombres, apellidos, correo, 'A', new Date(), Integer.parseInt(session.getAttribute("idUsuario").toString())), clave);
+					new UsuariosHomeExt().crearNuevoUsuario(new Usuarios(new PerfilesusuarioHome().findById(perfil), usuario, null, nombres, apellidos, correo,  new EstadosHome().findById(1), new Date(), Integer.parseInt(session.getAttribute("idUsuario").toString())), clave);
 							
 					Messagebox.show("Registro creado correctamente", "Exito", Messagebox.OK,  Messagebox.EXCLAMATION, new EventListener<Event>() {
 						

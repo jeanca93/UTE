@@ -16,6 +16,7 @@ import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Textbox;
 
 import entidades.Profesores;
+import entidadesDAO.EstadosHome;
 import entidadesDAO.ProfesoresHome;
 
 public class ProfesoresComposer extends GenericForwardComposer<Component>{
@@ -48,7 +49,7 @@ public class ProfesoresComposer extends GenericForwardComposer<Component>{
 			String titulo = txtTitulo.getValue();
 			Integer maxhoras = txtMaxhoras.getValue();
 			
-			new ProfesoresHome().save(new Profesores(profesor, titulo, maxhoras, 'A', new Date(),Integer.parseInt(session.getAttribute("idUsuario").toString())));
+			new ProfesoresHome().save(new Profesores(profesor, titulo, maxhoras,  new EstadosHome().findById(1), new Date(),Integer.parseInt(session.getAttribute("idUsuario").toString())));
 			
 			Messagebox.show("Registro creado correctamente", "Exito", Messagebox.OK,  Messagebox.EXCLAMATION, new EventListener<Event>() {
 				

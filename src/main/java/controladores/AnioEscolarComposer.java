@@ -18,6 +18,7 @@ import org.zkoss.zul.Intbox;
 import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Textbox;
 import entidades.Schollaryear;
+import entidadesDAO.EstadosHome;
 import entidadesDAO.SchollaryearHome;
 
 public class AnioEscolarComposer extends GenericForwardComposer<Component>{
@@ -50,7 +51,7 @@ public class AnioEscolarComposer extends GenericForwardComposer<Component>{
 				
 			Session session = Sessions.getCurrent();
 				
-			new SchollaryearHome().save(new Schollaryear(anioescolar, fechainicio, fechafin, 'A', new Date(), Integer.parseInt(session.getAttribute("idUsuario").toString())));
+			new SchollaryearHome().save(new Schollaryear(anioescolar, fechainicio, fechafin,  new EstadosHome().findById(1), new Date(), Integer.parseInt(session.getAttribute("idUsuario").toString())));
 		
 			Messagebox.show("Registro creado correctamente", "Exito", Messagebox.OK,  Messagebox.EXCLAMATION, new EventListener<Event>() {
 					

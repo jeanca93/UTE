@@ -19,6 +19,7 @@ import org.zkoss.zul.Textbox;
 
 import entidades.Cursos;
 import entidadesDAO.CursosHome;
+import entidadesDAO.EstadosHome;
 
 public class CursosComposer extends GenericForwardComposer<Component>{
 	private static final long serialVersionUID = 7L;
@@ -58,7 +59,7 @@ public class CursosComposer extends GenericForwardComposer<Component>{
 			//	char estados = cmbEstados.getSelectedItem().getValue();
 				Session session = Sessions.getCurrent();
 				
-				new CursosHome().save(new Cursos(idCurso,curso,paralelos,'A', new Date(), Integer.parseInt(session.getAttribute("idUsuario").toString())));
+				new CursosHome().save(new Cursos(idCurso,curso,paralelos, new EstadosHome().findById(1), new Date(), Integer.parseInt(session.getAttribute("idUsuario").toString())));
 				
 				Messagebox.show("Registro creado correctamente", "Exito", Messagebox.OK,  Messagebox.EXCLAMATION, new EventListener<Event>() {
 					

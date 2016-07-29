@@ -21,6 +21,7 @@ import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Timebox;
 
 import entidades.Materias;
+import entidadesDAO.EstadosHome;
 import entidadesDAO.MateriasHome;
 
 public class MateriasComposer extends GenericForwardComposer<Component>{
@@ -69,7 +70,7 @@ public class MateriasComposer extends GenericForwardComposer<Component>{
 					if(minutosSemana / minutosClases == 0){
 						Session session = Sessions.getCurrent();
 						
-						new MateriasHome().save(new Materias(idmateria,materia, duracionclases, horassemana, 'A', new Date(), Integer.parseInt(session.getAttribute("idUsuario").toString())));
+						new MateriasHome().save(new Materias(idmateria,materia, duracionclases, horassemana,  new EstadosHome().findById(1), new Date(), Integer.parseInt(session.getAttribute("idUsuario").toString())));
 						
 						Messagebox.show("Registro creado correctamente", "Exito", Messagebox.OK,  Messagebox.EXCLAMATION, new EventListener<Event>() {
 							
