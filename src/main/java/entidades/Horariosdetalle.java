@@ -13,7 +13,7 @@ public class Horariosdetalle implements java.io.Serializable {
 	private Dispprofesores dispprofesores;
 	private Aulas aulas;
 	private String paralelo;
-	private char estado;
+	private Estados estados;
 	private Date fechaCreacion;
 	private int usuarioCrea;
 	private Date fechaModificacion;
@@ -23,27 +23,27 @@ public class Horariosdetalle implements java.io.Serializable {
 	}
 
 	public Horariosdetalle(HorariosdetalleId id, Profesoresmaterias profesoresmaterias, 
-			Dispprofesores dispprofesores, Aulas aulas, String paralelo, char estado, 
+			Dispprofesores dispprofesores, Aulas aulas, String paralelo, Estados estados, 
 			Date fechaCreacion, int usuarioCrea) {
 		this.id = id;
 		this.profesoresmaterias = profesoresmaterias;
 		this.dispprofesores = dispprofesores;
 		this.aulas = aulas;
 		this.paralelo = paralelo;
-		this.estado = estado;
+		this.estados = estados;
 		this.fechaCreacion = fechaCreacion;
 		this.usuarioCrea = usuarioCrea;
 	}
 
 	public Horariosdetalle(HorariosdetalleId id, Profesoresmaterias profesoresmaterias, 
-			Dispprofesores dispprofesores, Aulas aulas, String paralelo, char estado,
+			Dispprofesores dispprofesores, Aulas aulas, String paralelo, Estados estados,
 			Date fechaCreacion, int usuarioCrea, Date fechaModificacion, Integer usuarioModifica) {
 		this.id = id;
 		this.profesoresmaterias = profesoresmaterias;
 		this.dispprofesores = dispprofesores;
 		this.aulas = aulas;
 		this.paralelo = paralelo;
-		this.estado = estado;
+		this.estados = estados;
 		this.fechaCreacion = fechaCreacion;
 		this.usuarioCrea = usuarioCrea;
 		this.fechaModificacion = fechaModificacion;
@@ -90,12 +90,12 @@ public class Horariosdetalle implements java.io.Serializable {
 		this.paralelo = paralelo;
 	}
 
-	public char getEstado() {
-		return this.estado;
+	public Estados getEstados() {
+		return this.estados;
 	}
 
-	public void setEstado(char estado) {
-		this.estado = estado;
+	public void setEstados(Estados estados) {
+		this.estados = estados;
 	}
 
 	public Date getFechaCreacion() {

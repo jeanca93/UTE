@@ -62,7 +62,7 @@ public class OpcionesHomeExt extends OpcionesHome{
             sbquery.append(" where pp.id.perfilesusuario = u.perfilesusuario");
             sbquery.append("	and pp.id.permisos = op.permisos");
             sbquery.append("	and ao.id.hijo = op.idOpcion");
-            sbquery.append("	and u.usuario=:usuario and u.estado=:estado and pp.estado=:estado and op.estado=:estado");
+            sbquery.append("	and u.usuario=:usuario and u.estados=:estado and pp.estados=:estado and op.estados=:estado");
         	
             if (padre != null)
             	sbquery.append("	and ao.id.padre = " + padre);
@@ -89,7 +89,7 @@ public class OpcionesHomeExt extends OpcionesHome{
             sbquery.append(" where pp.id.perfilesusuario = u.perfilesusuario");
             sbquery.append("	and pp.id.permisos = op.permisos");
             sbquery.append("	and ao.id.hijo = op.idOpcion");
-            sbquery.append("	and u.usuario=:usuario and u.estado=:estado and pp.estado=:estado and op.estado=:estado");
+            sbquery.append("	and u.usuario=:usuario and u.estados=:estado and pp.estados=:estado and op.estados=:estado");
         	
             if (padre != null)
             	sbquery.append("	and op.opcionContenedora = " + padre);
