@@ -12,7 +12,7 @@ public class Horarioscabecera implements java.io.Serializable {
 
 	private Integer idHorarioCab;
 	private Schollaryear schollaryear;
-	private char estado;
+	private Estados estados;
 	private Date fechaCreacion;
 	private int usuarioCrea;
 	private Date fechaModificacion;
@@ -21,17 +21,17 @@ public class Horarioscabecera implements java.io.Serializable {
 	public Horarioscabecera() {
 	}
 
-	public Horarioscabecera(Schollaryear schollaryear, char estado, Date fechaCreacion, int usuarioCrea) {
+	public Horarioscabecera(Schollaryear schollaryear, Estados estados, Date fechaCreacion, int usuarioCrea) {
 		this.schollaryear = schollaryear;
-		this.estado = estado;
+		this.estados = estados;
 		this.fechaCreacion = fechaCreacion;
 		this.usuarioCrea = usuarioCrea;
 	}
 
-	public Horarioscabecera(Schollaryear schollaryear, char estado, Date fechaCreacion, int usuarioCrea,
+	public Horarioscabecera(Schollaryear schollaryear, Estados estados, Date fechaCreacion, int usuarioCrea,
 			Date fechaModificacion, Integer usuarioModifica) {
 		this.schollaryear = schollaryear;
-		this.estado = estado;
+		this.estados = estados;
 		this.fechaCreacion = fechaCreacion;
 		this.usuarioCrea = usuarioCrea;
 		this.fechaModificacion = fechaModificacion;
@@ -54,12 +54,12 @@ public class Horarioscabecera implements java.io.Serializable {
 		this.schollaryear = schollaryear;
 	}
 
-	public char getEstado() {
-		return this.estado;
+	public Estados getEstados() {
+		return this.estados;
 	}
 
-	public void setEstado(char estado) {
-		this.estado = estado;
+	public void setEstados(Estados estados) {
+		this.estados = estados;
 	}
 
 	public Date getFechaCreacion() {

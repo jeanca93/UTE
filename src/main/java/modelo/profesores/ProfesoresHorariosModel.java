@@ -39,6 +39,7 @@ import entidades.Horas;
 import entidades.Profesores;
 import entidadesDAO.DiasHomeExt;
 import entidadesDAO.DispprofesoresHomeExt;
+import entidadesDAO.EstadosHome;
 import entidadesDAO.HorasHomeExt;
 import entidadesDAO.ProfesoresmateriasHomeExt;
 
@@ -125,7 +126,7 @@ public class ProfesoresHorariosModel {
 		        	  Horas horaSelecionada = listItem.getValue();
 		        	  
 		        	  DispprofesoresId id = new DispprofesoresId(profesor, profHorarioStatus.getDias(), horaSelecionada);
-		        	  Dispprofesores disprofesores = new Dispprofesores(id, 'A', new Date(), idUsuario);
+		        	  Dispprofesores disprofesores = new Dispprofesores(id, new EstadosHome().findById(1), new Date(), idUsuario);
 		        	  
 		        	  dispProfesor.add(disprofesores);
 		          }

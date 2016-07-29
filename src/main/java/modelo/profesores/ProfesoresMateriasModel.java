@@ -28,6 +28,7 @@ import entidades.Materiascursos;
 import entidades.Profesores;
 import entidades.Profesoresmaterias;
 import entidades.ProfesoresmateriasId;
+import entidadesDAO.EstadosHome;
 import entidadesDAO.ProfesoresmateriasHomeExt;
 import modelo.materias.MateriaStatus;
 import modelo.materiascursos.MateriascursosDatos;
@@ -98,7 +99,7 @@ public class ProfesoresMateriasModel {
 			   id.setProfesores(profesor);
 			   
 			   profmaterias.setId(id);
-			   profmaterias.setEstado('A');
+			   profmaterias.setEstados(new EstadosHome().findById(1));
 			   profmaterias.setFechaCreacion(new Date());
 			   profmaterias.setUsuarioCrea(idUsuario);
 			   

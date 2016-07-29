@@ -9,7 +9,7 @@ import java.util.Date;
 public class Permisosperfiles implements java.io.Serializable {
 
 	private PermisosperfilesId id;
-	private char estado;
+	private Estados estados;
 	private Date fechaCreacion;
 	private int usuarioCrea;
 	private Date fechaModificacion;
@@ -18,18 +18,18 @@ public class Permisosperfiles implements java.io.Serializable {
 	public Permisosperfiles() {
 	}
 
-	public Permisosperfiles(PermisosperfilesId id, char estado,
+	public Permisosperfiles(PermisosperfilesId id, Estados estados,
 			Date fechaCreacion, int usuarioCrea) {
 		this.id = id;
-		this.estado = estado;
+		this.estados = estados;
 		this.fechaCreacion = fechaCreacion;
 		this.usuarioCrea = usuarioCrea;
 	}
 
-	public Permisosperfiles(PermisosperfilesId id, char estado,
+	public Permisosperfiles(PermisosperfilesId id, Estados estados,
 			Date fechaCreacion, int usuarioCrea, Date fechaModificacion, Integer usuarioModifica) {
 		this.id = id;
-		this.estado = estado;
+		this.estados = estados;
 		this.fechaCreacion = fechaCreacion;
 		this.usuarioCrea = usuarioCrea;
 		this.fechaModificacion = fechaModificacion;
@@ -44,12 +44,12 @@ public class Permisosperfiles implements java.io.Serializable {
 		this.id = id;
 	}
 
-	public char getEstado() {
-		return this.estado;
+	public Estados getEstados() {
+		return this.estados;
 	}
 
-	public void setEstado(char estado) {
-		this.estado = estado;
+	public void setEstados(Estados estados) {
+		this.estados = estados;
 	}
 
 	public Date getFechaCreacion() {

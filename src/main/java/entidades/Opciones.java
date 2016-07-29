@@ -17,7 +17,7 @@ public class Opciones implements java.io.Serializable {
 	private String tituloPanel;
 	private String imagen;
 	private String url;
-	private char estado;
+	private Estados estados;
 	private Date fechaCreacion;
 	private int usuarioCrea;
 	private Date fechaModificacion;
@@ -26,17 +26,17 @@ public class Opciones implements java.io.Serializable {
 	public Opciones() {
 	}
 
-	public Opciones(String opcion, String orden, String tituloMenu, char estado, Date fechaCreacion, int usuarioCrea) {
+	public Opciones(String opcion, String orden, String tituloMenu, Estados estados, Date fechaCreacion, int usuarioCrea) {
 		this.opcion = opcion;
 		this.orden = orden;
 		this.tituloMenu = tituloMenu;
-		this.estado = estado;
+		this.estados = estados;
 		this.fechaCreacion = fechaCreacion;
 		this.usuarioCrea = usuarioCrea;
 	}
 
 	public Opciones(Permisos permisos, String opcion, Integer opcionContenedora, String orden, String tituloMenu,
-			String tituloPanel, String imagen, String url, char estado, Date fechaCreacion, int usuarioCrea,
+			String tituloPanel, String imagen, String url, Estados estados, Date fechaCreacion, int usuarioCrea,
 			Date fechaModificacion, Integer usuarioModifica) {
 		this.permisos = permisos;
 		this.opcion = opcion;
@@ -46,7 +46,7 @@ public class Opciones implements java.io.Serializable {
 		this.tituloPanel = tituloPanel;
 		this.imagen = imagen;
 		this.url = url;
-		this.estado = estado;
+		this.estados = estados;
 		this.fechaCreacion = fechaCreacion;
 		this.usuarioCrea = usuarioCrea;
 		this.fechaModificacion = fechaModificacion;
@@ -125,12 +125,12 @@ public class Opciones implements java.io.Serializable {
 		this.url = url;
 	}
 
-	public char getEstado() {
-		return this.estado;
+	public Estados getEstados() {
+		return this.estados;
 	}
 
-	public void setEstado(char estado) {
-		this.estado = estado;
+	public void setEstados(Estados estados) {
+		this.estados = estados;
 	}
 
 	public Date getFechaCreacion() {

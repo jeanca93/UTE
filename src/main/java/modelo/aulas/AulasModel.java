@@ -158,7 +158,7 @@ public class AulasModel {
         		if(aulas.getAula() != aul.getAula().getAula() || 
         		   aulas.getAsientos() != aul.getAula().getAsientos() ||
         		   aulas.getComentarios() != aul.getAula().getAula()  ||
-        		   aulas.getEstado() != aul.getAula().getEstado())
+        		   aulas.getEstados() != aul.getAula().getEstados())
         			flagCambio = true;
         		
         		aulTMP = aulas;
@@ -205,7 +205,7 @@ public class AulasModel {
     		listAulaTMP.get(listAulaTMP.size()-1).setAula(aul.getAula());
     		listAulaTMP.get(listAulaTMP.size()-1).setAsientos(aul.getAsientos());
     		listAulaTMP.get(listAulaTMP.size()-1).setComentarios(aul.getComentarios());
-    		listAulaTMP.get(listAulaTMP.size()-1).setEstado(aul.getEstado());
+    		listAulaTMP.get(listAulaTMP.size()-1).setEstados(aul.getEstados());
     		
 		}
     }
