@@ -94,7 +94,7 @@ public class Horariosdetalle implements java.io.Serializable {
 		return this.estados;
 	}
 
-	public void setEstados(Estados estados) {
+	public void setEstados(Estados estado) {
 		this.estados = estados;
 	}
 
