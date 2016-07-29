@@ -1,11 +1,12 @@
 package entidadesDAO;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-import org.hibernate.criterion.Restrictions;
 
 import entidades.Perfilesusuario;
 import entidades.Permisos;
@@ -38,9 +39,13 @@ public class PermisosperfilesHomeExt extends PermisosperfilesHome{
     	ArrayList<Permisosperfiles> results = new ArrayList<Permisosperfiles>();
 		
     	try {
-			results = (ArrayList<Permisosperfiles>) session.createCriteria(Permisosperfiles.class)
-						.add(Restrictions.eq("estado", 'A'))
-						.list();						
+    		StringBuffer sbquery = new StringBuffer();
+    		sbquery.append("from Permisosperfiles pp where pp.estados.idEstado=:estado");
+    		
+    		Query query = session.createQuery(sbquery.toString());
+    		query.setInteger("estado", EstadosHomeExt.ESTADO_ACTIVO);
+    		
+			results = (ArrayList<Permisosperfiles>) query.list();						
 		} catch (RuntimeException re) {			
 			throw re;
 		}
@@ -65,9 +70,12 @@ public class PermisosperfilesHomeExt extends PermisosperfilesHome{
     		for(Permisosperfiles permisosperfiles:listPermisosPerfil){
     			save(permisosperfiles);
     		}
-    		//Perfilesusuario perfil = listPermisosPerfil.get(0).getId().getPerfilesusuario();
-    		//perfil.setEstado(estado);
-    		//new PerfilesusuarioHome().save();
+    		
+    		Perfilesusuario perfil = listPermisosPerfil.get(0).getId().getPerfilesusuario();
+    		perfil.setEstados(new EstadosHome().findById(EstadosHomeExt.ESTADO_ACTIVO));
+    		perfil.setFechaModificacion(new Date());
+    		//pendiente usuario modifica
+    		new PerfilesusuarioHome().save(perfil);
     		
     		flag = true;
 		} catch (RuntimeException re) {

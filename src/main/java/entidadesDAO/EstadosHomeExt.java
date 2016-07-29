@@ -9,7 +9,11 @@ import entidades.Cursos;
 import entidades.Estados;
 
 public class EstadosHomeExt extends EstadosHome{
-
+	public static Integer ESTADO_ACTIVO = 1;
+	public static Integer ESTADO_INACTIVO = 2;
+	public static Integer ESTADO_PENDIENTE = 3;
+	public static Integer ESTADO_FINALIZADO = 4;
+	
 	public EstadosHomeExt() {
 		super();
 	}

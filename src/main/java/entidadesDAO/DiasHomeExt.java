@@ -2,9 +2,8 @@ package entidadesDAO;
 
 import java.util.ArrayList;
 
+import org.hibernate.Query;
 import org.hibernate.Session;
-import org.hibernate.criterion.Order;
-import org.hibernate.criterion.Restrictions;
 
 import entidades.Dias;
 
@@ -20,10 +19,13 @@ public class DiasHomeExt extends DiasHome{
     	ArrayList<Dias> results = new ArrayList<Dias>();
 		
     	try {
-			results = (ArrayList<Dias>) session.createCriteria(Dias.class)
-						.add(Restrictions.eq("estado", 'A'))
-						.addOrder(Order.asc("idDia"))
-						.list();						
+    		StringBuffer sbquery = new StringBuffer();
+    		sbquery.append("from Dias d where d.estados.idEstado=:estado order by d.idDia asc");
+    		
+    		Query query = session.createQuery(sbquery.toString());
+    		query.setInteger("estado", EstadosHomeExt.ESTADO_ACTIVO);
+    		
+			results = (ArrayList<Dias>) query.list();						
 		} catch (RuntimeException re) {			
 			throw re;
 		}

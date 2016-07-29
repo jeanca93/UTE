@@ -29,7 +29,7 @@ public class OpcionesHomeExt extends OpcionesHome{
             sbquery.append(" where pp.id.perfilesusuario = u.perfilesusuario");
             sbquery.append("	and pp.id.permisos = op.permisos");
             sbquery.append("	and ao.id.hijo = op.idOpcion");
-            sbquery.append("	and u.usuario=:usuario and u.estado = 'A' and pp.estado = 'A' and op.estado = 'A'");
+            sbquery.append("	and u.usuario=:usuario and u.estados=:estado and pp.estados=:estado and op.estados=:estado");
             //sbquery.append("	and ao.id.profundidad = 0");
             
             if (raiz)
@@ -42,6 +42,7 @@ public class OpcionesHomeExt extends OpcionesHome{
     		
             Query query = session.createQuery(sbquery.toString());
             query.setString("usuario", usuario);
+            query.setInteger("estado", EstadosHomeExt.ESTADO_ACTIVO);
             
             listResulst = query.list();
     	}catch(RuntimeException re){
@@ -61,13 +62,14 @@ public class OpcionesHomeExt extends OpcionesHome{
             sbquery.append(" where pp.id.perfilesusuario = u.perfilesusuario");
             sbquery.append("	and pp.id.permisos = op.permisos");
             sbquery.append("	and ao.id.hijo = op.idOpcion");
-            sbquery.append("	and u.usuario=:usuario and u.estado = 'A' and pp.estado = 'A' and op.estado = 'A'");
+            sbquery.append("	and u.usuario=:usuario and u.estado=:estado and pp.estado=:estado and op.estado=:estado");
         	
             if (padre != null)
             	sbquery.append("	and ao.id.padre = " + padre);
     		
             Query query = session.createQuery(sbquery.toString());
             query.setString("usuario", usuario);
+            query.setInteger("estado", EstadosHomeExt.ESTADO_ACTIVO);
             
             conteo = Integer.parseInt(query.uniqueResult().toString());
     	}catch(RuntimeException re){
@@ -87,13 +89,14 @@ public class OpcionesHomeExt extends OpcionesHome{
             sbquery.append(" where pp.id.perfilesusuario = u.perfilesusuario");
             sbquery.append("	and pp.id.permisos = op.permisos");
             sbquery.append("	and ao.id.hijo = op.idOpcion");
-            sbquery.append("	and u.usuario=:usuario and u.estado = 'A' and pp.estado = 'A' and op.estado = 'A'");
+            sbquery.append("	and u.usuario=:usuario and u.estado=:estado and pp.estado=:estado and op.estado=:estado");
         	
             if (padre != null)
             	sbquery.append("	and op.opcionContenedora = " + padre);
             		
             Query query = session.createQuery(sbquery.toString());
             query.setString("usuario", usuario);
+            query.setInteger("estado", EstadosHomeExt.ESTADO_ACTIVO);
             
             ultimo = (query.uniqueResult() != null?Integer.parseInt(query.uniqueResult().toString()):0);
     	}catch(RuntimeException re){

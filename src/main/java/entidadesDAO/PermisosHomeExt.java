@@ -2,9 +2,8 @@ package entidadesDAO;
 
 import java.util.ArrayList;
 
+import org.hibernate.Query;
 import org.hibernate.Session;
-import org.hibernate.criterion.Order;
-import org.hibernate.criterion.Restrictions;
 
 import entidades.Permisos;
 
@@ -19,10 +18,13 @@ public class PermisosHomeExt extends PermisosHome{
     	ArrayList<Permisos> results = new ArrayList<Permisos>();
 		
     	try {
-			results = (ArrayList<Permisos>) session.createCriteria(Permisos.class)
-						.add(Restrictions.eq("estado",'A'))
-						.addOrder(Order.asc("idPermiso"))
-						.list();			
+    		StringBuffer sbquery = new StringBuffer();
+    		sbquery.append("from Permisos p where p.estados.idEstado=:estado order by p.idPermiso asc");
+    		
+    		Query query = session.createQuery(sbquery.toString());
+    		query.setInteger("estado", EstadosHomeExt.ESTADO_ACTIVO);
+    		
+			results = (ArrayList<Permisos>) query.list();			
 		} catch (RuntimeException re) {			
 			throw re;
 		}

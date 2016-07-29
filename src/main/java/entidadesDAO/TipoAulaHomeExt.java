@@ -2,11 +2,8 @@ package entidadesDAO;
 
 import java.util.ArrayList;
 
-import org.hibernate.Criteria;
+import org.hibernate.Query;
 import org.hibernate.Session;
-import org.hibernate.criterion.Order;
-import org.hibernate.criterion.Restrictions;
-
 import entidades.Tipoaula;
 
 public class TipoAulaHomeExt extends TipoAulaHome{
@@ -20,14 +17,20 @@ public class TipoAulaHomeExt extends TipoAulaHome{
     	ArrayList<Tipoaula> results = new ArrayList<Tipoaula>();
 		
     	try {
-    		Criteria criteria = session.createCriteria(Tipoaula.class);
+    		StringBuffer sbquery = new StringBuffer();
+    		sbquery.append("from Tipoaula ta");
+    		    		
+    		if(activos)
+    			sbquery.append(" where ta.estados.idEstado=:estado");
+    		
+    		sbquery.append(" order by ta.idTipoaula asc");
+    		
+    		Query query = session.createQuery(sbquery.toString());
     		
     		if(activos)
-    			criteria.add(Restrictions.eq("estado", 'A'));
-    		
-    		criteria.addOrder(Order.asc("idTipoaula"));
-    		
-			results = (ArrayList<Tipoaula>) criteria.list();			
+    			query.setInteger("estado", EstadosHomeExt.ESTADO_ACTIVO);
+    			
+			results = (ArrayList<Tipoaula>) query.list();			
 		} catch (RuntimeException re) {			
 			throw re;
 		}

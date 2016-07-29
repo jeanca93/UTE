@@ -2,8 +2,8 @@ package entidadesDAO;
 
 import java.util.ArrayList;
 
+import org.hibernate.Query;
 import org.hibernate.Session;
-import org.hibernate.criterion.Restrictions;
 
 import entidades.Horas;
 
@@ -18,9 +18,13 @@ public class HorasHomeExt extends HorasHome{
     	ArrayList<Horas> results = new ArrayList<Horas>();
 		
     	try {
-			results = (ArrayList<Horas>) session.createCriteria(Horas.class)
-						.add(Restrictions.eq("estado", 'A'))
-						.list();			
+    		StringBuffer sbquery = new StringBuffer();
+    		sbquery.append("from Horas h where h.estados.idEstado=:estado");
+    		
+    		Query query = session.createQuery(sbquery.toString());
+    		query.setInteger("estado", EstadosHomeExt.ESTADO_ACTIVO);
+    		
+			results = (ArrayList<Horas>) query.list();			
 		} catch (RuntimeException re) {			
 			throw re;
 		}

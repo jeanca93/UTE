@@ -2,10 +2,8 @@ package entidadesDAO;
 
 import java.util.ArrayList;
 
-import org.hibernate.Criteria;
+import org.hibernate.Query;
 import org.hibernate.Session;
-import org.hibernate.criterion.Order;
-import org.hibernate.criterion.Restrictions;
 
 import entidades.Materias;
 
@@ -21,14 +19,20 @@ public class MateriasHomeExt extends MateriasHome{
     	ArrayList<Materias> results = new ArrayList<Materias>();
 		
     	try {
-    		Criteria criteria = session.createCriteria(Materias.class);
+    		StringBuffer sbquery = new StringBuffer();
+    		sbquery.append("from Materias m");
+    		    		
+    		if(activos)
+    			sbquery.append(" where m.estados.idEstado=:estado");
+    		
+    		sbquery.append(" order by m.fechaCreacion asc");
+    		
+    		Query query = session.createQuery(sbquery.toString());
     		
     		if(activos)
-    			criteria.add(Restrictions.eq("estado", 'A'));
+    			query.setInteger("estado", EstadosHomeExt.ESTADO_ACTIVO);
     		
-    		criteria.addOrder(Order.asc("fechaCreacion"));
-    		
-			results = (ArrayList<Materias>) criteria.list();
+			results = (ArrayList<Materias>) query.list();
 		} catch (RuntimeException re) {			
 			throw re;
 		}
