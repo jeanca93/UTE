@@ -56,7 +56,7 @@
                         value="@load(each.perfil.comentarios) @save(each.perfil.comentarios, before='confirm')" />
                     <combobox inplace="true" mold="rounded" readonly="true"
                         model="@load(vm.allEstados)" constraint="no empty:Campo obligatorio"
-                        selectedItem="@bind(each.perfil.estado)" hflex="1">
+                        selectedItem="@bind(each.perfil.estados)" hflex="1">
                         <template name="model">
                         	<comboitem value="@load(each.idEstado)" label="@load(each.estado)"/>
                     	</template>
@@ -79,7 +79,7 @@
                     <label value="@load(each.perfil.comentarios)" hflex="1"/>
                      <combobox disabled="true" inplace="true" mold="rounded"
                         model="@load(vm.allEstados)" 
-                        selectedItem="@bind(each.perfil.estado)" hflex="1">
+                        selectedItem="@bind(each.perfil.estados)" hflex="1">
                        <template name="model">
                         	<comboitem value="@load(each.idEstado)" label="@load(each.estado)"/>
                     	</template>

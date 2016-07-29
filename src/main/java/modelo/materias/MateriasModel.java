@@ -106,7 +106,7 @@ public class MateriasModel {
 	   if(materiaDelete.size() == 0){
 		   Clients.alert("Debe seleccionar m&iacute;nimo un registro para continuar", "Error", null);
 	   }else{
-		   Messagebox.show("ï¿½Est&aacute; seguro que desea continuar?", "Mensaje de Confirmaci&oacute;n", Messagebox.YES | Messagebox.NO, Messagebox.QUESTION, new EventListener<Event>() {
+		   Messagebox.show("¿Est&aacute; seguro que desea continuar?", "Mensaje de Confirmaci&oacute;n", Messagebox.YES | Messagebox.NO, Messagebox.QUESTION, new EventListener<Event>() {
 			
 				public void onEvent(Event event) throws Exception {
 					// TODO Auto-generated method stub
@@ -170,7 +170,9 @@ public class MateriasModel {
         
         for(Materias materia:listMateriaTMP){
         	if(materia.getIdMateria() == mate.getMaterias().getIdMateria()){
-        		if(materia.getMateria() != mate.getMaterias().getMateria() || materia.getHorasSemana() != mate.getMaterias().getHorasSemana() )
+        		if(materia.getMateria() != mate.getMaterias().getMateria() || 
+        				materia.getHorasSemana() != mate.getMaterias().getHorasSemana() ||
+        				materia.getEstados() != mate.getMaterias().getEstados())
         			flagCambio = true;
         		
         		mateTMP = materia;
@@ -216,6 +218,7 @@ public class MateriasModel {
     		listMateriaTMP.get(listMateriaTMP.size()-1).setIdMateria(mate.getIdMateria());
     		listMateriaTMP.get(listMateriaTMP.size()-1).setMateria(mate.getMateria());
     		listMateriaTMP.get(listMateriaTMP.size()-1).setHorasSemana(mate.getHorasSemana());
+    		listMateriaTMP.get(listMateriaTMP.size()-1).setEstados(mate.getEstados());
     		
 		}
     }

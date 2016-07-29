@@ -177,7 +177,7 @@ public class UsuariosModel {
         	if(usuario.getIdUsuario() == usr.getUsuario().getIdUsuario()){
         		if(usuario.getNombres() != usr.getUsuario().getNombres() || usuario.getApellidos() != usr.getUsuario().getApellidos() ||
         				usuario.getUsuario() != usr.getUsuario().getUsuario() || usuario.getCorreo() != usr.getUsuario().getCorreo() ||
-        				usuario.getPerfilesusuario() != usr.getUsuario().getPerfilesusuario())
+        				usuario.getPerfilesusuario() != usr.getUsuario().getPerfilesusuario() || usuario.getEstados() != usr.getUsuario().getEstados())
         			flagCambio = true;
         		
         		usrTMP = usuario;
@@ -226,6 +226,7 @@ public class UsuariosModel {
 			listUserTMP.get(listUserTMP.size()-1).setUsuario(user.getUsuario());
 			listUserTMP.get(listUserTMP.size()-1).setCorreo(user.getCorreo());
 			listUserTMP.get(listUserTMP.size()-1).setPerfilesusuario(user.getPerfilesusuario());
+			listUserTMP.get(listUserTMP.size()-1).setEstados(user.getEstados());
 		}
     }
     

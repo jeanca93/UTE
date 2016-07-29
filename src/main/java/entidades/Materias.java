@@ -90,15 +90,11 @@ public class Materias implements java.io.Serializable {
 		this.tipoaula = tipoaula;
 	}
 
-	public void setEstados(Estados estados) {
-		this.estados = estados;
-	}
-
 	public Estados getEstados() {
 		return this.estados;
 	}
 
-	public void setEstado(Estados estados) {
+	public void setEstados(Estados estados) {
 		this.estados = estados;
 	}
 

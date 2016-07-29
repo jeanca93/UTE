@@ -217,7 +217,7 @@ public class ProfesoresModel {
         for(Profesores profesor:listProfesorTMP){
         	if(profesor.getIdProfesor() == prof.getProfesor().getIdProfesor()){
         		if(profesor.getProfesor() != prof.getProfesor().getProfesor() || profesor.getTitulo() != prof.getProfesor().getTitulo() ||
-        				profesor.getMaxHorasPorSemana() != prof.getProfesor().getMaxHorasPorSemana())
+        				profesor.getMaxHorasPorSemana() != prof.getProfesor().getMaxHorasPorSemana() || profesor.getEstados() != prof.getProfesor().getEstados())
         			flagCambio = true;
         		
         		profTMP = profesor;
@@ -264,7 +264,7 @@ public class ProfesoresModel {
 			listProfesorTMP.get(listProfesorTMP.size()-1).setProfesor(profesor.getProfesor());
 			listProfesorTMP.get(listProfesorTMP.size()-1).setTitulo(profesor.getTitulo());
 			listProfesorTMP.get(listProfesorTMP.size()-1).setMaxHorasPorSemana(profesor.getMaxHorasPorSemana());
-
+			listProfesorTMP.get(listProfesorTMP.size()-1).setEstados(profesor.getEstados());
 		}
     }
     

@@ -40,7 +40,7 @@
         	    </column>
                 <column width="80px" label="ID Tipo Aula" align="center" sort="auto(tipoaula.idTipoaula)" />
                 <column width="250px" label="Tipo de Aula" align="left" sort="auto(tipoaula.tipoaula)"/>
-                <column width="100px" label="Estado" align="left" sort="auto(anioescolar.fechaFin)"/>
+                <column width="120px" label="Estado" align="left" sort="auto(anioescolar.fechaFin)"/>
                 <column width="120px" label="Edit" visible="@load(vm.displayEdit)"/>
             </columns>
             <template name="editable">

@@ -190,7 +190,7 @@ public class PerfilesModel {
         
         for(Perfilesusuario perf:listPerfilesTMP){
         	if(perf.getIdPerfilUsuario() == perfil.getPerfil().getIdPerfilUsuario()){
-        		if(perf.getPerfil() != perfil.getPerfil().getPerfil() || perf.getComentarios() != perfil.getPerfil().getComentarios())
+        		if(perf.getPerfil() != perfil.getPerfil().getPerfil() || perf.getComentarios() != perfil.getPerfil().getComentarios() || perf.getEstados() != perfil.getPerfil().getEstados())
         			flagCambio = true;
         		
         		perfilTMP = perf;
@@ -236,6 +236,7 @@ public class PerfilesModel {
     		listPerfilesTMP.get(listPerfilesTMP.size()-1).setIdPerfilUsuario(perfil.getIdPerfilUsuario());
     		listPerfilesTMP.get(listPerfilesTMP.size()-1).setPerfil(perfil.getPerfil());
     		listPerfilesTMP.get(listPerfilesTMP.size()-1).setComentarios(perfil.getComentarios());
+    		listPerfilesTMP.get(listPerfilesTMP.size()-1).setEstados(perfil.getEstados());
 		}
     }
     
