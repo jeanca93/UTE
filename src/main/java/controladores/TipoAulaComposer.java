@@ -21,7 +21,7 @@ import entidadesDAO.EstadosHome;
 import entidadesDAO.TipoAulaHome;
 
 public class TipoAulaComposer extends GenericForwardComposer<Component>{
-	private static final long serialVersionUID = 9L;
+	private static final long serialVersionUID = 10L;
 	private Textbox txtTipoAula;
 	
 	public TipoAulaComposer() {

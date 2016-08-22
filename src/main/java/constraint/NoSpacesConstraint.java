@@ -10,8 +10,6 @@ import org.zkoss.zk.ui.WrongValueException;
 import org.zkoss.zul.Constraint;
 import org.zkoss.zul.Textbox;
 
-import entidadesDAO.UsuariosHomeExt;
-
 public class NoSpacesConstraint implements Constraint, Serializable{
 	private static final long serialVersionUID = 10L;
 
@@ -19,7 +17,8 @@ public class NoSpacesConstraint implements Constraint, Serializable{
 		// TODO Auto-generated constructor stub
 		super();
 	}
-
+	
+	@Override
 	public void validate(Component comp, Object value) throws WrongValueException {
 		// TODO Auto-generated method stub
 		if (comp instanceof Textbox) {
@@ -32,7 +31,7 @@ public class NoSpacesConstraint implements Constraint, Serializable{
 				throw new WrongValueException(comp, "Campo obligatorio");
 			else{
 				if (((String)value).length() < 5 || ((String)value).length() > 15)
-					throw new WrongValueException(comp, "Usuario debe tener mínimo 5 caracteres y máximo 15 caracteres");
+					throw new WrongValueException(comp, "Usuario debe tener mï¿½nimo 5 caracteres y mï¿½ximo 15 caracteres");
 				else{
 					if (StringUtils.countMatches((String)value, " ") > 0 )
 						throw new WrongValueException(comp, "Espacios no son permitidos");

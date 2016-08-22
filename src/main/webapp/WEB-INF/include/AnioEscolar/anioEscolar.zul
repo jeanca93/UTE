@@ -22,14 +22,30 @@
             border-radius: 10px;
     		border: 1px thin #0080c0;
         }
+        
+        .z-panel-hm .z-panel-header, .z-panel-header,.z-panel-tl, .z-panel-tr, .z-panel-tl-gray, .z-panel-tr-gray, .z-panel-bl, .z-panel-br, .z-panel-hl, .z-panel-hr {
+			font-weight: bold;
+			color: #6d0c01;
+			background:#ddd;
+		}
+		
+		.z-panel-head {
+			background:#ddd;
+		}
 </style>
 <panel id="container" title="Administración de Años Escolares" vflex="1" 
         viewModel="@id('vm') @init('modelo.anioescolar.AnioEscolarModel')">
     <toolbar>
     	<toolbarbutton image="/img/agregar.png" label="Nuevo" onClick="@command('nuevoAnioEscolar')"/>
     	<toolbarbutton image="/img/trash.png" label="Eliminar" onClick="@command('eliminarAnioEscolar')"/>
+    	<toolbarbutton image="/img/agregar.png" label="Habilitar Año Lectivo" onClick="@command('habilitarSchollarYear')"/>
+    	<toolbarbutton image="/img/agregar.png" label="Inhabilitar año lectivo" onClick="@command('inhabilitarSchollarYear')"/>
+    	<toolbarbutton image="/img/agregar.png" label="Jornada Académica" onClick="@command('jornadaAcademica')"/>
     </toolbar>
     <panelchildren>
+    	<zscript>
+			constraint.TimeConstraint customTimeConstraint = new constraint.TimeConstraint();
+		</zscript>
         <grid id="GridAnioEscolar" mold="paging" pagingPosition="bottom"
         	model="@load(vm.allAnioEscolar) @template((vm.displayEdit and each.editingStatus) ? 'editable' : 'noneditable')"
             autopaging="true" vflex="1" emptyMessage="No hay registros">
@@ -38,11 +54,12 @@
             	<column width="30px" align="center" >
             		<checkbox id="selectAllCheckBox" onCheck="@command('selectedCheckBox', CheckEvent=event)"/>
         	    </column>
-                <column width="80px" label="ID Año Lectivo" align="center" sort="auto(anioescolar.idSchoolarYear))" />
+                <column width="100px" label="ID Año Lectivo" align="center" sort="auto(anioescolar.idSchoolarYear))" />
                 <column width="250px" label="Año Lectivo" align="left" sort="auto(anioescolar.schollarYear)"/>
-                <column width="250px" label="Fecha Inicio" align="left" sort="auto(anioescolar.fechaInicio)"/>
-                <column width="250px" label="Fecha Fin" align="left" sort="auto(anioescolar.fechaFin)"/>
-                <column width="120px" label="Estado" align="center" sort="auto(anioescolar.estado)"/>
+                <column width="100px" label="Fecha Inicio" align="left" sort="auto(anioescolar.fechaInicio)"/>
+                <column width="100px" label="Fecha Fin" align="left" sort="auto(anioescolar.fechaFin)"/>
+                <column width="140px" label="Duración de Clases" align="center"/>
+                <column width="200px" label="Máx. Horas Semana de Profesor" align="center"/>
                 <column width="120px" label="Edit" visible="@load(vm.displayEdit)"/>
             </columns>
             <template name="editable">
@@ -56,13 +73,10 @@
                             value="@load(each.anioescolar.fechaInicio) @save(each.anioescolar.fechaInicio, before='confirm')" />
                     <datebox constraint="no empty: Campo Obligatorio"  format="dd/MM/yyyy"  mold="rounded"
                             value="@load(each.anioescolar.fechaFin) @save(each.anioescolar.fechaFin, before='confirm')" />
-                    <combobox inplace="true" mold="rounded" readonly="true"
-                        model="@load(vm.allEstados)" constraint="no empty:Campo obligatorio"
-                        selectedItem="@bind(each.anioescolar.estados)" hflex="1">
-                        <template name="model">
-                        	<comboitem value="@load(each.idEstado)" label="@load(each.estado)"/>
-                    	</template>
-                    </combobox>
+                    <timebox constraint="${customTimeConstraint}"  format="HH:mm"  mold="rounded" maxlength="5"
+                            value="@load(each.anioescolar.duracionClase) @save(each.anioescolar.duracionClase, before='confirm')" />
+                    <spinner sclass="ftextbox" id="txtMaxhoras" hflex="1" maxlength="2" value="@load(each.anioescolar.maxHorasSemanaProfesor) @save(each.anioescolar.maxHorasSemanaProfesor, before='confirm')"
+							 constraint="no empty:Campo obligatorio, no negative:No se admiten valores negativos, min 1:Debe indicar una hora"/>
                     <div>
                         <button
                             image="/img/tick-small.png"
@@ -82,13 +96,9 @@
                             value="@load(each.anioescolar.fechaInicio)" disabled="true"/>
                     <datebox constraint="no empty: Campo Obligatorio"  format="dd/MM/yyyy"  mold="rounded"
                             value="@load(each.anioescolar.fechaFin)" disabled="true"/>
-                    <combobox disabled="true" inplace="true" mold="rounded"
-                        model="@load(vm.allEstados)" 
-                        selectedItem="@bind(each.anioescolar.estados)" hflex="1">
-                       <template name="model">
-                        	<comboitem value="@load(each.idEstado)" label="@load(each.estado)"/>
-                    	</template>
-                    </combobox>
+                    <timebox constraint="no empty: Campo Obligatorio"  format="HH:mm"  mold="rounded"
+                            value="@load(each.anioescolar.duracionClase)" disabled="true"/>
+                    <label value="@load(each.anioescolar.maxHorasSemanaProfesor)" hflex="1"/>
                     <button
                         image="/img/pencil-small.png"
                         onClick="@command('changeEditableStatus', AnioEscolarStatus=each)" />

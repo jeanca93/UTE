@@ -27,9 +27,9 @@ public class OpcionesHomeExt extends OpcionesHome{
     		StringBuffer sbquery = new StringBuffer();        	
             sbquery.append("select distinct op from Opciones op, Usuarios u, Permisosperfiles pp, Arbolopciones ao");
             sbquery.append(" where pp.id.perfilesusuario = u.perfilesusuario");
-            sbquery.append("	and pp.id.permisos = op.permisos");
+            sbquery.append("	and (op.permisos is null or pp.id.permisos = op.permisos)");
             sbquery.append("	and ao.id.hijo = op.idOpcion");
-            sbquery.append("	and u.usuario=:usuario and u.estados=:estado and pp.estados=:estado and op.estados=:estado");
+            sbquery.append("	and u.usuario=:usuario and op.estados.idEstado=:estado and op.estados = u.estados and u.estados = pp.estados");
             //sbquery.append("	and ao.id.profundidad = 0");
             
             if (raiz)
@@ -58,11 +58,11 @@ public class OpcionesHomeExt extends OpcionesHome{
     	
     	try{
     		StringBuffer sbquery = new StringBuffer();        	
-            sbquery.append("select count(op.idOpcion) from Opciones op, Usuarios u, Permisosperfiles pp, Arbolopciones ao");
+            sbquery.append("select count(distinct op.idOpcion) from Opciones op, Usuarios u, Permisosperfiles pp, Arbolopciones ao");
             sbquery.append(" where pp.id.perfilesusuario = u.perfilesusuario");
-            sbquery.append("	and pp.id.permisos = op.permisos");
+            sbquery.append("	and (op.permisos is null or pp.id.permisos = op.permisos)");
             sbquery.append("	and ao.id.hijo = op.idOpcion");
-            sbquery.append("	and u.usuario=:usuario and u.estados=:estado and pp.estados=:estado and op.estados=:estado");
+            sbquery.append("	and u.usuario=:usuario and op.estados.idEstado=:estado and op.estados = u.estados and u.estados = pp.estados");
         	
             if (padre != null)
             	sbquery.append("	and ao.id.padre = " + padre);
@@ -87,9 +87,9 @@ public class OpcionesHomeExt extends OpcionesHome{
     		StringBuffer sbquery = new StringBuffer();
             sbquery.append("select max(op.idOpcion) from Opciones op, Usuarios u, Permisosperfiles pp, Arbolopciones ao");
             sbquery.append(" where pp.id.perfilesusuario = u.perfilesusuario");
-            sbquery.append("	and pp.id.permisos = op.permisos");
+            sbquery.append("	and (op.permisos is null or pp.id.permisos = op.permisos)");
             sbquery.append("	and ao.id.hijo = op.idOpcion");
-            sbquery.append("	and u.usuario=:usuario and u.estados=:estado and pp.estados=:estado and op.estados=:estado");
+            sbquery.append("	and u.usuario=:usuario and op.estados.idEstado=:estado and op.estados = u.estados and u.estados = pp.estados");
         	
             if (padre != null)
             	sbquery.append("	and op.opcionContenedora = " + padre);

@@ -1,6 +1,7 @@
 package constraint;
 
 import java.io.Serializable;
+import java.util.Calendar;
 import java.util.Date;
 
 import org.zkoss.zk.ui.Component;
@@ -16,6 +17,7 @@ public class TimeConstraint implements Constraint, Serializable{
 		super();
 	}
 	
+	@Override
 	public void validate(Component comp, Object value) throws WrongValueException {
 		// TODO Auto-generated method stub
 		if (comp instanceof Timebox) {
@@ -27,8 +29,15 @@ public class TimeConstraint implements Constraint, Serializable{
 			if (value == null)
 				throw new WrongValueException(comp, "Campo obligatorio");
 			else{
-				if((((Date)value).getTime()/60000L) % 15 != 0)
-					throw new WrongValueException(comp, "Tiempo no permitido, debe ser m�ltiplo de 15 minutos");
+				Calendar validaMinutos = Calendar.getInstance();
+				validaMinutos.setTime((Date)value);
+				int totalMinutos = ((validaMinutos.get(Calendar.HOUR_OF_DAY)*60) + validaMinutos.get(Calendar.MINUTE));
+				
+				if(totalMinutos < 40)
+					throw new WrongValueException(comp, "Duración mínima de clases es de 40 minutos");
+				else
+					if(totalMinutos % 15 != 0)
+						throw new WrongValueException(comp, "Tiempo no permitido, debe ser múltiplo de 15 minutos");
 			}
 		}
 	}

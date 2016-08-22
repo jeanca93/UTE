@@ -12,6 +12,9 @@
         		<column name="ID_Curso" length="5" not-null="true" />
         	</key-many-to-one>
         </composite-id>
+        <property name="horasSemana" type="int">
+            <column name="HorasSemana" not-null="true"  />
+        </property>
         <many-to-one name="estados" class="entidades.Estados" fetch="select">
             <column name="ID_Estado" not-null="true" />
         </many-to-one>

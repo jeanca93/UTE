@@ -30,18 +30,18 @@ public class UsuariosHomeExt extends UsuariosHome{
     	return existe;
     }
     
-    public Integer existeUsuario(String user){
+    public Long existeUsuario(String user){
     	Session session = this.getSession();
-    	Integer existe = 0;
+    	Long existe = 0L;
     	
     	try{
     		StringBuffer sbquery = new StringBuffer();
     		sbquery.append("select count(u.idUsuario) from Usuarios u where u.usuario=:usuario");
         	    		
-            Query query = session.createSQLQuery(sbquery.toString());
+            Query query = session.createQuery(sbquery.toString());
             query.setString("usuario", user);
             
-            existe = (Integer) query.uniqueResult();
+            existe = (Long) query.uniqueResult();
     	}catch(RuntimeException re){
     		throw re;	
     	}

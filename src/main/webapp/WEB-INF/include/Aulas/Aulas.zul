@@ -22,6 +22,16 @@
             border-radius: 10px;
     		border: 1px thin #0080c0;
         }
+        
+        .z-panel-hm .z-panel-header, .z-panel-header,.z-panel-tl, .z-panel-tr, .z-panel-tl-gray, .z-panel-tr-gray, .z-panel-bl, .z-panel-br, .z-panel-hl, .z-panel-hr {
+			font-weight: bold;
+			color: #6d0c01;
+			background:#ddd;
+		}
+		
+		.z-panel-head {
+			background:#ddd;
+		}
 </style>
 <panel id="container" title="Administración de Aulas" vflex="1"
         viewModel="@id('vm') @init('modelo.aulas.AulasModel')">

@@ -2,9 +2,7 @@ package modelo.usuarios;
 
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.zkoss.bind.BindUtils;
 import org.zkoss.bind.annotation.AfterCompose;
@@ -34,7 +32,6 @@ import entidades.Estados;
 import entidades.Perfilesusuario;
 import entidades.Usuarios;
 import entidadesDAO.UsuariosHome;
-import entidadesDAO.UsuariosHomeExt;
 import modelo.estados.EstadosDatos;
 
 public class UsuariosModel {
@@ -110,7 +107,7 @@ public class UsuariosModel {
 	   if(usersDelete.size() == 0){
 		   Clients.alert("Debe seleccionar m&iacute;nimo un registro para continuar", "Error", null);
 	   }else{
-		   Messagebox.show("¿Est&aacute; seguro que desea continuar?", "Mensaje de Confirmaci&iacute;n", Messagebox.YES | Messagebox.NO, Messagebox.QUESTION, new EventListener<Event>() {
+		   Messagebox.show("ï¿½Estï¿½ seguro que desea continuar?", "Mensaje de Confirmaciï¿½n", Messagebox.YES | Messagebox.NO, Messagebox.QUESTION, new EventListener<Event>() {
 			
 				public void onEvent(Event event) throws Exception {
 					// TODO Auto-generated method stub

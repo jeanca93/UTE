@@ -11,7 +11,6 @@ import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.event.EventListener;
 import org.zkoss.zk.ui.util.GenericForwardComposer;
-import org.zkoss.zul.Intbox;
 import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Textbox;
 
@@ -23,7 +22,6 @@ public class ProfesoresComposer extends GenericForwardComposer<Component>{
 	private static final long serialVersionUID = 5L;
 	//private Window modalDialog;
 	private Textbox txtProfesor, txtTitulo;
-	private Intbox txtMaxhoras;
 	//private ListModelList<ProfesorStatus> allProfesoresStatus;
 	//private Grid GridProfesores;
 	
@@ -47,9 +45,8 @@ public class ProfesoresComposer extends GenericForwardComposer<Component>{
 		try{
 			String profesor = txtProfesor.getValue();
 			String titulo = txtTitulo.getValue();
-			Integer maxhoras = txtMaxhoras.getValue();
 			
-			new ProfesoresHome().save(new Profesores(profesor, titulo, maxhoras,  new EstadosHome().findById(1), new Date(),Integer.parseInt(session.getAttribute("idUsuario").toString())));
+			new ProfesoresHome().save(new Profesores(profesor, titulo,  new EstadosHome().findById(1), new Date(),Integer.parseInt(session.getAttribute("idUsuario").toString())));
 			
 			Messagebox.show("Registro creado correctamente", "Exito", Messagebox.OK,  Messagebox.EXCLAMATION, new EventListener<Event>() {
 				

@@ -14,16 +14,23 @@ public class DiasHomeExt extends DiasHome{
 		// TODO Auto-generated constructor stub
 	}
 	
-	public ArrayList<Dias> listDiasActivos() {
+	public ArrayList<Dias> listDiasActivos(boolean activos) {
 		Session session = this.getSession();
     	ArrayList<Dias> results = new ArrayList<Dias>();
 		
     	try {
     		StringBuffer sbquery = new StringBuffer();
-    		sbquery.append("from Dias d where d.estados.idEstado=:estado order by d.idDia asc");
+    		sbquery.append("from Dias d"); 
+    		
+    		if(activos)
+    			sbquery.append(" where d.estados.idEstado=:estado");
+    		
+    		sbquery.append(" order by d.idDia asc");
     		
     		Query query = session.createQuery(sbquery.toString());
-    		query.setInteger("estado", EstadosHomeExt.ESTADO_ACTIVO);
+    		
+    		if(activos)
+    			query.setInteger("estado", EstadosHomeExt.ESTADO_ACTIVO);
     		
 			results = (ArrayList<Dias>) query.list();						
 		} catch (RuntimeException re) {			

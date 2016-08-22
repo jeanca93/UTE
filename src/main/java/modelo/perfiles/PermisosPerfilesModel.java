@@ -30,7 +30,6 @@ import entidades.Permisosperfiles;
 import entidades.PermisosperfilesId;
 import entidadesDAO.EstadosHome;
 import entidadesDAO.PermisosHomeExt;
-import entidadesDAO.PermisosperfilesHome;
 import entidadesDAO.PermisosperfilesHomeExt;
 
 public class PermisosPerfilesModel {
@@ -104,7 +103,7 @@ public class PermisosPerfilesModel {
 		   }
 		   
 		   try{
-			   new PermisosperfilesHomeExt().registrarPermisosPerfil(listPermisosperfiles);
+			   new PermisosperfilesHomeExt().registrarPermisosPerfil(listPermisosperfiles, idUsuario);
 			   
 			   modalDialog.detach();
 			   

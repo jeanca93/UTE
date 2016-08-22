@@ -32,10 +32,8 @@ import org.zkoss.zul.Window;
 
 import entidades.Cursos;
 import entidades.Estados;
-import entidades.Profesores;
 import entidadesDAO.CursosHome;
 import modelo.estados.EstadosDatos;
-import modelo.profesores.ProfesorStatus;
 
 public class CursosModel {
 	private ListModelList<CursosStatus> allCursosStatus;
@@ -92,19 +90,19 @@ public class CursosModel {
 	    	  CursosStatus cursoStatus = (CursosStatus)row.getValue();
 	    	  materiaCur.add(cursoStatus.getCurso());
 	      }
-	   }
+	    }
 		   
-	   if(materiaCur.size() > 1){
-		   Clients.alert("Solo puede seleccionar un profesor a la vez", "Error", null);
-	   }else if(materiaCur.size() == 1){
-		   Map<String, Object> parameters = new HashMap<String, Object>();
-		   parameters.put("curso",materiaCur.get(0));
+	    if(materiaCur.size() > 1){
+	    	Clients.alert("Solo puede seleccionar una materia a la vez", "Error", null);
+	    }else if(materiaCur.size() == 1){
+		    Map<String, Object> parameters = new HashMap<String, Object>();
+		    parameters.put("curso",materiaCur.get(0));
 						
-		   Window window = (Window)Executions.createComponents(
-				   "/WEB-INF/include/Cursos/vtnMateriasCursos.zul", null, parameters);
-		   window.doModal();
-	   }else
-		   Clients.alert("Debe seleccionar un profesor para continuar", "Error", null);
+		    Window window = (Window)Executions.createComponents(
+				    "/WEB-INF/include/Cursos/vtnMateriasCursos.zul", null, parameters);
+		    window.doModal();
+	    }else
+		    Clients.alert("Debe seleccionar un materia para continuar", "Error", null);
 	}
 	
 	@Command
@@ -125,7 +123,7 @@ public class CursosModel {
 	    if(cursoDelete.size() == 0){
 		   Clients.alert("Debe seleccionar m&iacute;nimo un registro para continuar", "Error", null);
 		}else{
-		   Messagebox.show("�Est&aacute; seguro que desea continuar?", "Mensaje de Confirmaci&oacute;n", Messagebox.YES | Messagebox.NO, Messagebox.QUESTION, new EventListener<Event>() {
+		   Messagebox.show("¿Está seguro que desea continuar?", "Mensaje de Confirmación", Messagebox.YES | Messagebox.NO, Messagebox.QUESTION, new EventListener<Event>() {
 				
 				public void onEvent(Event event) throws Exception {
 					// TODO Auto-generated method stub

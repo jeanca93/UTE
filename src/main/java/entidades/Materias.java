@@ -12,8 +12,6 @@ public class Materias implements java.io.Serializable {
 
 	private String idMateria;
 	private String materia;
-	private Date duracionClase;
-	private Date horasSemana;
 	private Tipoaula tipoaula;
 	private Estados estados;
 	private Date fechaCreacion;
@@ -24,24 +22,20 @@ public class Materias implements java.io.Serializable {
 	public Materias() {
 	}
 
-	public Materias(String idMateria, String materia, Date duracionClase, Date horasSemana, Tipoaula tipoaula, 
-			Estados estados, Date fechaCreacion, int usuarioCrea) {
+	public Materias(String idMateria, String materia, Tipoaula tipoaula, Estados estados, Date fechaCreacion, 
+			int usuarioCrea) {
 		this.idMateria = idMateria;
 		this.materia = materia;
-		this.duracionClase = duracionClase;
-		this.horasSemana = horasSemana;
 		this.tipoaula = tipoaula;
 		this.estados = estados;
 		this.fechaCreacion = fechaCreacion;
 		this.usuarioCrea = usuarioCrea;
 	}
 
-	public Materias(String idMateria, String materia, Date duracionClase, Date horasSemana, Tipoaula tipoaula, 
-			Estados estados, Date fechaCreacion, int usuarioCrea, Date fechaModificacion, Integer usuarioModifica) {
+	public Materias(String idMateria, String materia, Tipoaula tipoaula, Estados estados, Date fechaCreacion, 
+			int usuarioCrea, Date fechaModificacion, Integer usuarioModifica) {
 		this.idMateria = idMateria;
 		this.materia = materia;
-		this.duracionClase = duracionClase;
-		this.horasSemana = horasSemana;
 		this.tipoaula = tipoaula;
 		this.estados = estados;
 		this.fechaCreacion = fechaCreacion;
@@ -64,22 +58,6 @@ public class Materias implements java.io.Serializable {
 
 	public void setMateria(String materia) {
 		this.materia = materia;
-	}
-
-	public Date getDuracionClase() {
-		return duracionClase;
-	}
-
-	public void setDuracionClase(Date duracionClase) {
-		this.duracionClase = duracionClase;
-	}
-
-	public Date getHorasSemana() {
-		return horasSemana;
-	}
-
-	public void setHorasSemana(Date horasSemana) {
-		this.horasSemana = horasSemana;
 	}
 	
 	public Tipoaula getTipoaula() {

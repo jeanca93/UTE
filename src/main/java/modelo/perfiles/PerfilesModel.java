@@ -101,7 +101,7 @@ public class PerfilesModel {
 	   if(perfilesDelete.size() == 0){
 		   Clients.alert("Debe seleccionar m&iacute;nimo un registro para continuar", "Error", null);
 	   }else{
-		   Messagebox.show("¿Est&aacute; seguro que desea continuar?", "Mensaje de Confirmaci&oacute;n", Messagebox.YES | Messagebox.NO, Messagebox.QUESTION, new EventListener<Event>() {
+		   Messagebox.show("¿Está seguro que desea continuar?", "Mensaje de Confirmación", Messagebox.YES | Messagebox.NO, Messagebox.QUESTION, new EventListener<Event>() {
 			
 				public void onEvent(Event event) throws Exception {
 					// TODO Auto-generated method stub
@@ -153,7 +153,7 @@ public class PerfilesModel {
 	}
 	
 	public void refresh() {
-		PerfilesDatos perfilDatos = new  PerfilesDatos();
+		PerfilesDatos perfilDatos = new PerfilesDatos(false);
 		
 		allPerfilStatus = new ListModelList<PerfilStatus>();
 		allPerfilStatus = genListModel(perfilDatos.getAllPerfiles());

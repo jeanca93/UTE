@@ -2,9 +2,7 @@ package modelo.aulas;
 
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.zkoss.bind.BindUtils;
 import org.zkoss.bind.annotation.AfterCompose;
@@ -32,11 +30,9 @@ import org.zkoss.zul.Window;
 
 import entidades.Aulas;
 import entidades.Estados;
-import entidades.Perfilesusuario;
 import entidades.Tipoaula;
 import entidadesDAO.AulasHome;
 import modelo.estados.EstadosDatos;
-import modelo.usuarios.UsuarioDatos;
 
 public class AulasModel {
 	private List<Tipoaula> allTipoAulas;
@@ -104,7 +100,7 @@ public class AulasModel {
 	   if(aulaDelete.size() == 0){
 		   Clients.alert("Debe seleccionar m&iacute;nimo un registro para continuar", "Error", null);
 	   }else{
-		   Messagebox.show("¿Est&aacute; seguro que desea continuar?", "Mensaje de Confirmaci&oacute;n", Messagebox.YES | Messagebox.NO, Messagebox.QUESTION, new EventListener<Event>() {
+		   Messagebox.show("ï¿½Estï¿½ seguro que desea continuar?", "Mensaje de Confirmaciï¿½n", Messagebox.YES | Messagebox.NO, Messagebox.QUESTION, new EventListener<Event>() {
 			
 				public void onEvent(Event event) throws Exception {
 					// TODO Auto-generated method stub

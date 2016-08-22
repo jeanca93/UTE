@@ -30,7 +30,6 @@ import entidades.Profesoresmaterias;
 import entidades.ProfesoresmateriasId;
 import entidadesDAO.EstadosHome;
 import entidadesDAO.ProfesoresmateriasHomeExt;
-import modelo.materias.MateriaStatus;
 import modelo.materiascursos.MateriascursosDatos;
 import modelo.materiascursos.MateriascursosStatus;
 

@@ -11,6 +11,7 @@ import java.util.Set;
 public class Materiascursos implements java.io.Serializable {
 
 	private MateriascursosId id;
+	private int horasSemana;
 	private Estados estados;
 	private Date fechaCreacion;
 	private int usuarioCrea;
@@ -20,18 +21,19 @@ public class Materiascursos implements java.io.Serializable {
 	public Materiascursos() {
 	}
 
-	public Materiascursos(MateriascursosId id, Estados estados, Date fechaCreacion,
+	public Materiascursos(MateriascursosId id, int horasSemana, Estados estados, Date fechaCreacion,
 			int usuarioCrea) {
 		this.id = id;
+		this.horasSemana = horasSemana;
 		this.estados = estados;
 		this.fechaCreacion = fechaCreacion;
 		this.usuarioCrea = usuarioCrea;
 	}
 
-	public Materiascursos(MateriascursosId id, Estados estados, Date fechaCreacion,
-			int usuarioCrea, Date fechaModificacion, Integer usuarioModifica,
-			Set<Profesoresmaterias> profesoresmateriases) {
+	public Materiascursos(MateriascursosId id, int horasSemana, Estados estados, Date fechaCreacion, 
+			int usuarioCrea, Date fechaModificacion, Integer usuarioModifica) {
 		this.id = id;
+		this.horasSemana = horasSemana;
 		this.estados = estados;
 		this.fechaCreacion = fechaCreacion;
 		this.usuarioCrea = usuarioCrea;
@@ -45,6 +47,14 @@ public class Materiascursos implements java.io.Serializable {
 
 	public void setId(MateriascursosId id) {
 		this.id = id;
+	}
+	
+	public int getHorasSemana() {
+		return horasSemana;
+	}
+
+	public void setHorasSemana(int horasSemana) {
+		this.horasSemana = horasSemana;
 	}
 	
 	public Estados getEstados() {

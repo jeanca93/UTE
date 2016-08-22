@@ -154,7 +154,7 @@ public class ProfesoresModel {
 	   if(profesoresDelete.size() == 0){
 		   Clients.alert("Debe seleccionar m&iacute;nimo un registro para continuar", "Error", null);
 	   }else{
-		   Messagebox.show("¿Est&aacute; seguro que desea continuar?", "Mensaje de Confirmaci&oacute;n", Messagebox.YES | Messagebox.NO, Messagebox.QUESTION, new EventListener<Event>() {
+		   Messagebox.show("ï¿½Estï¿½ seguro que desea continuar?", "Mensaje de Confirmaciï¿½n", Messagebox.YES | Messagebox.NO, Messagebox.QUESTION, new EventListener<Event>() {
 			
 				public void onEvent(Event event) throws Exception {
 					// TODO Auto-generated method stub
@@ -217,7 +217,7 @@ public class ProfesoresModel {
         for(Profesores profesor:listProfesorTMP){
         	if(profesor.getIdProfesor() == prof.getProfesor().getIdProfesor()){
         		if(profesor.getProfesor() != prof.getProfesor().getProfesor() || profesor.getTitulo() != prof.getProfesor().getTitulo() ||
-        				profesor.getMaxHorasPorSemana() != prof.getProfesor().getMaxHorasPorSemana() || profesor.getEstados() != prof.getProfesor().getEstados())
+        				profesor.getEstados() != prof.getProfesor().getEstados())
         			flagCambio = true;
         		
         		profTMP = profesor;
@@ -263,7 +263,6 @@ public class ProfesoresModel {
 			listProfesorTMP.get(listProfesorTMP.size()-1).setIdProfesor(profesor.getIdProfesor());
 			listProfesorTMP.get(listProfesorTMP.size()-1).setProfesor(profesor.getProfesor());
 			listProfesorTMP.get(listProfesorTMP.size()-1).setTitulo(profesor.getTitulo());
-			listProfesorTMP.get(listProfesorTMP.size()-1).setMaxHorasPorSemana(profesor.getMaxHorasPorSemana());
 			listProfesorTMP.get(listProfesorTMP.size()-1).setEstados(profesor.getEstados());
 		}
     }

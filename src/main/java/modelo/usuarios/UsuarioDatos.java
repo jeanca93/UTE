@@ -3,12 +3,10 @@ package modelo.usuarios;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.zkoss.zul.ListModelList;
-
 import entidades.Perfilesusuario;
 import entidades.Usuarios;
-import entidadesDAO.PerfilesusuarioHomeExt;
 import entidadesDAO.UsuariosHomeExt;
+import modelo.perfiles.PerfilesDatos;
 
 public class UsuarioDatos {
 	private List<Usuarios> allUsuarios = new ArrayList<Usuarios>();
@@ -17,9 +15,8 @@ public class UsuarioDatos {
 	public UsuarioDatos(){
 		UsuariosHomeExt userExt = new UsuariosHomeExt();
 		allUsuarios = userExt.listUsuariosActivos();
-		
-		PerfilesusuarioHomeExt prfExt = new PerfilesusuarioHomeExt();		
-		allPerfiles = prfExt.listPerfilesActivos(true);		
+				
+		allPerfiles = new PerfilesDatos(true).getAllPerfiles();		
 	}
 	
 	public List<Usuarios> getAllUsuarios() {

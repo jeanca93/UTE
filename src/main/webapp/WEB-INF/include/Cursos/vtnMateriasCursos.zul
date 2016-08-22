@@ -1,6 +1,6 @@
 <?page title="new page title" contentType="text/html;charset=UTF-8"?>
 <zk>
-<window id = "modalDialog" title="Materias por Cursos" border="normal" width="625px" height="500px"
+<window id = "modalDialog" title="Materias por Cursos" border="normal" width="508px" height="500px"
     position="center,center" closable="true"
     action="show: slideDown">
 
@@ -20,12 +20,17 @@
         	    </column>
                 <column width="80px" label="ID Materia" align="center" sort="auto(materias.idMateria)" />
                 <column width="250px" label="Materia" align="left" sort="auto(materias.materia)"/>
+                <column width="120px" label="Horas a la Semana" align="center"/>
             </columns>
             <template name="noneditable">
                 <row>
                 	<checkbox checked="${each.seleccionado}" disabled="false"/>
                     <label value="@load(each.materias.idMateria)" hflex="1"/>
                     <label value="@load(each.materias.materia)" hflex="1"/>
+                    <div align="center" hflex="1">
+                    	<intbox constraint="no empty:Campo obligatorio, no negative:No se admiten valores negativos, no zero:Valor mínimo es 1" maxlength="2"
+                    	value="@load(each.horassemana) @save(each.horassemana, before='grabarMateriasCursos')" width="30px"/>
+                    </div>
                 </row>
             </template>
         </grid>

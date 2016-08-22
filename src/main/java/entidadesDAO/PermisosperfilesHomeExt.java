@@ -53,7 +53,7 @@ public class PermisosperfilesHomeExt extends PermisosperfilesHome{
 		return results;
 	}
 	
-	public boolean registrarPermisosPerfil(List<Permisosperfiles> listPermisosPerfil){
+	public boolean registrarPermisosPerfil(List<Permisosperfiles> listPermisosPerfil, Integer idUsuario){
 		Session session = this.getSession();
 		Transaction tx = null;
     	boolean flag = false;
@@ -73,8 +73,9 @@ public class PermisosperfilesHomeExt extends PermisosperfilesHome{
     		
     		Perfilesusuario perfil = listPermisosPerfil.get(0).getId().getPerfilesusuario();
     		perfil.setEstados(new EstadosHome().findById(EstadosHomeExt.ESTADO_ACTIVO));
+    		perfil.setUsuarioModifica(idUsuario);
     		perfil.setFechaModificacion(new Date());
-    		//pendiente usuario modifica
+    		
     		new PerfilesusuarioHome().save(perfil);
     		
     		flag = true;

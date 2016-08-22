@@ -5,6 +5,9 @@
     position="center,center" closable="true"
     action="show: slideDown">
     <style src="/css/Focus.css" />
+    <zscript>
+		constraint.TimeConstraint customTimeConstraint = new constraint.TimeConstraint();
+	</zscript>
     <style>
         .z-toolbar a, .z-toolbar a:visited, .z-toolbar a:hover{
             border-radius: 10px;
@@ -32,7 +35,17 @@
 							<textbox sclass="ftextbox" id="txtAnioEscolar" maxlength="20"
 								style="text-transform: uppercase" width="240px" constraint="no empty:Campo obligatorio"/>
 							<label value="*" style="color:red" />
-
+						</row>
+						<row>
+							<label value="Duración de Clases:" />
+							<timebox  id="txtDuracionClases" constraint="${customTimeConstraint}"  format="HH:mm" 
+							 width="120px" mold="rounded" maxlength="5"/>
+							<label value="*" style="color:red" />
+							 
+							<label value="Máx. Horas Semana de Profesor" />
+							<spinner sclass="ftextbox" id="txtMaxhoras" width="50px" maxlength="2" value="35"
+							 constraint="no empty:Campo obligatorio, no negative:No se admiten valores negativos, min 1:Debe indicar una hora"/>
+							<label value="*" style="color:red" />
 						</row>
 						<row>
 							<label value="Fecha Inicio:" />

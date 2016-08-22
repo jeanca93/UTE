@@ -18,7 +18,6 @@
 package controladores;
 
 import java.io.IOException;
-import java.math.BigInteger;
 
 import javax.xml.parsers.ParserConfigurationException;
 
@@ -34,20 +33,12 @@ import org.zkoss.zul.*;
 
 import entidadesDAO.UsuariosHomeExt;
 
-/**
- *
- * @author Ban
- */
-
-public class LoginComposer extends GenericForwardComposer {
+public class LoginComposer extends GenericForwardComposer<Component> {
 
 	private static final long serialVersionUID = 1L;
 	private Textbox txtUsuario;
 	private Textbox txtClave;
-	private Button btnEntrar;
 	public static String grupo = "";
-	private String app_name = "1";
-	private BigInteger e;
 
 	@Override
 	public void doAfterCompose(Component comp) throws Exception {
@@ -76,7 +67,7 @@ public class LoginComposer extends GenericForwardComposer {
 		if(user.length() == 0)
 			Clients.showNotification("Debe ingresar un usuario v&aacute;lido","info",txtUsuario,"end_center",3000);		
 		else if(password.length() == 0)
-			Clients.showNotification("Debe ingresar una contraseña v&aacute;lida","info",txtClave,"end_center",3000);
+			Clients.showNotification("Debe ingresar una contraseï¿½a v&aacute;lida","info",txtClave,"end_center",3000);
 		else{
 			UsuariosHomeExt userExt = new UsuariosHomeExt();
 			
@@ -89,7 +80,7 @@ public class LoginComposer extends GenericForwardComposer {
 				
 				Executions.sendRedirect("/principal.zul");
 			}else
-				Clients.showNotification("Usuario o contraseña inv&aacute;lido",Clients.NOTIFICATION_TYPE_ERROR, null, null, 0);
+				Clients.showNotification("Usuario o contraseï¿½a inv&aacute;lido",Clients.NOTIFICATION_TYPE_ERROR, null, null, 0);
 		}
 	}
 

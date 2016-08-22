@@ -14,9 +14,6 @@
         <property name="titulo" type="string">
             <column name="Titulo" length="100" />
         </property>
-        <property name="maxHorasPorSemana" type="int">
-            <column name="MaxHorasPorSemana" not-null="true" />
-        </property>
         <many-to-one name="estados" class="entidades.Estados" fetch="select">
             <column name="ID_Estado" not-null="true" />
         </many-to-one>

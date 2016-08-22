@@ -4,10 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import entidades.Aulas;
-import entidades.Perfilesusuario;
 import entidades.Tipoaula;
 import entidadesDAO.AulasHomeExt;
-import entidadesDAO.PerfilesusuarioHomeExt;
 import entidadesDAO.TipoAulaHomeExt;
 
 public class AulasDatos {

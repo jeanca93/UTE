@@ -15,15 +15,24 @@
  -->
 
 <?page title="new page title" contentType="text/html;charset=UTF-8"?>
-<?link rel="stylesheet" type="text/css" href="/bootstrap/css/bootstrap.css" ?>
-<zk>
+<zk xmlns:w="client" xmlns:n="native">
 <style dynamic="true">
         .z-toolbar a, .z-toolbar a:visited, .z-toolbar a:hover{
             border-radius: 10px;
     		border: 1px thin #0080c0;
         }
+        
+		.z-panel-hm .z-panel-header, .z-panel-header,.z-panel-tl, .z-panel-tr, .z-panel-tl-gray, .z-panel-tr-gray, .z-panel-bl, .z-panel-br, .z-panel-hl, .z-panel-hr {
+			font-weight: bold;
+			color: #6d0c01;
+			background:#ddd;
+		}
+		
+		.z-panel-head {
+			background:#ddd;
+		}
 </style>
-<panel id="container" title="Administración de Usuarios" vflex="1"
+<panel id="container" title="Administración de Usuarios" vflex="1" 
         viewModel="@id('vm') @init('modelo.usuarios.UsuariosModel')">
     <toolbar>
     	<toolbarbutton image="/img/agregar.png" label="Nuevo" onClick="@command('nuevoUsuario')"/>

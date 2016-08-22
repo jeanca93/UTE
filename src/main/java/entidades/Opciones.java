@@ -14,7 +14,6 @@ public class Opciones implements java.io.Serializable {
 	private Integer opcionContenedora;
 	private String orden;
 	private String tituloMenu;
-	private String tituloPanel;
 	private String imagen;
 	private String url;
 	private Estados estados;
@@ -36,14 +35,13 @@ public class Opciones implements java.io.Serializable {
 	}
 
 	public Opciones(Permisos permisos, String opcion, Integer opcionContenedora, String orden, String tituloMenu,
-			String tituloPanel, String imagen, String url, Estados estados, Date fechaCreacion, int usuarioCrea,
-			Date fechaModificacion, Integer usuarioModifica) {
+			String imagen, String url, Estados estados, Date fechaCreacion, int usuarioCrea, Date fechaModificacion, 
+			Integer usuarioModifica) {
 		this.permisos = permisos;
 		this.opcion = opcion;
 		this.opcionContenedora = opcionContenedora;
 		this.orden = orden;
 		this.tituloMenu = tituloMenu;
-		this.tituloPanel = tituloPanel;
 		this.imagen = imagen;
 		this.url = url;
 		this.estados = estados;
@@ -99,14 +97,6 @@ public class Opciones implements java.io.Serializable {
 
 	public void setTituloMenu(String tituloMenu) {
 		this.tituloMenu = tituloMenu;
-	}
-
-	public String getTituloPanel() {
-		return this.tituloPanel;
-	}
-
-	public void setTituloPanel(String tituloPanel) {
-		this.tituloPanel = tituloPanel;
 	}
 
 	public String getImagen() {

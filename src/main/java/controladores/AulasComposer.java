@@ -20,25 +20,18 @@ import org.zkoss.zul.ListModel;
 import org.zkoss.zul.ListModelList;
 import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Textbox;
-import org.zkoss.zul.Window;
 
 import entidades.Aulas;
-import entidades.Estados;
-import entidades.Perfilesusuario;
 import entidades.Tipoaula;
 import entidadesDAO.AulasHome;
 import entidadesDAO.EstadosHome;
 import entidadesDAO.TipoAulaHome;
 import modelo.aulas.AulasDatos;
-import modelo.estados.EstadosDatos;
-import modelo.usuarios.UsuarioDatos;
-
 
 public class AulasComposer extends GenericForwardComposer<Component>{
 	private static final long serialVersionUID = 9L;
 	private ListModelList<Tipoaula> allTipoAula = new ListModelList<Tipoaula>();
-	private ListModelList<Estados> allEstados = new ListModelList<Estados>();
-	private Window modalDialog;
+	//private Window modalDialog;
 	private Combobox cmbAulas;
 	private Textbox txtIdAula, txtAula, txtComentarios;
 	private Intbox txtAsientos;

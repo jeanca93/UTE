@@ -2,7 +2,6 @@ package modelo.profesores;
 
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
@@ -18,7 +17,6 @@ import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.Session;
 import org.zkoss.zk.ui.Sessions;
 import org.zkoss.zk.ui.event.CheckEvent;
-import org.zkoss.zk.ui.event.FulfillEvent;
 import org.zkoss.zk.ui.event.SelectEvent;
 import org.zkoss.zk.ui.select.Selectors;
 import org.zkoss.zk.ui.select.annotation.Wire;
@@ -41,7 +39,7 @@ import entidadesDAO.DiasHomeExt;
 import entidadesDAO.DispprofesoresHomeExt;
 import entidadesDAO.EstadosHome;
 import entidadesDAO.HorasHomeExt;
-import entidadesDAO.ProfesoresmateriasHomeExt;
+import modelo.anioescolar.DiasDatos;
 
 public class ProfesoresHorariosModel {
 	private ListModelList<ProfesoreshorariosStatus> allProfesoreshorariosStatus;
@@ -56,7 +54,7 @@ public class ProfesoresHorariosModel {
 		// TODO Auto-generated constructor stub
 		
 		allHoras = new ArrayList<Horas>();
-		allHoras = new HorasHomeExt().listHorasActivos();
+		allHoras = new HorasHomeExt().listHorasActivos(true);
 	}
 	
 	public List<Horas> getAllhoras(){
@@ -71,7 +69,7 @@ public class ProfesoresHorariosModel {
 		profesor = (Profesores)execution.getArg().get("profesor");
 		
 		allProfesoreshorariosStatus = new ListModelList<ProfesoreshorariosStatus>();
-		allProfesoreshorariosStatus = genListModel(new DiasHomeExt().listDiasActivos());
+		allProfesoreshorariosStatus = genListModel(new DiasDatos(true).getAllDias());
 	}
 	
 	@Command

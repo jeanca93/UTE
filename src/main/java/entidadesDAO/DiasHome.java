@@ -6,6 +6,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.hibernate.LockMode;
 import org.hibernate.Session;
+import org.hibernate.Transaction;
 
 import basehibernate.MydbBaseHibernateDAO;
 import entidades.Dias;
@@ -32,6 +33,49 @@ public class DiasHome extends MydbBaseHibernateDAO{
 			log.debug("persist successful");
 		} catch (RuntimeException re) {
 			log.error("persist failed", re);
+			
+			throw re;
+		}
+	}
+	
+	public void save(Dias instance) {
+		Session session = this.getSession();
+		Transaction tx = null;
+		
+		log.debug("saving Dias instance");
+		
+		try {
+			tx = session.beginTransaction();
+			session.save(instance);
+			
+			log.debug("attach successful");
+			tx.commit();
+		} catch (RuntimeException re) {
+			tx.rollback();
+			log.error("attach failed", re);
+			
+			throw re;
+		}
+	}
+	
+	public void update(Dias instance) {
+		Session session = this.getSession();
+		Transaction tx = null;
+		
+		log.debug("updating Dias instance");
+		
+		try {
+			tx = session.beginTransaction();
+			
+			session.update(instance);
+			
+			log.debug("update successful");
+			
+			tx.commit();
+		} catch (RuntimeException re) {
+			tx.rollback();
+			
+			log.error("update failed", re);
 			
 			throw re;
 		}

@@ -23,7 +23,7 @@ public class PerfilesusuarioHomeExt extends  PerfilesusuarioHome{
 		
     	try {
     		StringBuffer sbquery = new StringBuffer();
-    		sbquery.append("from Perfilesusuario pu");
+    		sbquery.append("select distinct pu from Permisosperfiles pp " + (activos == true?"inner":"right outer") + " join pp.id.perfilesusuario pu ");
     		    		
     		if(activos)
     			sbquery.append(" where pu.estados.idEstado=:estado");

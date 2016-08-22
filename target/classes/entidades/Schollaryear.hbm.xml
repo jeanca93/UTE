@@ -17,6 +17,12 @@
         <property name="fechaFin" type="date">
             <column name="FechaFin" length="10" not-null="true" />
         </property>
+        <property name="duracionClase" type="time">
+            <column name="DuracionClase" length="5" not-null="true"  />
+        </property>
+        <property name="maxHorasSemanaProfesor" type="int">
+            <column name="MaxHorasSemanaProfesor" not-null="true" />
+        </property>
         <many-to-one name="estados" class="entidades.Estados" fetch="select">
             <column name="ID_Estado" not-null="true" />
         </many-to-one>

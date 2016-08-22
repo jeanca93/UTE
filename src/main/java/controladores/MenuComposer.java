@@ -26,16 +26,10 @@ import modelo.opciones.AdvancedTreeModel;
 import modelo.opciones.OpcionesList;
 import modelo.opciones.OpcionesTreeRenderer;
 
-/**
- *
- * @author Ban
- */
-
 public class MenuComposer extends GenericForwardComposer<Component> {
 	private static final long serialVersionUID = 2L;
 	private Tree mtree;	
 	private Center centerLayout;
-	private West westLayout;
 	private Include icdEspacio;
 	
 	@Override

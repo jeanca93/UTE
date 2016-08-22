@@ -5,9 +5,6 @@
     position="center,center" closable="true"
     action="show: slideDown">
     <style src="/css/Focus.css" />
-    <zscript>
-		constraint.TimeConstraint customTimeConstraint = new constraint.TimeConstraint();
-	</zscript>
     <style>
         .z-toolbar a, .z-toolbar a:visited, .z-toolbar a:hover{
             border-radius: 10px;
@@ -39,18 +36,6 @@
 								style="text-transform: uppercase" width="240px" constraint="no empty:Campo obligatorio"/>
 							<label value="*" style="color:red" />
 
-						</row>
-						<row>
-							<label value="Duración de Clases:" />
-							<timebox  id="txtDuracionClases" constraint="${customTimeConstraint}"  format="HH:mm" 
-							 width="120px" mold="rounded" maxlength="5"/>
-							<label value="*" style="color:red" />
-						</row>
-						<row>
-							<label value="Horas a la Semana:" />
-							<timebox  id="txtHorasSemana" constraint="no empty: Campo Obligatorio"  format="HH:mm" 
-							 width="120px" mold="rounded" maxlength="5"/>
-							<label value="*" style="color:red" />
 						</row>
 						<row>
 							<combobox id="cmbTipoAulas" inplace="true" mold="rounded" autodrop="true" maxlength="60"

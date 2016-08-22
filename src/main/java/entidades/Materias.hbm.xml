@@ -11,12 +11,6 @@
         <property name="materia" type="string">
             <column name="Materia" length="100" not-null="true" />
         </property>
-        <property name="duracionClase" type="time">
-            <column name="DuracionClase" length="5" not-null="true"  />
-        </property>
-        <property name="horasSemana" type="time">
-            <column name="HorasSemana" length="5" not-null="true"  />
-        </property>
         <many-to-one name="tipoaula" class="entidades.Tipoaula" fetch="select">
             <column name="ID_TipoAula" not-null="true" />
         </many-to-one>
