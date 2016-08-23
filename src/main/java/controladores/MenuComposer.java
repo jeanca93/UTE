@@ -16,6 +16,11 @@
 
 package controladores;
 
+import java.io.IOException;
+
+import javax.xml.parsers.ParserConfigurationException;
+
+import org.xml.sax.SAXException;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.util.Clients;
@@ -31,6 +36,7 @@ public class MenuComposer extends GenericForwardComposer<Component> {
 	private Tree mtree;	
 	private Center centerLayout;
 	private Include icdEspacio;
+	private Label lblBienvenido;
 	
 	@Override
 	public void doAfterCompose(Component comp) throws Exception {
@@ -53,6 +59,16 @@ public class MenuComposer extends GenericForwardComposer<Component> {
 		mtree.setItemRenderer(new OpcionesTreeRenderer(centerLayout, icdEspacio));
 		mtree.setModel(opcionesTreeModel);
 		
+		lblBienvenido.setValue("Bienvenido " + user);
+		
 		Clients.clearBusy();
+	}
+	
+	public void onClick$mnitemCambiarPwd() throws InterruptedException,
+			ParserConfigurationException, SAXException, IOException,
+			InstantiationException, IllegalAccessException {
+		Window window = (Window)Executions.createComponents(
+                "/WEB-INF/include/Usuarios/vtnChangePassword.zul", null, null);
+        window.doModal();
 	}
 }

@@ -9,7 +9,7 @@
             <generator class="assigned" />
         </id>
         <property name="curso" type="string">
-            <column name="Curso" length="10" not-null="true" />
+            <column name="Curso" length="20" not-null="true" />
         </property>
         <property name="paralelos" type="int">
             <column name="Paralelos" not-null="true" />
