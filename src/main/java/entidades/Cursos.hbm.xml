@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Jul 4, 2016 12:16:50 PM by Hibernate Tools 4.0.0.Final -->
+<hibernate-mapping>
+    <class name="entidades.Cursos" table="cursos" catalog="gaha">
+        <id name="idCurso" type="string">
+            <column name="ID_Curso" length="5" />
+            <generator class="assigned" />
+        </id>
+        <property name="curso" type="string">
+            <column name="Curso" length="20" not-null="true" />
+        </property>
+        <property name="paralelos" type="int">
+            <column name="Paralelos" not-null="true" />
+        </property>
+        <many-to-one name="estados" class="entidades.Estados" fetch="select">
+            <column name="ID_Estado" not-null="true" />
+        </many-to-one>
+        <property name="fechaCreacion" type="timestamp">
+            <column name="FechaCreacion" length="19" not-null="true" />
+        </property>
+        <property name="usuarioCrea" type="int">
+            <column name="UsuarioCrea" not-null="true" />
+        </property>
+        <property name="fechaModificacion" type="timestamp">
+            <column name="FechaModificacion" length="19" />
+        </property>
+        <property name="usuarioModifica" type="java.lang.Integer">
+            <column name="UsuarioModifica" />
+        </property>
+    </class>
+</hibernate-mapping>
