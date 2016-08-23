@@ -1,13 +1,10 @@
 <?page title="new page title" contentType="text/html;charset=UTF-8"?>
 <zk>
-<window id = "modalDialog" title="Nuevo Curso" border="normal" width="810px"
+<window id = "modalDialog" title="Nuevo Curso" border="normal" width="410px"
     apply="controladores.CursosComposer"
     position="center,center" closable="true"
     action="show: slideDown">
     <style src="/css/Focus.css" />
-    <zscript>
-		constraint.NoSpacesConstraint customConstraint = new constraint.NoSpacesConstraint();
-	</zscript>
     <style>
         .z-toolbar a, .z-toolbar a:visited, .z-toolbar a:hover{
             border-radius: 10px;
@@ -22,44 +19,29 @@
 					<columns>
 						<column width="110px" />
 						<column width="250px"/>
-						<column width="20px" />
-						
+						<column width="20px" />						
 					</columns>
 
 					<rows xmlns:w="client">
 						<row>
-							<label value="Id Curso:" />
+							<label value="ID Curso:" />
 							<textbox sclass="ftextbox" id="txtIdCurso"
-								width="120px" maxlength="5" constraint="/^.*(?=.{2,5}).*$/:El Id del Curso debe tener minimo 2 caracteres"/>
+								width="120px" maxlength="5" constraint="/^.*(?=.{3,5}).*$/:ID de Curso debe tener mínimo 3 caracteres"/>
 							<label value="*" style="color:red" />
 					   </row>
 					   <row>
 							<label value="Curso" />
 							<textbox sclass="ftextbox" id="txtCurso" 
-								width="120px" maxlength="10" constraint="/^.*(?=.{2,10}).*$/:El Id del Curso debe tener minimo 2 caracteres"/>
+								width="120px" maxlength="10" constraint="/^.*(?=.{2,10}).*$/:ID de Curso debe tener minimo 2 caracteres"/>
 							<label value="*" style="color:red" />
 						</row>
 						<row>
 							<label value="Paralelo" />
-							<intbox sclass="ftextbox" id="txtParalelo"
+							<intbox sclass="ftextbox" id="txtParalelo" maxlength="2"
 								style="text-transform: uppercase" width="240px" constraint="no empty:Campo obligatorio"/>
 							<label value="*" style="color:red" />
 
 						</row>
-
-					<!--  	<row>
-							 
-							<label value="Estado: " />
-							<combobox id="cmbEstados" inplace="true" mold="rounded" autodrop="true"
-		                        model="${modalDialog$composer.allEstados}" constraint="no empty:Campo obligatorio" vflex="1">
-		                       <template name="model">
-		                        	<comboitem value="${each.codigo}" label="${each.estado}"/>
-		                    	</template>
-		                    </combobox>
-							<label value="*" style="color:red" />
-						</row>
-					-->	
-
 					</rows>
 				</grid>
 				<separator />

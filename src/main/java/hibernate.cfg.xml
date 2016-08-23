@@ -34,15 +34,12 @@
         <mapping resource="entidades/Horarioscabecera.hbm.xml" />
         <mapping resource="entidades/Horas.hbm.xml" />
         <mapping resource="entidades/Profesoresmaterias.hbm.xml" />
-        <mapping resource="entidades/Aulasrecursos.hbm.xml" />
         <mapping resource="entidades/Materiascursos.hbm.xml" />
-        <mapping resource="entidades/Materiasrecursos.hbm.xml" />
         <mapping resource="entidades/Permisos.hbm.xml" />
         <mapping resource="entidades/Profesores.hbm.xml" />
         <mapping resource="entidades/Aulas.hbm.xml" />
         <mapping resource="entidades/Horariosdetalletmp.hbm.xml" />
         <mapping resource="entidades/Opciones.hbm.xml" />
-        <mapping resource="entidades/Recursos.hbm.xml" />
         <mapping resource="entidades/Tipoaula.hbm.xml" />
         <mapping resource="entidades/Estados.hbm.xml" />
     </session-factory>

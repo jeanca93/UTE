@@ -3,30 +3,21 @@ package modelo.estados;
 import java.util.ArrayList;
 import java.util.List;
 
+import entidades.Estados;
+import entidadesDAO.EstadosHome;
+
 public class EstadosDatos 	{
 	
-	private List<String> allEstados = new ArrayList<String>();
-
-	public EstadosDatos(){
-		allEstados.add("A");
-		allEstados.add("I");
-	}
-
-	public List<String> getAllEstados() {
-		return allEstados;
-	}
-	
-/*
 	private List<Estados> allEstados = new ArrayList<Estados>();
-	
+
 	public EstadosDatos(){
-		allEstados.add(new Estados('A',"Activo"));
-		allEstados.add(new Estados('I',"Inactivo"));
+		EstadosHome estados = new EstadosHome();
+		allEstados.add(estados.findById(1));
+		allEstados.add(estados.findById(2));
 	}
-	
+
 	public List<Estados> getAllEstados() {
 		return allEstados;
 	}
-*/
 
 }

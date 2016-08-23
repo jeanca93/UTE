@@ -30,12 +30,15 @@ import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Row;
 import org.zkoss.zul.Window;
 
+import entidades.Estados;
 import entidades.Perfilesusuario;
 import entidadesDAO.PerfilesusuarioHome;
+import modelo.estados.EstadosDatos;
 
 public class PerfilesModel {
 	private ListModelList<PerfilStatus> allPerfilStatus;
 	private List<Perfilesusuario> listPerfilesTMP;
+	private List<Estados> allEstados;
 	private boolean displayEdit = true;
 	
 	@Wire
@@ -43,6 +46,9 @@ public class PerfilesModel {
 	
 	public PerfilesModel(){
 		super();
+		
+		allEstados = new ArrayList<Estados>();
+		allEstados = new EstadosDatos().getAllEstados();
 		
 		allPerfilStatus = new ListModelList<PerfilStatus>();		
 		listPerfilesTMP = new ArrayList<Perfilesusuario>();
@@ -93,9 +99,9 @@ public class PerfilesModel {
 	   }
 	    
 	   if(perfilesDelete.size() == 0){
-		   Clients.alert("Debe seleccionar mínimo un registro para continuar", "Error", null);
+		   Clients.alert("Debe seleccionar m&iacute;nimo un registro para continuar", "Error", null);
 	   }else{
-		   Messagebox.show("Esta seguro que desea continuar?", "Mensaje de Confirmación", Messagebox.YES | Messagebox.NO, Messagebox.QUESTION, new EventListener<Event>() {
+		   Messagebox.show("¿Está seguro que desea continuar?", "Mensaje de Confirmación", Messagebox.YES | Messagebox.NO, Messagebox.QUESTION, new EventListener<Event>() {
 			
 				public void onEvent(Event event) throws Exception {
 					// TODO Auto-generated method stub
@@ -109,7 +115,7 @@ public class PerfilesModel {
 							
 							//refresh();
 							
-							Clients.showNotification("Eliminado correctamente");
+							Clients.showNotification("Registro eliminado correctamente");
 						}catch(RuntimeException re){
 							throw re;
 						}
@@ -147,7 +153,7 @@ public class PerfilesModel {
 	}
 	
 	public void refresh() {
-		PerfilesDatos perfilDatos = new  PerfilesDatos();
+		PerfilesDatos perfilDatos = new PerfilesDatos(false);
 		
 		allPerfilStatus = new ListModelList<PerfilStatus>();
 		allPerfilStatus = genListModel(perfilDatos.getAllPerfiles());
@@ -184,7 +190,7 @@ public class PerfilesModel {
         
         for(Perfilesusuario perf:listPerfilesTMP){
         	if(perf.getIdPerfilUsuario() == perfil.getPerfil().getIdPerfilUsuario()){
-        		if(perf.getPerfil() != perfil.getPerfil().getPerfil() || perf.getComentarios() != perfil.getPerfil().getComentarios())
+        		if(perf.getPerfil() != perfil.getPerfil().getPerfil() || perf.getComentarios() != perfil.getPerfil().getComentarios() || perf.getEstados() != perfil.getPerfil().getEstados())
         			flagCambio = true;
         		
         		perfilTMP = perf;
@@ -202,7 +208,7 @@ public class PerfilesModel {
         		
         		refresh();
         		
-        		Clients.showNotification("Modificado correctamente");
+        		Clients.showNotification("Registro modificado correctamente");
         	}catch(RuntimeException re){
         		throw re;
         	}
@@ -230,6 +236,7 @@ public class PerfilesModel {
     		listPerfilesTMP.get(listPerfilesTMP.size()-1).setIdPerfilUsuario(perfil.getIdPerfilUsuario());
     		listPerfilesTMP.get(listPerfilesTMP.size()-1).setPerfil(perfil.getPerfil());
     		listPerfilesTMP.get(listPerfilesTMP.size()-1).setComentarios(perfil.getComentarios());
+    		listPerfilesTMP.get(listPerfilesTMP.size()-1).setEstados(perfil.getEstados());
 		}
     }
     
@@ -248,6 +255,10 @@ public class PerfilesModel {
     
 	public ListModelList<PerfilStatus> getAllPerfiles() {
 		return allPerfilStatus;
+	}
+	
+	public List<Estados> getAllEstados() {
+		return allEstados;
 	}
 	
 	public boolean isDisplayEdit() {

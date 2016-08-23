@@ -1,12 +1,7 @@
 package modelo.opciones;
 
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.LinkedList;
 import java.util.List;
-
-import org.zkoss.zul.DefaultTreeNode;
-import org.zkoss.zul.TreeNode;
 
 import entidades.Opciones;
 import entidadesDAO.OpcionesHomeExt;
@@ -104,7 +99,6 @@ public class OpcionesList {
 						if (opExt.conteoOpciones(usuario, ops.getIdOpcion()) > 1)
 							flag2 = false;
 					}
-							
 					
 					if ((ops.getIdOpcion() == opExt.verificaUltimo(usuario, ops.getOpcionContenedora())) && (flag == true) && (flag2 == true) && (count1 == treeOpcion.length-1))
 					{

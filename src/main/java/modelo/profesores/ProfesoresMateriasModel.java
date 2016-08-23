@@ -28,8 +28,8 @@ import entidades.Materiascursos;
 import entidades.Profesores;
 import entidades.Profesoresmaterias;
 import entidades.ProfesoresmateriasId;
+import entidadesDAO.EstadosHome;
 import entidadesDAO.ProfesoresmateriasHomeExt;
-import modelo.materias.MateriaStatus;
 import modelo.materiascursos.MateriascursosDatos;
 import modelo.materiascursos.MateriascursosStatus;
 
@@ -54,7 +54,7 @@ public class ProfesoresMateriasModel {
 		profesor = (Profesores)execution.getArg().get("profesor");
 		
 		allMateriascursosStatus = new ListModelList<MateriascursosStatus>();
-		allMateriascursosStatus = genListModel(new  MateriascursosDatos().getAllMateriascursos());
+		allMateriascursosStatus = genListModel(new  MateriascursosDatos("").getAllMateriascursos());
 	}
 	
 	@Command
@@ -84,7 +84,7 @@ public class ProfesoresMateriasModel {
 	   }
 	    
 	   if(profMateriascursos.size() == 0){
-		   Clients.alert("Debe seleccionar una materia minimo para continuar", "Error", null);
+		   Clients.alert("Debe seleccionar una materia m&iacute;nimo para continuar", "Error", null);
 	   }else{
 		   Session session = Sessions.getCurrent();
 		   Integer idUsuario = Integer.parseInt(session.getAttribute("idUsuario").toString());
@@ -98,7 +98,7 @@ public class ProfesoresMateriasModel {
 			   id.setProfesores(profesor);
 			   
 			   profmaterias.setId(id);
-			   profmaterias.setEstado('A');
+			   profmaterias.setEstados(new EstadosHome().findById(1));
 			   profmaterias.setFechaCreacion(new Date());
 			   profmaterias.setUsuarioCrea(idUsuario);
 			   
@@ -110,7 +110,7 @@ public class ProfesoresMateriasModel {
 			   
 			   modalDialog.detach();
 			   
-			   Clients.showNotification("Registrado correctamente");
+			   Clients.showNotification("Registro(s) creado(s) correctamente");
 		   }catch(RuntimeException re){
 			   throw re;
 		   }

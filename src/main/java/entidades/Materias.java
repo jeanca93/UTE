@@ -12,9 +12,8 @@ public class Materias implements java.io.Serializable {
 
 	private String idMateria;
 	private String materia;
-	private Date duracionClase;
-	private Date horasSemana;
-	private char estado;
+	private Tipoaula tipoaula;
+	private Estados estados;
 	private Date fechaCreacion;
 	private int usuarioCrea;
 	private Date fechaModificacion;
@@ -23,23 +22,22 @@ public class Materias implements java.io.Serializable {
 	public Materias() {
 	}
 
-	public Materias(String idMateria, String materia, Date duracionClase, Date horasSemana, char estado, Date fechaCreacion, int usuarioCrea) {
+	public Materias(String idMateria, String materia, Tipoaula tipoaula, Estados estados, Date fechaCreacion, 
+			int usuarioCrea) {
 		this.idMateria = idMateria;
 		this.materia = materia;
-		this.duracionClase = duracionClase;
-		this.horasSemana = horasSemana;
-		this.estado = estado;
+		this.tipoaula = tipoaula;
+		this.estados = estados;
 		this.fechaCreacion = fechaCreacion;
 		this.usuarioCrea = usuarioCrea;
 	}
 
-	public Materias(String idMateria, String materia, Date duracionClase, Date horasSemana, char estado, Date fechaCreacion,
+	public Materias(String idMateria, String materia, Tipoaula tipoaula, Estados estados, Date fechaCreacion, 
 			int usuarioCrea, Date fechaModificacion, Integer usuarioModifica) {
 		this.idMateria = idMateria;
 		this.materia = materia;
-		this.duracionClase = duracionClase;
-		this.horasSemana = horasSemana;
-		this.estado = estado;
+		this.tipoaula = tipoaula;
+		this.estados = estados;
 		this.fechaCreacion = fechaCreacion;
 		this.usuarioCrea = usuarioCrea;
 		this.fechaModificacion = fechaModificacion;
@@ -61,29 +59,21 @@ public class Materias implements java.io.Serializable {
 	public void setMateria(String materia) {
 		this.materia = materia;
 	}
-
-	public Date getDuracionClase() {
-		return duracionClase;
+	
+	public Tipoaula getTipoaula() {
+		return tipoaula;
 	}
 
-	public void setDuracionClase(Date duracionClase) {
-		this.duracionClase = duracionClase;
+	public void setTipoaula(Tipoaula tipoaula) {
+		this.tipoaula = tipoaula;
 	}
 
-	public Date getHorasSemana() {
-		return horasSemana;
+	public Estados getEstados() {
+		return this.estados;
 	}
 
-	public void setHorasSemana(Date horasSemana) {
-		this.horasSemana = horasSemana;
-	}
-
-	public char getEstado() {
-		return this.estado;
-	}
-
-	public void setEstado(char estado) {
-		this.estado = estado;
+	public void setEstados(Estados estados) {
+		this.estados = estados;
 	}
 
 	public Date getFechaCreacion() {

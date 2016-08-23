@@ -3,6 +3,7 @@ package entidadesDAO;
 import java.util.ArrayList;
 
 import org.hibernate.Criteria;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
@@ -21,14 +22,20 @@ public class PerfilesusuarioHomeExt extends  PerfilesusuarioHome{
     	ArrayList<Perfilesusuario> results = new ArrayList<Perfilesusuario>();
 		
     	try {
-    		Criteria criteria = session.createCriteria(Perfilesusuario.class);
+    		StringBuffer sbquery = new StringBuffer();
+    		sbquery.append("select distinct pu from Permisosperfiles pp " + (activos == true?"inner":"right outer") + " join pp.id.perfilesusuario pu ");
+    		    		
+    		if(activos)
+    			sbquery.append(" where pu.estados.idEstado=:estado");
+    		
+    		sbquery.append(" order by pu.idPerfilUsuario asc");
+    		
+    		Query query = session.createQuery(sbquery.toString());
     		
     		if(activos)
-    			criteria.add(Restrictions.eq("estado", 'A'));
+    			query.setInteger("estado", EstadosHomeExt.ESTADO_ACTIVO);
     		
-    		criteria.addOrder(Order.asc("idPerfilUsuario"));
-    		
-			results = (ArrayList<Perfilesusuario>) criteria.list();						
+			results = (ArrayList<Perfilesusuario>) query.list();
 		} catch (RuntimeException re) {			
 			throw re;
 		}

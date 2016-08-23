@@ -2,9 +2,7 @@ package modelo.aulas;
 
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.zkoss.bind.BindUtils;
 import org.zkoss.bind.annotation.AfterCompose;
@@ -31,14 +29,16 @@ import org.zkoss.zul.Row;
 import org.zkoss.zul.Window;
 
 import entidades.Aulas;
+import entidades.Estados;
+import entidades.Tipoaula;
 import entidadesDAO.AulasHome;
-import modelo.estados.Estados;
 import modelo.estados.EstadosDatos;
 
 public class AulasModel {
+	private List<Tipoaula> allTipoAulas;
 	private ListModelList<AulasStatus> allAulasStatus;
 	private List<Aulas> listAulaTMP;
-	private List<String> allEstados;
+	private List<Estados> allEstados;
 	private boolean displayEdit = true;
 	
 	@Wire
@@ -47,8 +47,13 @@ public class AulasModel {
 	public AulasModel(){
 		super();
 		
-		allEstados = new ArrayList<String>();
+		AulasDatos aulaDatos = new  AulasDatos();	
+		
+		allEstados = new ArrayList<Estados>();
 		allEstados = new EstadosDatos().getAllEstados();
+		
+		allTipoAulas = new ArrayList<Tipoaula>();
+		allTipoAulas = aulaDatos.getAllTipoAula();
 
 		allAulasStatus = new ListModelList<AulasStatus>();
 		allAulasStatus = genListModel(new AulasDatos().getAllAula());
@@ -93,9 +98,9 @@ public class AulasModel {
 	   }
 	    
 	   if(aulaDelete.size() == 0){
-		   Clients.alert("Debe seleccionar mínimo un registro para continuar", "Error", null);
+		   Clients.alert("Debe seleccionar m&iacute;nimo un registro para continuar", "Error", null);
 	   }else{
-		   Messagebox.show("Esta seguro que desea continuar?", "Mensaje de Confirmación", Messagebox.YES | Messagebox.NO, Messagebox.QUESTION, new EventListener<Event>() {
+		   Messagebox.show("�Est� seguro que desea continuar?", "Mensaje de Confirmaci�n", Messagebox.YES | Messagebox.NO, Messagebox.QUESTION, new EventListener<Event>() {
 			
 				public void onEvent(Event event) throws Exception {
 					// TODO Auto-generated method stub
@@ -109,7 +114,7 @@ public class AulasModel {
 							
 							refresh();
 							
-							Clients.showNotification("Eliminada correctamente");
+							Clients.showNotification("Registro eliminado correctamente");
 						}catch(RuntimeException re){
 							throw re;
 						}
@@ -120,9 +125,11 @@ public class AulasModel {
 	}
 	
 	public void refresh() {
-		allEstados = new ArrayList<String>();
-		allEstados = new EstadosDatos().getAllEstados();
-
+		
+		AulasDatos aulaDatos = new  AulasDatos();	
+		allTipoAulas = new ArrayList<Tipoaula>();
+		allTipoAulas = aulaDatos.getAllTipoAula();
+		
 		allAulasStatus = new ListModelList<AulasStatus>();
 		allAulasStatus = genListModel(new AulasDatos().getAllAula());
 		GridAulas.setModel(allAulasStatus);
@@ -161,7 +168,7 @@ public class AulasModel {
         		if(aulas.getAula() != aul.getAula().getAula() || 
         		   aulas.getAsientos() != aul.getAula().getAsientos() ||
         		   aulas.getComentarios() != aul.getAula().getAula()  ||
-        		   aulas.getEstado() != aul.getAula().getEstado())
+        		   aulas.getEstados() != aul.getAula().getEstados())
         			flagCambio = true;
         		
         		aulTMP = aulas;
@@ -179,7 +186,7 @@ public class AulasModel {
 
         		//refresh();
         		
-        		Clients.showNotification("Materia Modificada correctamente");
+        		Clients.showNotification("Registro modificado correctamente");
         	}catch(RuntimeException re){
         		throw re;
         	}
@@ -194,7 +201,7 @@ public class AulasModel {
     	
     	if(listAulaTMP.size() != 0){    		
     		for(Aulas au:listAulaTMP){
-    			if(au.getAula() == aul.getAula()){
+    			if(au.getIdAula() == aul.getIdAula()){
     				flag = true;
     				
     				break;
@@ -208,7 +215,7 @@ public class AulasModel {
     		listAulaTMP.get(listAulaTMP.size()-1).setAula(aul.getAula());
     		listAulaTMP.get(listAulaTMP.size()-1).setAsientos(aul.getAsientos());
     		listAulaTMP.get(listAulaTMP.size()-1).setComentarios(aul.getComentarios());
-    		listAulaTMP.get(listAulaTMP.size()-1).setEstado(aul.getEstado());
+    		listAulaTMP.get(listAulaTMP.size()-1).setEstados(aul.getEstados());
     		
 		}
     }
@@ -230,18 +237,17 @@ public class AulasModel {
 		return allAulasStatus;
 	}
 	
-	public List<String> getAllEstados() {
-		return allEstados;
+	public List<Tipoaula> getAllTipoAula() {
+		return allTipoAulas;
 	}
 	
-	/*
+	
 	public List<Estados> getAllEstados() {
 		return allEstados;
 	}
-	*/
+	
 	public boolean isDisplayEdit() {
         return displayEdit;
-    }
-	
+    }	
 
 }

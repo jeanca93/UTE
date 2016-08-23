@@ -104,7 +104,7 @@ public class EstadosHome extends MydbBaseHibernateDAO{
 		log.debug("getting Horas instance with id: " + id);
 		
 		try {
-			Estados instance = (Estados) session.get("entidadesDAO.Horas", id);
+			Estados instance = (Estados) session.get("entidades.Estados", id);
 			
 			if (instance == null) {
 				log.debug("get successful, no instance found");
@@ -126,7 +126,7 @@ public class EstadosHome extends MydbBaseHibernateDAO{
 		log.debug("finding Horas instance by example");
 		
 		try {
-			List<Estados> results = (List<Estados>) session.createCriteria("entidadesDAO.Horas")
+			List<Estados> results = (List<Estados>) session.createCriteria("entidades.Estados")
 					.add(create(instance)).list();
 			
 			log.debug("find by example successful, result size: " + results.size());

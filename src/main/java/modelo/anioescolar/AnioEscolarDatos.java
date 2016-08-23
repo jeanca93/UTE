@@ -9,10 +9,9 @@ public class AnioEscolarDatos {
 
 	private List<Schollaryear> allSchollaryear = new ArrayList<Schollaryear>();
 	
-	public AnioEscolarDatos(){
+	public AnioEscolarDatos(boolean activos){
 		SchollaryearHomeExt anioExt = new SchollaryearHomeExt();
-		allSchollaryear = anioExt.listSchollaryearActivos();	
-
+		allSchollaryear = anioExt.listSchollaryearActivos(activos);
 	}
 	
 	public List<Schollaryear> getAllAnioEscolar() {

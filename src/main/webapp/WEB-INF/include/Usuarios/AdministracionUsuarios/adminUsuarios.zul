@@ -15,22 +15,31 @@
  -->
 
 <?page title="new page title" contentType="text/html;charset=UTF-8"?>
-<?link rel="stylesheet" type="text/css" href="/bootstrap/css/bootstrap.css" ?>
-<zk>
+<zk xmlns:w="client" xmlns:n="native">
 <style dynamic="true">
         .z-toolbar a, .z-toolbar a:visited, .z-toolbar a:hover{
             border-radius: 10px;
     		border: 1px thin #0080c0;
         }
+        
+		.z-panel-hm .z-panel-header, .z-panel-header,.z-panel-tl, .z-panel-tr, .z-panel-tl-gray, .z-panel-tr-gray, .z-panel-bl, .z-panel-br, .z-panel-hl, .z-panel-hr {
+			font-weight: bold;
+			color: #6d0c01;
+			background:#ddd;
+		}
+		
+		.z-panel-head {
+			background:#ddd;
+		}
 </style>
-<panel id="container" title="Administracion de Usuarios" vflex="1"
+<panel id="container" title="Administración de Usuarios" vflex="1" 
         viewModel="@id('vm') @init('modelo.usuarios.UsuariosModel')">
     <toolbar>
     	<toolbarbutton image="/img/agregar.png" label="Nuevo" onClick="@command('nuevoUsuario')"/>
     	<toolbarbutton image="/img/trash.png" label="Eliminar" onClick="@command('eliminarUsuarios')"/>
     </toolbar>
     <panelchildren>
-    	 <zscript>
+    	<zscript>
 			constraint.NoSpacesConstraint customConstraint = new constraint.NoSpacesConstraint();
 		</zscript>
         <grid id="GridUsuarios" mold="paging" pagingPosition="bottom"
@@ -41,34 +50,43 @@
             	<column width="30px" align="center" >
             		<checkbox id="selectAllCheckBox" onCheck="@command('selectedCheckBox', CheckEvent=event)"/>
         	    </column>
-                <column width="80px" label="Id Usuario" align="center" sort="auto(usuario.idUsuario)" />
+                <column width="80px" label="ID Usuario" align="center" sort="auto(usuario.idUsuario)" />
                 <column width="250px" label="Nombres" align="left" sort="auto(usuario.nombres)"/>
                 <column width="250px" label="Apellidos" align="left" sort="auto(usuario.apellidos)"/>
                 <column width="120px" label="Usuario" align="left" sort="auto(usuario.usuario)"/>
                 <column width="180px" label="Correo" align="left" sort="auto(usuario.correo)"/>
                 <column width="170px" label="Perfil de Usuario" align="center" sort="auto(usuario.perfilesusuario.perfil)"/>
+                <column width="120px" label="Estado" align="center" sort="auto(usuario.estado)"/>                               
                 <column width="120px" label="Edit" visible="@load(vm.displayEdit)"/>
             </columns>
             <template name="editable">
                 <row>
                 	<checkbox checked="@load(each.seleccionado) @save(each.seleccionado, before='confirm')" disabled="true"/>
-                    <textbox disabled="true" style="text-align: center;" hflex="1" 
+                    <intbox disabled="true" style="text-align: center;" hflex="1" 
                         value="@load(each.usuario.idUsuario) @save(each.usuario.idUsuario, before='confirm')" />
-                    <textbox focus="true" constraint="no empty:Campo obligatorio" hflex="1" 
+                    <textbox focus="true" constraint="no empty:Campo obligatorio" hflex="1"  maxlength="50"
                         value="@load(each.usuario.nombres) @save(each.usuario.nombres, before='confirm')" />
-                    <textbox constraint="no empty:Campo obligatorio" hflex="1" 
+                    <textbox constraint="no empty:Campo obligatorio" hflex="1" maxlength="50"
                         value="@load(each.usuario.apellidos) @save(each.usuario.apellidos, before='confirm')" />
-                    <textbox constraint="${customConstraint}" hflex="1" 
+                    <textbox constraint="${customConstraint}" hflex="1" maxlength="15"
                         value="@load(each.usuario.usuario) @save(each.usuario.usuario, before='confirm')" />
-                    <textbox constraint="no empty:Campo obligatorio, /.+@.+\.[a-z]+/:Correo invalido" hflex="1" 
+                    <textbox constraint="no empty:Campo obligatorio, /.+@.+\.[a-z]+/:Correo inválido" hflex="1" maxlength="70"
                         value="@load(each.usuario.correo) @save(each.usuario.correo, before='confirm')" />
-                    <combobox inplace="true" mold="rounded" readonly="true"
+                    <combobox inplace="true" mold="rounded" readonly="true" maxlength="60"
                         model="@load(vm.allPerfiles)" constraint="no empty:Campo obligatorio"
                         selectedItem="@bind(each.usuario.perfilesusuario)" hflex="1">
                         <template name="model">
                         	<comboitem value="@load(each.idPerfilUsuario)" label="@load(each.perfil)"/>
                     	</template>
                     </combobox>
+					<combobox inplace="true" mold="rounded" readonly="true"
+                        model="@load(vm.allEstados)" constraint="no empty:Campo obligatorio"
+                        selectedItem="@bind(each.usuario.estados)" hflex="1">
+                        <template name="model">
+                        	<comboitem value="@load(each.idEstado)" label="@load(each.estado)"/>
+                    	</template>
+                    </combobox>
+
                     <div>
                         <button
                             image="/img/tick-small.png"
@@ -92,6 +110,13 @@
                         selectedItem="@bind(each.usuario.perfilesusuario)" hflex="1">
                        <template name="model">
                         	<comboitem value="@load(each.idPerfilUsuario)" label="@load(each.perfil)"/>
+                    	</template>
+                    </combobox>
+                    <combobox disabled="true" inplace="true" mold="rounded"
+                        model="@load(vm.allEstados)" 
+                        selectedItem="@bind(each.usuario.estados)" hflex="1">
+                       <template name="model">
+                        	<comboitem value="@load(each.idEstado)" label="@load(each.estado)"/>
                     	</template>
                     </combobox>
                     <button

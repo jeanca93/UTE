@@ -1,12 +1,15 @@
 package entidadesDAO;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-import org.hibernate.criterion.Restrictions;
 
+import entidades.Perfilesusuario;
+import entidades.Permisos;
 import entidades.Permisosperfiles;
 
 public class PermisosperfilesHomeExt extends PermisosperfilesHome{
@@ -16,14 +19,14 @@ public class PermisosperfilesHomeExt extends PermisosperfilesHome{
 		// TODO Auto-generated constructor stub
 	}
 	
-	public ArrayList<Permisosperfiles> listPermisosActivos() {
-		Session session = this.getSession();
-    	ArrayList<Permisosperfiles> results = new ArrayList<Permisosperfiles>();
+	public ArrayList<Permisos> listPermisosperfiles(Integer idPerfil) {
+    	Session session = this.getSession();
+    	ArrayList<Permisos> results = new ArrayList<Permisos>();
 		
     	try {
-			results = (ArrayList<Permisosperfiles>) session.createCriteria(Permisosperfiles.class)
-						.add(Restrictions.eq("estado", 'A'))
-						.list();						
+			results = (ArrayList<Permisos>) session.createQuery("select pp.id.permisos from Permisosperfiles pp where pp.id.perfilesusuario.idPerfilUsuario=:perfil")
+					.setInteger("perfil", idPerfil)
+					.list();	
 		} catch (RuntimeException re) {			
 			throw re;
 		}
@@ -31,7 +34,26 @@ public class PermisosperfilesHomeExt extends PermisosperfilesHome{
 		return results;
 	}
 	
-	public boolean registrarPermisosPerfil(List<Permisosperfiles> listPermisosPerfil){
+	public ArrayList<Permisosperfiles> listPermisosperfilesActivos() {
+		Session session = this.getSession();
+    	ArrayList<Permisosperfiles> results = new ArrayList<Permisosperfiles>();
+		
+    	try {
+    		StringBuffer sbquery = new StringBuffer();
+    		sbquery.append("from Permisosperfiles pp where pp.estados.idEstado=:estado");
+    		
+    		Query query = session.createQuery(sbquery.toString());
+    		query.setInteger("estado", EstadosHomeExt.ESTADO_ACTIVO);
+    		
+			results = (ArrayList<Permisosperfiles>) query.list();						
+		} catch (RuntimeException re) {			
+			throw re;
+		}
+		
+		return results;
+	}
+	
+	public boolean registrarPermisosPerfil(List<Permisosperfiles> listPermisosPerfil, Integer idUsuario){
 		Session session = this.getSession();
 		Transaction tx = null;
     	boolean flag = false;
@@ -48,6 +70,13 @@ public class PermisosperfilesHomeExt extends PermisosperfilesHome{
     		for(Permisosperfiles permisosperfiles:listPermisosPerfil){
     			save(permisosperfiles);
     		}
+    		
+    		Perfilesusuario perfil = listPermisosPerfil.get(0).getId().getPerfilesusuario();
+    		perfil.setEstados(new EstadosHome().findById(EstadosHomeExt.ESTADO_ACTIVO));
+    		perfil.setUsuarioModifica(idUsuario);
+    		perfil.setFechaModificacion(new Date());
+    		
+    		new PerfilesusuarioHome().save(perfil);
     		
     		flag = true;
 		} catch (RuntimeException re) {

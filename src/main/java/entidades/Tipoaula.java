@@ -5,7 +5,7 @@ import java.util.Date;
 public class Tipoaula implements java.io.Serializable{
 	private Integer idTipoaula;
 	private String tipoaula;
-	private char estado;
+	private Estados estados;
 	private Date fechaCreacion;
 	private int usuarioCrea;
 	private Date fechaModificacion;
@@ -14,21 +14,21 @@ public class Tipoaula implements java.io.Serializable{
 	public Tipoaula() {
 	}
 
-	public Tipoaula(Integer idTipoaula, String tipoaula, char estado, Date fechaCreacion, int usuarioCrea) {
-		this.idTipoaula = idTipoaula;
+	public Tipoaula(String tipoaula, Estados estados, Date fechaCreacion, int usuarioCrea) {
 		this.tipoaula = tipoaula;
-		this.estado = estado;
+		this.estados = estados;
 		this.fechaCreacion = fechaCreacion;
 		this.usuarioCrea = usuarioCrea;
 	}
 	
-	public Tipoaula(Integer idTipoaula, String tipoaula, char estado, Date fechaCreacion, int usuarioCrea,
+	public Tipoaula(String tipoaula, Estados estados, Date fechaCreacion, int usuarioCrea,
 			Date fechaModificacion, Integer usuarioModifica) {
-		this.idTipoaula = idTipoaula;
 		this.tipoaula = tipoaula;
-		this.estado = estado;
+		this.estados = estados;
 		this.fechaCreacion = fechaCreacion;
 		this.usuarioCrea = usuarioCrea;
+		this.fechaModificacion = fechaModificacion;
+		this.usuarioModifica = usuarioModifica;
 	}
 	
 	public Integer getIdTipoaula() {
@@ -47,12 +47,12 @@ public class Tipoaula implements java.io.Serializable{
 		this.tipoaula = tipoaula;
 	}
 
-	public char getEstado() {
-		return estado;
+	public Estados getEstados() {
+		return estados;
 	}
 
-	public void setEstado(char estado) {
-		this.estado = estado;
+	public void setEstados(Estados estados) {
+		this.estados = estados;
 	}
 
 	public Date getFechaCreacion() {

@@ -15,12 +15,10 @@
  -->
 
 <?page title="Menu" contentType="text/html;charset=UTF-8"?>
-<?link rel="stylesheet" type="text/css" href="/bootstrap/css/bootstrap.css"?>
-<?script src="/bootstrap/js/bootstrap.js"?>
 
 <zk xmlns:h="http://www.w3.org/1999/xhtml" xmlns:zk="http://www.zkoss.org/2005/zk">	
 	<style>
-		body {padding: 0 0;}
+		body {padding: 0 0; min-width:1080px; min-height:642px;}
 
 		.z-treerow{
 			background-color: transparent;
@@ -33,9 +31,26 @@
 		}
 	</style>
 	<borderlayout id="bdlPrincipal" apply="controladores.MenuComposer">
-		<north size="17%" border="none" vflex="min" hflex="1">
+		<north size="115px" border="none" vflex="min" hflex="1">
 			<borderlayout>
-				<center border="none" hflex="1" vflex="1" style='background-image:url("img/degradado_azul.png"); background-repeat:repeat; background-position: center;'>
+				<center border="none" style='background-image:url("img/fondo_azul_oscuro.jpeg"); background-repeat:repeat; background-position: center;'>
+						<borderlayout style="background:transparent;" hflex="1" vflex="1">
+							<west style="background:transparent;" border="none" size="9%">
+								<image src="img/Escudo.png" height="114px"/>
+							</west>
+							<center style="background:transparent;" border="none">
+								<div hflex="1" vflex="1" align="center">
+									<separator/>
+									<separator/>
+									<vbox align="center">
+										<label value="Sistema Gestor Automático de Horarios Académicos"
+											style="font-size:45px;font-family:Trebuchet MS;color:#ffffff;"/>
+										<label value="Unidad Educativa Federico González Suarez"
+											style="font-size:20px;font-family:Trebuchet MS;color:#ffffff;text-align:center;"/>	
+									</vbox>
+								</div>							
+							</center>
+						</borderlayout>
 				</center>
 			</borderlayout>
 		</north>
@@ -43,27 +58,11 @@
 			<div vflex="1" hflex="1">
 				<include id="icdEspacio"></include>
 		    </div>
-			<!--   
-			<borderlayout>
-				<north border="none" hflex="1" vflex="1">
-					<div>
-						<menubar id="mnbMenu" autodrop="true">
-							<custom-attributes org.zkoss.zul.image.preload="true" />
-						</menubar>
-					</div>
-				</north>
-				<center id = "centerLayout" border="none" hflex="1" vflex="1">
-					<div>
-		            	<include id="icdEspacio"></include>
-		        	</div>
-				</center>
-			</borderlayout>
-			-->
 		</center>
 		<west id="westLayout" open="true" size="22%" vflex="1" hflex="min" splittable="true" collapsible="true" autoscroll="true">
-			<div style="padding: 0 0;" >
-				<div class="navbar-header navbar-inverse" style="background-color: #000080;">
-					<h:button style="background-color: #000080;border-color:#000080" type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navHeaderCollapse" aria-expanded="false">
+			<div style="padding: 0 0; overflow: auto; height:100%" >
+				<div class="navbar-header navbar-inverse" style="background-color:#003869;">
+					<h:button style="background-color:#003869;border-color:#003869" type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navHeaderCollapse" aria-expanded="false">
 						<span class="icon-bar"></span>
 				        <span class="icon-bar"></span>
 				        <span class="icon-bar"></span>
@@ -72,7 +71,7 @@
 				<div style = "padding: 0 0;" class="collapse navbar-collapse navHeaderCollapse">
 					<tree id="mtree" style="border:none;">
 						<treecols>
-							<treecol style = "color:#000080;font-size:20px;"  label="Menu" />
+							<treecol style = "color:#6d0c01;font-size:20px;"  label="Menú" />
 						</treecols>
 					</tree>
 				</div>

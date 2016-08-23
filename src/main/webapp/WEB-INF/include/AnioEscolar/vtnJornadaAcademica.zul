@@ -1,0 +1,109 @@
+<?page title="new page title" contentType="text/html;charset=UTF-8"?>
+<zk>
+<window id = "modalDialog" title="Jornada Académica" border="normal" width="340px"
+    apply="controladores.JornadaAcademicaComposer"
+    position="center,center" closable="true"
+    action="show: slideDown">
+    <style src="/css/Focus.css" />
+    <zscript>
+    	constraint.TimeConstraint2 customConstraint2 = new constraint.TimeConstraint2();
+    </zscript>
+    <style>
+        .z-toolbar a, .z-toolbar a:visited, .z-toolbar a:hover{
+            border-radius: 10px;
+    		border: 1px thin #0080c0;
+        }
+	</style>
+	<vbox style="overflow:auto;">
+		<div id="div_check">
+			<groupbox mold="3d">
+				<caption label="Datos de la Jornada Académica"></caption>
+				<div style="border:1px solid #cfcfcf;">
+					<grid style="border:none">
+						<columns>
+							<column width="110px" />
+							<column width="80px"/>
+							<column width="20px" />
+							<column width="80px" />
+							<column width="20px" />
+						</columns>
+	
+						<rows>
+							<row>
+								<label value="Horario:" />
+								<timebox id="txtHoraIni" constraint="no empty: Campo Obligatorio" format="HH:mm" 
+								 	 hflex="1" mold="rounded" maxlength="5"/>
+								
+								<label value="-" style="text-align:center" />
+								
+								<timebox id="txtHoraFin" constraint="no empty: Campo Obligatorio" format="HH:mm" 
+								 	 hflex="1"  mold="rounded" maxlength="5"/>
+								 
+								<label value="*" style="color:red" />
+							</row>
+							<row>
+								<label value="Receso 1:" />
+								<timebox id="txtReceso1Ini" constraint="${customConstraint2}"  format="HH:mm" 
+								 	 hflex="1" mold="rounded" maxlength="5"/>
+								
+								<label value="-" style="text-align:center" />
+								
+								<timebox id="txtReceso1Fin" constraint="${customConstraint2}"  format="HH:mm" 
+								 	 hflex="1"  mold="rounded" maxlength="5"/>
+								 
+								<label value="*" style="color:red" />
+							</row>
+							<row>
+								<label value="Receso 2:" />
+								<timebox id="txtReceso2Ini" constraint="${customConstraint2}"  format="HH:mm" 
+								 	 hflex="1" mold="rounded" maxlength="5"/>
+								
+								<label value="-" style="text-align:center" />
+								
+								<timebox id="txtReceso2Fin" constraint="${customConstraint2}"  format="HH:mm" 
+								 	 hflex="1"  mold="rounded" maxlength="5"/>
+								 
+								<label value="*" style="color:red" />
+							</row>
+						</rows>
+					</grid>
+					<grid style="border:none">
+						<columns>
+							<column width="110px" />
+							<column width="180px"/>
+							<column width="20px" />
+						</columns>
+	
+						<rows xmlns:w="client">
+							<row valign="top">
+								<label value="Días:" />
+								<listbox id="lbDias" hflex="1" model="${modalDialog$composer.allDias}"
+									checkmark="true" multiple="true">
+					                <listhead>
+					                    <listheader label="#" width="40px"/>
+					                    <listheader label="Día"/>
+					                </listhead>
+					                <template name="model">
+					                	<listitem>
+					                		<listcell label="${each.idDia}" hflex="1"/>
+					                		<listcell label="${each.dia}" hflex="1"/>
+					                	</listitem>
+					                </template>
+					            </listbox>
+								<label value="*" style="color:red" />
+							</row>
+						</rows>
+					</grid>
+				</div>
+				<separator />
+				<label
+					value="Los campos con * deben ser llenados obligatoriamente"
+					style="color:red" />
+			</groupbox>
+		</div>
+		<toolbar>
+			<toolbarbutton id="tbbGrabar" image="/img/save.png" label="Grabar"/>
+		</toolbar>
+	</vbox>
+</window>
+</zk>

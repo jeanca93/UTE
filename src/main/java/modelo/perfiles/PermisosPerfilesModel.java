@@ -28,6 +28,7 @@ import entidades.Perfilesusuario;
 import entidades.Permisos;
 import entidades.Permisosperfiles;
 import entidades.PermisosperfilesId;
+import entidadesDAO.EstadosHome;
 import entidadesDAO.PermisosHomeExt;
 import entidadesDAO.PermisosperfilesHomeExt;
 
@@ -80,7 +81,7 @@ public class PermisosPerfilesModel {
 	   }
 	    
 	   if(listPermisos.size() == 0){
-		   Clients.alert("Debe seleccionar un permiso minimo para continuar", "Error", null);
+		   Clients.alert("Debe seleccionar un permiso m&iacute;nimo para continuar", "Error", null);
 	   }else{
 		   Session session = Sessions.getCurrent();
 		   Integer idUsuario = Integer.parseInt(session.getAttribute("idUsuario").toString());
@@ -94,7 +95,7 @@ public class PermisosPerfilesModel {
 			   id.setPermisos(permisos);
 			   
 			   permisosperfiles.setId(id);
-			   permisosperfiles.setEstado('A');
+			   permisosperfiles.setEstados(new EstadosHome().findById(1));
 			   permisosperfiles.setFechaCreacion(new Date());
 			   permisosperfiles.setUsuarioCrea(idUsuario);
 			   
@@ -102,11 +103,11 @@ public class PermisosPerfilesModel {
 		   }
 		   
 		   try{
-			   new PermisosperfilesHomeExt().registrarPermisosPerfil(listPermisosperfiles);
+			   new PermisosperfilesHomeExt().registrarPermisosPerfil(listPermisosperfiles, idUsuario);
 			   
 			   modalDialog.detach();
 			   
-			   Clients.showNotification("Registrado correctamente");
+			   Clients.showNotification("Registro(s) creado(s) correctamente");
 		   }catch(RuntimeException re){
 			   throw re;
 		   }
@@ -114,7 +115,7 @@ public class PermisosPerfilesModel {
 	}
 	
 	private ListModelList<PermisosStatus> genListModel(List<Permisos> lsPermisos){
-		List<Permisos> listPermisosSelect = new PermisosHomeExt().listPermisosperfiless(perfil.getIdPerfilUsuario());
+		List<Permisos> listPermisosSelect = new PermisosperfilesHomeExt().listPermisosperfiles(perfil.getIdPerfilUsuario());
 		
     	for(Permisos permisos: lsPermisos){
     		boolean seleccionado = false;

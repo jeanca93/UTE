@@ -1,36 +1,37 @@
 <?page title="new page title" contentType="text/html;charset=UTF-8"?>
+<?link rel="stylesheet" type="text/css" href="/bootstrap/css/bootstrap.css"?>
+<?script src="/bootstrap/js/bootstrap.js"?>
+
 <zk>
-<window id = "modalDialog" title="Asignacion de permisos" border="normal" width="625px" height="500px"
+<window id = "modalDialog" title="Asignación de Permisos" border="normal" width="385px" height="510px"
     position="center,center" closable="true"
     action="show: slideDown">
-
-<panel id="container" vflex="1" hflex="1"
-        viewModel="@id('vm') @init('modelo.perfiles.PermisosPerfilesModel')">
-    <toolbar>
-    	<toolbarbutton image="/img/save.png" label="Grabar" onClick="@command('grabarPermisosPerfiles')"/>
-    </toolbar>
-    <panelchildren>
-        <grid id="GridPermisosPerfil" mold="paging" pagingPosition="bottom"
-        	model="@load(vm.allPermisos) @template('noneditable')"
-            autopaging="true" vflex="1" hflex="1"  emptyMessage="No hay registros">
-            
-            <columns>
-            	<column width="33px" align="center" >
-            		<checkbox id="selectAllCheckBox" onCheck="@command('selectedCheckBox', CheckEvent=event)"/>
-        	    </column>
-                <column width="80px" label="Id Materia" align="center" sort="auto(permisos.idPermiso)" />
-                <column width="250px" label="Materia" align="left" sort="auto(permisos.permiso)"/>
-            </columns>
-            <template name="noneditable">
-                <row>
-                	<checkbox checked="${each.seleccionado}" disabled="false"/>
-                    <label value="@load(each.permisos.idPermiso)" hflex="1"/>
-                    <label value="@load(each.permisos.permiso)" hflex="1"/>
-                </row>
-            </template>
-        </grid>
-    </panelchildren>
-</panel>
-
+    <panel id="container" hflex="1" vflex="1"
+	        viewModel="@id('vm') @init('modelo.perfiles.PermisosPerfilesModel')">
+	    <toolbar>
+	    	<toolbarbutton image="/img/save.png" label="Grabar" onClick="@command('grabarPermisosPerfiles')"/>
+	    </toolbar>
+	    <panelchildren>
+	    	<grid id="GridPermisosPerfil" mold="paging" pagingPosition="bottom"
+	        	model="@load(vm.allPermisos) @template('noneditable')"
+	            autopaging="true" vflex="1"  emptyMessage="No hay registros">
+		            
+	            <columns>
+	            	<column width="33px" align="center" >
+	            		<checkbox id="selectAllCheckBox" onCheck="@command('selectedCheckBox', CheckEvent=event)"/>
+	        	    </column>
+	                <column width="80px" label="ID Permiso" align="center" sort="auto(permisos.idPermiso)" />
+	                <column hflex="1" label="Permiso" align="left" sort="auto(permisos.permiso)"/>
+	            </columns>
+	            <template name="noneditable">
+	                <row>
+	                	<checkbox checked="${each.seleccionado}" disabled="false" hflex="1"/>
+	                    <label value="@load(each.permisos.idPermiso)" hflex="1"/>
+	                    <label value="@load(each.permisos.permiso)" hflex="1"/>
+	                </row>
+	            </template>
+	        </grid>	        
+	   	</panelchildren>
+	</panel>
 </window>
 </zk>

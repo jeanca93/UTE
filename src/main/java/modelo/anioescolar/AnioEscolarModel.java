@@ -28,15 +28,17 @@ import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Row;
 import org.zkoss.zul.Window;
 
-
+import entidades.Estados;
 import entidades.Schollaryear;
+import entidadesDAO.EstadosHome;
+import entidadesDAO.EstadosHomeExt;
 import entidadesDAO.SchollaryearHome;
+import entidadesDAO.SchollaryearHomeExt;
 import modelo.estados.EstadosDatos;
 
 public class AnioEscolarModel {
 	private ListModelList<AnioEscolarStatus> allAnioEscolarStatus;
 	private List<Schollaryear> listAnioTMP;
-	private List<String> allEstados;
 	private boolean displayEdit = true;
 	
 	@Wire
@@ -45,11 +47,7 @@ public class AnioEscolarModel {
 	public AnioEscolarModel(){
 		super();
 		
-		allEstados = new ArrayList<String>();
-		allEstados = new EstadosDatos().getAllEstados();
-
-		allAnioEscolarStatus = new ListModelList<AnioEscolarStatus>();
-		allAnioEscolarStatus = genListModel(new AnioEscolarDatos().getAllAnioEscolar());
+		refresh();
 		
 		listAnioTMP = new ArrayList<Schollaryear>();
 	}
@@ -76,6 +74,17 @@ public class AnioEscolarModel {
     }
 	
 	@Command
+    public void jornadaAcademica() {
+		//Map<String, Object> parameters = new HashMap<String, Object>();
+		//parameters.put("modelPrincipal",allAnioEscolarStatus );
+		//parameters.put("gridPrincipal",GridAnioEscolar );
+		
+		Window window = (Window)Executions.createComponents(
+                "/WEB-INF/include/AnioEscolar/vtnJornadaAcademica.zul", null, null);
+        window.doModal();
+    }
+	
+	@Command
 	public void eliminarAnioEscolar(){
 		List<Row> components = GridAnioEscolar.getRows().getChildren();
 	    final List<Schollaryear> anioDelete = new ArrayList<Schollaryear>();
@@ -91,9 +100,9 @@ public class AnioEscolarModel {
 	   }
 	    
 	   if(anioDelete.size() == 0){
-		   Clients.alert("Debe seleccionar mínimo un registro para continuar", "Error", null);
+		   Clients.alert("Debe seleccionar m&iacute;nimo un registro para continuar", "Error", null);
 	   }else{
-		   Messagebox.show("Esta seguro que desea continuar?", "Mensaje de Confirmación", Messagebox.YES | Messagebox.NO, Messagebox.QUESTION, new EventListener<Event>() {
+		   Messagebox.show("¿Está seguro que desea continuar?", "Mensaje de Confirmación", Messagebox.YES | Messagebox.NO, Messagebox.QUESTION, new EventListener<Event>() {
 			
 				public void onEvent(Event event) throws Exception {
 					// TODO Auto-generated method stub
@@ -107,7 +116,9 @@ public class AnioEscolarModel {
 							
 							refresh();
 							
-							Clients.showNotification("Eliminado correctamente");
+							GridAnioEscolar.setModel(allAnioEscolarStatus);
+							
+							Clients.showNotification("Registro eliminado correctamente");
 						}catch(RuntimeException re){
 							throw re;
 						}
@@ -117,13 +128,96 @@ public class AnioEscolarModel {
 	   }
 	}
 	
+	@Command
+	public void habilitarSchollarYear(){
+		List<Row> components = GridAnioEscolar.getRows().getChildren();
+		List<Schollaryear> listSchollarYear = new ArrayList<Schollaryear>();
+		
+		for(Row row:components){
+			Checkbox ck = (Checkbox) row.getChildren().get(0);
+			
+			if(ck.isChecked()){
+				AnioEscolarStatus schollaryearStatus = (AnioEscolarStatus)row.getValue();
+				
+				listSchollarYear.add(schollaryearStatus.getAnioescolar());
+			}
+		}
+		
+		if (listSchollarYear.size() > 1)
+			Clients.alert("Solo puede seleccionar una año escolar a la vez", "Error", null);
+		else if(listSchollarYear.size() == 1){
+			int yearHabilitado = 0;
+			
+			for(AnioEscolarStatus SchollarYearStatus: allAnioEscolarStatus){
+				if (SchollarYearStatus.getAnioescolar().getIdSchoolarYear() != listSchollarYear.get(0).getIdSchoolarYear()){
+					if (SchollarYearStatus.getAnioescolar().getEstados().getIdEstado() == 1){
+						yearHabilitado = SchollarYearStatus.getAnioescolar().getIdSchoolarYear();
+						
+						break;
+					}
+				}
+			}
+			
+			if (yearHabilitado == 0){
+				modificarEstado(listSchollarYear.get(0), EstadosHomeExt.ESTADO_ACTIVO);
+			}else if(yearHabilitado == listSchollarYear.get(0).getIdSchoolarYear())
+				Clients.alert("Año escolar ya se encuentra habilitado", "Error", null);
+			else
+				Clients.alert("No puede tener varios años escolares habilitados al mismo tiempo", "Error", null);
+		}else
+			Clients.alert("Debe seleccionar un año escolar para continuar", "Error", null);
+	}
+	
+	@Command
+	public void inhabilitarSchollarYear(){
+		List<Row> components = GridAnioEscolar.getRows().getChildren();
+		List<Schollaryear> listSchollarYear = new ArrayList<Schollaryear>();
+		
+		for(Row row:components){
+			Checkbox ck = (Checkbox) row.getChildren().get(0);
+			
+			if(ck.isChecked()){
+				AnioEscolarStatus schollaryearStatus = (AnioEscolarStatus)row.getValue();
+				
+				listSchollarYear.add(schollaryearStatus.getAnioescolar());
+			}
+		}
+		
+		if (listSchollarYear.size() > 1)
+			Clients.alert("Solo puede seleccionar una año escolar a la vez", "Error", null);
+		else if(listSchollarYear.size() == 1){
+			if(listSchollarYear.get(0).getEstados().getIdEstado() == 2)
+				Clients.alert("Año escolar ya se encuentra inhabilitado", "Error", null);
+			else
+				modificarEstado(listSchollarYear.get(0), EstadosHomeExt.ESTADO_INACTIVO);
+		}else
+			Clients.alert("Debe seleccionar un año escolar para continuar", "Error", null);
+	}
+	
+	private void modificarEstado(Schollaryear schollaryear, int estado){
+		schollaryear.setEstados(new EstadosHome().findById(estado));
+		schollaryear.setFechaModificacion(new Date());
+		Session session = Sessions.getCurrent();
+		schollaryear.setUsuarioModifica(Integer.parseInt(session.getAttribute("idUsuario").toString()));
+		
+		try{
+			new SchollaryearHome().update(schollaryear);
+    		
+			Messagebox.show("Registro modificado correctamente", "Exito", Messagebox.OK,  Messagebox.EXCLAMATION, new EventListener<Event>() {
+				
+				public void onEvent(Event event) throws Exception {
+					// TODO Auto-generated method stub
+					Executions.sendRedirect("");
+				}
+			});
+		}catch(RuntimeException re){
+			throw re;
+		}
+	}
+	
 	public void refresh() {
-		allEstados = new ArrayList<String>();
-		allEstados = new EstadosDatos().getAllEstados();
-
 		allAnioEscolarStatus = new ListModelList<AnioEscolarStatus>();
-		allAnioEscolarStatus = genListModel(new AnioEscolarDatos().getAllAnioEscolar());
-		GridAnioEscolar.setModel(allAnioEscolarStatus);
+		allAnioEscolarStatus = genListModel(new AnioEscolarDatos(false).getAllAnioEscolar());
 	}
 	
 	@Command
@@ -132,8 +226,8 @@ public class AnioEscolarModel {
 	    
 	    for(Row row:rows){
 	      Checkbox ck = (Checkbox) row.getChildren().get(0);
-	      AnioEscolarStatus aulStatus = (AnioEscolarStatus)row.getValue();
-	      if(!aulStatus.isEditingStatus())
+	      AnioEscolarStatus anioStatus = (AnioEscolarStatus)row.getValue();
+	      if(!anioStatus.isEditingStatus())
 	    	  ck.setChecked(evt.isChecked());
 	   }
 	}
@@ -159,7 +253,8 @@ public class AnioEscolarModel {
         		if(aniotmp.getSchollarYear() != anio.getAnioescolar().getSchollarYear() || 
         			aniotmp.getFechaInicio() != anio.getAnioescolar().getFechaInicio() ||
         			aniotmp.getFechaFin() != anio.getAnioescolar().getFechaFin()  ||
-        			aniotmp.getEstado() != anio.getAnioescolar().getEstado())
+        			aniotmp.getDuracionClase() != anio.getAnioescolar().getDuracionClase() ||
+        			aniotmp.getMaxHorasSemanaProfesor() != anio.getAnioescolar().getMaxHorasSemanaProfesor())
         			flagCambio = true;
         		
         		anioTMP = aniotmp;
@@ -177,7 +272,7 @@ public class AnioEscolarModel {
         		
         	//	refresh();
         		
-        		Clients.showNotification("Anio Escolar Modificado correctamente");
+        		Clients.showNotification("Registro modificado correctamente");
         	}catch(RuntimeException re){
         		throw re;
         	}
@@ -192,7 +287,7 @@ public class AnioEscolarModel {
     	
     	if(listAnioTMP.size() != 0){    		
     		for(Schollaryear an:listAnioTMP){
-    			if(an.getSchollarYear() == anio.getSchollarYear()){
+    			if(an.getIdSchoolarYear() == anio.getIdSchoolarYear()){
     				flag = true;
     				
     				break;
@@ -206,7 +301,8 @@ public class AnioEscolarModel {
     		listAnioTMP.get(listAnioTMP.size()-1).setSchollarYear(anio.getSchollarYear());
     		listAnioTMP.get(listAnioTMP.size()-1).setFechaInicio(anio.getFechaInicio());
     		listAnioTMP.get(listAnioTMP.size()-1).setFechaFin(anio.getFechaFin());
-    		listAnioTMP.get(listAnioTMP.size()-1).setEstado(anio.getEstado());
+    		listAnioTMP.get(listAnioTMP.size()-1).setDuracionClase(anio.getDuracionClase());
+    		listAnioTMP.get(listAnioTMP.size()-1).setMaxHorasSemanaProfesor(anio.getMaxHorasSemanaProfesor());
     		
 		}
     }
@@ -228,19 +324,8 @@ public class AnioEscolarModel {
 		return allAnioEscolarStatus;
 	}
 	
-	public List<String> getAllEstados() {
-		return allEstados;
-	}
-	
-	/*
-	public List<Estados> getAllEstados() {
-		return allEstados;
-	}
-	*/
 	public boolean isDisplayEdit() {
         return displayEdit;
     }
-	
-
 
 }

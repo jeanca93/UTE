@@ -5,8 +5,7 @@
 	<artifactId>GAHA</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<properties>
-		<zk.version>8.0.0</zk.version>
-		<commons-io>2.4</commons-io>
+		<zk.version>8.0.2.1</zk.version>
 		<maven.build.timestamp.format>yyyy-MM-dd</maven.build.timestamp.format>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<packname>-${project.version}-FL-${maven.build.timestamp}</packname>
@@ -24,13 +23,11 @@
 	<repositories>
 		<repository>
 			<id>ZK CE</id>
-			<name>ZK CE Repository</name>
-			<url>http://mavensync.zkoss.org/maven2</url>
+		    <url>http://mavensync.zkoss.org/maven2</url>
 		</repository>
 		<repository>
-			<id>ZK EVAL</id>
-      		<name>ZK Evaluation Repository</name>
-			<url>http://mavensync.zkoss.org/eval</url>
+			<id>ZK EE</id>
+			<url>https://maven.zkoss.org/repo/zk/ee</url>
 		</repository>
 	</repositories>
 	<pluginRepositories>
@@ -40,10 +37,11 @@
 			<url>http://mavensync.zkoss.org/maven2/</url>
 		</pluginRepository>
 	</pluginRepositories>
-	<dependencies>
+	<dependencies>		
+		<!-- CE requirements -->
 		<dependency>
 			<groupId>org.zkoss.zk</groupId>
-			<artifactId>zkbind</artifactId>
+			<artifactId>zhtml</artifactId>
 			<version>${zk.version}</version>
 		</dependency>
 		<dependency>
@@ -52,22 +50,82 @@
 			<version>${zk.version}</version>
 		</dependency>
 		<dependency>
+			<groupId>org.zkoss.common</groupId>
+			<artifactId>zcommon</artifactId>
+			<version>${zk.version}</version>
+		</dependency>
+		<dependency>
+            <groupId>org.zkoss.common</groupId>
+            <artifactId>zweb</artifactId>
+            <version>${zk.version}</version>
+        </dependency>
+        <dependency>
+			<groupId>org.zkoss.common</groupId>
+			<artifactId>zel</artifactId>
+			<version>${zk.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.zkoss.zk</groupId>
+			<artifactId>zkbind</artifactId>
+			<version>${zk.version}</version>
+		</dependency>		
+        
+		<!-- ZK PE / EE -->
+        <dependency>
+			<groupId>org.zkoss.zk</groupId>
+			<artifactId>zkmax</artifactId>
+			<version>${zk.version}</version>
+		</dependency>
+		<dependency>
 			<groupId>org.zkoss.zk</groupId>
 			<artifactId>zkplus</artifactId>
 			<version>${zk.version}</version>
 		</dependency>
 		<dependency>
-			<groupId>org.zkoss.zk</groupId>
-			<artifactId>zhtml</artifactId>
+            <groupId>org.zkoss.zk</groupId>
+            <artifactId>zkex</artifactId>
+            <version>${zk.version}</version>
+        </dependency>
+        
+        <!-- Addons -->
+        <dependency>
+		  <groupId>org.zkoss.addons</groupId>
+		  <artifactId>zk-bootstrap</artifactId>
+		  <version>1.0.0</version>
+		</dependency>
+		
+		<!-- Themes -->
+		<dependency>
+			<groupId>org.zkoss.theme</groupId>
+			<artifactId>sapphire</artifactId>
+			<version>${zk.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.zkoss.theme</groupId>
+			<artifactId>silvertail</artifactId>
 			<version>${zk.version}</version>
 		</dependency>
 		
+		<!-- Java servlet -->
+        <dependency>
+		    <groupId>javax.servlet</groupId>
+		    <artifactId>javax.servlet-api</artifactId>
+		    <version>3.1.0</version>
+		</dependency>
+		
+		<!-- Commons -->
 		<dependency>
 			<groupId>commons-io</groupId>
 			<artifactId>commons-io</artifactId>
-			<version>${commons-io}</version>
+			<version>2.4</version>
+		</dependency>
+		<dependency>
+		    <groupId>commons-logging</groupId>
+		    <artifactId>commons-logging</artifactId>
+		    <version>1.1.1</version>
 		</dependency>
 		
+		<!-- Commons-lang3 -->
 		<dependency>
 		    <groupId>org.apache.commons</groupId>
 		    <artifactId>commons-lang3</artifactId>
@@ -75,86 +133,73 @@
 		</dependency>
 		
 		<!-- BD Libriaries -->
-
 		<dependency>
 		    <groupId>mysql</groupId>
 		    <artifactId>mysql-connector-java</artifactId>
 		    <version>5.1.39</version>
-		</dependency>
-		
+		</dependency>		
 		<dependency>
 		    <groupId>antlr</groupId>
 		    <artifactId>antlr</artifactId>
 		    <version>2.7.7</version>
-		</dependency>
-		
+		</dependency>		
 		<dependency>
 		    <groupId>dom4j</groupId>
 		    <artifactId>dom4j</artifactId>
 		    <version>1.6.1</version>
-		</dependency>
-		
+		</dependency>		
 		<dependency>
 		    <groupId>org.hibernate.common</groupId>
 		    <artifactId>hibernate-commons-annotations</artifactId>
 		    <version>4.0.5.Final</version>
-		</dependency>
-		
+		</dependency>		
 		<dependency>
 		    <groupId>org.hibernate</groupId>
 		    <artifactId>hibernate-core</artifactId>
 		    <version>4.3.11.Final</version>
-		</dependency>
-		
+		</dependency>		
 		<dependency>
 		    <groupId>org.hibernate.javax.persistence</groupId>
 		    <artifactId>hibernate-jpa-2.0-api</artifactId>
 		    <version>1.0.1.Final</version>
-		</dependency>
-		
+		</dependency>		
 		<dependency>
 		    <groupId>org.jboss</groupId>
 		    <artifactId>jandex</artifactId>
 		    <version>1.1.0.Final</version>
 		</dependency>
-		
 		<dependency>
 		    <groupId>org.javassist</groupId>
 		    <artifactId>javassist</artifactId>
 		    <version>3.18.1-GA</version>
-		</dependency>
-		
+		</dependency>		
 		<dependency>
 		    <groupId>org.jboss.logging</groupId>
 		    <artifactId>jboss-logging</artifactId>
 		    <version>3.1.4.GA</version>
-		</dependency>
-		
+		</dependency>		
 		<dependency>
 		    <groupId>org.jboss.logging</groupId>
 		    <artifactId>jboss-logging-annotations</artifactId>
 		    <version>1.2.0.Final</version>
-		</dependency>
-		
+		</dependency>		
 		<dependency>
 		    <groupId>org.jboss.spec.javax.transaction</groupId>
 		    <artifactId>jboss-transaction-api_1.2_spec</artifactId>
 		    <version>1.0.0.Final</version>
-		</dependency>
-		
-		<dependency>
-		    <groupId>commons-logging</groupId>
-		    <artifactId>commons-logging</artifactId>
-		    <version>1.1.1</version>
-		</dependency>
-		
+		</dependency>		
 		<dependency>
 		    <groupId>org.hibernate</groupId>
 		    <artifactId>hibernate-c3p0</artifactId>
 		    <version>4.3.7.Final</version>
 		</dependency>
 		
-		<!-- Fin -->
+		<!-- Jasperreports -->	
+		<dependency>
+		    <groupId>net.sf.jasperreports</groupId>
+		    <artifactId>jasperreports</artifactId>
+		    <version>4.0.1</version>
+		</dependency>
 	</dependencies>
 	<build>
 		<finalName>${project.artifactId}</finalName>

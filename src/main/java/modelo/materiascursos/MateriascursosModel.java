@@ -1,6 +1,7 @@
 package modelo.materiascursos;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -28,22 +29,18 @@ import entidades.Cursos;
 import entidades.Materias;
 import entidades.Materiascursos;
 import entidades.MateriascursosId;
-import entidades.Profesores;
-import entidades.Profesoresmaterias;
-import entidades.ProfesoresmateriasId;
-import entidadesDAO.MateriasHomeExt;
+import entidadesDAO.EstadosHome;
 import entidadesDAO.MateriascursosHomeExt;
-import entidadesDAO.ProfesoresmateriasHomeExt;
 import modelo.materias.MateriaDatos;
 import modelo.materias.MateriaStatus;
 
 public class MateriascursosModel {
-	private ListModelList<MateriaStatus> allMateriaStatus;
+	private ListModelList<MateriasHorasSemanaStatus> allMateriaStatus;
 	private Cursos curso;
 	@Wire
-	private Grid GridMateriasCurso;
-	@Wire
 	private Window modalDialog;
+	@Wire
+	private Grid GridMateriasCurso;
 	
 	public MateriascursosModel() {
 		// TODO Auto-generated constructor stub
@@ -57,8 +54,8 @@ public class MateriascursosModel {
 		Execution execution = Executions.getCurrent();
 		curso = (Cursos)execution.getArg().get("curso");
 		
-		allMateriaStatus = new ListModelList<MateriaStatus>();
-		allMateriaStatus = genListModel(new  MateriaDatos().getAllMaterias());
+		allMateriaStatus = new ListModelList<MateriasHorasSemanaStatus>();
+		allMateriaStatus = genListModel(new  MateriaDatos(true).getAllMaterias());
 	}
 	
 	@Command
@@ -76,33 +73,34 @@ public class MateriascursosModel {
 	@Command
 	public void grabarMateriasCursos(){
 		List<Row> components = GridMateriasCurso.getRows().getChildren();
-	    List<Materias> materiascursos = new ArrayList<Materias>();
+	    List<MateriasHorasSemanaStatus> materiascursos = new ArrayList<MateriasHorasSemanaStatus>();
 	    
 	    for(Row row:components){
 	      Checkbox ck = (Checkbox) row.getChildren().get(0);
 	      
 	      if(ck.isChecked()){
-	    	  MateriaStatus mateStatus = (MateriaStatus)row.getValue();
-	    	  materiascursos.add(mateStatus.getMaterias());
+	    	  MateriasHorasSemanaStatus mateStatus = (MateriasHorasSemanaStatus)row.getValue();
+	    	  materiascursos.add(mateStatus);
 	      }
 	   }
 	    
 	   if(materiascursos.size() == 0){
-		   Clients.alert("Debe seleccionar una materia minimo para continuar", "Error", null);
+		   Clients.alert("Debe seleccionar una materia m&iacute;nimo para continuar", "Error", null);
 	   }else{
 		   Session session = Sessions.getCurrent();
 		   Integer idUsuario = Integer.parseInt(session.getAttribute("idUsuario").toString());
 		   
 		   List<Materiascursos> listMateriasCur = new ArrayList<Materiascursos>();
-		   for(Materias mate:materiascursos){
+		   for(MateriasHorasSemanaStatus materiasHorassemana:materiascursos){
 			   Materiascursos materiascur = new Materiascursos();
 			   
 			   MateriascursosId id = new MateriascursosId();
 			   id.setCursos(curso);
-			   id.setMaterias(mate);
+			   id.setMaterias(materiasHorassemana.getMaterias());
 			   
 			   materiascur.setId(id);
-			   materiascur.setEstado('A');
+			   materiascur.setHorasSemana(materiasHorassemana.getHorassemana());
+			   materiascur.setEstados(new EstadosHome().findById(1));
 			   materiascur.setFechaCreacion(new Date());
 			   materiascur.setUsuarioCrea(idUsuario);
 			   
@@ -114,33 +112,36 @@ public class MateriascursosModel {
 			   
 			   modalDialog.detach();
 			   
-			   Clients.showNotification("Registrado correctamente");
+			   Clients.showNotification("Registro(s) creado(s) correctamente");
 		   }catch(RuntimeException re){
 			   throw re;
 		   }
 	   }
 	}
 	
-	private ListModelList<MateriaStatus> genListModel(List<Materias> lsMaterias){
-		List<Materiascursos> listMateriasCurso = new MateriascursosHomeExt().listMateriascur((curso.getIdCurso()));
+	private ListModelList<MateriasHorasSemanaStatus> genListModel(List<Materias> lsMaterias){
+		List<Materiascursos> listMateriasCurso = new MateriascursosDatos(curso.getIdCurso()).getAllMateriascursos();
+		
+		int horassemana = 1;
 		
     	for(Materias mate: lsMaterias){
     		boolean seleccionado = false;
     		
     		for(Materiascursos mateCursos: listMateriasCurso){
     			if(mateCursos.getId().getMaterias().equals(mate)){
+    				horassemana = mateCursos.getHorasSemana();
     				seleccionado = true;
     				break;
     			}
     		}
     		
-    		allMateriaStatus.add(new MateriaStatus(mate, seleccionado, false));
+    		allMateriaStatus.add(new MateriasHorasSemanaStatus(mate, horassemana, seleccionado, false));
 		}
     	
     	return allMateriaStatus;
     }
     
-	public ListModelList<MateriaStatus> getAllMaterias() {
+	public ListModelList<MateriasHorasSemanaStatus> getAllMaterias() {
 		return allMateriaStatus;
 	}
 

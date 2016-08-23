@@ -9,9 +9,9 @@ import entidadesDAO.MateriascursosHomeExt;
 public class MateriascursosDatos {
 private List<Materiascursos> allMateriascursos = new ArrayList<Materiascursos>();
 	
-	public MateriascursosDatos(){
+	public MateriascursosDatos(String idCurso){
 		MateriascursosHomeExt matcursosExt = new MateriascursosHomeExt();
-		allMateriascursos = matcursosExt.listMateriascursos();
+		allMateriascursos = matcursosExt.listMateriascursos(idCurso);
 	}
 	
 	public List<Materiascursos> getAllMateriascursos() {

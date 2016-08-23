@@ -14,7 +14,9 @@ public class Schollaryear implements java.io.Serializable {
 	private String schollarYear;
 	private Date fechaInicio;
 	private Date fechaFin;
-	private char estado;
+	private Date duracionClase;
+	private int maxHorasSemanaProfesor;
+	private Estados estados;
 	private Date fechaCreacion;
 	private int usuarioCrea;
 	private Date fechaModificacion;
@@ -23,22 +25,27 @@ public class Schollaryear implements java.io.Serializable {
 	public Schollaryear() {
 	}
 
-	public Schollaryear(String schollarYear, Date fechaInicio, Date fechaFin, char estado, Date fechaCreacion,
-			int usuarioCrea) {
+	public Schollaryear(String schollarYear, Date fechaInicio, Date fechaFin, Date duracionClase, 
+			int maxHorasSemanaProfesor, Estados estados, Date fechaCreacion, int usuarioCrea) {
 		this.schollarYear = schollarYear;
 		this.fechaInicio = fechaInicio;
 		this.fechaFin = fechaFin;
-		this.estado = estado;
+		this.duracionClase = duracionClase;
+		this.maxHorasSemanaProfesor = maxHorasSemanaProfesor;
+		this.estados = estados;
 		this.fechaCreacion = fechaCreacion;
 		this.usuarioCrea = usuarioCrea;
 	}
 
-	public Schollaryear(String schollarYear, Date fechaInicio, Date fechaFin, char estado, Date fechaCreacion,
-			int usuarioCrea, Date fechaModificacion, Integer usuarioModifica) {
+	public Schollaryear(String schollarYear, Date fechaInicio, Date fechaFin, Date duracionClase, 
+			int maxHorasSemanaProfesor, Estados estados, Date fechaCreacion, int usuarioCrea, Date fechaModificacion, 
+			Integer usuarioModifica) {
 		this.schollarYear = schollarYear;
 		this.fechaInicio = fechaInicio;
 		this.fechaFin = fechaFin;
-		this.estado = estado;
+		this.duracionClase = duracionClase;
+		this.maxHorasSemanaProfesor = maxHorasSemanaProfesor;
+		this.estados = estados;
 		this.fechaCreacion = fechaCreacion;
 		this.usuarioCrea = usuarioCrea;
 		this.fechaModificacion = fechaModificacion;
@@ -76,13 +83,29 @@ public class Schollaryear implements java.io.Serializable {
 	public void setFechaFin(Date fechaFin) {
 		this.fechaFin = fechaFin;
 	}
-
-	public char getEstado() {
-		return this.estado;
+	
+	public Date getDuracionClase() {
+		return duracionClase;
 	}
 
-	public void setEstado(char estado) {
-		this.estado = estado;
+	public void setDuracionClase(Date duracionClase) {
+		this.duracionClase = duracionClase;
+	}
+	
+	public int getMaxHorasSemanaProfesor() {
+		return this.maxHorasSemanaProfesor;
+	}
+	
+	public void setMaxHorasSemanaProfesor(int maxHorasSemanaProfesor) {
+		this.maxHorasSemanaProfesor = maxHorasSemanaProfesor;
+	}
+	
+	public Estados getEstados() {
+		return this.estados;
+	}
+
+	public void setEstados(Estados estados) {
+		this.estados = estados;
 	}
 
 	public Date getFechaCreacion() {

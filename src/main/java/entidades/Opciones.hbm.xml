@@ -23,18 +23,15 @@
         <property name="tituloMenu" type="string">
             <column name="TituloMenu" length="50" not-null="true" />
         </property>
-        <property name="tituloPanel" type="string">
-            <column name="TituloPanel" length="100" />
-        </property>
         <property name="imagen" type="string">
             <column name="Imagen" length="150" />
         </property>
         <property name="url" type="string">
             <column name="URL" length="150" />
         </property>
-        <property name="estado" type="char">
-            <column name="Estado" length="1" not-null="true" />
-        </property>
+        <many-to-one name="estados" class="entidades.Estados" fetch="select">
+            <column name="ID_Estado" not-null="true" />
+        </many-to-one>
         <property name="fechaCreacion" type="timestamp">
             <column name="FechaCreacion" length="19" not-null="true" />
         </property>

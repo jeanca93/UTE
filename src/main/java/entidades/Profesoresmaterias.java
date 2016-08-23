@@ -11,7 +11,7 @@ import java.util.Set;
 public class Profesoresmaterias implements java.io.Serializable {
 
 	private ProfesoresmateriasId id;
-	char estado;
+	private Estados estados;
 	private Date fechaCreacion;
 	private int usuarioCrea;
 	private Date fechaModificacion;
@@ -21,17 +21,17 @@ public class Profesoresmaterias implements java.io.Serializable {
 	}
 
 	public Profesoresmaterias(ProfesoresmateriasId id, 
-			char estado, Date fechaCreacion, int usuarioCrea) {
+			Estados estados, Date fechaCreacion, int usuarioCrea) {
 		this.id = id;
-		this.estado = estado;
+		this.estados = estados;
 		this.fechaCreacion = fechaCreacion;
 		this.usuarioCrea = usuarioCrea;
 	}
 
 	public Profesoresmaterias(ProfesoresmateriasId id,
-			char estado, Date fechaCreacion, int usuarioCrea, Date fechaModificacion, Integer usuarioModifica) {
+			Estados estados, Date fechaCreacion, int usuarioCrea, Date fechaModificacion, Integer usuarioModifica) {
 		this.id = id;
-		this.estado = estado;
+		this.estados = estados;
 		this.fechaCreacion = fechaCreacion;
 		this.usuarioCrea = usuarioCrea;
 		this.fechaModificacion = fechaModificacion;
@@ -46,12 +46,12 @@ public class Profesoresmaterias implements java.io.Serializable {
 		this.id = id;
 	}
 	
-	public char getEstado() {
-		return this.estado;
+	public Estados getEstados() {
+		return this.estados;
 	}
 
-	public void setEstado(char estado) {
-		this.estado = estado;
+	public void setEstados(Estados estados) {
+		this.estados = estados;
 	}
 
 	public Date getFechaCreacion() {

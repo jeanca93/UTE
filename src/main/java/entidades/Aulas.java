@@ -12,9 +12,10 @@ public class Aulas implements java.io.Serializable {
 
 	private String idAula;
 	private String aula;
+	private Tipoaula tipoaula;
 	private int asientos;
 	private String comentarios;
-	private char estado;
+	private Estados estados;
 	private Date fechaCreacion;
 	private int usuarioCrea;
 	private Date fechaModificacion;
@@ -23,23 +24,26 @@ public class Aulas implements java.io.Serializable {
 	public Aulas() {
 	}
 
-	public Aulas(String idAula, String aula, int asientos, String comentarios, char estado, Date fechaCreacion, int usuarioCrea) {
+	public Aulas(String idAula, String aula, Tipoaula tipoaula, int asientos, String comentarios, 
+			Estados estados, Date fechaCreacion, int usuarioCrea) {
 		this.idAula = idAula;
 		this.aula = aula;
 		this.asientos = asientos;
 		this.comentarios = comentarios;
-		this.estado = estado;
+		this.tipoaula = tipoaula;
+		this.estados = estados;
 		this.fechaCreacion = fechaCreacion;
 		this.usuarioCrea = usuarioCrea;
 	}
 
-	public Aulas(String idAula, String aula, int asientos, String comentarios, char estado, Date fechaCreacion,
-			int usuarioCrea, Date fechaModificacion, Integer usuarioModifica) {
+	public Aulas(String idAula, String aula, Tipoaula tipoaula, int asientos, String comentarios, 
+			Estados estados, Date fechaCreacion, int usuarioCrea, Date fechaModificacion, Integer usuarioModifica) {
 		this.idAula = idAula;
 		this.aula = aula;
 		this.asientos = asientos;
 		this.comentarios = comentarios;
-		this.estado = estado;
+		this.tipoaula = tipoaula;
+		this.estados = estados;
 		this.fechaCreacion = fechaCreacion;
 		this.usuarioCrea = usuarioCrea;
 		this.fechaModificacion = fechaModificacion;
@@ -61,6 +65,14 @@ public class Aulas implements java.io.Serializable {
 	public void setAula(String aula) {
 		this.aula = aula;
 	}
+	
+	public Tipoaula getTipoaula() {
+		return tipoaula;
+	}
+
+	public void setTipoaula(Tipoaula tipoaula) {
+		this.tipoaula = tipoaula;
+	}
 
 	public int getAsientos() {
 		return this.asientos;
@@ -78,12 +90,12 @@ public class Aulas implements java.io.Serializable {
 		this.comentarios = comentarios;
 	}
 
-	public char getEstado() {
-		return this.estado;
+	public Estados getEstados() {
+		return this.estados;
 	}
 
-	public void setEstado(char estado) {
-		this.estado = estado;
+	public void setEstados(Estados estados) {
+		this.estados = estados;
 	}
 
 	public Date getFechaCreacion() {

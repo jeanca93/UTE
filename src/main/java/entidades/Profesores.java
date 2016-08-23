@@ -13,8 +13,7 @@ public class Profesores implements java.io.Serializable {
 	private Integer idProfesor;
 	private String profesor;
 	private String titulo;
-	private int maxHorasPorSemana;
-	private char estado;
+	private Estados estados;
 	private Date fechaCreacion;
 	private int usuarioCrea;
 	private Date fechaModificacion;
@@ -23,21 +22,19 @@ public class Profesores implements java.io.Serializable {
 	public Profesores() {
 	}
 
-	public Profesores(String profesor, String titulo, int maxHorasPorSemana, char estado, Date fechaCreacion, int usuarioCrea) {
+	public Profesores(String profesor, String titulo, Estados estados, Date fechaCreacion, int usuarioCrea) {
 		this.profesor = profesor;
 		this.titulo = titulo;
-		this.maxHorasPorSemana = maxHorasPorSemana;
-		this.estado = estado;
+		this.estados = estados;
 		this.fechaCreacion = fechaCreacion;
 		this.usuarioCrea = usuarioCrea;
 	}
 
-	public Profesores(String profesor, String titulo, int maxHorasPorSemana, char estado, Date fechaCreacion,
+	public Profesores(String profesor, String titulo, Estados estados, Date fechaCreacion,
 			int usuarioCrea, Date fechaModificacion, Integer usuarioModifica) {
 		this.profesor = profesor;
 		this.titulo = titulo;
-		this.maxHorasPorSemana = maxHorasPorSemana;
-		this.estado = estado;
+		this.estados = estados;
 		this.fechaCreacion = fechaCreacion;
 		this.usuarioCrea = usuarioCrea;
 		this.fechaModificacion = fechaModificacion;
@@ -68,20 +65,12 @@ public class Profesores implements java.io.Serializable {
 		this.titulo = titulo;
 	}
 
-	public int getMaxHorasPorSemana() {
-		return this.maxHorasPorSemana;
+	public Estados getEstados() {
+		return this.estados;
 	}
 
-	public void setMaxHorasPorSemana(int maxHorasPorSemana) {
-		this.maxHorasPorSemana = maxHorasPorSemana;
-	}
-
-	public char getEstado() {
-		return this.estado;
-	}
-
-	public void setEstado(char estado) {
-		this.estado = estado;
+	public void setEstados(Estados estados) {
+		this.estados = estados;
 	}
 
 	public Date getFechaCreacion() {

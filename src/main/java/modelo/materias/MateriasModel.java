@@ -28,13 +28,18 @@ import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Row;
 import org.zkoss.zul.Window;
 
+import entidades.Estados;
 import entidades.Materias;
+import entidades.Tipoaula;
 import entidadesDAO.MateriasHome;
+import modelo.aulas.AulasDatos;
+import modelo.estados.EstadosDatos;
 
 public class MateriasModel {
-
+	private List<Tipoaula> allTipoAulas;
 	private ListModelList<MateriaStatus> allMateriasStatus;
 	private List<Materias> listMateriaTMP;
+	private List<Estados> allEstados;
 	private boolean displayEdit = true;
 	
 	@Wire
@@ -43,8 +48,15 @@ public class MateriasModel {
 	public MateriasModel(){
 		super();
 		
+		AulasDatos aulaDatos = new  AulasDatos();	
+		allTipoAulas = new ArrayList<Tipoaula>();
+		allTipoAulas = aulaDatos.getAllTipoAula();
+		
+		allEstados = new ArrayList<Estados>();
+		allEstados = new EstadosDatos().getAllEstados();
+		
 		allMateriasStatus = new ListModelList<MateriaStatus>();
-		allMateriasStatus = genListModel(new  MateriaDatos().getAllMaterias());
+		allMateriasStatus = genListModel(new  MateriaDatos(false).getAllMaterias());
 		
 		listMateriaTMP = new ArrayList<Materias>();
 	}
@@ -92,9 +104,9 @@ public class MateriasModel {
 	   }
 	    
 	   if(materiaDelete.size() == 0){
-		   Clients.alert("Debe seleccionar mÃ­nimo un registro para continuar", "Error", null);
+		   Clients.alert("Debe seleccionar m&iacute;nimo un registro para continuar", "Error", null);
 	   }else{
-		   Messagebox.show("Esta seguro que desea continuar?", "Mensaje de Confirmaciòn", Messagebox.YES | Messagebox.NO, Messagebox.QUESTION, new EventListener<Event>() {
+		   Messagebox.show("ï¿½Estï¿½ seguro que desea continuar?", "Mensaje de Confirmaciï¿½n", Messagebox.YES | Messagebox.NO, Messagebox.QUESTION, new EventListener<Event>() {
 			
 				public void onEvent(Event event) throws Exception {
 					// TODO Auto-generated method stub
@@ -108,7 +120,7 @@ public class MateriasModel {
 							
 							refresh();
 							
-							Clients.showNotification("Eliminada correctamente");
+							Clients.showNotification("Registro eliminado correctamente");
 						}catch(RuntimeException re){
 							throw re;
 						}
@@ -119,10 +131,12 @@ public class MateriasModel {
 	}
 	
 	public void refresh() {
-		MateriaDatos materiaDatos = new  MateriaDatos();
-
+		AulasDatos aulaDatos = new  AulasDatos();	
+		allTipoAulas = new ArrayList<Tipoaula>();
+		allTipoAulas = aulaDatos.getAllTipoAula();
+		
 		allMateriasStatus = new ListModelList<MateriaStatus>();
-		allMateriasStatus = genListModel(materiaDatos.getAllMaterias());
+		allMateriasStatus = genListModel(new  MateriaDatos(false).getAllMaterias());
 		GridMaterias.setModel(allMateriasStatus);
 	}
 	
@@ -156,7 +170,8 @@ public class MateriasModel {
         
         for(Materias materia:listMateriaTMP){
         	if(materia.getIdMateria() == mate.getMaterias().getIdMateria()){
-        		if(materia.getMateria() != mate.getMaterias().getMateria() || materia.getHorasSemana() != mate.getMaterias().getHorasSemana() )
+        		if(materia.getMateria() != mate.getMaterias().getMateria() || 
+        				materia.getEstados() != mate.getMaterias().getEstados())
         			flagCambio = true;
         		
         		mateTMP = materia;
@@ -174,7 +189,7 @@ public class MateriasModel {
         		
         		//refresh();
         		
-        		Clients.showNotification("Materia Modificada correctamente");
+        		Clients.showNotification("Registro modificado correctamente");
         	}catch(RuntimeException re){
         		throw re;
         	}
@@ -189,7 +204,7 @@ public class MateriasModel {
     	
     	if(listMateriaTMP.size() != 0){    		
     		for(Materias mat:listMateriaTMP){
-    			if(mat.getMateria() == mate.getMateria()){
+    			if(mat.getIdMateria() == mate.getIdMateria()){
     				flag = true;
     				
     				break;
@@ -201,7 +216,7 @@ public class MateriasModel {
     		listMateriaTMP.add(new Materias());
     		listMateriaTMP.get(listMateriaTMP.size()-1).setIdMateria(mate.getIdMateria());
     		listMateriaTMP.get(listMateriaTMP.size()-1).setMateria(mate.getMateria());
-    		listMateriaTMP.get(listMateriaTMP.size()-1).setHorasSemana(mate.getHorasSemana());
+    		listMateriaTMP.get(listMateriaTMP.size()-1).setEstados(mate.getEstados());
     		
 		}
     }
@@ -223,7 +238,13 @@ public class MateriasModel {
 		return allMateriasStatus;
 	}
 	
-
+	public List<Tipoaula> getAllTipoAula() {
+		return allTipoAulas;
+	}
+	
+	public List<Estados> getAllEstados() {
+		return allEstados;
+	}
 		
 	public boolean isDisplayEdit() {
         return displayEdit;

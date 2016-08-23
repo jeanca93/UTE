@@ -13,7 +13,7 @@ public class Cursos implements java.io.Serializable {
 	private String idCurso;
 	private String curso;
 	private int paralelos;
-	private char estado;
+	private Estados estados;
 	private Date fechaCreacion;
 	private int usuarioCrea;
 	private Date fechaModificacion;
@@ -22,21 +22,21 @@ public class Cursos implements java.io.Serializable {
 	public Cursos() {
 	}
 
-	public Cursos(String idCurso, String curso, int paralelos, char estado, Date fechaCreacion, int usuarioCrea) {
+	public Cursos(String idCurso, String curso, int paralelos, Estados estados, Date fechaCreacion, int usuarioCrea) {
 		this.idCurso = idCurso;
 		this.curso = curso;
 		this.paralelos = paralelos;
-		this.estado = estado;
+		this.estados = estados;
 		this.fechaCreacion = fechaCreacion;
 		this.usuarioCrea = usuarioCrea;
 	}
 
-	public Cursos(String idCurso, String curso, int paralelos, char estado, Date fechaCreacion, int usuarioCrea,
+	public Cursos(String idCurso, String curso, int paralelos, Estados estados, Date fechaCreacion, int usuarioCrea,
 			Date fechaModificacion, Integer usuarioModifica) {
 		this.idCurso = idCurso;
 		this.curso = curso;
 		this.paralelos = paralelos;
-		this.estado = estado;
+		this.estados = estados;
 		this.fechaCreacion = fechaCreacion;
 		this.usuarioCrea = usuarioCrea;
 		this.fechaModificacion = fechaModificacion;
@@ -67,12 +67,12 @@ public class Cursos implements java.io.Serializable {
 		this.paralelos = paralelos;
 	}
 
-	public char getEstado() {
-		return this.estado;
+	public Estados getEstados() {
+		return this.estados;
 	}
 
-	public void setEstado(char estado) {
-		this.estado = estado;
+	public void setEstados(Estados estados) {
+		this.estados = estados;
 	}
 
 	public Date getFechaCreacion() {

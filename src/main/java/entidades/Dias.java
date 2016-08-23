@@ -12,7 +12,7 @@ public class Dias implements java.io.Serializable {
 
 	private Integer idDia;
 	private String dia;
-	private char estado;
+	private Estados estados;
 	private Date fechaCreacion;
 	private int usuarioCrea;
 	private Date fechaModificacion;
@@ -21,19 +21,19 @@ public class Dias implements java.io.Serializable {
 	public Dias() {
 	}
 
-	public Dias(Integer idDia, String dia, char estado, Date fechaCreacion, int usuarioCrea) {
+	public Dias(Integer idDia, String dia, Estados estados, Date fechaCreacion, int usuarioCrea) {
 		this.idDia = idDia;
 		this.dia = dia;
-		this.estado = estado;
+		this.estados = estados;
 		this.fechaCreacion = fechaCreacion;
 		this.usuarioCrea = usuarioCrea;
 	}
 
-	public Dias(Integer idDia, String dia, char estado, Date fechaCreacion, int usuarioCrea, Date fechaModificacion,
+	public Dias(Integer idDia, String dia, Estados estados, Date fechaCreacion, int usuarioCrea, Date fechaModificacion,
 			Integer usuarioModifica) {
 		this.idDia = idDia;
 		this.dia = dia;
-		this.estado = estado;
+		this.estados = estados;
 		this.fechaCreacion = fechaCreacion;
 		this.usuarioCrea = usuarioCrea;
 		this.fechaModificacion = fechaModificacion;
@@ -56,12 +56,12 @@ public class Dias implements java.io.Serializable {
 		this.dia = dia;
 	}
 
-	public char getEstado() {
-		return this.estado;
+	public Estados getEstados() {
+		return this.estados;
 	}
 
-	public void setEstado(char estado) {
-		this.estado = estado;
+	public void setEstados(Estados estados) {
+		this.estados = estados;
 	}
 
 	public Date getFechaCreacion() {

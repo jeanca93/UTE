@@ -17,10 +17,11 @@ import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Textbox;
 
 import entidades.Perfilesusuario;
+import entidadesDAO.EstadosHome;
 import entidadesDAO.PerfilesusuarioHome;
 
 public class PerfilesComposer extends GenericForwardComposer<Component>{
-	private static final long serialVersionUID = 5L;
+	private static final long serialVersionUID = 4L;
 	//private Window modalDialog;
 	private Textbox txtPerfil, txtComentarios;
 	//private ListModelList<PerfilStatus> allPerfilesStatus;
@@ -49,9 +50,9 @@ public class PerfilesComposer extends GenericForwardComposer<Component>{
 			String comentarios = txtComentarios.getValue();
 			Session session = Sessions.getCurrent();
 			
-			new PerfilesusuarioHome().save(new Perfilesusuario(perfil, comentarios, 'A', new Date(),Integer.parseInt(session.getAttribute("idUsuario").toString())));
+			new PerfilesusuarioHome().save(new Perfilesusuario(perfil, comentarios,  new EstadosHome().findById(1), new Date(),Integer.parseInt(session.getAttribute("idUsuario").toString())));
 			
-			Messagebox.show("Creado correctamente", "Exito", Messagebox.OK,  Messagebox.EXCLAMATION, new EventListener<Event>() {
+			Messagebox.show("Registro creado correctamente", "Exito", Messagebox.OK,  Messagebox.EXCLAMATION, new EventListener<Event>() {
 				
 				public void onEvent(Event event) throws Exception {
 					// TODO Auto-generated method stub

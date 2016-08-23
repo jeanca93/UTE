@@ -10,6 +10,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
+import basehibernate.MydbBaseHibernateDAO;
 import entidades.Aulas;
 =======
 
