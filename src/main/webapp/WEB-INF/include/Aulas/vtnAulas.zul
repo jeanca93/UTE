@@ -48,17 +48,17 @@
 								style="text-transform: uppercase" width="240px" />
 							<label value="" style="color:red" />
 						</row>
+						<row>
+							<label value="Tipo de Aula:" />
+							<combobox id="cmbTipoAula" inplace="true" mold="rounded" autodrop="true" maxlength="60"
+			                        model="${modalDialog$composer.allTipoAula}" constraint="no empty:Campo obligatorio" vflex="1">
+			                       <template name="model">
+			                        	<comboitem value="${each.id_tipoaula}" label="${each.perfil}"/>
+			                    	</template>
+			                </combobox>
+							<label value="*" style="color:red" />
+						</row>
 					</rows>
-					<row>
-						<label value="Tipo de Aula:" />
-						<combobox id="cmbTipoAula" inplace="true" mold="rounded" autodrop="true" maxlength="60"
-		                        model="${modalDialog$composer.allTipoAula}" constraint="no empty:Campo obligatorio" vflex="1">
-		                       <template name="model">
-		                        	<comboitem value="${each.id_tipoaula}" label="${each.perfil}"/>
-		                    	</template>
-		                </combobox>
-						<label value="*" style="color:red" />
-					<row>
 				</grid>
 				<separator />
 				<label
