@@ -6,16 +6,9 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.hibernate.LockMode;
 import org.hibernate.Session;
-<<<<<<< HEAD
-import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
 import basehibernate.MydbBaseHibernateDAO;
-import entidades.Aulas;
-=======
-
-import basehibernate.MydbBaseHibernateDAO;
->>>>>>> 483854328becc2494595525082c41ae851fdd760
 import entidades.Cursos;
 
 import static org.hibernate.criterion.Example.create;
