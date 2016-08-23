@@ -14,9 +14,13 @@
         <property name="paralelos" type="int">
             <column name="Paralelos" not-null="true" />
         </property>
-        <many-to-one name="estados" class="entidades.Estados" fetch="select">
-            <column name="ID_Estado" not-null="true" />
-        </many-to-one>
+        <property name="estado" type="char">
+<<<<<<< HEAD
+            <column name="Estado" length="1" not-null="true" />
+=======
+             <column name="Estado" length="1" not-null="true" />
+>>>>>>> 483854328becc2494595525082c41ae851fdd760
+        </property>
         <property name="fechaCreacion" type="timestamp">
             <column name="FechaCreacion" length="19" not-null="true" />
         </property>

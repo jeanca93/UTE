@@ -5,9 +5,13 @@ import java.util.List;
 
 import org.hibernate.Query;
 import org.hibernate.Session;
+<<<<<<< HEAD
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
+=======
+
+>>>>>>> 483854328becc2494595525082c41ae851fdd760
 import entidades.Materiascursos;
 
 
