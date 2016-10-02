@@ -77,10 +77,12 @@ public class LoginComposer extends GenericForwardComposer<Component> {
 				Session session = Sessions.getCurrent();
 				session.setAttribute("idUsuario", existeUsuario);
 				session.setAttribute("usuario", user);
+				session.setAttribute("correo", userExt.correoUsuario(existeUsuario));
+				session.setAttribute("pagina", "/WEB-INF/include/inicio.zul");
 				
 				Executions.sendRedirect("/principal.zul");
 			}else
-				Clients.showNotification("Usuario o contrase�a inv&aacute;lido",Clients.NOTIFICATION_TYPE_ERROR, null, null, 0);
+				Clients.showNotification("Usuario o contraseña inv&aacute;lido",Clients.NOTIFICATION_TYPE_ERROR, txtClave, "end_center", 0);
 		}
 	}
 

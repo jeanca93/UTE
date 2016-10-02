@@ -20,27 +20,28 @@
         <property name="hibernate.validator.apply_to_ddl">false</property>
         <property name="hibernate.temp.use_jdbc_metadata_defaults">false</property>
         
-        <mapping resource="entidades/Cursos.hbm.xml" />
-        <mapping resource="entidades/Permisosperfiles.hbm.xml" />
-        <mapping resource="entidades/Arbolopciones.hbm.xml" />
-        <mapping resource="entidades/Horarioscabeceratmp.hbm.xml" />
-        <mapping resource="entidades/Horariosdetalle.hbm.xml" />
-        <mapping resource="entidades/Materias.hbm.xml" />
-        <mapping resource="entidades/Dias.hbm.xml" />
-        <mapping resource="entidades/Schollaryear.hbm.xml" />
-        <mapping resource="entidades/Dispprofesores.hbm.xml" />
+        <mapping resource="entidades/Estados.hbm.xml" />
         <mapping resource="entidades/Perfilesusuario.hbm.xml" />
         <mapping resource="entidades/Usuarios.hbm.xml" />
-        <mapping resource="entidades/Horarioscabecera.hbm.xml" />
-        <mapping resource="entidades/Horas.hbm.xml" />
-        <mapping resource="entidades/Profesoresmaterias.hbm.xml" />
-        <mapping resource="entidades/Materiascursos.hbm.xml" />
         <mapping resource="entidades/Permisos.hbm.xml" />
-        <mapping resource="entidades/Profesores.hbm.xml" />
-        <mapping resource="entidades/Aulas.hbm.xml" />
-        <mapping resource="entidades/Horariosdetalletmp.hbm.xml" />
+        <mapping resource="entidades/Permisosperfiles.hbm.xml" />
         <mapping resource="entidades/Opciones.hbm.xml" />
+        <mapping resource="entidades/Arbolopciones.hbm.xml" />        
+        <mapping resource="entidades/Schollaryear.hbm.xml" />
         <mapping resource="entidades/Tipoaula.hbm.xml" />
-        <mapping resource="entidades/Estados.hbm.xml" />
+        <mapping resource="entidades/Aulas.hbm.xml" />  
+        <mapping resource="entidades/Materias.hbm.xml" />
+        <mapping resource="entidades/Cursos.hbm.xml" />
+        <mapping resource="entidades/Materiascursos.hbm.xml" />
+        <mapping resource="entidades/Profesores.hbm.xml" />
+        <mapping resource="entidades/Profesoresmaterias.hbm.xml" />
+        <mapping resource="entidades/Dias.hbm.xml" />
+        <mapping resource="entidades/Horas.hbm.xml" />
+        <mapping resource="entidades/Dispprofesores.hbm.xml" />                
+        <mapping resource="entidades/Horarioscabecera.hbm.xml" />
+        <mapping resource="entidades/Horariosdetalle.hbm.xml" />
+        <mapping resource="entidades/Horarioscabeceratmp.hbm.xml" />
+        <mapping resource="entidades/Horariosdetalletmp.hbm.xml" />
+        <mapping resource="entidades/Generacionhorarios.hbm.xml" />
     </session-factory>
 </hibernate-configuration>

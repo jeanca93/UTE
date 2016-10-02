@@ -55,7 +55,7 @@ public class OpcionesTreeRenderer implements TreeitemRenderer<OpcionesTreeNode>{
     							} catch (UiException ex) {
     								Clients.clearBusy(centerLayout);
     								
-    								Clients.showNotification("Menú no disponible");
+    								Clients.showNotification("MenÃº no disponible");
     							}			
     						
     					}
@@ -83,7 +83,7 @@ public class OpcionesTreeRenderer implements TreeitemRenderer<OpcionesTreeNode>{
         							} catch (UiException ex) {
         								Clients.clearBusy(centerLayout);
         								
-        								Clients.showNotification("Menú no disponible");
+        								Clients.showNotification("MenÃº no disponible");
         							}			
         						
         					}

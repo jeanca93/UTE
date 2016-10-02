@@ -24,7 +24,7 @@ import entidades.Usuarios;
 import entidadesDAO.EstadosHome;
 import entidadesDAO.PerfilesusuarioHome;
 import entidadesDAO.UsuariosHomeExt;
-import modelo.usuarios.UsuarioDatos;
+import modelo.mantenimiento.usuarios.administracionUsuarios.UsuarioDatos;
 
 public class UsuariosComposer extends GenericForwardComposer<Component>{
 	private ListModelList<Perfilesusuario> allPerfiles = new ListModelList<Perfilesusuario>();
@@ -66,31 +66,34 @@ public class UsuariosComposer extends GenericForwardComposer<Component>{
 					Clients.showNotification("Usuario ya existente", Clients.NOTIFICATION_TYPE_ERROR, txtUsuario,  null, 0);
 				}else{
 					String clave = txtClave.getValue().trim();
-					String nombres = txtNombres.getValue();
-					String apellidos = txtApellidos.getValue();
-					String correo = txtCorreo.getValue().trim();
-					Integer perfil = cmbPerfiles.getSelectedItem().getValue();
-					Session session = Sessions.getCurrent();
-					
-					new UsuariosHomeExt().crearNuevoUsuario(new Usuarios(new PerfilesusuarioHome().findById(perfil), usuario, null, nombres, apellidos, correo,  new EstadosHome().findById(1), new Date(), Integer.parseInt(session.getAttribute("idUsuario").toString())), clave);
-							
-					Messagebox.show("Registro creado correctamente", "Exito", Messagebox.OK,  Messagebox.EXCLAMATION, new EventListener<Event>() {
+					if(clave.matches("^(?=.*?\\p{Lu})(?=.*?[\\p{L}&&[^\\p{Lu}]])(?=.*?\\d).*$")){
+						String nombres = txtNombres.getValue().toUpperCase();
+						String apellidos = txtApellidos.getValue().toUpperCase();
+						String correo = txtCorreo.getValue().trim();
+						Integer perfil = cmbPerfiles.getSelectedItem().getValue();
+						Session session = Sessions.getCurrent();
 						
-						public void onEvent(Event event) throws Exception {
-							// TODO Auto-generated method stub
-							Executions.sendRedirect("");
-						}
-					});
-					
-					/*
-					modalDialog.detach();
-					
-					allUsuariosStatus = new ListModelList<UsuarioStatus>();
-					genListModel(new UsuarioDatos().getAllUsuarios());
-					GridUsuarios.setModel(allUsuariosStatus);
-					
-					Clients.showNotification("Creado correctamente");
-					*/
+						new UsuariosHomeExt().crearNuevoUsuario(new Usuarios(new PerfilesusuarioHome().findById(perfil), usuario, null, nombres, apellidos, correo,  new EstadosHome().findById(1), new Date(), Integer.parseInt(session.getAttribute("idUsuario").toString())), clave);
+								
+						Messagebox.show("Registro creado correctamente", "Exito", Messagebox.OK,  Messagebox.EXCLAMATION, new EventListener<Event>() {
+							
+							public void onEvent(Event event) throws Exception {
+								// TODO Auto-generated method stub
+								Executions.sendRedirect("");
+							}
+						});
+						
+						/*
+						modalDialog.detach();
+						
+						allUsuariosStatus = new ListModelList<UsuarioStatus>();
+						genListModel(new UsuarioDatos().getAllUsuarios());
+						GridUsuarios.setModel(allUsuariosStatus);
+						
+						Clients.showNotification("Creado correctamente");
+						*/
+					}else
+						Clients.showNotification("Clave no cumple con las politicas de seguridad establecida", Clients.NOTIFICATION_TYPE_ERROR, txtClave, "end_center", 3000);
 				}
 			}catch(RuntimeException re){
 				throw re;

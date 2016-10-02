@@ -18,7 +18,7 @@ public class NoSpacesConstraint implements Constraint, Serializable{
 		super();
 	}
 	
-	@Override
+	@Override  
 	public void validate(Component comp, Object value) throws WrongValueException {
 		// TODO Auto-generated method stub
 		if (comp instanceof Textbox) {

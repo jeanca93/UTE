@@ -26,7 +26,7 @@ import org.zkoss.zul.Window;
 import entidades.Dias;
 import entidadesDAO.HorasHomeExt;
 import entidadesDAO.SchollaryearHomeExt;
-import modelo.anioescolar.DiasDatos;
+import modelo.mantenimiento.anioescolar.DiasDatos;
 
 public class JornadaAcademicaComposer extends GenericForwardComposer<Component>{
 	private static final long serialVersionUID = 12L;
@@ -46,7 +46,7 @@ public class JornadaAcademicaComposer extends GenericForwardComposer<Component>{
 		for(Dias dias:new DiasDatos(false).getAllDias()){
 			((ListModelList<Dias>)allDias).add(dias);
 			
-			if (!((dias.getDia().toUpperCase().equals("SÁBADO")) || (dias.getDia().toUpperCase().equals("DOMINGO"))))
+			if (!((dias.getDia().toUpperCase().equals("SABADO")) || (dias.getDia().toUpperCase().equals("DOMINGO"))))
 				diasSeleccionados.add(dias);
 		}
 		
@@ -150,7 +150,7 @@ public class JornadaAcademicaComposer extends GenericForwardComposer<Component>{
 									(receso1Fin.before(horaFin) && receso1Fin.after(horaIni))) &&
 								((receso2Ini.before(horaFin) && receso2Ini.after(horaIni)) && 
 											(receso2Fin.before(horaFin) && receso2Fin.after(horaIni)))){
-								if(lbDias.getSelectedCount() > 3){
+								if(lbDias.getSelectedCount() >= 5){
 									Calendar nuevahora = Calendar.getInstance();
 									nuevahora.setTime(new SchollaryearHomeExt().obtenerDuracionClase());
 									int totalMinutosClases = ((nuevahora.get(Calendar.HOUR_OF_DAY)*60) + nuevahora.get(Calendar.MINUTE));
@@ -211,7 +211,7 @@ public class JornadaAcademicaComposer extends GenericForwardComposer<Component>{
 									}else
 										Messagebox.show("Recesos no pueden interferir con duración de las clases", "Error",  Messagebox.OK,  Messagebox.ERROR);
 								}else
-									Messagebox.show("Debe escoger mínimo tres días de la semana", "Error",  Messagebox.OK,  Messagebox.ERROR);
+									Messagebox.show("Debe escoger mínimo cinco días de la semana", "Error",  Messagebox.OK,  Messagebox.ERROR);
 							}else
 								Messagebox.show("Recesos deben estar dentro del rango de la jornada académica", "Error",  Messagebox.OK,  Messagebox.ERROR);
 						}else

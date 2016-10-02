@@ -9,32 +9,27 @@ import entidades.Permisos;
 
 public class PermisosHomeExt extends PermisosHome{
 
-	public static int Incio = 1;
-	public static int Mantenimiento = 2;
-	public static int AñoLectivo = 3;
-	public static int AdministraciónAñoLectivo = 4;
-	public static int Cursos = 5;
-	public static int Materias = 6;
-	public static int Aulas = 7;
-	public static int TiposAula = 8;
-	public static int Profesores = 9;
-	public static int AdministracónProfesores = 10;
-	public static int HorariosProfesores = 11;
-	public static int MateriasProfesor = 12;
-	public static int Usuarios = 13;
-	public static int AdministraciónUsuarios = 14;
-	public static int PerfilesUsuarios = 15;
-	public static int PermisosPerfiles = 16;
-	public static int Procesos = 17;
-	public static int GestorHorariosAcadémicos = 18;
-	public static int Reportes = 19;
-	public static int ReporteHorariosAcademicos = 20;
-	public static int ReporteCargaHorariaProfesores = 21;
-	public static int ReporteProfesores = 22;
-	public static int ReporteMaterias = 23;
-	public static int ReporteAulas = 24;
-	public static int ReporteAsignaciónMaterias = 25;
-	public static int ReporteHorariosProfesores = 26;
+	public static Integer Incio = 1;
+	public static Integer Mantenimiento = 2;
+	public static Integer SchollarYear = 3;
+	public static Integer Cursos = 4;
+	public static Integer Materias = 5;
+	public static Integer Aulas = 6;
+	public static Integer TiposAula = 7;
+	public static Integer Profesores = 8;
+	public static Integer Usuarios = 9;
+	public static Integer AdministraciónUsuarios = 10;
+	public static Integer PerfilesUsuarios = 11;
+	public static Integer Procesos = 12;
+	public static Integer GestorHorariosAcadémicos = 13;
+	public static Integer Reportes = 14;
+	public static Integer ReporteHorariosAcademicos = 15;
+	public static Integer ReporteCargaHorariaProfesores = 16;
+	public static Integer ReporteProfesores = 17;
+	public static Integer ReporteMaterias = 18;
+	public static Integer ReporteAulas = 19;
+	public static Integer ReporteAsignaciónMaterias = 20;
+	public static Integer ReporteHorariosProfesores = 21;
 	
 	public PermisosHomeExt() {
 		super();
@@ -46,7 +41,7 @@ public class PermisosHomeExt extends PermisosHome{
 		
     	try {
     		StringBuffer sbquery = new StringBuffer();
-    		sbquery.append("from Permisos p where p.estados.idEstado=:estado order by p.idPermiso asc");
+    		sbquery.append("from Permisos p where p.estados.idEstado=:estado and p.idPermiso <> 1 order by p.idPermiso asc");
     		
     		Query query = session.createQuery(sbquery.toString());
     		query.setInteger("estado", EstadosHomeExt.ESTADO_ACTIVO);

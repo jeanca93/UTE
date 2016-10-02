@@ -66,16 +66,30 @@ public class UsuariosHomeExt extends UsuariosHome{
     
     public Boolean crearNuevoUsuario(Usuarios user, String clave){
     	Session session = this.getSession();
-    	Transaction tx = null;
+    	session.flush();
     	Boolean flag = false;
     	
     	try{
     		save(user);
     		
+    		registrarClave(user.getUsuario(), clave, session);
+    	}catch(RuntimeException re){    		
+    		throw re;
+    	}
+    	
+    	return flag;
+    }
+    
+    public Boolean registrarClave(String usuario, String clave, Session sessionCrerUsuario){
+    	Session session = (sessionCrerUsuario == null?this.getSession():sessionCrerUsuario);
+    	Transaction tx = null;
+    	Boolean flag = false;
+    	
+    	try{    		
     		tx = session.beginTransaction();
     		
     		StringBuffer sbquery = new StringBuffer();
-    		sbquery.append("call registra_clave('" + user.getUsuario() + "','" + clave + "')");
+    		sbquery.append("call registra_clave('" + usuario + "','" + clave + "')");
         	
             Query query = session.createSQLQuery(sbquery.toString());
             
@@ -90,4 +104,24 @@ public class UsuariosHomeExt extends UsuariosHome{
     	
     	return flag;
     }
+    
+    public String correoUsuario(Integer usuario){
+    	Session session = this.getSession();
+    	String correo = "";
+    	
+    	try{
+    		StringBuffer sbquery = new StringBuffer();
+            sbquery.append("select u.correo from Usuarios u where u.idUsuario=:usuario");
+            		
+            Query query = session.createQuery(sbquery.toString());
+            query.setInteger("usuario", usuario);
+            
+            correo = (query.uniqueResult() != null?query.uniqueResult().toString():"");
+    	}catch(RuntimeException re){
+    		throw re;
+    	}
+        
+    	return correo;
+    }
+    
 }

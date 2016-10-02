@@ -43,6 +43,7 @@ public class MateriascursosHomeExt extends MateriascursosHome{
 	
 	public boolean registrarMateriasCursos(List<Materiascursos> listMateriasCursos){
 		Session session = this.getSession();
+		session.flush();
 		Transaction tx = null;
     	boolean flag = false;
 		

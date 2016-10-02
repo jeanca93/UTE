@@ -26,7 +26,7 @@ import entidades.Tipoaula;
 import entidadesDAO.AulasHome;
 import entidadesDAO.EstadosHome;
 import entidadesDAO.TipoAulaHome;
-import modelo.aulas.AulasDatos;
+import modelo.mantenimiento.tipoaula.TipoAulaDatos;
 
 public class AulasComposer extends GenericForwardComposer<Component>{
 	private static final long serialVersionUID = 9L;
@@ -38,7 +38,7 @@ public class AulasComposer extends GenericForwardComposer<Component>{
 	
 	public AulasComposer() {
 		// TODO Auto-generated constructor stub
-		for(Tipoaula tipo:new AulasDatos().getAllTipoAula()){
+		for(Tipoaula tipo:new TipoAulaDatos(true).getAllTipoAula()){
 			allTipoAula.add(tipo);
 		}
 		
@@ -60,9 +60,9 @@ public class AulasComposer extends GenericForwardComposer<Component>{
 		{
 				try{
 					String idAula = txtIdAula.getValue().trim();
-					String aula = txtAula.getValue().trim();
+					String aula = txtAula.getValue().trim().toUpperCase();
 					Integer asientos = txtAsientos.getValue();
-					String comentarios = txtComentarios.getValue().trim();
+					String comentarios = txtComentarios.getValue();
 					Integer tipoAula = cmbAulas.getSelectedItem().getValue();
 					Session session = Sessions.getCurrent();
 				

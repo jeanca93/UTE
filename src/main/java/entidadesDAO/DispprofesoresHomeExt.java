@@ -32,6 +32,7 @@ public class DispprofesoresHomeExt extends DispprofesoresHome{
 	
 	public boolean registrarDisponibilidadProfesor(List<Dispprofesores> dispProfesor){
 		Session session = this.getSession();
+		session.flush();
 		Transaction tx = null;
 		boolean flag = false;
 		

@@ -23,6 +23,7 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.xml.sax.SAXException;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Executions;
+import org.zkoss.zk.ui.Sessions;
 import org.zkoss.zk.ui.util.Clients;
 import org.zkoss.zk.ui.util.GenericForwardComposer;
 import org.zkoss.zul.*;
@@ -45,7 +46,7 @@ public class MenuComposer extends GenericForwardComposer<Component> {
 		String user = (session.getAttribute("usuario")!= null?session.getAttribute("usuario").toString():"");
 		
 		if(user.length() == 0)
-			Executions.sendRedirect("/index.zul");
+			Executions.sendRedirect("/");
 		else{
 			String pagina = (session.getAttribute("pagina")!= null?session.getAttribute("pagina").toString():"");
 			
@@ -68,7 +69,14 @@ public class MenuComposer extends GenericForwardComposer<Component> {
 			ParserConfigurationException, SAXException, IOException,
 			InstantiationException, IllegalAccessException {
 		Window window = (Window)Executions.createComponents(
-                "/WEB-INF/include/Usuarios/vtnChangePassword.zul", null, null);
+                "/WEB-INF/include/Mantenimiento/Usuarios/vtnChangePassword.zul", null, null);
         window.doModal();
+	}
+	
+	public void onClick$mnitemCerrarSesion() throws InterruptedException,
+			ParserConfigurationException, SAXException, IOException,
+			InstantiationException, IllegalAccessException {
+		session.invalidate();
+		Executions.sendRedirect("/");
 	}
 }

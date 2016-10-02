@@ -1,0 +1,39 @@
+<?page title="new page title" contentType="text/html;charset=UTF-8"?>
+<zk>
+<window id = "modalDialog" title="Materias por Cursos" border="normal" width="520px" height="540px"
+    position="center,center" closable="true"
+    action="show: slideDown">
+	<panel id="container" vflex="1" hflex="1"
+	        viewModel="@id('vm') @init('modelo.mantenimiento.materiascursos.MateriascursosModel')">
+	    <toolbar>
+	    	<toolbarbutton image="/img/save.png" label="Grabar" onClick="@command('grabarMateriasCursos')"/>
+	    </toolbar>
+	    <panelchildren>
+	        <grid id="GridMateriasCurso" mold="paging" pagingPosition="bottom" 
+	        	model="@load(vm.allMateriasStatus)"  pageSize="12"
+	            autopaging="true" vflex="1" emptyMessage="No hay registros">
+	            
+	            <columns>
+	            	<column width="33px" align="center" >
+	            		<checkbox id="selectAllCheckBox" onCheck="@command('selectedCheckBox', CheckEvent=event)"/>
+	        	    </column>
+	                <column width="80px" label="ID Materia" align="center" sort="auto(materias.idMateria)" />
+	                <column width="250px" label="Materia" align="left" sort="auto(materias.materia)"/>
+	                <column hflex="1" label="Horas a la Semana" align="center"/>
+	            </columns>
+	            <template name="model">
+	                <row>
+	                	<checkbox checked="@load(each.seleccionado)  @save(each.seleccionado, before='grabarMateriasCursos')" disabled="false" hflex="1"/>
+	                    <label value="@load(each.materias.idMateria)" hflex="1"/>
+	                    <label value="@load(each.materias.materia)" hflex="1"/>
+	                    <div align="center" hflex="1">
+	                    	<intbox constraint="no empty:Campo obligatorio, no negative:No se admiten valores negativos, no zero:Valor mínimo es 1" maxlength="2"
+	                    		value="@load(each.horassemana) @save(each.horassemana, before='grabarMateriasCursos')" width="30px" style="text-align:center"/>
+	                    </div>
+	                </row>
+	            </template>
+	        </grid>
+	    </panelchildren>
+	</panel>
+</window>
+</zk>

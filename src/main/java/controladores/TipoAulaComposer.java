@@ -40,7 +40,7 @@ public class TipoAulaComposer extends GenericForwardComposer<Component>{
 	InstantiationException, IllegalAccessException {		
 
 	try{
-		String tipoaula = txtTipoAula.getValue();
+		String tipoaula = txtTipoAula.getValue().toUpperCase();
 		
 		Session session = Sessions.getCurrent();
 		

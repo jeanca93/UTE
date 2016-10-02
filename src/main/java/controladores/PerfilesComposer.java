@@ -46,7 +46,7 @@ public class PerfilesComposer extends GenericForwardComposer<Component>{
 			ParserConfigurationException, SAXException, IOException,
 			InstantiationException, IllegalAccessException {		
 		try{
-			String perfil = txtPerfil.getValue();
+			String perfil = txtPerfil.getValue().toUpperCase();
 			String comentarios = txtComentarios.getValue();
 			Session session = Sessions.getCurrent();
 			

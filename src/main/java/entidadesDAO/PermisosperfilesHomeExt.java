@@ -15,7 +15,7 @@ import entidades.Permisosperfiles;
 public class PermisosperfilesHomeExt extends PermisosperfilesHome{
 
 	public PermisosperfilesHomeExt() {
-		super();
+		//super();
 		// TODO Auto-generated constructor stub
 	}
 	
@@ -55,13 +55,14 @@ public class PermisosperfilesHomeExt extends PermisosperfilesHome{
 	
 	public boolean registrarPermisosPerfil(List<Permisosperfiles> listPermisosPerfil, Integer idUsuario){
 		Session session = this.getSession();
+		session.flush();
 		Transaction tx = null;
     	boolean flag = false;
 		
     	try {
     		tx = session.beginTransaction();
     		
-    		session.createQuery("delete from Permisosperfiles pp where pp.id.perfilesusuario.idPerfilUsuario=:perfil")
+    		session.createQuery("delete from Permisosperfiles pp where pp.id.perfilesusuario.idPerfilUsuario=:perfil and pp.id.permisos.idPermiso <> 1")
     			.setInteger("perfil", listPermisosPerfil.get(0).getId().getPerfilesusuario().getIdPerfilUsuario())
     			.executeUpdate();
     		
@@ -76,7 +77,7 @@ public class PermisosperfilesHomeExt extends PermisosperfilesHome{
     		perfil.setUsuarioModifica(idUsuario);
     		perfil.setFechaModificacion(new Date());
     		
-    		new PerfilesusuarioHome().save(perfil);
+    		new PerfilesusuarioHome().update(perfil);
     		
     		flag = true;
 		} catch (RuntimeException re) {

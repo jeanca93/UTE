@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Sep 7, 2016 21:16:50 PM by Jean Carlos Triviño -->
+<hibernate-mapping>
+    <class name="entidades.Generacionhorarios" table="generacionhorarios" catalog="gaha">
+        <id name="idGeneracionHorario" type="java.lang.Integer">
+            <column name="ID_GeneracionHorario" />
+            <generator class="identity" />
+        </id>
+		<property name="usuarioGenera" type="int">
+            <column name="UsuarioGenera" not-null="true" />
+        </property>
+        <property name="usuario" type="string">
+            <column name="Usuario" length="15" not-null="true" />
+        </property>
+        <property name="correo" type="string">
+            <column name="Correo" length="70" />
+        </property>
+        <property name="fechaGeneracion" type="timestamp">
+            <column name="FechaGeneracion" length="19" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

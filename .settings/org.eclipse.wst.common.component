@@ -4,6 +4,9 @@
         <wb-resource deploy-path="/" source-path="/src/main/webapp" tag="defaultRootSource"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/java"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/test/java"/>
+        <dependent-module archiveName="GAHA-CLIENTE-INTEGRADOR-WS-0.0.1-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/GAHA-CLIENTE-INTEGRADOR-WS/GAHA-CLIENTE-INTEGRADOR-WS">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
         <property name="context-root" value="GAHA"/>
         <property name="java-output-path" value="/GAHA/target/classes"/>
     </wb-module>

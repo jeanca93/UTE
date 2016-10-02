@@ -18,9 +18,9 @@ package sessionfactory;
 
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
-import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
+//import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
-import org.hibernate.service.ServiceRegistry;
+//import org.hibernate.service.ServiceRegistry;
 
 /**
  *
@@ -37,7 +37,7 @@ public class MydbHibernateSessionFactory {
      */
     private static String CONFIG_FILE_LOCATION = "/hibernate.cfg.xml";
     private static final ThreadLocal<Session> threadLocal = new ThreadLocal<Session>();
-    private static ServiceRegistry serviceRegistry;
+    //private static ServiceRegistry serviceRegistry;
     private static Configuration configuration = new Configuration();
     private static org.hibernate.SessionFactory sessionFactory;
     private static String configFile = CONFIG_FILE_LOCATION;
@@ -45,9 +45,12 @@ public class MydbHibernateSessionFactory {
     static {
         try {
             configuration.configure(configFile);
+            /*
             serviceRegistry = new StandardServiceRegistryBuilder().applySettings(
                     configuration.getProperties()).build();
             sessionFactory = configuration.buildSessionFactory(serviceRegistry);
+        	*/
+            sessionFactory = configuration.buildSessionFactory();
         } catch (Exception e) {
             System.err
                     .println("%%%% Error Creating SessionFactory %%%%");
@@ -94,9 +97,12 @@ public class MydbHibernateSessionFactory {
     public static void rebuildSessionFactory() {
         try {
             configuration.configure(configFile);
+            /*
             serviceRegistry = new StandardServiceRegistryBuilder().applySettings(
                     configuration.getProperties()).build();
             sessionFactory = configuration.buildSessionFactory(serviceRegistry);
+        	*/
+            sessionFactory = configuration.buildSessionFactory();
         } catch (Exception e) {
             System.err
                     .println("%%%% Error Creating SessionFactory %%%%");

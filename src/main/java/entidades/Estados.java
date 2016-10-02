@@ -2,6 +2,8 @@ package entidades;
 
 import java.util.Date;
 
+import org.hibernate.proxy.HibernateProxyHelper;
+
 public class Estados implements java.io.Serializable {
 	private Integer idEstado;
 	private String estado;
@@ -12,19 +14,17 @@ public class Estados implements java.io.Serializable {
 	private Integer usuarioModifica;
 	
 	public Estados() {
+		HibernateProxyHelper.getClassWithoutInitializingProxy(getClass());
 	}
 	
-	public Estados(Integer idEstado, String estado, String descripcion, Date fechaCreacion, int usuarioCrea) {
-		this.idEstado = idEstado;
+	public Estados(String estado, Date fechaCreacion, int usuarioCrea) {
 		this.estado = estado;
-		this.descripcion = descripcion;
 		this.fechaCreacion = fechaCreacion;
 		this.usuarioCrea = usuarioCrea;
 	}
 	
-	public Estados(Integer idEstado, String estado, String descripcion, Date fechaCreacion, int usuarioCrea,
+	public Estados(String estado, String descripcion, Date fechaCreacion, int usuarioCrea,
 			Date fechaModificacion, Integer usuarioModifica) {
-		this.idEstado = idEstado;
 		this.estado = estado;
 		this.descripcion = descripcion;
 		this.fechaCreacion = fechaCreacion;

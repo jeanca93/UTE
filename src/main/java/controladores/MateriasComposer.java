@@ -25,11 +25,11 @@ import entidades.Tipoaula;
 import entidadesDAO.EstadosHome;
 import entidadesDAO.MateriasHome;
 import entidadesDAO.TipoAulaHome;
-import modelo.aulas.AulasDatos;
+import modelo.mantenimiento.tipoaula.TipoAulaDatos;
 
 public class MateriasComposer extends GenericForwardComposer<Component>{
 	private static final long serialVersionUID = 6L;
-	private ListModelList<Tipoaula> allTipoAula = new ListModelList<Tipoaula>();
+	private ListModelList<Tipoaula> allTipoAulas = new ListModelList<Tipoaula>();
 	//private Window modalDialog;
 	private Combobox cmbTipoAulas;
 	private Textbox txtMateria,txtIdMateria;
@@ -38,8 +38,8 @@ public class MateriasComposer extends GenericForwardComposer<Component>{
 
 	public MateriasComposer() {
 		// TODO Auto-generated constructor stub
-		for(Tipoaula tipo:new AulasDatos().getAllTipoAula()){
-			allTipoAula.add(tipo);
+		for(Tipoaula tipo:new TipoAulaDatos(true).getAllTipoAula()){
+			allTipoAulas.add(tipo);
 		}
 	}
 	
@@ -64,7 +64,7 @@ public class MateriasComposer extends GenericForwardComposer<Component>{
 		
 			try{
 				String idmateria = txtIdMateria.getValue().trim();
-				String materia = txtMateria.getValue().trim();
+				String materia = txtMateria.getValue().toUpperCase();
 				//Date horassemana = txtHorasSemana.getValue();
 				//long minutosSemana = horassemana.getTime()/60000L;
 				Integer tipoAula = cmbTipoAulas.getSelectedItem().getValue();
@@ -108,8 +108,8 @@ public class MateriasComposer extends GenericForwardComposer<Component>{
 	}
 	
 	
-	public ListModel<Tipoaula> getAllTipoAula() {
-		return allTipoAula;
+	public ListModel<Tipoaula> getAllTipoAulas() {
+		return allTipoAulas;
 	}
 	/*
 	private void genListModel(List<Materias> lsMaterias){

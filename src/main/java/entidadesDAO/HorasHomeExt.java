@@ -45,6 +45,7 @@ public class HorasHomeExt extends HorasHome{
 	
 	public boolean registrarJornadaAcademica(Date horaIni, Date horaFin, Date receso1Ini, Date receso1Fin, Date receso2Ini, Date receso2Fin, List<Dias> diasSeleccionados, Integer usuario){
 		Session session = this.getSession();
+		session.flush();
     	Transaction tx = null;
 		boolean flag = false;
 		

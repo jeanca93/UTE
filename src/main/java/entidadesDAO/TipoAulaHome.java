@@ -80,7 +80,6 @@ public class TipoAulaHome extends MydbBaseHibernateDAO{
 	}
 	
 	public void update(Tipoaula instance) {
-		//this.getSession().clear();
 		Session session = this.getSession();
 		Transaction tx = null;
 		

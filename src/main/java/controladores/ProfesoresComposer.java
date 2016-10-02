@@ -43,7 +43,7 @@ public class ProfesoresComposer extends GenericForwardComposer<Component>{
 			ParserConfigurationException, SAXException, IOException,
 			InstantiationException, IllegalAccessException {		
 		try{
-			String profesor = txtProfesor.getValue();
+			String profesor = txtProfesor.getValue().toUpperCase();
 			String titulo = txtTitulo.getValue();
 			
 			new ProfesoresHome().save(new Profesores(profesor, titulo,  new EstadosHome().findById(1), new Date(),Integer.parseInt(session.getAttribute("idUsuario").toString())));

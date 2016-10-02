@@ -62,7 +62,7 @@ public class AnioEscolarComposer extends GenericForwardComposer<Component>{
 				
 			try{
 				
-				String anioescolar = txtAnioEscolar.getValue().trim();
+				String anioescolar = txtAnioEscolar.getValue().trim().toUpperCase();
 				Date fechainicio = txtFechaInicio.getValue();
 				Date fechafin = txtFechaFin.getValue();
 				Date duracionclases = (Date)txtDuracionClases.getRawValue();

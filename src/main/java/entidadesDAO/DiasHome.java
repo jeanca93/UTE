@@ -19,7 +19,6 @@ import static org.hibernate.criterion.Example.create;
  * @author Hibernate Tools
  */
 public class DiasHome extends MydbBaseHibernateDAO{
-
 	private static final Log log = LogFactory.getLog(DiasHome.class);
 
 	public void persist(Dias transientInstance) {
@@ -153,7 +152,7 @@ public class DiasHome extends MydbBaseHibernateDAO{
 		log.debug("getting Dias instance with id: " + id);
 		
 		try {
-			Dias instance = (Dias) session.get("entidadesDAO.Dias", id);
+			Dias instance = (Dias) session.get("entidades.Dias", id);
 			
 			if (instance == null) {
 				log.debug("get successful, no instance found");
@@ -175,7 +174,7 @@ public class DiasHome extends MydbBaseHibernateDAO{
 		log.debug("finding Dias instance by example");
 		
 		try {
-			List<Dias> results = (List<Dias>) session.createCriteria("entidadesDAO.Dias")
+			List<Dias> results = (List<Dias>) session.createCriteria("entidades.Dias")
 					.add(create(instance)).list();
 			
 			log.debug("find by example successful, result size: " + results.size());
